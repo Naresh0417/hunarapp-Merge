@@ -1,0 +1,466 @@
+<resources>
+    <string name="app_name">Hunar Online Courses</string>
+    <string name="lblSkip">SKIP</string>
+    <string name="lblSignHere"><u>Login here</u></string>
+    <string name="lblRegisterHere"><u>Register here</u></string>
+    <string name="lblAboveFive">Sorry! You have already selected five categories</string>
+    <string name="lblHome">Home</string>
+    <string name="lblChat">Chat</string>
+    <string name="lblEnrol">Enrol</string>
+    <string name="lblToday">Hunar Club</string>
+    <string name="lblContact">Contact Us</string>
+    <string name="lblNext">NEXT</string>
+    <string name="lblStartLearning">Start Learning</string>
+    <string name="lblVerify"> Verify to Register </string>
+    <string name="lblVeryLogin">Verify</string>
+    <string name="lblApiKey">dsf99898398i3jofklese93</string>
+    <string name="lblCourseEnrolNowButton">(Total Course Fee - ₹8,000/-)\nEnrol Now for just ₹3000 + Taxes</string>
+    <string name="lblTaxes">Taxes</string>
+    <string name="lblEnrolNow">Enrol Now</string>
+    <string name="choosePopupMsg">Sorry! You have already selected five categories</string>
+    <string name="AlreadyMember">Already a member?  </string>
+    <string name="enterOtp">Enter OTP</string>
+    <string name="resendOtp">Resend OTP</string>
+    <string name="lblPreferred"><big><b><font color='#333333'>Pay Full Fees</font></b></big> <small><b><font color='#8e8e8e'>Get </font></b></small></string>
+    <string name="lblPremium"><big><b><font color='#333333'>Pay in Easy</font></b></big> <small><b><font color='#8e8e8e'>Instalments</font></b></small></string>
+    <string name="lblMonth">&#160;Months</string>
+    <string name="lblCourseCounselling">With our post-course counselling, we help you to take your skills to a professional level. With our guidance, you could learn about all the career options you have after completing your course.</string>
+    <string name="lblWebinars">We bring you free live webinars where industry experts discuss and share interesting facts. The interactive programmes can clear your doubts and help you learn more about the industry so that you can become a professional yourself!</string>
+    <string name="lblCareerOptions">On completing this course, you can create beautiful Indian clothes for yourself and others. You can run your tailoring business from home or even start your own boutique and brand!</string>
+    <string name="lblAttendWorkshop">For you to develop creative ideas and skills, we conduct free workshops at our centres with industry experts and professionals. It is your golden chance to expand your knowledge and increase your confidence!</string>
+    <string name="lblCenter1">Peejay Plaza, Opposite Tycoon Hotel, Door No: 10-1-44/6,1st floor VIP Road, Siripuram, CBM Compound, Asilmetta, Visakhapatnam, Andhra Pradesh 530003</string>
+    <string name="lblPhone1">9010100240</string>
+    <string name="lblContactus">+91 <u>9010100240</u></string>
+    <string name="lblLink1"><u>https://www.hunarcourses.com/</u></string>
+    <string name="lblLink2"><u>https://www.hunarcourses.com/</u></string>
+    <string name="lblAboutContent">Ever since its inception, the Hunar Group has been imparting skill-based education across the nation.
+Our courses in Fashion Design, Interior Design, Jewellery Design, Photography and many others, have had a rippling effect amongst our students, because they give them the choice and chance of indulging in their creative passions.
+\n\n
+Hunar’s alumni of over 25,000 + members consists of individuals who work with some of the biggest brands in the industry, and those who have forged ahead to become entrepreneurs.
+\n\n
+Even in its 26th year, the Hunar Institute still strongly upholds its philosophy of
+‘Learn, Believe, Create’. Hunar Online Courses is designed to sharpen your skills and to give you the golden opportunity of turning your passion into a certified skill, right from the comfort of your home.
+\n\n
+So now is the time to dream, explore and learn and empower yourself!
+</string>
+    <string name="lblAchieversTitle1">Shilpa Waghray</string>
+    <string name="lblAchieversTitle2">Mohit Dochania</string>
+    <string name="lblAchieversTitle3">Rachna Kimtee</string>
+    <string name="lblAchieversSubtitle1">Fashion Designer</string>
+    <string name="lblAchieversSubtitle2">Fashion Designer</string>
+    <string name="lblAchieversSubtitle3">Fashion Designer</string>
+    <string name="lblAchieversDescription1">An ace achiever from Hamstech who showcased her designs at the prestigious Hawaiian Fashion Month on invitation by Ms. CheriVasek. Her garments were worn and appreciated by the First Lady of Hawaii.</string>
+    <string name="lblAchieversDescription2">Mohit had a wonderful opportunity to do internship with Neeta Lulla, which launched his career. He has participated in the London Fashion Week 2010 and has made his impressive presence in various trade shows conducted in Milan and Paris, “Mohit Dochania”, his fashion label, caters to some of the most elite fashionistas.</string>
+    <string name="lblAchieversDescription3">Rachna Kimtee is the only designer who got the opportunity to participate in India Fashion Week, London, in the GenX category.</string>
+    <string-array name="faqs_qns">
+        <item>1. What is Hunar Online Courses?</item>
+        <item>2. How will Hunar Online Courses help me build my skill?</item>
+        <item>3. Who is eligible to enrol in Hunar Online Courses?</item>
+        <item>4. What happens once I decide to enrol in a course?</item>
+        <item>5. How long will a course registration be active?</item>
+        <item>6. Can I enrol in multiple Courses at a same time?</item>
+        <item>7. What is the difference between enrolling in a course and signing up for a free lesson?</item>
+        <item>8. When can I start my course?</item>
+        <item>9. In case of a doubt, how can I reach out to my instructor?</item>
+        <item>10. How long can I take to complete one course?</item>
+        <item>11. Can I see a demo of how the course are structured?</item>
+        <item>12. Will I be able to get in touch with other students?</item>
+        <item>13. How and in what form will I receive my certificate at the end of each course?</item>
+        <item>14. What are the basic requirements of being able to pursue the online course?</item>
+        <item>15. Do I need a continuous internet connection to be able to learn online and watch my tutorials? Can I view tutorials offline?</item>
+        <item>16. How can I find help if I have a technical difficulty?</item>
+    </string-array>
+    <string-array name="faqs_ans">
+        <item>Hunar Online Courses, previously known as Hamstech Online Courses, is an initiative of Hamstech Group of Institutes which has over 27 years of experience in Fashion Education. With an alumni portfolio of over 30,000 students, Hamstech takes pride in its ideology of skill-building. More than 8,000 Hamstech students are working with the biggest brands in the industry today and several others are successful entrepreneurs.</item>
+        <item>Download our free learning app. Once you enrol, start learning with our video classes, gain 24/7 faculty support, upload assignments and get certified by Neeta Lulla! It’s that simple!</item>
+        <item>Anyone with passion for fashion! At Hunar Online Courses, we encourage those who have a unique zeal for pursuing their interest and honing it into a skill. So, if you have a strong keenness for this subject, you’re most welcome!</item>
+        <item>Upon making your choice of the course you wish to pursue, you can follow 6 simple steps to start learning:\n
+                Step 1: Click on enrol/buy button.\n
+                Step 2: Fill out your details to register as a student.\n
+                Step 3: Make an online payment using your debit/ credit care or net banking. You can also select the cash-on-delivery option.\n
+                Step 4: Use the auto-generated password sent to your email to log in to our Learning Management System which is just a portal for your courses and all the information required.\n
+                Step 5: Receive your Free Starter Kit which has the materials you need to begin your classes.\n
+                Step 6: Go to your My Courses page and start your lesson number 1!
+        </item>
+        <item>Your registration is active for a period of 6 months from the day of your login credentials are facilitated.</item>
+        <item>Yes, you most certainly can! Hunar Online Courses allows you to learn as many skills as you want at the same time.</item>
+        <item>A free lesson gives you a glimpse of learning techniques and a feel of the classes. Enrolment helps you access the course available on our learning management system making a payment.</item>
+        <item>Being an online learning platform, Hunar Online Courses allows you to enrol any time during the course of a year. So, ENROL NOW and avail the starter kit to give you a smooth beginning.</item>
+        <item>Hunar Online Courses ensures that your learning is both interactive and simple. Our faculty members are reachable via Skype, chat, email and phone. Our instructors and mentors will be by your side every step of the way throughout your learning journey.</item>
+        <item>You can complete the course as per your convenience. You may take anywhere between a few hours to a few weeks to a few months to complete the course.</item>
+        <item>Please sign up for a free trial to get an essence of the entire chosen course. They will give you an idea of our teaching methodology and the place of the classes.</item>
+        <item>Yes, during the sessions, you can interact with your peers through Discussion Boards and forums.</item>
+        <item>Upon completion of the course, a digital certificate will be e-mailed to your registered e-mail id.</item>
+        <item>You may need a basic device like a laptop or even a smartphone with an active internet connection. It’s as simple as that!</item>
+        <item>The content of our courses can be accessed while connected to the internet.</item>
+        <item>Contact the Support Team on the toll free number (10:00 AM – 6:00 PM) or leave an email at any time. Your issue will be resolved at the earliest.</item>
+    </string-array>
+    <string name="lblStarterKit">You shall receive a free starter kit that helps you to get a head start into the course. The kit contains all the tools and materials you will need\n\n
+    &#183; Basic stationery\n
+    &#183; Measuring tape\n
+    &#183; Scales &amp; curves\n
+    &#183; Carbon paper (black, yellow &amp; blue)\n
+        &#183; Sewing materials (tracing wheel, threads, etc)\n
+        &#183; Scissors\n
+        &#183; Needle set (hand &amp; machine)\n
+        &#183; Fasteners (zipper, hooks, buttons etc)\n
+        &#183; Fusing (paper, cloth, buckram etc)\n
+        &#183; Fabrics (as per the garments &amp; practice sessions)\n
+    </string>
+    <string name="failed_to_load_chat">Couldn\'t load chat.</string>
+    <string name="cant_share_files">File sharing is not configured for this app</string>
+    <string name="facebook_app_id">1959327670853361</string>
+    <string name="fb_login_protocol_scheme">fb1959327670853361</string>
+    <string name="terms_conditions"><u>By clicking next, you agree to our terms and conditions</u></string>
+    <string name="lblFacultyDescription">Get a professional certificate signed by your mentor and one of India&#44;s top Fashion Designers, Neeta Lulla, who is: Costume Designer of Bollywood movies like Jodha Akbar, Devdas, Manikarnika &amp; more. 4-Time National Award Winner recipient of the prestigious Dadasaheb Phalke International Film Festival Award.
+</string>
+
+    <string name="lblOtpExpire">OTP Expires in:  2:00 Minutes</string>
+    <string name="lblStaterKit">Start Your Free Trial Now!</string>
+    <string name="lblName">Name</string>
+    <string name="lblMobileNumber">Mobile Number</string>
+    <string name="lblLoginOtp">Login using OTP</string>
+    <string name="lblEnterOtp">Enter OTP</string>
+    <string name="lblResendOtp">Resend OTP</string>
+    <string-array name="menu_list">
+        <item>Profile</item>
+        <item>Live Digital Fashion Show</item>
+        <item>Courses</item>
+        <item>Success Stories</item>
+        <item>Recommendations</item>
+        <item>Hunar Today</item>
+        <item>About Us</item>
+        <item>Our Centres</item>
+        <item>Choose Language</item>
+        <item>FAQ\'s</item>
+    </string-array>
+    <string-array name="courseTabsNames">
+        <item>Trial Lessons</item>
+        <item>Course Details</item>
+    </string-array>
+    <string-array name="minicourseTabsNames">
+        <item>Course Details</item>
+        <item>Lessons</item>
+    </string-array>
+    <string-array name="minicourseTabs">
+        <item>Topics &amp; Study Material</item>
+        <item>Assignments &amp; Certification</item>
+    </string-array>
+    <string-array name="NsdcExpandableList">
+        <item>NSDC Certificate - Recognised By Government of India</item>
+        <item>Course Syllabus</item>
+        <item>Get our free starter kit</item>
+        <item>Learn From Expert Faculty</item>
+        <item>Get Certified</item>
+        <item>Attend Workshops</item>
+        <item>Watch Live Webinars</item>
+        <item>Gain Post-course Counselling</item>
+        <item>Know Your Career Options</item>
+        <item>FAQ\'s</item>
+    </string-array>
+    <string-array name="OtherExpandableList">
+        <item>Course Syllabus</item>
+        <item>Get our free starter kit</item>
+        <item>Learn From Expert Faculty</item>
+        <item>Get Certified</item>
+        <item>Attend Workshops</item>
+        <item>Watch Live Webinars</item>
+        <item>Gain Post-course Counselling</item>
+        <item>Know Your Career Options</item>
+        <item>FAQ\'s</item>
+    </string-array>
+    <string-array name="aboutGroupList">
+        <item>About Us</item>
+        <item>Our Mentor- Neeta Lulla</item>
+        <item>Our Awards</item>
+        <item>Our Achievers</item>
+    </string-array>
+    <string-array name="ourAwardsItemList">
+        <item>Times Education Icon - 2017</item>
+        <item>India Education Awards - 2018</item>
+        <item>Times Education Icon - 2018</item>
+        <item>Listed in Forbes under \u0027Great Indian Institutes\u0027</item>
+    </string-array>
+    <string name="viewCertificate"><u>View Certificate</u></string>
+    <string name="chooseLanguage">Choose your language</string>
+    <string name="headerTitle">Hunar Online Courses</string>
+    <string name="nsdcTextEnglish">GOVERNMENT-RECOGNISED COURSES (English)</string>
+    <string name="nsdcTextHindi">GOVERNMENT-RECOGNISED COURSES (Hindi)</string>
+    <string name="nsdcTextTite">GOVERNMENT-RECOGNISED COURSES</string>
+    <string name="YourRecCourses">Your recommended Courses</string>
+    <string name="OtherCoursesEnglish">COURSE CATEGORIES</string>
+    <string name="OtherCoursesHindi">COURSE CATEGORIES</string>
+    <string name="studyMaterial">Study\nMaterial</string>
+    <string name="viewStudyMaterial">View study material to understand the lesson better!</string>
+    <string name="hamstechToday">Hunar Today</string>
+    <string name="contactUs">Contact Us</string>
+    <string name="callUs">Call Us</string>
+    <string name="callBackRequest">Request a Call Back</string>
+    <string name="chatWithUs">Chat with us</string>
+    <string name="ourCenters">Visit Our Centres:</string>
+    <string name="moreAboutUs">Know More About Us:</string>
+    <string name="headerNotifications">Notifications</string>
+    <string name="tellUsWhatYouLike">Tell Us What You Like</string>
+    <string name="chooseFiveTopics">Choose Upto 5 Topics</string>
+    <string name="getRecommendedCourses">Get Recommended Courses</string>
+    <string name="enterMobileNumber">Please enter 10 digit mobile number.</string>
+    <string name="expireIn">Expires in&#160;</string>
+    <string name="chatURL">https://wa.me/919010100240</string>
+    <string name="enrolNow">Enrol Now</string>
+    <string name="enrolNowMiniCourse">Watch Now For Only Rs. </string>
+    <string name="strike_line"><strike>899</strike></string>
+    <string name="chooseCourses">+ Choose Course</string>
+    <string name="viewAll">View All</string>
+    <string name="textDiscount">+ Add Another Course for 10% discount</string>
+    <string name="chooseAccess">Thank You for Choosing Your Course!</string>
+    <string name="chooseLaguage">choose your language</string>
+    <string name="discount">Discount 15%</string>
+    <string name="discount_25">Discount 25%</string>
+    <string name="discount_5">Discount 5%</string>
+    <string name="TaxexCharges">GST(18%)</string>
+    <string name="txtTotal">Total</string>
+    <string name="GrandTotal"><big><b><font color='#333333'>Grand Total</font></b></big> <small><b><font color='#8e8e8e'> (Inclusive of all taxes)</font></b></small></string>
+    <string name="DeliverText">Personal Details</string>
+    <string name="Address">Address</string>
+    <string name="City">City</string>
+    <string name="State">State</string>
+    <string name="Country">Country</string>
+    <string name="Pincode">Pincode</string>
+    <string name="Email">Email</string>
+    <string name="choosePaymentOption">Choose Your Payment Option</string>
+    <string name="continuePayment">Pay Now</string>
+    <string name="validPincode">Enter valid pincode</string>
+    <string name="getCertified">Get certified by NSDC</string>
+    <string name="certificationNotApplicable">NSDC certification not applicable</string>
+    <string name="discountApplied">+ 10% Discount Applied</string>
+    <string name="RemoveCourse">ARE YOU SURE YOU WANT TO REMOVE THIS COURSE?</string>
+    <string name="lblYes">Yes</string>
+    <string name="lblNo">No</string>
+    <string name="FieldsNotEmpty">Fields should not be empty.</string>
+    <string name="invalidEmail">Invalid email address</string>
+    <string name="hamstechStory">The Hunar Story</string>
+    <string name="lblFaqs">FAQ\'s</string>
+    <string name="lblContinue">Continue</string>
+    <string name="Overview">Overview</string>
+    <string name="FirstInstalment">First Instalment - ₹</string>
+    <string name="TotalCourseFee">(Total Fees - ₹</string>
+    <string name="EnrolJust">ENROL NOW FOR JUST ₹</string>
+    <string name="onlyhindi"></string>
+    <string name="enrolNowToStart">Enrol Now To start learning!</string>
+    <string name="enrolGetYours">Enrol Now to Get Yours!</string>
+    <string name="enrolGetCertified">Enrol Now to Get certified!</string>
+    <string name="enrolAttend">Enrol Now to Attend!</string>
+    <string name="enrolWatch">Enrol Now to Watch!</string>
+    <string name="enrolStartCourse">Enrol Now to Start Your Course!</string>
+    <string name="enrolBeginCareer">Enrol Now to Begin Your Career!</string>
+    <string name="lblCourses">COURSES</string>
+    <string name="lblStories">STORIES</string>
+    <string name="txtUnlock">to unlock the complete course!</string>
+    <string-array name="branchNames">
+        <item>HYDERABAD</item>
+        <item>VIZAG</item>
+        <item>INDORE</item>
+    </string-array>
+    <string-array name="branchAddress">
+        <item>5th Floor, Venkat Plaza,Punjagutta X Roads, Opposite Joy Alukas, Hyderabad - 500082</item>
+        <item>Peejay Plaza, Opposite Tycoon Hotel, Door No: 10-1-44/6,1st floor, VIP Road, Siripuram, CBM Compound, Asilmetta, Visakhapatnam, Andhra Pradesh - 530003</item>
+        <item>Princess Business Park , 1st Floor, Opposite Orbit Mall, AB Road, Indore - 452001</item>
+    </string-array>
+    <string name="lblPhone">Phone</string>
+    <string name="lblProfile">Profile</string>
+    <string name="profileEmail">What\u0027s your email address?</string>
+    <string name="profileInputEmail">Enter email</string>
+    <string name="profilelive">Where do you live?</string>
+    <string name="profileInputCity">Where do you live?</string>
+    <string name="profileWhatDo">What do you do?</string>
+    <string name="profileHowOld">How old are you?</string>
+    <string name="profileWhyHamstech">Why Hunar Online Courses?</string>
+    <string name="profileSelectLanguage">Select Language</string>
+    <string name="profileSave">Save</string>
+    <string name="requestReceived">Request Received!</string>
+    <string name="requestCallBack">You will receive a call from us shortly.</string>
+    <string name="Or">Or  </string>
+    <string name="lockButton">ENROL NOW</string>
+    <string name="lblTermsConditions">Terms &amp; Conditions</string>
+    <string name="lblPrevious">WATCH PREVIOUS</string>
+    <string name="lblVideoNext">WATCH NEXT</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="howToUse"><u>HOW to use our App!</u></string>
+    <string name="successStories">Student Success</string>
+    <string name="testimonials">Testimonials</string>
+    <string name="startEnrol">Enrol now to start learning</string>
+    <string name="otpMessage">If you didn\u0027t receive your OTP, you can also enter
+the last 4 digits of your mobile number to log in.</string>
+    <string name="sendusMsg">Send Us A Message!</string>
+    <string name="firstInstalment">(As First Instalment)</string>
+    <string name="ratingHeader">We\u0027re happy that you liked them.</string>
+    <string name="ratingContent">Please rate our app to help other women discover and learn skills!</string>
+    <string name="ratingSure">Sure</string>
+    <string name="ratingLater">Maybe Later</string>
+    <string name="ratingVideo">Did You Enjoy Watching Our Videos?</string>
+    <string name="btnTrialClass">Watch More Garment Making Trial Classes</string>
+    <string name="txtMoreClasses">Check Out Some More Trial Classes!</string>
+    <string name="btnFirst">Watch More</string>
+    <string name="txtAddCourse"><u>+ Add Course</u></string>
+    <string name="txtAddDiscount"><big><b><font color='#232323'>10% Discount</font></b></big>\n<small><b><font color='#232323'>Add another course to get an extra 10% discount!</font></b></small></string>
+    <string name="choosePaymentPlan">Choose Your Payment Plan</string>
+    <string name="txtCourseRemove">X Remove</string>
+    <string name="txtInclusiveAllTaxes"><small><font color='#8e8e8e'>Inclusive of all taxes</font></small></string>
+    <string name="txtViewOrderSummary">View Order Summary (</string>
+    <string name="txtSummaryCourse">Courses)</string>
+    <string name="txtOrderTotal"><small><font color='#848383'>Grand Total</font></small></string>
+    <string name="txtAddressDetails">Address Details</string>
+    <string name="txtEdit">Address Details</string>
+    <string name="yourStarterKit">*Your starter kit will be delivered to this address, Please ensure entered details are correct</string>
+    <string name="debitOrCredit">Debit Card/ Credit Card\n
+    (Extra 5% Discount)</string>
+    <string name="netBanking">Net Banking\n
+    (Extra 5% Discount)</string>
+    <string name="gPay">Gpay\n
+    (Extra 5% Discount)</string>
+    <string name="payTm">Paytm\n
+    (Extra 5% Discount)</string>
+    <string name="cod">Cash on Delivery</string>
+    <string name="txt_terms_conditions"><p><font color='#848383'>By clicking above, I agree to the </font></p>Terms and Conditions</string>
+    <string name="txt_click_here"><u>Please Click Here</u></string>
+    <string name="txt_click_here_desc">To download the Hunar Learning App,login and start your course!</string>
+    <string name="start_your_courses">To start your course, just follow these 3 simple steps:</string>
+    <string name="courses_steps">Step 1:\n
+    Confirm your address when our team calls you so that we can send your starter kit to your doorstep.\n\n
+    Step 2:\n
+    Pay your fees to unlock your course and receive your username &amp; password.\n\n
+    Step 3:\n
+    Download the Hunar Learning App, login and start your course!</string>
+    <string name="whatsAppmsg">Hi, I want to know more about courses and latest offers!</string>
+    <string name="onlinePaymentDiscount">Extra 5% Discount on Online Payment</string>
+    <string name="sixMonths">6 - Month Online Courses</string>
+    <string name="liner_certificate">To download your certificate, please complete 80% of your mini lesson and submit your assignment.</string>
+    <string name="clear_doubts">Clear Your Doubts by Chatting with Us!</string>
+    <string name="linear_makePayment">Enrol, Make your Payment &amp; Start Learning Now</string>
+    <string name="linear_endigSoon">Hurry! Offer Ending Soon!</string>
+    <string name="popular_lessons">Popular Lessons</string>
+    <string name="one_step_away">You\'re one step away from watching your lessons!</string>
+    <string name="chat_student_guide">Hello, I want to talk to my Student Guide!</string>
+    <string name="Assignment_Submission_Liner">Thank you for submitting your assignment! Hunar’s faculty shall review it and get back to you.</string>
+    <string name="download_assignment">Download Assignment</string>
+    <string name="upload_assignment">Upload Your Assignment</string>
+    <string name="select_files">Select Your Files</string>
+    <string name="file_submit">Submit</string>
+    <string name="download_certificate">Download Your Certificate</string>
+    <string name="chat_student_guide_btn">Chat with Student Guide</string>
+    <string name="video_call_faculty">Video Call with Faculty</string>
+    <string name="start_learning_today">Click Below to Start Learning Today!</string>
+    <string name="enrol_chat_msg">Hi, I want to enrol in my lesson and start learning!</string>
+    <string name="minilessons_overview">With this Popular Lesson, You Can:</string>
+    <string name="upload_image">Upload image</string>
+    <string name="write_title">Write title...</string>
+    <string name="write_Description">Write Description...</string>
+    <string name="submit_Your_Post">Submit Your Post</string>
+    <string name="certificate_download_liner">Your certificate has been downloaded successfully. Please check your download folder to view your certificate</string>
+    <string name="recieve_payments">Recieve Your Payment Scan\nCode and Link on WhatsApp</string>
+    <string name="need_help_payments">Need Help in Making Payment?</string>
+    <string name="watch_video_enroll">Watch this Video\nOn How to Pay!</string>
+    <string name="select_what_to_post">Select what to post</string>
+
+    <string name="students_certified">Students Certified</string>
+    <string name="special">Special</string>
+    <string name="live_class">Live Classes</string>
+    <string name="hurray">Hurry! Get limited offer on this course!</string>
+    <string name="with_lesson">With This Lesson You Can</string>
+    <string name="topics">Topics</string>
+    <string name="expert_faculty">Expert Faculty</string>
+    <string name="make_beautiful">Make beautiful designs and a name for yourself like</string>
+    <string name="hunar_students">Hunar Students!</string>
+    <string name="common_doubts">Common Doubts About this Course:</string>
+    <string name="watch_just">Watch Now For Just</string>
+    <string name="enroll_make">Enroll, Make Your Payment &amp; Start Learning Now</string>
+    <string name="offer_today">Offers Available Today!</string>
+
+    <string name="learnanother"><b><font color='#232323'>Learn Another Course &amp; Get </font></b></string>
+    <string name="enrol_title">Enrol, Make Payment &amp; Learn On the Home Page!</string>
+    <string name="choose_paytype">Choose Your Payment Method</string>
+
+    <string name="online"><b><font color='#232323'>Online-</font></b></string>
+    <string name="discount5"><b>Extra 5 % Discount</b></string>
+    <string name="payment_from"><small>(Gpay, PhonePe, PayTM, Card, Netbanking &amp; more)</small></string>
+    <string name="cash_delevery"><b>CASH ON DELIVERY</b></string>
+    <string name="txt_one_step">You are one step away from Watching Your Lessons!</string>
+    <string name="instalment"><small>Installment</small></string>
+    <string name="days"><small>days</small></string>
+    <string name="paynow">Pay Now!</string>
+    <string name="pay_now">Pay %1$s Now!</string>
+    <string name="labeladdress">Fill your details to get the starter kit at your door step</string>
+
+    <string name="in">INDIA</string>
+    <string name="houseno">House Number, Street name, Landmark, Locality</string>
+    <string name="labl_startcourse"><b>Click Below to start Your Course!</b></string>
+    <string name="lblstartlearn">Start Learning Now!</string>
+
+    <string name="pay_success">Payment Successful!</string>
+    <string name="pay_message">We will send you a message  with your login details soon.</string>
+    <string name="pay_address">Please fill your address details to get your starter kit at home</string>
+    <string name="learn_success">Your request has been accepted!\nWe will call you shortly.</string>
+    <string name="lesson_watched">Lesson Watched</string>
+    <string name="keep_watch">Keep watching to become</string>
+    <string name="hunar_topper">A Hunar Topper</string>
+    <string name="study_material">Study Material</string>
+    <string name="download_material">Download</string>
+    <string name="assignment">Assignments</string>
+    <string name="student_works">Student Works</string>
+    <string name="faculty_feedback_on_your_assignment">Faculty Feedback on Your Assignment</string>
+    <string name="you_have_successfully_submitted_your_assignment">You have successfully submitted your Assignment!</string>
+    <string name="your_faculty_will_review_it_and_post_the_feedback_on_this_page">Your faculty will review it and post the feedback on this page!</string>
+    <string name="hunar_posts">Hunar Posts</string>
+    <string name="your_posts">My Post</string>
+    <string name="enrol_now_to_attend">Enrol Now to Attend!</string>
+    <string name="like">Like</string>
+    <string name="comment">Comment</string>
+    <string name="share">Share</string>
+    <string name="post">Post</string>
+    <string name="enrol_now">Enrol now</string>
+    <string name="all">All</string>
+    <string name="my_courses">My Courses</string>
+    <string name="professional_courses">Professional Courses</string>
+    <string name="_6_month_online_government_certified_courses_to_make_your_hobby_a_skill_and_a_business">6-month online government-certified courses to make your hobby a skill and a business!</string>
+    <string name="language">Language</string>
+    <string name="enrol_now_to_start_learning">Enrol Now to Start Learning!</string>
+    <string name="lessons_1">Lessons 1</string>
+    <string name="skip">Skip</string>
+    <string name="study_material_pdf">Study Material.pdf</string>
+    <string name="enrol_to_download">Enrol to download</string>
+    <string name="how_you_learn">How You’ll Learn</string>
+    <string name="lessons">Lessons</string>
+    <string name="discussion">Discussion</string>
+    <string name="with_this_course_you_will">With this Course You Will</string>
+    <string name="your_next_lesson">Your Next Lesson</string>
+    <string name="see_all_lessons">See All Lessons</string>
+    <string name="learn_from_expert_faculties">Learn From Expert Faculties</string>
+    <string name="grow_your_skill_with_similar_courses">Grow Your Skill with Similar Courses</string>
+    <string name="want_to_be_a_part_of_the_hunar_club">Want to be A Part of the Hunar Club?</string>
+    <string name="get_daily_diy_videos_look_at_student_designs_amp_feature_nyour_own_creation_and_win_contest_prizes"><![CDATA[Get daily DIY videos, look at student designs & feature\nyour own creation and win contest prizes!]]></string>
+    <string name="short_and_trending_certified_courses_to_help_you_design_unique_products">Short and trending certified courses to help you design unique products!</string>
+    <string name="see_more">See more</string>
+    <string name="your_celebrity_mentor">Your Celebrity Mentor</string>
+    <string name="learn_from_bollywood_s_top_fashion_designer_neeta_lulla_and_get_certified_by_her_too">Learn from Bollywood’s top Fashion Designer, Neeta Lulla and get certified by her too!</string>
+    <string name="reply">reply</string>
+    <string name="type_your_comment_here">Type your comment here...</string>
+    <string name="enrol_now_to_begin_your_career">Enrol Now to Begin Your Career!</string>
+    <string name="learn_from_expert_faculty">Learn From Expert Faculty</string>
+    <string name="feedback">Feedback</string>
+    <string name="pay_your_instalment">Pay Your Instalment</string>
+    <string name="view_order_summary">View Order Summary</string>
+    <string name="wow_you_are_na_fast_learner">Wow! You are\nA Fast learner!</string>
+    <string name="complete_your_course_to_download_certificate">Complete your course to Download certificate</string>
+    <string name="thanks_for_your_submission">Thanks for your submission</string>
+    <string name="it_will_be_reviewed_and_posted_within_24_hours">It will be reviewed and posted within 24 hours</string>
+    <string name="view_less">View less</string>
+    <string name="course_completed">Course Completed!</string>
+    <string name="course_in_progress">Course In Progress</string>
+    <string name="days_left">Days left</string>
+    <string name="your_next_instalment">Your Next Instalment</string>
+    <string name="pay">Pay</string>
+    <string name="by">By:</string>
+    <string name="call_request_accepted">Your request has been accepted!\nWe will call you shortly</string>
+    <string name="complete_your_assignment">Complete your assignments to download the certificate</string>
+    <string name="complete_your_course_to_download">Complete your course to download your certificate</string>
+</resources>

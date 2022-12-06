@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="40dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/onlinePaymentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/imgCancel"
+        android:padding="0dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imgOfferImage"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scaleType="fitXY"/>
+
+        <TextView
+            android:id="@+id/txtOfferTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Offer Ends in 05:00 mins"
+            android:textColor="@color/muted_blue"
+            android:textSize="18sp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/dinpro"/>
+
+        <TextView
+            android:id="@+id/btnEnrol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lblEnrolNow"
+            android:textColor="@color/white"
+            android:textAllCaps="true"
+            android:fontFamily="@font/dinprobold"
+            android:textSize="15sp"
+            android:padding="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/blue_button_bg"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="15dp"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Limited Offer!"
+                android:textColor="@color/black_two"
+                android:textSize="20sp"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/dinpro"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Flash Sale"
+                android:textColor="@color/muted_blue"
+                android:textSize="24sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/dinpro"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enrol Now for"
+                android:textColor="@color/muted_blue"
+                android:textSize="15sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/dinpro"/>
+
+            <TextView
+                android:id="@+id/txtFinalAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="       ₹ 399"
+                android:textColor="@color/muted_blue"
+                android:textSize="24sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/dinpro"/>
+
+            <TextView
+                android:id="@+id/txtActualAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="₹ 499"
+                android:textColor="@color/muted_blue"
+                android:textSize="24sp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/dinpro"/>
+
+
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cod_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/imgCancel"
+        android:padding="15dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/muted_blue"
+            android:fontFamily="@font/dinpro"
+            android:text="@string/start_your_courses"
+            android:gravity="center"
+            android:textSize="19sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_two"
+            android:fontFamily="@font/dinpro"
+            android:text="@string/courses_steps"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgCancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_cross"
+        android:layout_alignParentRight="true"
+        android:padding="6dp"
+        android:layout_margin="5dp"/>
+
+</RelativeLayout>

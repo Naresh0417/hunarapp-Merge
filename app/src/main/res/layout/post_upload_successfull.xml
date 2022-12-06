@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="40dp"
+    android:background="@color/white"
+    android:layout_centerInParent="true">
+
+    <LinearLayout
+        android:id="@+id/onlinePaymentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/imgCancel"
+        android:padding="15dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/progressBar"
+            android:visibility="visible"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thanks_for_your_submission"
+            android:textColor="@color/muted_blue"
+            android:textSize="20sp"
+            android:fontFamily="@font/dinpro"
+            android:gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/it_will_be_reviewed_and_posted_within_24_hours"
+            android:textColor="@color/black_two"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:layout_marginTop="15dp"/>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgCancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_cross"
+        android:layout_alignParentEnd="true"
+        android:padding="6dp"
+        android:layout_margin="5dp"/>
+
+</RelativeLayout>

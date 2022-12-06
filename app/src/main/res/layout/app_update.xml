@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    app:cardCornerRadius="10dp"
+    android:elevation="30dp"
+    android:padding="10dp"
+    android:background="@drawable/version_control_dialogue"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@android:color/transparent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New version available"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/dinprobold"
+            android:textColor="@color/muted_blue"
+            android:textSize="22sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Looks like you have an older version of the app. Please update to get latest features and best experience"
+            android:layout_gravity="center_horizontal"
+            android:fontFamily="@font/dinpromedium"
+            android:gravity="center"
+            android:textColor="@color/black_two"
+            android:textSize="17sp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            />
+
+        <TextView
+            android:id="@+id/btnUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="UPDATE"
+            android:textColor="@color/shape_orange"
+            android:layout_gravity="end"
+            android:layout_margin="15dp"
+            android:fontFamily="@font/dinprobold"
+            />
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

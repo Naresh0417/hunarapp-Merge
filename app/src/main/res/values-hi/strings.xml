@@ -1,0 +1,473 @@
+<resources>
+    <string name="app_name">Hunar Online Courses</string>
+    <string name="lblSkip">छोड़ें</string>
+    <string name="lblSignHere"><u>यहां लॉगिन करें</u></string>
+    <string name="lblRegisterHere"><u>यहां रजिस्टर करें</u></string>
+    <string name="lblAboveFive">माफ़ कीजिये! आपने पहले ही पाँच श्रेणियों को चुना है</string>
+    <string name="lblHome">होम</string>
+    <string name="lblChat">बातचीत</string>
+    <string name="lblEnrol">नामांकन करें</string>
+    <string name="lblToday">हुनर क्लब</string>
+    <string name="lblContact">हमसे संपर्क करें</string>
+    <string name="lblNext">आगे बढ़ें</string>
+    <string name="lblStartLearning">सीखना शुरू कीजिये</string>
+    <string name="lblVerify">रजिस्टर करने के</string>
+    <string name="lblVeryLogin">सत्यापित करें</string>
+    <string name="lblApiKey">dsf99898398i3jofklese93</string>
+    <string name="lblCourseEnrolNowButton">(कुल पाठ्यक्रम शुल्क - ₹8,000/-)\nबस अब के लिए नामांकन 3000 + करों</string>
+    <string name="lblTaxes">टैक्स</string>
+    <string name="lblEnrolNow">एनरोल कीजिए</string>
+    <string name="choosePopupMsg">माफ़ कीजिये! आपने पहले ही पाँच श्रेणियों को चुना है</string>
+    <string name="AlreadyMember">पहले से सदस्य हैं?  </string>
+    <string name="enterOtp">OTP दर्ज करें</string>
+    <string name="resendOtp">OTP दोबारा भेजें</string>
+    <string name="lblPreferred"><big><b><font color='#333333'>पूरी फीस जमा कीजिए</font></b></big> <small><b><font color='#8e8e8e'>और </font></b></small></string>
+    <string name="lblPremium"><big><b><font color='#333333'>आसान किश्तों में</font></b></big> <small><b><font color='#8e8e8e'>जमा कीजिए</font></b></small></string>
+    <string name="lblMonth">&#160;महीने</string>
+    <string name="lblCourseCounselling">With our post-course counselling, we help you to take your skills to a professional level. With our guidance, you could learn about all the career options you have after completing your course.</string>
+    <string name="lblWebinars">We bring you free live webinars where industry experts discuss and share interesting facts. The interactive programmes can clear your doubts and help you learn more about the industry so that you can become a professional yourself!</string>
+    <string name="lblCareerOptions">On completing this course, you can create beautiful Indian clothes for yourself and others. You can run your tailoring business from home or even start your own boutique and brand!</string>
+    <string name="lblAttendWorkshop">For you to develop creative ideas and skills, we conduct free workshops at our centres with industry experts and professionals. It is your golden chance to expand your knowledge and increase your confidence!</string>
+    <string name="lblCenter1">Peejay Plaza, Opposite Tycoon Hotel, Door No: 10–1–44/6,1st floor VIP Road, Siripuram, CBM Compound, Asilmetta, Visakhapatnam, Andhra Pradesh 530003</string>
+    <string name="lblPhone1">9010100240</string>
+    <string name="lblContactus">+91 <u>9010100240</u></string>
+    <string name="lblLink1"><u>https://www.hunarcourses.com/</u></string>
+    <string name="lblLink2"><u>https://www.hunarcourses.com/</u></string>
+    <string name="lblAboutContent">अपने 27वें वर्ष में भी, हैमस्टेक अपने फिलॉसफी लर्न, बिलीव, क्रिएट पर पूरी तरह से चल रहा है। हैमस्टेक ऑनलाइन पाठ्यक्रम आपके कौशल को धार देने और आपके जुनून को प्रमाणित कौशल में बदलने का अवसर देता है।
+\n\n
+फैशन और ज्वैलरी डिज़ाइनिंग, स्टाइलिंग और बहुत कुछ में कई पाठ्यक्रमों के साथ, हैमस्टेक ऑनलाइन आपको घर बैठे नए रचनात्मक कौशल सीखने का अवसर देता है!
+\n\n
+हमारे पास सरकार द्वारा मान्यता प्राप्त पाठ्यक्रम भी हैं, जिनके माध्यम से आपको NSDC द्वारा प्रमाणित किया जा सकता है और अपने कौशल को एक सफल व्यवसाय में बदलने के लिए सर्वश्रेष्ठ उद्योग-स्तरीय प्रशिक्षण प्राप्त कर सकते हैं!
+\n\n
+इसलिए, अब यह समय आ गया है कि हम सपने देखें, अपनी गलतियों से सीखें और खुद को सशक्त करें।
+</string>
+    <string name="lblAchieversTitle1">शिल्पा वाघरे</string>
+    <string name="lblAchieversTitle2">मोहित दोचानिया</string>
+    <string name="lblAchieversTitle3">रचना कीमती</string>
+    <string name="lblAchieversSubtitle1">फैशन डिजाइनर</string>
+    <string name="lblAchieversSubtitle2">फैशन डिजाइनर</string>
+    <string name="lblAchieversSubtitle3">फैशन डिजाइनर</string>
+    <string name="lblAchieversDescription1">हैम्सटेक की कुशल डिजाइनर, जिन्होंने सुश्री चेरिवासेक के निमंत्रण पर प्रतिष्ठित हवाईयन फैशन माह में अपने डिजाइन प्रदर्शित किए हैं। उनके डिजाइन को फर्स्ट लेडी ऑफ हवाईयन ने न सिर्फ सराहा, बल्कि पहना भी है।</string>
+    <string name="lblAchieversDescription2">मोहित के पास नीता लुल्ला के साथ इंटर्नशिप करने का एक शानदार अवसर था, जिससे उनके करियर की शुरुआत हुई । उन्होंने 2010 में लंदन फैशन वीक में भाग लिया था और मिलान और पेरिस में आयोजित विभिन्न ट्रेड शो में अपनी प्रभावशाली उपस्थिति दर्ज की। उनका फैशन लेबल, "मोहित डोचनिया" कुछ सबसे संभ्रांत फैशनिस्टाओं को पूरा करता है।</string>
+    <string name="lblAchieversDescription3">रचना कीमती एकमात्र ऐसी डिजाइनर हैं, जिन्हें GenX (जेनएक्स) कैटेगरी में इंडिया फैशन वीक, लंदन में भाग लेने का अवसर मिला।</string>
+    <string-array name="faqs_qns">
+        <item>1. हुनर ऑनलाइन पाठ्यक्रम क्या है?</item>
+        <item>2. मेरा कौशल बढ़ाने में हुनर ऑनलाइन पाठ्यक्रम मेरी मदद कैसे करेगा?</item>
+        <item>3. हुनर ऑनलाइन पाठ्यक्रम में नामांकन करने के लिए कौन योग्य है?</item>
+        <item>4. एक बार जब मैं किसी पाठ्यक्रम में नामांकन करने का निर्णय ले लेता हूं तो क्या होता है?</item>
+        <item>5. पाठ्यक्रम का पंजीकरण कब तक सक्रिय रहेगा?</item>
+        <item>6. क्या मैं एक ही समय में कई पाठ्यक्रमों में नामांकन ले सकता/सकती हूं?</item>
+        <item>7. पाठ्यक्रम में नामांकन लेने और नि:शुल्क पाठ के लिए साइन अप करने में क्या अंतर है?</item>
+        <item>8. मैं अपना पाठ्यक्रम कब शुरू कर सकता/सकती हूं?</item>
+        <item>9. किसी डाउट की स्थिति में, मैं अपने प्रशिक्षक तक कैसे पहुंच सकता/सकती हूं?</item>
+        <item>10. मुझे एक पाठ्यक्रम पूरा करने में कितना समय लग सकता है?</item>
+        <item>11. क्या मैं इस बात का डेमो देख सकता हूं कि पाठ्यक्रम कैसा हैz?</item>
+        <item>12. क्या मैं अन्य छात्रों से संपर्क कर पाऊंगा?</item>
+        <item>13. प्रत्येक पाठ्यक्रम के अंत में मुझे अपना प्रमाणपत्र कैसे और किस रूप में प्राप्त होगा?</item>
+        <item>14. ऑनलाइन पाठ्यक्रम करने के योग्य होने के लिए मूलभूत आवश्यकताएं क्या हैं?</item>
+        <item>15. क्या मुझे ऑनलाइन सीखने और अपने ट्यूटोरियल देखने में सक्षम होने के लिए निरंतर इंटरनेट कनेक्शन की आवश्यकता है? क्या मैं ट्यूटोरियल को ऑफ़लाइन देख सकता हूं?</item>
+        <item>16. यदि मुझे कोई तकनीकी कठिनाई आती है तो मैं कैसे मदद पा सकता/सकती हूं?</item>
+    </string-array>
+    <string-array name="faqs_ans">
+        <item>हुनर ऑनलाइन पाठ्यक्रम हैम्सटेक ग्रुप ऑफ इंस्टीट्यूट की एक पहल है। जिन्हें फैशन की शिक्षा देते हुए 27 साल से अधिक हो चुके हैं। 30,000 से अधिक पूर्व विद्यार्थियों के एक समूह के साथ ही हैम्सटेक को कौशल विकास की अपनी विचारधारा पर गर्व है। हैम्सटेक के 8,000 से अधिक विद्यार्थी आज उद्योग जगत में बड़े से बड़े ब्रांड के साथ काम कर रहे हैं और बहुत से तो सफल व्यवसायी भी हैं।</item>
+        <item>आप हमारे फ्री लर्निंग एप को डाउनलोड करें। एक बार जब आप नामांकन कर लेते हैं, तो हमारी वीडियो क्लास से सीखना शुरू करें, 24/7 फैकल्टी सपोर्ट प्राप्त करें, असाइनमेंट अपलोड करें और नीता लुल्ला से प्रमाण पत्र प्राप्त करें! यह बहुत ही आसान काम है!</item>
+        <item>यदि किसी को फैशन का जुनून है! हैमस्टेक ऑनलाइन पाठ्यक्रम में, हम उन विद्यार्थियों को प्रोत्साहित करते हैं जिनके पास अपने जुनून को बनाए रखने और इसे अपने कौशल में बदलने का एक अनूठा उत्साह है। इसलिए, यदि आपमें इस विषय के लिए गहरी उत्सुकता है तो हम आपका स्वागत करते हैं!</item>
+        <item>आप जिस पाठ्यक्रम को सीखना चाहते हो, उसको चुनने के बाद सीखना शुरू करने के लिए आप 6 सरल चरणों का पालन कर सकते हैं:\n
+            चरण 1: नामांकन / भुगतान बटन पर क्लिक करें।\n
+            चरण 2: एक छात्र के रूप में पंजीकरण करने के लिए अपने विवरण को भरें। \n
+            चरण 3: अपने डेबिट / क्रेडिट कार्ड या नेट बैंकिंग से ऑनलाइन भुगतान करें। आप कैश-ऑन-डिलीवरी विकल्प भी चुन सकते हैं। \n
+            चरण 4: हमारे लर्निंग मैनेजमेंट सिस्टम में लॉग इन करने के लिए आपकी ईमेल पर भेजे गए ऑटो-जनरेट पासवर्ड का उपयोग करें जो आपके पाठ्यक्रमों और सभी आवश्यक जानकारी के लिए सिर्फ एक पोर्टल है। \n
+            चरण 5: अपनी फ्री स्टार्टर किट प्राप्त करें जिसमें आपकी क्लासेस शुरू करने के लिए आवश्यक सामग्री है। \n
+            चरण 6: आप अपने पाठ्यक्रम पृष्ठ पर जाएं और अपना पाठ नंबर 1 शुरू करें!
+        </item>
+        <item>आपके लॉगिन क्रेडेन्शियल्स मिलने के दिन से 6 महीने की अवधि तक आपका पंजीकरण सक्रिय रहेगा।</item>
+        <item>हां, आप अवश्य कर सकते/सकती हैं! हैमस्टेक ऑनलाइन पाठ्यक्रम आपको एक ही समय में बहुत से कौशल सीखने की अनुमति देता है।</item>
+        <item>ये नि: शुल्क प्रशिक्षण आपको सीखने की तकनीकें और क्लास मे होने की एक झलक देता है। भुगतान करने के बाद नामांकन की सहायता से आप हमारे लर्निंग मैनेजमेंट सिस्टम पर उपलब्ध पाठ्यक्रम तक पहुंचते हैं।</item>
+        <item>एक ऑनलाइन सीखने का प्लेटफार्म होने के कारण, हैमस्टेक ऑनलाइन पाठ्यक्रम आपको एक वर्ष के दौरान किसी भी समय नामांकन करने की अनुमति देता है। तो, अब नामांकन करें और स्टार्टर किट का लाभ उठाकर आराम से शुरुआत करें।</item>
+        <item>हैमस्टेक ऑनलाइन पाठ्यक्रम यह सुनिश्चित करता है कि आपकी शिक्षा संवादात्मक/इंटरैक्टिव और सरल दोनों ढ़ंग से हो। हमारे फैकल्टी मेंबर्स स्काइप, चैट, ईमेल और फोन के माध्यम से उपलब्ध हैं। हमारे प्रशिक्षक और संरक्षक आपकी सीखने की अवधि तक हर कदम पर आपके साथ रहेंगे।</item>
+        <item>आप अपनी सुविधानुसार पाठ्यक्रम पूरा कर सकते हैं। पाठ्यक्रम को पूरा करने के लिए आपको कुछ घंटों से लेकर कुछ हफ्तों से लेकर कुछ महीनों तक का भी समय लग सकता हैं।</item>
+        <item>सभी चुने हुए पाठ्यक्रमों को समझने हेतु नि:शुल्क प्रयोग हेतु कृपया साइन अप करें। यह आपको हमारी शिक्षण पद्धति और कक्षा स्थल के बारे में एक आइडिया दे देगा।</item>
+        <item>हां, सत्रों के दौरान, आप चर्चा करने वाले समूह और गोष्ठियों के माध्यम से अपने साथियों के साथ बातचीत कर सकते हैं।</item>
+        <item>पाठ्यक्रम पूरा होने के बाद, आपकी पंजीकृत ई-मेल आईडी पर एक डिजिटल प्रमाणपत्र ई-मेल किया जाएगा।</item>
+        <item>आपको सक्रिय इंटरनेट कनेक्शन वाले लैपटॉप या स्मार्टफोन जैसे एक साधारण यंत्र की आवश्यकता हो सकती है। यह बहुत आसान है!</item>
+        <item>इंटरनेट से कनेक्ट होने के बाद हमारे पाठ्यक्रमों के कंटेंट तक पहुंचा जा सकता है।</item>
+        <item>टोल फ्री नंबर (10:00 पूर्वाह्न-6:00 बजे) पर सहायता टीम से संपर्क करें या किसी भी समय एक ईमेल छोड़ दें। आपकी समस्या को जल्द से जल्द हल किया जाएगा।</item>
+    </string-array>
+    <string name="lblStarterKit">You shall receive a free starter kit that helps you to get a head start into the course. The kit contains all the tools and materials you will need\n\n
+    &#183; Basic stationery\n
+    &#183; Measuring tape\n
+    &#183; Scales &amp; curves\n
+    &#183; Carbon paper (black, yellow &amp; blue)\n
+        &#183; Sewing materials (tracing wheel, threads, etc)\n
+        &#183; Scissors\n
+        &#183; Needle set (hand &amp; machine)\n
+        &#183; Fasteners (zipper, hooks, buttons etc)\n
+        &#183; Fusing (paper, cloth, buckram etc)\n
+        &#183; Fabrics (as per the garments &amp; practice sessions)\n
+    </string>
+    <string name="failed_to_load_chat">चैट लोड नहीं कर सका.</string>
+    <string name="cant_share_files">फ़ाइल साझाकरण इस ऐप के लिए कॉन्फ़िगर नहीं किया गया है</string>
+    <string name="facebook_app_id">1959327670853361</string>
+    <string name="fb_login_protocol_scheme">fb1959327670853361</string>
+    <string name="terms_conditions"><u>अगले पर क्लिक करके, आप हमारे नियमों और शर्तों से सहमत होते हैं</u></string>
+    <string name="lblFacultyDescription">Get a professional certificate signed by your mentor and one of India&#44;s top Fashion Designers, Neeta Lulla, who is: Costume Designer of Bollywood movies like Jodha Akbar, Devdas, Manikarnika &amp; more. 4-Time National Award Winner recipient of the prestigious Dadasaheb Phalke International Film Festival Award.
+</string>
+
+    <string name="lblOtpExpire">OTP Expires in:  2:00 Minutes</string>
+    <string name="lblStaterKit">अपना मुफ्त ट्रायल अभी शुरू करें!</string>
+    <string name="lblName">नाम</string>
+    <string name="lblMobileNumber">मोबाइल नंबर</string>
+    <string name="lblLoginOtp">OTP का उपयोग करके लॉगिन करें</string>
+    <string name="lblResendOtp">OTP दोबारा भेजें</string>
+    <string name="lblEnterOtp">OTP दर्ज करें</string>
+    <string-array name="menu_list">
+        <item>प्रोफाइल</item>
+        <item>लाइव डिजिटल फैशन शो</item>
+        <item>कोर्सस</item>
+        <item>सफलता की कहानियाँ</item>
+        <item>रिकमेंडेशन</item>
+        <item>हुनर न्यूज़</item>
+        <item>हमारे बारे में</item>
+        <item>हमारे केंद्र</item>
+        <item>भाषा चुनें</item>
+        <item>सामान्य प्रश्न</item>
+    </string-array>
+    <string-array name="courseTabsNames">
+        <item>ट्रायल क्लास</item>
+        <item>पाठ्यक्रम विवरण</item>
+    </string-array>
+    <string-array name="minicourseTabsNames">
+        <item>पाठ्यक्रम विवरण</item>
+        <item>क्लास</item>
+    </string-array>
+    <string-array name="minicourseTabs">
+        <item>विषय और स्टडी मटेरियल</item>
+        <item>असाइनमेंट और प्रमाणन</item>
+    </string-array>
+    <string-array name="NsdcExpandableList">
+        <item>एन.एस.डी.सी सर्टिफिकेट - भारत सरकार द्वारा मान्यता प्राप्त</item>
+        <item>पाठ्यक्रम</item>
+        <item>अपना स्टार्टर किट प्राप्त करें</item>
+        <item>एक्सपर्ट फैकल्टी से सीखें</item>
+        <item>सर्टिफ़िकेट हासिल कीजिए</item>
+        <item>वर्कशॉप में भाग लें</item>
+        <item>लाइव वेबिनार देखें</item>
+        <item>पोस्ट-कोर्स काउंसलिंग प्राप्त करें</item>
+        <item>अपने कैरियर विकल्पों को जानें</item>
+        <item>सामान्य प्रश्न</item>
+    </string-array>
+    <string-array name="OtherExpandableList">
+        <item>पाठ्यक्रम</item>
+        <item>अपना स्टार्टर किट प्राप्त करें</item>
+        <item>एक्सपर्ट फैकल्टी से सीखें</item>
+        <item>सर्टिफ़िकेट हासिल कीजिए</item>
+        <item>वर्कशॉप में भाग लें</item>
+        <item>लाइव वेबिनार देखें</item>
+        <item>पोस्ट-कोर्स काउंसलिंग प्राप्त करें</item>
+        <item>अपने कैरियर विकल्पों को जानें</item>
+        <item>सामान्य प्रश्न</item>
+    </string-array>
+    <string-array name="aboutGroupList">
+        <item>हमारे बारे में</item>
+        <item>हमारी मेंटॉर - नीता लूला</item>
+        <item>हमारे पुरस्कार</item>
+        <item>हमारे अचीवर</item>
+    </string-array>
+    <string-array name="ourAwardsItemList">
+        <item>टाइम्स एडुकेशन आइकॉन - 2017</item>
+        <item>इंडिया एडुकेशन अवार्ड्स - 2018</item>
+        <item>टाइम्स एडुकेशन आइकॉन - 2018</item>
+        <item>फोर्ब्स मैगजीन की \u0027ग्रेट इंडियन इंस्टीटूट्स\u0027 केटेगरी में जगह पायी</item>
+    </string-array>
+    <string name="viewCertificate"><u>प्रमाणपत्र देखें</u></string>
+    <string name="chooseLanguage">अपनी भाषा चुनिए</string>
+    <string name="headerTitle">हुनर ऑनलाइन पाठ्यक्रम</string>
+    <string name="nsdcTextEnglish">सरकार द्वारा मान्यता प्राप्त पाठ्यक्रम (अंग्रेजी)</string>
+    <string name="nsdcTextHindi">सरकार द्वारा मान्यता प्राप्त पाठ्यक्रम (हिंदी)</string>
+    <string name="YourRecCourses">आपके सुझाए गए पाठ्यक्रम</string>
+    <string name="OtherCoursesEnglish">कोर्स चेटेघोरिस</string>
+    <string name="OtherCoursesHindi">विषय सूची</string>
+    <string name="nsdcTextTite">भारत सरकार द्वारा मान्यता प्राप्त कौर्सेस</string>
+    <string name="studyMaterial">अध्ययन\nसामग्री</string>
+    <string name="viewStudyMaterial">पाठ को बेहतर समझने के लिए अध्ययन सामग्री देखें!</string>
+    <string name="hamstechToday">हुनर ताज़ा</string>
+    <string name="contactUs">संपर्क करें</string>
+    <string name="callUs">हमें कॉल करें</string>
+    <string name="callBackRequest">कॉल बैक का अनुरोध करें</string>
+    <string name="chatWithUs">हम से बात करे</string>
+    <string name="ourCenters">हमारे केंद्रों पर जाएँ:</string>
+    <string name="moreAboutUs">हमारे बारे में अधिक जानें:</string>
+    <string name="headerNotifications">सूचनाएं</string>
+    <string name="tellUsWhatYouLike">हमें बताएँ कि आप क्या पसंद करते हैं</string>
+    <string name="chooseFiveTopics">5 विषय चुनें</string>
+    <string name="getRecommendedCourses">रिकमेंडेड कौर्सेस प्राप्त करें</string>
+    <string name="enterMobileNumber">कृपया 10 अंकों का मोबाइल नंबर दर्ज करें।</string>
+    <string name="expireIn">मिनट में समाप्त होने वाला है&#160;</string>
+    <string name="chatURL">https://wa.me/919010100240</string>
+    <string name="enrolNow">एनरोल कीजिये</string>
+    <string name="enrolNowMiniCourse">एंरोल कीजिए सिर्फ़ Rs. </string>
+    <string name="strike_line"><strike>899</strike></string>
+    <string name="chooseCourses">+ कोर्स चुनिए</string>
+    <string name="viewAll">सारे कोर्स देखें</string>
+    <string name="textDiscount">+ 10% छूट के लिए एक और कोर्स जोड़ें</string>
+    <string name="chooseAccess">अपना कोर्स चुनने के लिए धन्यवाद!</string>
+    <string name="chooseLaguage">अपनी भाषा चुनिए</string>
+    <string name="discount">छूट 15%</string>
+    <string name="discount_25">छूट 25%</string>
+    <string name="discount_5">छूट 5%</string>
+    <string name="TaxexCharges">जीएसटी(18%)</string>
+    <string name="txtTotal">टोटल</string>
+    <string name="GrandTotal"><big><b><font color='#333333'>कुल योग</font></b></big> <small><b><font color='#8e8e8e'> (टैक्स सहित)</font></b></small></string>
+    <string name="DeliverText">अपनी डीटेल भर कर सीखना शुरू कीजिए!</string>
+    <string name="Address">पता</string>
+    <string name="City">शहर</string>
+    <string name="State">राज्य</string>
+    <string name="Country">देश</string>
+    <string name="Pincode">पिन कोड</string>
+    <string name="Email">ईमेल</string>
+    <string name="choosePaymentOption">अपना भुगतान विकल्प चुनें</string>
+    <string name="continuePayment">भुगतान जारी रखें</string>
+    <string name="validPincode">मान्य पिनकोड दर्ज करें</string>
+    <string name="getCertified">एन.एस.डी.सी द्वारा प्रमाणित हो</string>
+    <string name="certificationNotApplicable">एन.एस.डी.सी प्रमाणीकरण लागू नहीं है</string>
+    <string name="discountApplied">+ 10% छूट लागू</string>
+    <string name="RemoveCourse">क्या आप इस कोर्स को अपने लिस्ट से हटाने चाहते हैं?</string>
+    <string name="lblYes">हाँ</string>
+    <string name="FieldsNotEmpty">खेत खाली नहीं होने चाहिए।</string>
+    <string name="invalidEmail">अमान्य ईमेल पता</string>
+    <string name="hamstechStory">हुनर की कहानी</string>
+    <string name="lblFaqs">पूछे जाने वाले प्रश्न के</string>
+    <string name="lblContinue">जारी रखें</string>
+    <string name="Overview">कोर्स के बारे में</string>
+    <string name="FirstInstalment">पहली किस्त - ₹</string>
+    <string name="TotalCourseFee">(कुल फीस - ₹</string>
+    <string name="EnrolJust">अब बस ₹</string>
+    <string name="onlyhindi">में दाखिला ले</string>
+    <string name="enrolNowToStart">सीखना शुरू करने के लिए अब दाखिला लें!</string>
+    <string name="enrolGetYours">अपना किट पाने के लिए दाख़िला लें</string>
+    <string name="enrolGetCertified">अपना सर्टिफ़िकेट पाने के लिए आज ही दाख़िला लें !</string>
+    <string name="enrolAttend">अब भाग लेने के लिए दाख़िला लें</string>
+    <string name="enrolWatch">वेबिनार का हिस्सा बनने के लिए दाख़िला लें !</string>
+    <string name="enrolStartCourse">अपना कोर्स शुरू करने के लिए अब दाखिला लें!</string>
+    <string name="enrolBeginCareer">अपना कैरियर शुरू करने के लिए दाखिला लें!</string>
+    <string name="lblCourses">पाठ्यक्रम</string>
+    <string name="lblStories">कहानियों</string>
+    <string name="txtUnlock">पूरा कोर्स सीखने के लिए !</string>
+    <string-array name="branchNames">
+        <item>हैदराबाद</item>
+        <item>विशाखापट्नम</item>
+        <item>इंदौर</item>
+    </string-array>
+    <string-array name="branchAddress">
+        <item>5वा फ्लोर, वेंकट प्लाज़ा, पंजागुट्टा, X रोड्स, जोस अलुक्कास के सामने, हैदराबाद - 500082</item>
+        <item>पीजे प्लाज़ा, टाइकून होटल के सामने, डोर नं: 10–1–44/6,  पहला फ्लोर, वी आई पी रोड, सिरिपुरम, सी बी एम् कम्पाउंड, असिलमेट्टा, विशाखापट्नम, आंध्रा प्रदेश - 530003</item>
+        <item>प्रिंसेस बिज़नेस पार्क, पहला फ्लोर, ऑर्बिट मॉल के सामने , ए बी रोड, इंदौर - 452001</item>
+    </string-array>
+    <string name="lblPhone">फ़ोन</string>
+    <string name="lblProfile">प्रोफाइल</string>
+    <string name="profileEmail">आपका ईमेल एड्रेस क्या है?</string>
+    <string name="profileInputEmail">एंटर कीजिए</string>
+    <string name="profilelive">आप कहाँ रहते हैं?</string>
+    <string name="profileInputCity">शहर का नाम भरिये</string>
+    <string name="profileWhatDo">आप क्या करते हैं?</string>
+    <string name="profileHowOld">आपकी उम्र क्या है?</string>
+    <string name="profileWhyHamstech">आप हेम्स्टेक ऑनलाइन कोर्सेस क्यों चुनना चाहते हैं?</string>
+    <string name="profileSelectLanguage">अपनी भाषा चुनें</string>
+    <string name="profileSave">सहेजें</string>
+    <string name="requestReceived">अनुरोध प्राप्त!</string>
+    <string name="requestCallBack">आपको शीघ्र ही हमसे एक कॉल प्राप्त होगी।</string>
+    <string name="Or">या  </string>
+    <string name="lockButton">अब दाख़िला लें</string>
+    <string name="lblTermsConditions">नियम और शर्तें</string>
+    <string name="lblPrevious">पिछला</string>
+    <string name="lblVideoNext">अगला</string>
+    <string name="error_player">There was an error initializing the YouTubePlayer (%1$s)</string>
+    <string name="howToUse"><u>हमारे एप्लिकेशन का उपयोग कैसे करें!</u></string>
+    <string name="successStories">सफलता की कहानियाँ</string>
+    <string name="testimonials">प्रशंसापत्र</string>
+    <string name="startEnrol">सीखना शुरू करने के लिए अब दाखिला लें</string>
+    <string name="otpMessage">यदि आपको अपना ओ.टी.पी. प्राप्त नहीं हुआ तो आप अपने
+मोबाइल नम्बर के आख़री चार अंक भरके भी लोग इन कर सकते हैं।</string>
+    <string name="sendusMsg">हमें मेसेज भेजिए!</string>
+    <string name="firstInstalment">(As First Instalment)</string>
+    <string name="ratingHeader">हमें ख़ुशी है की आपको हमारे वीडियो पसंद आए।</string>
+    <string name="ratingContent">अब दूसरी महिलाओं को भी हुनर सीखने का मौक़ा देने के लिए हमारी ऐप को रेट कीजिए!</string>
+    <string name="ratingSure">बिलकुल</string>
+    <string name="ratingLater">फिर कभी</string>
+    <string name="ratingVideo">क्या आपको हमारे वीडियो देखने में मज़ा आया?</string>
+    <string name="lblNo">नहीं</string>
+    <string name="btnTrialClass">देखिए अन्य कपड़ो की सिलाई के ट्रायल क्लास</string>
+    <string name="txtMoreClasses">देखिए अन्य ट्रायल क्लास!</string>
+    <string name="btnFirst">और देखिए</string>
+    <string name="txtAddCourse"><u>+ कोर्स लीजिए</u></string>
+    <string name="txtAddDiscount"><big><b><font color='#232323'>10% डिस्काउंट</font></b></big>\n<small><b><font color='#232323'>एक और नया कोर्स लीजिए और पाइए 10% की छूट!</font></b></small></string>
+    <string name="choosePaymentPlan">अपनी भुगतान की योजना चुनिए</string>
+    <string name="txtCourseRemove">X रिमूव</string>
+    <string name="txtInclusiveAllTaxes"><small><font color='#8e8e8e'>टैक्स सहित</font></small></string>
+    <string name="txtViewOrderSummary">ऑर्डर की समरी देखिए (</string>
+    <string name="txtSummaryCourse">कोर्स)</string>
+    <string name="txtOrderTotal"><small><font color='#848383'>कुल योग</font></small></string>
+    <string name="txtAddressDetails">पता</string>
+    <string name="txtEdit">एडिट</string>
+    <string name="yourStarterKit">*आपका स्टार्टर किट इस पते पर भेजा जायेगा, कृपया सुनिश्चित कीजिए कि दी गई जानकारी सही है!</string>
+    <string name="debitOrCredit">डेबिट कार्ड/ क्रेडिट कार्ड\n
+    (एक्स्ट्रा 5% डिस्काउंट)</string>
+    <string name="netBanking">नेट बैंकिंग\n
+    (एक्स्ट्रा 5% डिस्काउंट)</string>
+    <string name="gPay">जी-पे\n
+    (एक्स्ट्रा 5% डिस्काउंट)</string>
+    <string name="payTm">Paytm\n
+    (एक्स्ट्रा 5% डिस्काउंट)</string>
+    <string name="cod">कैश ऑन डिलीवरी</string>
+    <string name="txt_terms_conditions"><small><font color='#848383'>By clicking above, I agree to the </font></small>Terms and Conditions</string>
+    <string name="txt_click_here"><u>यहाँ क्लिक करके</u></string>
+    <string name="txt_click_here_desc">हुनर लर्निंग ऐप डाउनलोड कीजिए, लॉगिन कीजिए और अपना कोर्स शुरू कीजिए!</string>
+    <string name="start_your_courses">अपना कोर्स शुरू करने के लिए,इन 3 स्टेप को फॉलो कीजिए:</string>
+    <string name="courses_steps">स्टेप 1:\n
+    जब हमारी टीम आपको कॉल करे तो अपना एड्रेस कन्फर्म कीजिए ताकि हम आपको स्टार्टर किट भेज सकें।\n\n
+    स्टेप 2:\n
+    Pay your fees to unlock your course and receive your username &amp; password.\n\n
+    स्टेप 3:\n
+    हुनर ऑनलाइन ऐप डाउनलोड कीजिए और अपना कोर्स शुरू करने के लिए लॉगिन कीजिए।</string>
+    <string name="whatsAppmsg">हेलो, मुझे कोर्स और नये ऑफर के बारे में बात करना है!</string>
+    <string name="onlinePaymentDiscount">पाइये एक्स्ट्रा 5% डिस्काउंट</string>
+    <string name="sixMonths">6 - महीने के ऑनलाइन कोर्सेस</string>
+    <string name="liner_certificate">सर्टिफ़िकेट डाउनलोड करने लिए अपने मिनी लेसन का 80% भाग पूरा कीजिए और अपना असाइनमेंट सबमिट कीजिए।</string>
+    <string name="clear_doubts">हमारे साथ चैट करके अपने डाउट क्लियर कीजिए!</string>
+    <string name="linear_makePayment">पेमेंट करके एनरोल कीजिए और अभी सीखना शुरू कीजिए!</string>
+    <string name="linear_endigSoon">जल्दी कीजिए! ऑफ़र ख़त्म होने वाला है!</string>
+    <string name="popular_lessons">मनपसंद लेसन</string>
+    <string name="one_step_away">लीजिए बस एक और कदम और देखिए अपने लेसन!</string>
+    <string name="chat_student_guide">हेलो, मुझे अपने स्टूडेन्ट गाइड से बात करना है!</string>
+    <string name="Assignment_Submission_Liner">अपना असाइनमेंट सबमिट करने के लिए धन्यवाद! हुनर की फ़ैकल्टी उसे रिव्यू करके आपसे सम्पर्क करेगी।</string>
+    <string name="download_assignment">अपना असाइनमेंट डाउनलोड कीजिए</string>
+    <string name="upload_assignment">अपना असाइनमेंट अपलोड कीजिए</string>
+    <string name="select_files">अपने फाइल चुनिए</string>
+    <string name="file_submit">सबमिट कीजिए</string>
+    <string name="download_certificate">अपना सर्टिफिकेट डाउनलोड कीजिए</string>
+    <string name="chat_student_guide_btn">स्टूडेंट गाइड से बात कीजिए</string>
+    <string name="video_call_faculty">फैकल्टी के साथ वीडियो कॉल</string>
+    <string name="start_learning_today">नीचे क्लिक करके आज ही सीखना शुरू कीजिए!</string>
+    <string name="enrol_chat_msg">हेलो, मैं अपने मनपसंद लेसन में एनरोल करके सीखना शुरू करना चाहती हूँ।</string>
+    <string name="minilessons_overview">इस मनपसंद लेसन से आप:</string>
+    <string name="upload_image">फोटो अपलोड कीजिए</string>
+    <string name="write_title">टाइटल लिखिए…</string>
+    <string name="write_Description">विवरण/ डिस्क्रिप्शन लिखिए…</string>
+    <string name="submit_Your_Post">अपना पोस्ट सबमिट करें</string>
+    <string name="certificate_download_liner">आपका प्रमाणपत्र सफलतापूर्वक डाउनलोड हो गया है। अपना प्रमाणपत्र देखने के लिए कृपया अपने डाउनलोड फोल्डर में जाये!</string>
+    <string name="recieve_payments">भुगतान स्कैन कोड और लिंक\nव्हाट्सएप पर पाइए</string>
+    <string name="need_help_payments">भुगतान करने में सहायता चाहिए?</string>
+    <string name="watch_video_enroll">इस वीडियो से पाइए\nपेमेंट की जानकारी</string>
+    <string name="select_what_to_post">चुनें क्या पोस्ट करना है</string>
+
+    <string name="students_certified">से ज्यादा प्रमाणित स्टूडेंट्स</string>
+    <string name="special">स्पेशल</string>
+    <string name="live_class">लाइव क्लासेस</string>
+    <string name="hurray">जल्दी कीजिए! इस कोर्स पर लिमिटेड ऑफर पाइए।</string>
+    <string name="with_lesson">इस लेसन के साथ आप</string>
+    <string name="topics">विषय:</string>
+    <string name="expert_faculty">एक्सपर्ट फैकल्टी</string>
+    <string name="make_beautiful">सुंदर डिजाइन बनाएं और अपने लिए एक नाम पसंद करें</string>
+    <string name="hunar_students">हुनर छात्र!</string>
+    <string name="common_doubts">इस कोर्स से जुड़े कुछ सामान्य डाउट:</string>
+    <string name="watch_just">अभी देखिए सिर्फ</string>
+    <string name="enroll_make">एनरोल कीजिए, अपना पेमेंट कीजिए और अभी सीखना शुरू कीजिए।</string>
+    <string name="offer_today">ऑफर आज के लिए लागू।</string>
+
+    <string name="learnanother"><b><font color='#232323'>% की छूट पाइए कोई भी अन्य कोर्स सीखने पर।</font></b></string>
+    <string name="enrol_title">पेमेंट करके एनरोल कीजिए और अभी सीखना शुरू कीजिए!</string>
+    <string name="choose_paytype">अपना पेमेंट प्लान चुनिए</string>
+
+    <string name="online"><b><font color='#232323'>ऑनलाइन–पाइए-</font></b></string>
+    <string name="discount5"><b> 5% की अधिक छूट।</b></string>
+    <string name="payment_from"><small>(जीपे, फोनपे, पेटीएम, कार्ड, नेटबैंकिंग आदि)</small></string>
+    <string name="cash_delevery"><b>कैश ऑन डिलीवरी</b></string>
+    <string name="txt_one_step">आप एक कदम दूर है अपने लेसन देखने से।</string>
+    <string name="instalment"><small>किश्त</small></string>
+    <string name="days"><small>दिन पर।</small></string>
+    <string name="paynow">अभी का भुगतान कीजिए।</string>
+    <string name="pay_now">अभी %1$s का भुगतान कीजिए।</string>
+    <string name="labeladdress">अपना स्टार्टर किट पाने के लिए डिटेल्स भरिए</string>
+
+    <string name="in">इंडिया</string>
+    <string name="houseno">मकान संख्या, गली का नाम, लैंडमार्क, मोहल्ला</string>
+    <string name="labl_startcourse"><b>अपना कोर्स शुरू करने के लिए नीचे क्लिक कीजिए!</b></string>
+    <string name="lblstartlearn">सीखना शूरु कीजिए!</string>
+
+    <string name="pay_success">भुगतान सफल!</string>
+    <string name="pay_message">हम आपका लॉगिन डिटेल जल्द ही मैसेज करेंगे!</string>
+    <string name="pay_address">घर पर आपका स्टार्टर किट पाने के लिए कृपया अपना डिटेल भरें अपना डिटेल भरिए!</string>
+    <string name="learn_success">आपका अनुरोध स्वीकार कर लिया गया है!\nहम आपको शीघ्र ही कॉल करेंगे।</string>
+    <string name="lesson_watched">सबक देखा गया</string>
+    <string name="keep_watch">बनने के लिए देखते रहो</string>
+    <string name="hunar_topper">एक हुनर टॉपर</string>
+    <string name="study_material">अध्ययन सामग्री</string>
+    <string name="download_material">डाउनलोड करें</string>
+    <string name="assignment">असाइनमेंट</string>
+    <string name="student_works">छात्र वर्क्स</string>
+    <string name="faculty_feedback_on_your_assignment">आपके असाइनमेंट पर फैकल्टी फीडबैक</string>
+    <string name="you_have_successfully_submitted_your_assignment">आपने अपना असाइनमेंट सफलतापूर्वक सब्मिट कर दिया है।</string>
+    <string name="your_faculty_will_review_it_and_post_the_feedback_on_this_page">आपकी फैकल्टी इसको रिव्यु करेगी और अपना फीडबैक इस पेज पर पोस्ट करेगी!</string>
+    <string name="hunar_posts">हुनर पोस्ट</string>
+    <string name="your_posts">मेरे पोस्ट</string>
+    <string name="enrol_now_to_attend">अटेंड करने के लिए अभी एनरोल करें!</string>
+    <string name="like">लाइक</string>
+    <string name="comment">कमेंट</string>
+    <string name="share">शेयर</string>
+    <string name="post">पोस्ट</string>
+    <string name="enrol_now">अभी एनरोल करें</string>
+    <string name="all">सभी</string>
+    <string name="my_courses">मेरे कोर्सेस</string>
+    <string name="professional_courses">प्रोफेशनल कोर्सेस</string>
+    <string name="_6_month_online_government_certified_courses_to_make_your_hobby_a_skill_and_a_business">6 महीने का ऑनलाइन गवर्नमेंट सर्टिफाइड कोर्सेस
+आपके शौक को एक कौशल और एक बिज़नस बनाने के लिए!</string>
+    <string name="language">भाषा</string>
+    <string name="enrol_now_to_start_learning">सीखना शुरू करने के लिए अभी एनरोल करें!</string>
+    <string name="lessons_1">लेसन 1</string>
+    <string name="skip">हटाए</string>
+    <string name="study_material_pdf">स्टडी मटेरियल.pdf</string>
+    <string name="enrol_to_download">डाउनलोड करने के लिए एनरोल करें</string>
+    <string name="how_you_learn">आप कैसे सीखेंगे</string>
+    <string name="lessons">लेसन</string>
+    <string name="discussion">डिस्कशन</string>
+    <string name="with_this_course_you_will">इस कोर्स के साथ आपको मिलेगा</string>
+    <string name="your_next_lesson">आपका अगला लेसन</string>
+    <string name="see_all_lessons">सभी लेसन देखें</string>
+    <string name="learn_from_expert_faculties">एक्सपर्ट फैकल्टी से सीखें</string>
+    <string name="grow_your_skill_with_similar_courses">सिमिलर कोर्स के साथ अपना कौशल बढ़ाएं</string>
+    <string name="want_to_be_a_part_of_the_hunar_club">क्या आप हुनर क्लब का हिस्सा बनना चाहते हैं?</string>
+    <string name="get_daily_diy_videos_look_at_student_designs_amp_feature_nyour_own_creation_and_win_contest_prizes">
+        पाएं रोज़ DIY वीडियो, देखें स्टूडेंट डिजाइन और फीचर करे अपनी क्रिएशन और जीतें इनाम!
+    </string>
+    <string name="short_and_trending_certified_courses_to_help_you_design_unique_products">
+        छोटे और ट्रेंडिंग प्रमाणित कोर्स जो आपकी अमेजिंग प्रोडक्ट डिज़ाइन करने में मदद करेंगे!
+    </string>
+    <string name="see_more">और देखें</string>
+    <string name="your_celebrity_mentor">आपकी सेलिब्रिटी मेंटर</string>
+    <string name="learn_from_bollywood_s_top_fashion_designer_neeta_lulla_and_get_certified_by_her_too">
+        बॉलीवुड की टॉप फैशन डिजाइनर नीता लुल्ला से सीखें और होइए सर्टिफाइड!
+    </string>
+    <string name="reply">रिप्लाई</string>
+    <string name="type_your_comment_here">अपने कमेंट यहाँ टाइप करें...</string>
+    <string name="enrol_now_to_begin_your_career">अपना करियर शुरू करने के लिए अभी एनरोल करें!</string>
+    <string name="learn_from_expert_faculty">एक्सपर्ट फैकल्टी से सीखें</string>
+    <string name="feedback">फीडबैक</string>
+    <string name="pay_your_instalment">अपनी किश्त भरें</string>
+    <string name="view_order_summary">आर्डर समरी देखें</string>
+    <string name="wow_you_are_na_fast_learner">शानदार! आप एक\nफ़ास्ट लर्नर हैं!</string>
+    <string name="complete_your_course_to_download_certificate">सर्टिफिकेट डाउनलोड करने के लिए अपना कोर्स पूरा करें</string>
+    <string name="thanks_for_your_submission">सबमिशन करने के लिए धन्यवाद!</string>
+    <string name="it_will_be_reviewed_and_posted_within_24_hours">इसको रिव्यु किया जायेगा 24 घंटे में पोस्ट किया जाएगा</string>
+    <string name="view_less">कम देखें</string>
+    <string name="course_completed">कोर्स पूरा हो गया।</string>
+    <string name="course_in_progress">कोर्स चल रहा है</string>
+    <string name="days_left">दिन बाकी</string>
+    <string name="your_next_instalment">आपकी अगली किश्त</string>
+    <string name="pay">भरे</string>
+    <string name="by">को:</string>
+    <string name="call_request_accepted">आपकी रिक्वेस्ट एक्सेप्ट कर ली गई है!\n
+हम आपको जल्द ही कॉल करेंगे।</string>
+    <string name="complete_your_assignment">सर्टिफिकेट डाउनलोड करने के लिए अपना असाइनमेंट पूरा करें!
+अभी सब्मिट करें</string>
+    <string name="complete_your_course_to_download">अपना सर्टिफिकेट डाउनलोड करने के लिए अपना कोर्स पूरा करें</string>
+</resources>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="15dp"
+    android:layout_marginRight="0dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/listLayout"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:padding="0dp">
+
+            <TextView
+                android:id="@+id/txtTopTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:text=""
+                android:fontFamily="@font/helveticabold"
+                android:textColor="@color/black"
+                android:background="@color/white"
+                android:padding="7dp"
+                android:textSize="12sp"
+                android:gravity="center"/>
+
+            <ImageView
+                android:id="@+id/imgCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/txtBottomTitle"
+                android:layout_below="@+id/txtTopTitle"
+                android:scaleType="fitXY"
+                />
+            <TextView
+                android:id="@+id/txtBottomTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:text=""
+                android:fontFamily="@font/helveticabold"
+                android:textColor="@color/black"
+                android:background="@color/white"
+                android:padding="7dp"
+                android:textSize="11sp"
+                android:gravity="center"/>
+
+        </RelativeLayout>
+        <LinearLayout
+            android:id="@+id/subListLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:background="@color/light_gray">
+
+            <TextView
+                android:id="@+id/subListTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/muted_blue"
+                android:fontFamily="@font/dinprobold"
+                android:textSize="17sp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="7dp"
+                android:id="@+id/subListCategory">
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

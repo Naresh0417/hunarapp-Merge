@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/dialog_background_inset"
+    android:scrollbars="none">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5sp"
+            android:orientation="vertical"
+            android:id="@+id/mainLayout">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:id="@+id/txtTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@color/muted_blue"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:fontFamily="sans-serif-medium"
+                        android:padding="10dp"
+                        android:textSize="18sp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/imgHamstech"
+                            android:layout_width="match_parent"
+                            android:layout_height="180dp"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="5dp"/>
+
+                        <RelativeLayout
+                            android:id="@+id/player_youtube"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone">
+                            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                                android:id="@+id/youtube_player_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                app:showYouTubeButton="false"
+                                app:showFullScreenButton="false" />
+
+                        </RelativeLayout>
+
+                        <ImageView
+                            android:id="@+id/imgPlayButton"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/play_button_dan_goode"
+                            android:layout_centerInParent="true"
+                            android:visibility="gone"/>
+
+                        <ImageView
+                            android:id="@+id/imgZoom"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_hamstech_zoom"
+                            android:layout_alignParentRight="true"
+                            android:layout_margin="5dp"
+                            android:visibility="gone"/>
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="3"
+                        android:padding="8dp"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/imgLikeUnlike"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_unlike"
+                            android:drawablePadding="6dp"
+                            android:text="@string/like"
+                            android:layout_weight="1"
+                            android:textSize="13sp"
+                            android:gravity="center_vertical"
+                            android:layout_gravity="center_vertical"
+                            android:fontFamily="sans-serif-medium"/>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_chat_buzz"/>
+
+                            <TextView
+                                android:id="@+id/txtComment"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:paddingLeft="6dp"
+                                android:text="@string/comment"
+                                android:textSize="13sp"
+                                android:fontFamily="sans-serif-medium"
+                                android:layout_gravity="center_vertical"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/btnShare"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_weight="1.0"
+                            android:gravity="right"
+                            android:paddingRight="10dp">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_buzz_share"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/share"
+                                android:layout_marginLeft="5dp"
+                                android:textSize="13sp"
+                                android:fontFamily="sans-serif-medium"
+                                android:layout_gravity="center"
+                                android:gravity="center"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/likesCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="7dp"/>
+
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:fontFamily="sans-serif-medium"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/txtExternalLink"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/muted_blue"
+                android:layout_marginTop="5dp"
+                android:visibility="gone"
+                android:layout_marginBottom="10dp"/>
+
+            <LinearLayout
+                android:id="@+id/inputCommentFields"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:background="#16000000"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/imgProfile"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:background="@drawable/circle_bg"
+                    android:text=""
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:textSize="25sp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txtUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:fontFamily="@font/dinpromedium"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"/>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/comment_input_bg"
+                        android:paddingTop="2dp"
+                        android:paddingBottom="2dp"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
+                        android:layout_centerVertical="true">
+
+                        <EditText
+                            android:id="@+id/userInputComment"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:hint="@string/type_your_comment_here"
+                            android:textSize="13sp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginRight="5dp"
+                            android:background="@android:color/transparent"
+                            android:layout_toLeftOf="@+id/txtPost"/>
+                        <TextView
+                            android:id="@+id/txtPost"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/post"
+                            android:textColor="@color/black_two"
+                            android:textStyle="bold"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentRight="true"/>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/listComments"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginTop="7dp"/>
+
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+</ScrollView>
+

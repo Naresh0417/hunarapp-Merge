@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/fabPrevious"
+        android:layout_alignParentLeft="true"
+        android:orientation="vertical"
+        android:background="@color/white">
+        <RelativeLayout
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/gray_background_bg">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/blue_button_bg"
+                    android:text="@string/lblPrevious"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/dinpro"
+                    android:gravity="right|center_vertical"
+                    android:textSize="11sp"
+                    android:paddingLeft="38dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/previousLessonTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:text="@string/lblNext"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/dinpro"
+                    android:background="@color/light_gray"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:ellipsize="end"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_previous"
+                android:layout_marginLeft="7dp"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/txtPdfTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_pdf"
+            android:layout_gravity="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/studyMaterial"
+            android:textColor="@color/black_two"
+            android:gravity="center"
+            android:drawablePadding="10dp"
+            android:fontFamily="@font/dinpro"
+            android:textSize="12sp"
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:id="@+id/fabNext"
+        android:orientation="vertical"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:layout_width="145dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/gray_background_bg">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/blue_button_bg"
+                    android:text="@string/lblVideoNext"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/dinpro"
+                    android:gravity="left|center_vertical"
+                    android:textSize="11sp"
+                    android:padding="5dp"/>
+
+                <TextView
+                    android:id="@+id/nextLessonTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="55dp"
+                    android:text="@string/lblNext"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/dinpro"
+                    android:background="@color/light_gray"
+                    android:padding="10dp"
+                    android:textSize="12sp"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_next"
+                android:layout_marginRight="7dp"
+                android:layout_alignParentRight="true"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

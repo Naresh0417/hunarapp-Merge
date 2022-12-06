@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:layout_marginTop="5dp">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imgArrow"
+            android:fontFamily="sans-serif"
+            android:textStyle="bold"
+            android:text=""
+            android:textColor="@color/muted_blue"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/imgArrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="5dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/textAnswer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/imgArrow"
+        android:fontFamily="sans-serif"
+        android:text=""
+        android:textColor="#000"
+        android:textSize="15sp"
+        android:visibility="gone"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"/>
+    
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@drawable/gray_bg"
+        android:layout_marginTop="4dp"/>
+
+</LinearLayout>

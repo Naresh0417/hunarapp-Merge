@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="11dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginRight="3dp"
+    android:layout_marginLeft="3dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/listLayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_toLeftOf="@+id/lessonCheckbox"
+            android:layout_marginRight="5dp">
+
+            <TextView
+                android:id="@+id/txtLessons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textSize="15sp"
+                android:textColor="@color/dark_pink"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"
+                android:text="@string/lessons_1"/>
+
+            <TextView
+                android:id="@+id/txtLessonTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:textSize="14sp"
+                android:textColor="@color/black_two"
+                android:layout_marginStart="7dp"
+                android:layout_gravity="center_vertical"
+                android:text=""
+                android:layout_marginEnd="22dp"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/lessonLock"
+            android:layout_width="18dp"
+            android:layout_height="16dp"
+            android:background="@drawable/ic_lock"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+
+        <CheckBox
+            android:id="@+id/lessonCheckbox"
+            android:layout_width="18dp"
+            android:layout_height="14dp"
+            android:button="@null"
+            android:background="@drawable/ic_ticks_grayblack"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:visibility="visible"/>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

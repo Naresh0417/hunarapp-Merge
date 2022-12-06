@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:src="@mipmap/ic_launcher_round"
+                app:civ_border_width="2dp"
+                app:civ_border_color="#EDECED"/>
+
+            <LinearLayout
+                android:id="@+id/linProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:id="@+id/txtUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:fontFamily="@font/dinpromedium"
+                    android:textColor="@color/shape_orange"
+                    android:textSize="20sp"/>
+
+                <TextView
+                    android:id="@+id/txtUserMobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/dinpromedium"
+                    android:textSize="15sp"
+                    android:text=""
+                    android:textColor="@color/muted_blue"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/pinkish_grey"
+            android:layout_marginTop="15dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </androidx.recyclerview.widget.RecyclerView>
+
+        <TextView
+            android:id="@+id/txtHowToUse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/howToUse"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/muted_blue"
+            android:textAllCaps="true"
+            android:layout_marginTop="20dp"/>
+
+        <Button
+            android:id="@+id/btnEnrolNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lblEnrolNow"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:fontFamily="@font/dinpro"
+            android:textStyle="bold"
+            android:textSize="14sp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/blue_button_bg"
+            android:layout_marginBottom="10dp"
+            />
+
+    </LinearLayout>
+
+</RelativeLayout>

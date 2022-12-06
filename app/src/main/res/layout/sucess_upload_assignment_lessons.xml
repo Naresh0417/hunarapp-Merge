@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="40dp"
+    android:layout_centerInParent="true"
+    android:layout_margin="7dp"
+    android:background="@drawable/black_stroke_radious">
+
+    <LinearLayout
+        android:id="@+id/onlinePaymentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:padding="15dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imgCancel"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_cross"
+            android:padding="6dp"
+            android:layout_gravity="right"/>
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:id="@+id/progressBar"
+            android:visibility="visible"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/you_have_successfully_submitted_your_assignment"
+            android:textColor="@color/muted_blue"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/your_faculty_will_review_it_and_post_the_feedback_on_this_page"
+            android:textColor="@color/black_two"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:layout_marginTop="15dp"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

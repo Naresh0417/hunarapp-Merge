@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="7dp">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/muted_blue"
+                android:fontFamily="@font/dinpro"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/txtDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:layout_marginTop="5dp"
+                android:textColor="@color/black_two"
+                android:fontFamily="@font/dinpro"
+                android:textSize="13sp"
+                android:visibility="gone"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/overViewList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                android:layout_marginTop="7dp"/>
+
+            <LinearLayout
+                android:id="@+id/btnEnrolNow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/button_shape_orange"
+                android:padding="10dp"
+                android:layout_marginTop="7dp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/dinpro"
+                    android:textSize="15sp"
+                    android:text="@string/enrolNowMiniCourse"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/txtStrike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/dinpro"
+                    android:textSize="15sp"
+                    android:text=""
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/txtTotalFee"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/dinpro"
+                    android:textSize="15sp"
+                    android:text=""
+                    android:paddingLeft="4dp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_two"
+                android:fontFamily="sans-serif"
+                android:textSize="15sp"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/linear_makePayment"
+                 />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black_two"
+                android:fontFamily="sans-serif"
+                android:textSize="15sp"
+                android:text="@string/linear_endigSoon"
+                android:layout_gravity="center_horizontal"
+                android:textStyle="bold"/>
+
+            <!--<Button
+                android:id="@+id/btnEnrolNow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:fontFamily="@font/dinpro"
+                android:visibility="gone"
+                android:textStyle="bold"
+                android:textSize="13sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:layout_marginTop="7dp"
+                android:layout_gravity="center_horizontal"
+                android:background="@drawable/button_shape_orange"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="10dp" />-->
+
+            <com.hamstechonline.utils.NonScrollExpandableListView
+                android:id="@+id/listExpandable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/gray"
+                android:dividerHeight="0.5dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:transcriptMode="alwaysScroll"
+                android:scrollbars="none">
+
+            </com.hamstechonline.utils.NonScrollExpandableListView>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

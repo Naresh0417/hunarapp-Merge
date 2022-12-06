@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/linearMain"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tellUsWhatYouLike"
+            android:fontFamily="@font/helveticabold"
+            android:textColor="@color/muted_blue"
+            android:textSize="15sp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/chooseFiveTopics"
+            android:fontFamily="@font/helveticabold"
+            android:textColor="@color/dark_slate_blue"
+            android:layout_marginTop="5dp"
+            android:textSize="12sp"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearMain"
+        android:layout_above="@+id/btnRecommended"
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="5dp"
+        android:visibility="visible">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listGrid"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:scrollbars="none">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnRecommended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/getRecommendedCourses"
+        android:textAllCaps="true"
+        android:onClick="Homepage"
+        android:textColor="@color/white"
+        android:fontFamily="@font/dinpro"
+        android:textStyle="bold"
+        android:textSize="13sp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:background="@drawable/button_shape_orange"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="10dp"
+        />
+
+    <ImageButton
+        android:id="@+id/stickyWhatsApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_whatsapp_circle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:layout_marginLeft="7dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:visibility="gone"/>
+
+</RelativeLayout>

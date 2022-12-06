@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/light_gray">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Please"
+        android:fontFamily="@font/dinprobold"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        android:visibility="gone"
+        android:textColor="@color/muted_blue"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/choosePopupMsg"
+        android:fontFamily="@font/dinprobold"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/muted_blue"/>
+
+</LinearLayout>

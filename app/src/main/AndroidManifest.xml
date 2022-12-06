@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.hamstechonline">
+
+    <supports-screens
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:smallScreens="true"
+        android:anyDensity="true"/>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.CALL_PHONE"
+        tools:node="remove"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR" />
+    <uses-permission
+        android:name="android.permission.READ_PHONE_STATE"
+        tools:node="remove" />
+    <uses-feature
+        android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <permission android:name="android.permission.CALL_PHONE" />
+    <permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START" />
+        </intent>
+    </queries>
+
+    <application
+        android:name="com.hamstechonline.utils.AFApplication"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/AppTheme"
+        android:supportsRtl="true"
+        tools:ignore="GoogleAppIndexingWarning"
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:replace="android:allowBackup">
+
+        <activity android:name=".activities.SplashScreenActivity"
+            android:screenOrientation="unspecified"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+        <activity
+            android:name=".activities.LoginActivity"
+            android:screenOrientation="unspecified"
+            android:exported="true"
+            />
+        <activity
+            android:name=".activities.RegistrationActivity"
+            android:screenOrientation="unspecified"
+            android:windowSoftInputMode="adjustResize|stateHidden"
+            android:exported="true"/>
+        <activity android:name=".activities.ChooseTopisActivity"
+            android:exported="true"/>
+        <activity
+            android:name=".activities.HomePageActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".activities.NSDCPageActivity"
+            android:exported="true"
+            android:screenOrientation="unspecified">
+        </activity>
+        <activity
+            android:name=".activities.LanguageSelectionActivity"
+            android:exported="true"
+            android:screenOrientation="unspecified">
+        </activity>
+        <activity android:name=".activities.EditProfileActivity"
+            android:exported="true"/>
+        <activity android:name=".activities.LiveFashionWebview"
+            android:exported="false"/>
+        <activity
+            android:name=".activities.CoursePageActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".activities.MiniCourseDetailsActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".activities.MiniLessonsCourseActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:exported="true" >
+        </activity>
+        <activity
+            android:name=".activities.DynamicLinkingActivity"
+            android:exported="true">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data
+                    android:host="link.hamstechonline.com/"
+                    android:scheme="https" />
+                <data
+                    android:host="link.hunarcourses.com/"
+                    android:scheme="https" />
+                <data
+                    android:host="https://play.google.com/store/apps/details?id=com.hamstechonline"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activities.LessonsPageActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:exported="true" />
+        <activity
+            android:name=".activities.MyCoursesLessonsPage"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:exported="true" />
+        <activity
+            android:name=".activities.MyCoursesPageActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:exported="true" />
+        <activity
+            android:name=".activities.PopularCourseActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:exported="true" />
+        <activity
+            android:name=".activities.LessonsPageNotifications"
+            android:windowSoftInputMode="stateAlwaysHidden"
+            android:configChanges="orientation|screenSize"
+            android:hardwareAccelerated="true"
+            android:exported="true" />
+        <activity android:name=".activities.EnrolNowActivity"
+            android:screenOrientation="unspecified"
+            android:exported="true"/>
+        <activity android:name=".activities.MiniLessonsEnrolNowActivity"
+            android:screenOrientation="unspecified"
+            android:exported="true"/>
+        <activity android:name=".activities.NotificationsActivity"
+            android:exported="true">
+
+        </activity>
+        <service android:name="com.moengage.firebase.MoEFireBaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service
+            android:name=".push.MyFirebaseMessagingService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity
+            android:name="com.moe.pushlibrary.activities.MoEActivity"
+            android:label="[ACTIVITY_NAME]"
+            android:parentActivityName=".activities.SplashScreenActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.SplashScreenActivity" />
+        </activity>
+
+        <activity android:name=".activities.CentersActivity"
+            android:exported="true"/>
+        <activity android:name=".activities.ContactActivity"
+            android:screenOrientation="unspecified"
+            android:exported="true"/>
+        <activity android:name=".activities.HamstechTodayActivity"
+            android:screenOrientation="unspecified"
+            android:exported="true"/>
+        <activity android:name=".activities.AboutUsActivity"
+            android:exported="true"/>
+        <activity android:name=".activities.SuccessStoryActivity"
+            android:exported="true"/>
+        <activity android:name=".activities.FaqsActivity"
+            android:exported="true"/>
+        <activity android:name=".activities.OnBoardingActivity"
+            android:screenOrientation="unspecified"
+            android:exported="true"/>
+        <activity android:name=".activities.ChooseLanguage"
+            android:screenOrientation="unspecified"
+            android:exported="true"/>
+        <activity android:name=".activities.BuzzActivity"
+            android:screenOrientation="unspecified"
+            android:exported="true"/>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDGcJJs7LBnnZ3OY6aobe3ozdoN8voN_KY"/>
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <provider
+            android:authorities="com.facebook.app.FacebookContentProvider1959327670853361"
+            android:name="com.facebook.FacebookContentProvider"
+            android:exported="true" />
+
+        <meta-data
+            android:name="com.facebook.sdk.CodelessDebugLogEnabled"
+            android:value="true" />
+        <meta-data
+            android:name="com.facebook.sdk.AutoInitEnabled"
+            android:value="true" />
+        <meta-data
+            android:name="com.facebook.sdk.AutoLogAppEventsEnabled"
+            android:value="true" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="Hamstech" />
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_launcher" />
+
+        <receiver android:name="com.appsflyer.MultipleInstallBroadcastReceiver" android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <!--<provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.hamstechonline.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths">
+            </meta-data>
+        </provider>-->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.hamstechonline.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/pdf_paths" />
+        </provider>
+
+        <!-- Add your API key here -->
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_live_FA4qLICa6tnp4J"
+            />
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
+
+
+    </application>
+
+</manifest>

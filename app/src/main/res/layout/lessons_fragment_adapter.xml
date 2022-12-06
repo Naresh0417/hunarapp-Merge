@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/mainLayout">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/profile_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@mipmap/ic_launcher_round"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#EDECED" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@+id/profile_image"
+        android:layout_toLeftOf="@+id/imgLock">
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black_two"
+            android:textSize="16sp"
+            android:fontFamily="@font/dinpromedium"
+            />
+
+        <TextView
+            android:id="@+id/txtDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black_two"
+            android:textSize="12sp"
+            android:fontFamily="@font/dinpro"/>
+
+        <TextView
+            android:id="@+id/txtDuration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/black_two"
+            android:fontFamily="@font/dinpro"
+            android:textSize="16sp"
+            android:drawableLeft="@drawable/file_light_15_512"
+            android:gravity="center_vertical"
+            android:drawablePadding="7dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgLock"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_lock"
+        android:layout_marginLeft="7dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:visibility="visible"/>
+
+</RelativeLayout>

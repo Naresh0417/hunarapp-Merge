@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="40dp"
+    android:background="@color/white">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/imgCancel"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:id="@+id/onlinePaymentLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerInParent="true"
+            android:padding="15dp"
+            android:visibility="visible">
+
+            <TextView
+                android:id="@+id/txtAssignment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/helveticabold"
+                android:text=""
+                android:textColor="@color/black_two"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:padding="7dp"/>
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <ImageView
+        android:id="@+id/imgCancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_cross"
+        android:layout_alignParentRight="true"
+        android:padding="6dp"
+        android:layout_margin="5dp"/>
+
+</RelativeLayout>

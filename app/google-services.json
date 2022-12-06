@@ -1,0 +1,99 @@
+{
+  "project_info": {
+    "project_number": "21578544270",
+    "firebase_url": "https://hamstech-online.firebaseio.com",
+    "project_id": "hamstech-online",
+    "storage_bucket": "hamstech-online.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21578544270:android:e813d38c87476411",
+        "android_client_info": {
+          "package_name": "com.hamstechonline"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21578544270-d65dglp2rgbaa5uj7qbnrfk3am4gseqk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hamstechonline",
+            "certificate_hash": "94e9813e42da7e1f93ed6fd9b7f20d938146c112"
+          }
+        },
+        {
+          "client_id": "21578544270-4trb0qnb27b8cknfaa8dpa58efvq0lkl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hamstechonline",
+            "certificate_hash": "2fbb4e8b4812d14a20ea02c8b73d7133d5119b7e"
+          }
+        },
+        {
+          "client_id": "21578544270-iqlr5eohrs4ijhgnonrv6o03ut11dtct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGcJJs7LBnnZ3OY6aobe3ozdoN8voN_KY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21578544270-bfbic1k1jh56sd5rvqd59ngv73511epf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "21578544270-u7tl6t0oa5ff024gfbg1sjan0qo6nl73.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.onlinehamstech"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21578544270:android:ca7b19ebf8101800",
+        "android_client_info": {
+          "package_name": "com.hoccourses"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21578544270-iqlr5eohrs4ijhgnonrv6o03ut11dtct.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDGcJJs7LBnnZ3OY6aobe3ozdoN8voN_KY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21578544270-bfbic1k1jh56sd5rvqd59ngv73511epf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "21578544270-u7tl6t0oa5ff024gfbg1sjan0qo6nl73.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.onlinehamstech"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

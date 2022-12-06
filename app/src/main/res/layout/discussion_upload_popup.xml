@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp"
+    android:orientation="vertical"
+    android:layout_marginRight="7dp"
+    android:layout_marginLeft="7dp">
+
+    <ImageView
+        android:id="@+id/imgCancel"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:src="@drawable/ic_cross"
+        android:layout_gravity="right"
+        android:padding="6dp"
+        android:layout_margin="5dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/select_what_to_post"
+        android:layout_centerVertical="true"
+        android:textColor="@color/muted_blue"
+        android:textSize="17sp"
+        android:fontFamily="sans-serif"
+        android:textStyle="bold"/>
+
+    <LinearLayout
+        android:id="@+id/selectGallery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="5"
+        android:background="@drawable/border_gray_strok">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_upload_gallery"
+            android:layout_weight="1"
+            android:padding="7dp"/>
+
+        <TextView
+            android:id="@+id/uploadFileName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="@string/upload_image"
+            android:textColor="@color/gray"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="4"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:weightSum="5"
+        android:background="@drawable/border_gray_strok"
+        android:padding="8dp">
+
+        <EditText
+            android:id="@+id/userInputContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:fontFamily="sans-serif"
+            android:hint="@string/write_Description"
+            android:textColor="@color/gray"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:lines="5"
+            android:gravity="start"
+            android:layout_weight="4"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_button_bg"
+        android:padding="8dp"
+        android:text="@string/file_submit"
+        android:textAllCaps="true"
+        android:textColor="@color/white"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:gravity="center_vertical"
+        android:layout_gravity="right"
+        android:drawablePadding="20dp"
+        android:layout_marginTop="15dp"
+        android:drawableRight="@drawable/submit_post"/>
+
+</LinearLayout>

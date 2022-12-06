@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="40dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/onlinePaymentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/imgCancel"
+        android:padding="15dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            android:id="@+id/progressBar"
+            android:layout_centerInParent="true"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Congratulations!"
+            android:textColor="@color/muted_blue"
+            android:textSize="20sp"
+            android:fontFamily="@font/dinpro"/>
+
+        <TextView
+            android:id="@+id/txtStatusFor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="You have successfully enrolled in your course."
+            android:textColor="@color/dark_pink"
+            android:textSize="17sp"
+            android:fontFamily="@font/dinpro"
+            android:gravity="center"
+            android:layout_marginTop="10dp"/>
+
+        <LinearLayout
+            android:id="@+id/txt_ClickHere"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/muted_blue"
+                android:fontFamily="@font/dinpro"
+                android:text="@string/txt_click_here"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:layout_marginTop="30dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/muted_blue"
+                android:fontFamily="@font/dinpro"
+                android:text="@string/txt_click_here_desc"
+                android:gravity="center"
+                android:textSize="17sp" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cod_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/imgCancel"
+        android:padding="15dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/muted_blue"
+            android:fontFamily="@font/dinpro"
+            android:text="@string/start_your_courses"
+            android:gravity="center"
+            android:textSize="19sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_two"
+            android:fontFamily="@font/dinpro"
+            android:text="@string/courses_steps"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgCancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_cross"
+        android:layout_alignParentRight="true"
+        android:padding="6dp"
+        android:layout_margin="5dp"/>
+
+</RelativeLayout>

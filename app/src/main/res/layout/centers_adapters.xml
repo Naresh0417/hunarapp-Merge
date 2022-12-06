@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="2"
+    android:layout_marginTop="10dp">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.3"
+        android:orientation="vertical"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/txtBranchName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="VIZAG"
+            android:textColor="@color/muted_blue"
+            android:textSize="15sp"
+            android:fontFamily="@font/dinpromedium"/>
+
+        <TextView
+            android:id="@+id/txtCenterAddress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lblCenter1"
+            android:textColor="@color/black_two"
+            android:fontFamily="@font/dinpro"
+            android:textSize="13sp"/>
+
+        <TextView
+            android:id="@+id/txtPhone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="7dp"
+            android:text="Phone: "/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.7"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imgLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/vizag_map"/>
+
+    </LinearLayout>
+
+</LinearLayout>

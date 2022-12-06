@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="40dp"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:id="@+id/onlinePaymentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/imgCancel"
+        android:padding="15dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:id="@+id/progressBar"
+            android:layout_centerInParent="true"
+            android:padding="5dp"/>
+
+        <TextView
+            android:id="@+id/paymentComment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/pay_success"
+            android:textColor="@color/muted_blue"
+            android:textSize="20sp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/dinpro"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/cod_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:layout_below="@id/imgCancel"
+        android:padding="15dp"
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/muted_blue"
+            android:fontFamily="@font/dinpro"
+            android:text="@string/start_your_courses"
+            android:gravity="center"
+            android:textSize="19sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black_two"
+            android:fontFamily="@font/dinpro"
+            android:text="@string/courses_steps"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:layout_marginTop="15dp"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgCancel"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_cross"
+        android:layout_alignParentRight="true"
+        android:padding="6dp"
+        android:layout_margin="5dp"/>
+
+</RelativeLayout>

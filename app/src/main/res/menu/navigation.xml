@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:icon="@drawable/ic_home_black"
+        android:title="@string/lblHome"
+        />
+
+    <item
+        android:id="@+id/navigation_chat"
+        android:icon="@drawable/ic_chat"
+        android:title="@string/lblChat"
+        android:textSize="7sp"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/navigation_enrol"
+        android:icon="@drawable/ic_success_stories"
+        android:title="@string/lblStories"
+        android:textSize="7sp"
+        android:visible="false"/>
+
+    <item
+        android:id="@+id/navigation_today"
+        android:icon="@drawable/ic_hamstech_today"
+        android:title="@string/lblToday"
+        android:textSize="7sp"/>
+    <item
+        android:id="@+id/navigation_aboutus"
+        android:icon="@drawable/ic_contact_us"
+        android:title="@string/lblContact"
+        android:textSize="7sp"/>
+
+</menu>

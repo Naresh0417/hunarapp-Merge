@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/navigation">
+
+            <RelativeLayout
+                android:id="@+id/layoutHeader"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/imgSideMenu"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:onClick="sideMenu"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/side_menu"/>
+
+                <TextView
+                    android:id="@+id/headerTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:textSize="17sp"
+                    android:textAllCaps="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/imgSideMenu"
+                    android:layout_toLeftOf="@+id/imgSearch"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/dinpromedium"
+                    android:layout_gravity="center_vertical"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp">
+                    <include
+                        android:id="@+id/searchLayout"
+                        layout="@layout/search_layout"
+                        android:visibility="gone" />
+                </RelativeLayout>
+
+                <CheckBox
+                    android:id="@+id/imgSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:button="@null"
+                    android:background="@drawable/ic_search"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="end"
+                    android:visibility="gone"/>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_below="@+id/layoutHeader">
+
+                <TextView
+                    android:id="@+id/txtCourseName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=""
+                    android:layout_gravity="center_vertical"
+                    android:paddingLeft="7dp"
+                    android:layout_marginTop="3dp"
+                    android:textColor="@color/muted_blue"
+                    android:layout_marginBottom="5dp"/>
+
+                <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                    android:id="@+id/youtube_player_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:showYouTubeButton="false"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher_round"
+                    android:scaleType="fitXY"
+                    android:layout_marginTop="7dp"
+                    android:layout_marginBottom="7dp"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/btnEnrolNow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enrol_now"
+                    android:onClick="EnrolNow"
+                    android:textAllCaps="true"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/dinpro"
+                    android:textStyle="bold"
+                    android:textSize="13sp"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:layout_marginTop="7dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@drawable/button_shape_orange"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginBottom="10dp"
+                    android:visibility="gone"
+                    />
+
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/tab_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:tabMode="fixed"
+                    android:background="@drawable/tab_background"
+                    app:tabIndicatorHeight="2dp">
+
+                </com.google.android.material.tabs.TabLayout>
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+                </androidx.viewpager.widget.ViewPager>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            app:itemBackground="@color/white"
+            android:foreground="?attr/selectableItemBackground"
+            app:itemIconTint="@drawable/navigation_selector"
+            app:itemTextColor="@color/pinkish_grey"
+            android:theme="@style/menu_text_style"
+            app:menu="@menu/navigation"
+            app:labelVisibilityMode="labeled"/>
+
+        <ImageButton
+            android:id="@+id/stickyWhatsApp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_whatsapp_circle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="60dp"
+            android:layout_marginLeft="7dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:visibility="gone"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="260dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        android:background="@color/white">
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navSideMenu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </RelativeLayout>
+
+</androidx.drawerlayout.widget.DrawerLayout>
