@@ -117,6 +117,26 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
     }
+    public void EventMyCourse(){
+        eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
+        eventData.put(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
+        eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
+        eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
+        //AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_CONTACTUS,eventData);
+        logger.logEvent(AppEventsConstants.EVENT_NAME_ACHIEVED_LEVEL,params);
+        logger.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS);
+        mFirebaseAnalytics.logEvent(SocialMediaEventsParameters.EVENT_NAME_SUBSCRIBE, params);
+        mFirebaseAnalytics.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS, params);
+        properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
+        properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
+        properties.addAttribute(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
+        properties.addAttribute(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
+        properties.addAttribute(AppsFlyerEventParameter.KEY_LANGUAGE,langPref);
+        MoEHelper.getInstance(context).trackEvent(AppsFlyerEventParameter.KEY_ISSTUDENT,properties);
+        MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
+        MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
+        MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+    }
     public void EventAccordion(String accordion,String course, String category){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
         eventData.put(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);

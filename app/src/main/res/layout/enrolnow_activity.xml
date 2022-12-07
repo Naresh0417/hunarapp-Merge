@@ -954,7 +954,7 @@
         android:layout_marginBottom="60dp"
         android:layout_marginLeft="7dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:visibility="gone"/>
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"

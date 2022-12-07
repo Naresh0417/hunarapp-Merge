@@ -295,7 +295,7 @@ public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements Bo
                 PagenameLog = "Payment Page";
                 LessonLog = "";
                 getLogEvent(MiniLessonsEnrolNowActivity.this);
-                dynamicWhatsAppChat = new DynamicWhatsAppChat(MiniLessonsEnrolNowActivity.this,"Mini lessons enrol");
+                dynamicWhatsAppChat = new DynamicWhatsAppChat(MiniLessonsEnrolNowActivity.this,"Mini lessons enrol","","");
                 dynamicWhatsAppChat.getEnrollChatNumber(userDataBase.getUserMobileNumber(1));
             }
         });

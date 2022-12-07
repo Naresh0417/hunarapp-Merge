@@ -471,7 +471,7 @@
                 android:layout_margin="5dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_whatsapp_circle"
-                android:visibility="gone"/>
+                />
 
             <LinearLayout
                 android:id="@+id/bottomView"

@@ -147,7 +147,7 @@
                 android:layout_marginLeft="7dp"
                 android:layout_marginRight="4dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
-                android:visibility="gone"/>
+                />
             <RelativeLayout
                 android:id="@+id/submitPost"
                 android:layout_width="match_parent"

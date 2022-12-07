@@ -338,7 +338,7 @@ public class PopularCourseActivity extends AppCompatActivity implements AdapterV
         stickyWhatsApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dynamicWhatsAppChat = new DynamicWhatsAppChat(PopularCourseActivity.this,"Popular lessons");
+                dynamicWhatsAppChat = new DynamicWhatsAppChat(PopularCourseActivity.this,"Popular lessons",CourseLog,"");
                 dynamicWhatsAppChat.getChatNumber(userDataBase.getUserMobileNumber(1));
             }
         });

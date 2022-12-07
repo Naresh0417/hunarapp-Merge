@@ -359,7 +359,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             @Override
             public void onClick(View v) {
 
-                dynamicWhatsAppChat = new DynamicWhatsAppChat(MyCoursesPageActivity.this,"MyCourse page");
+                dynamicWhatsAppChat = new DynamicWhatsAppChat(MyCoursesPageActivity.this,"MyCourse page",CourseLog,"");
                 dynamicWhatsAppChat.getChatNumber(userDataBase.getUserMobileNumber(1));
 
             }

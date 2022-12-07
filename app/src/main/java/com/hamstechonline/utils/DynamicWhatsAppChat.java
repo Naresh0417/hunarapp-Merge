@@ -25,13 +25,15 @@ public class DynamicWhatsAppChat {
     Context context;
     ApiInterface apiService;
     LogEventsActivity logEventsActivity;
-    String ActivityLog,PagenameLog;
+    String CourseLog,LessonLog,ActivityLog,PagenameLog;
 
-    public DynamicWhatsAppChat(Context context,String PagenameLog) {
+    public DynamicWhatsAppChat(Context context,String PagenameLog,String CourseLog, String LessonLog) {
         this.context = context;
         apiService = ApiClient.getClient().create(ApiInterface.class);
         logEventsActivity = new LogEventsActivity();
         this.PagenameLog = PagenameLog;
+        this.CourseLog = CourseLog;
+        this.LessonLog = LessonLog;
     }
 
     public void getChatNumber(String phone){
@@ -134,8 +136,8 @@ public class DynamicWhatsAppChat {
             data.put("fullname",UserDataConstants.userName);
             data.put("email",UserDataConstants.userMail);
             data.put("category","");
-            data.put("course","");
-            data.put("lesson","");
+            data.put("course",CourseLog);
+            data.put("lesson",LessonLog);
             data.put("activity","Sticky whatsapp");
             data.put("pagename",PagenameLog);
             logEventsActivity.LogEventsActivity(context,data);

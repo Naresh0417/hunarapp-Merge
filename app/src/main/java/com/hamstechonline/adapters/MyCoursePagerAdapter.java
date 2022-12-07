@@ -229,7 +229,7 @@ public class MyCoursePagerAdapter extends PagerAdapter implements PaymentResultW
                 intent.putExtra("email",datamodels.get(position).getEmail());
                 intent.putExtra("statusNSDC","0");
                 getLogEvent(context);
-                new AppsFlyerEventsHelper(context).EventIsStudent();
+                new AppsFlyerEventsHelper(context).EventMyCourse();
                 context.startActivity(intent);
             }
         });

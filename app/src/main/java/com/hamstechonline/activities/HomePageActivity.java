@@ -363,7 +363,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         stickyWhatsApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dynamicWhatsAppChat = new DynamicWhatsAppChat(HomePageActivity.this,"Home page");
+                dynamicWhatsAppChat = new DynamicWhatsAppChat(HomePageActivity.this,"Home page","","");
                 dynamicWhatsAppChat.getChatNumber(userDataBase.getUserMobileNumber(1));
             }
         });

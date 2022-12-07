@@ -1355,7 +1355,7 @@
         android:layout_marginBottom="60dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/ic_whatsapp_circle"
-        android:visibility="gone"/>
+        />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/navigation"

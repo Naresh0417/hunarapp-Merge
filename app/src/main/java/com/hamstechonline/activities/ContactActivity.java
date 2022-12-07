@@ -197,7 +197,7 @@ public class ContactActivity extends AppCompatActivity implements BottomNavigati
                 logContactusEvent(ActivityLog);
                 getLogEvent(ContactActivity.this);
                 PackageManager packageManager = getPackageManager();
-                dynamicWhatsAppChat = new DynamicWhatsAppChat(ContactActivity.this,"");
+                dynamicWhatsAppChat = new DynamicWhatsAppChat(ContactActivity.this,"","","");
                 dynamicWhatsAppChat.getChatNumber(userDataBase.getUserMobileNumber(1));
             }
         });
@@ -205,7 +205,7 @@ public class ContactActivity extends AppCompatActivity implements BottomNavigati
         stickyWhatsApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dynamicWhatsAppChat = new DynamicWhatsAppChat(ContactActivity.this,"Contact us");
+                dynamicWhatsAppChat = new DynamicWhatsAppChat(ContactActivity.this,"Contact us","","");
                 dynamicWhatsAppChat.getChatNumber(userDataBase.getUserMobileNumber(1));
             }
         });
