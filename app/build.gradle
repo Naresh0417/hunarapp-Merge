@@ -27,15 +27,6 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    /*signingConfigs {
-        config {
-            storeFile ('D:\\AndroidProjects\\keystore\\HunarOnline\\hamstech.jks')
-            storePassword 'Hamstech2019'
-            keyAlias 'HamstechAlias'
-            keyPassword 'Hamstech2019'
-        }
-    }*/
-
     packagingOptions {
         exclude 'META-INF/DEPENDENCIES'
         exclude 'META-INF/LICENSE'
