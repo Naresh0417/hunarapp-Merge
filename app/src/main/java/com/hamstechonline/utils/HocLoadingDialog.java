@@ -32,7 +32,7 @@ public class HocLoadingDialog {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         Glide.with(context)
                 .asGif()
-                .load(R.raw.loader_original)
+                .load(R.drawable.splash_loading_gif)
                 .into(imageView);
 
         dialog.show();

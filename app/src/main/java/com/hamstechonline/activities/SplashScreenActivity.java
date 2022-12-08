@@ -1,7 +1,6 @@
 package com.hamstechonline.activities;
 
 import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,11 +18,13 @@ import android.os.RemoteException;
 import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import com.android.installreferrer.api.InstallReferrerClient;
-import com.android.installreferrer.api.InstallReferrerStateListener;
 import com.android.installreferrer.api.ReferrerDetails;
 import com.appsflyer.AppsFlyerLib;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.FacebookSdk;
 import com.facebook.applinks.AppLinkData;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -39,13 +40,8 @@ import com.hamstechonline.datamodel.VersionUpload;
 import com.hamstechonline.restapi.ApiClient;
 import com.hamstechonline.restapi.ApiInterface;
 import com.hamstechonline.utils.ForceUpdate;
-import com.hamstechonline.utils.HocLoadingDialog;
 import com.hamstechonline.utils.LogEventsActivity;
 import com.hamstechonline.utils.UserDataConstants;
-
-import com.moengage.core.*;
-import com.moengage.core.config.LogConfig;
-import com.moengage.core.config.NotificationConfig;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -63,8 +59,8 @@ import static com.facebook.FacebookSdk.setAdvertiserIDCollectionEnabled;
 public class SplashScreenActivity extends AppCompatActivity  {
 
     int version;
-    HocLoadingDialog hocLoadingDialog;
     ForceUpdate forceUpdate;
+    ImageView splashImg;
     String gcm_id;
     LogEventsActivity logEventsActivity;
     String langPref = "Language";
@@ -83,7 +79,8 @@ public class SplashScreenActivity extends AppCompatActivity  {
 
         setContentView(R.layout.splash_screen);
 
-        hocLoadingDialog = new HocLoadingDialog(this);
+        splashImg = findViewById(R.id.splashImg);
+
         forceUpdate = new ForceUpdate(this);
         logEventsActivity = new LogEventsActivity();
 
@@ -104,6 +101,12 @@ public class SplashScreenActivity extends AppCompatActivity  {
                     }
                 }
         );
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.splash_loading_gif)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.mipmap.ic_launcher)
+                .into(splashImg);
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             version = pInfo.versionCode;

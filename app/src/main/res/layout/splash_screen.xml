@@ -4,9 +4,10 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/splashImg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/first_screen"
+        android:src="@drawable/splash_loading_gif"
         android:padding="0dp"/>
 
 </RelativeLayout>
