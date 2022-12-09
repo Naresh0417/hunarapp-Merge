@@ -180,7 +180,7 @@
         <item>फोर्ब्स मैगजीन की \u0027ग्रेट इंडियन इंस्टीटूट्स\u0027 केटेगरी में जगह पायी</item>
     </string-array>
     <string name="viewCertificate"><u>प्रमाणपत्र देखें</u></string>
-    <string name="chooseLanguage">अपनी भाषा चुनिए</string>
+    <string name="chooseLanguage">Choose your language</string>
     <string name="headerTitle">हुनर ऑनलाइन पाठ्यक्रम</string>
     <string name="nsdcTextEnglish">सरकार द्वारा मान्यता प्राप्त पाठ्यक्रम (अंग्रेजी)</string>
     <string name="nsdcTextHindi">सरकार द्वारा मान्यता प्राप्त पाठ्यक्रम (हिंदी)</string>
@@ -470,4 +470,5 @@
     <string name="complete_your_assignment">सर्टिफिकेट डाउनलोड करने के लिए अपना असाइनमेंट पूरा करें!
 अभी सब्मिट करें</string>
     <string name="complete_your_course_to_download">अपना सर्टिफिकेट डाउनलोड करने के लिए अपना कोर्स पूरा करें</string>
+    <string name="chooseLanguage_hindi">अपनी भाषा चुनिए</string>
 </resources>

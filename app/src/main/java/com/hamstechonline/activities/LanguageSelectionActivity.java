@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -67,6 +69,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
     LogEventsActivity logEventsActivity;
     String gcm_id;
     AppEventsLogger logger;
+    CheckBox chbEnglish,chbHindi;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,6 +78,8 @@ public class LanguageSelectionActivity extends AppCompatActivity {
         super.setContentView(R.layout.language_selection_activity);
         listLanguages = findViewById(R.id.listLanguages);
         btnNext = findViewById(R.id.btnNext);
+        chbEnglish = findViewById(R.id.chbEnglish);
+        chbHindi = findViewById(R.id.chbHindi);
 
         languagesList = new ArrayList<>();
 
@@ -115,6 +120,33 @@ public class LanguageSelectionActivity extends AppCompatActivity {
                     Intent intent = new Intent(LanguageSelectionActivity.this, HomePageActivity.class);
                     startActivity(intent);
                     LanguageSelectionActivity.this.finish();
+                }
+            }
+        });
+        chbEnglish.setChecked(true);
+
+        chbEnglish.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    chbHindi.setChecked(false);
+                    chbEnglish.setTextColor(getResources().getColor(R.color.dark_pink));
+                } else {
+                    chbHindi.setChecked(true);
+                    chbEnglish.setTextColor(getResources().getColor(R.color.muted_blue));
+                }
+            }
+        });
+
+        chbHindi.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                if (isChecked) {
+                    chbEnglish.setChecked(false);
+                    chbHindi.setTextColor(getResources().getColor(R.color.dark_pink));
+                } else {
+                    chbEnglish.setChecked(true);
+                    chbHindi.setTextColor(getResources().getColor(R.color.muted_blue));
                 }
             }
         });

@@ -101,12 +101,7 @@ public class SplashScreenActivity extends AppCompatActivity  {
                     }
                 }
         );
-        Glide.with(this)
-                .asGif()
-                .load(R.drawable.splash_loading_gif)
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.mipmap.ic_launcher)
-                .into(splashImg);
+
         try {
             PackageInfo pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
             version = pInfo.versionCode;
