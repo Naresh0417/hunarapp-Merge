@@ -12,6 +12,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
@@ -103,11 +104,16 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -434,11 +440,11 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
 
     }
 
-    @Override
+    /*@Override
     protected void onRestart() {
         super.onRestart();
         startActivity(getIntent());
-    }
+    }*/
 
     public void lockPopup() {
         final Dialog dialog = new Dialog(MyCoursesPageActivity.this);
@@ -1098,7 +1104,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 } else {
                     //uploadSuccessPopUp();
                     showFileChooser();
-                    uploadFileName.setText(uploadFilePath);
+                    uploadFileName.setText(picturePath);
 
                 }
             }
@@ -1157,17 +1163,15 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
 
     }
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    /*public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == FILE_SELECT_CODE) {
 
-            if (resultCode == Activity.RESULT_OK)
-            {
-                if (data != null)
-                {
+            if (resultCode == Activity.RESULT_OK) {
+                if (data != null) {
                     Uri selectedImage = data.getData();
                     try {
-                        mBitmap = MediaStore.Images.Media.getBitmap(MyCoursesPageActivity.this.getContentResolver(), selectedImage);
+                        mBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), selectedImage);
 
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -1226,6 +1230,102 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             }
         }
 
+    }*/
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == FILE_SELECT_CODE) {
+
+            if (resultCode == Activity.RESULT_OK)
+            {
+                if (data != null)
+                {
+                    Uri selectedImage = data.getData();
+                    try {
+                        mBitmap = MediaStore.Images.Media.getBitmap(MyCoursesPageActivity.this.getContentResolver(), selectedImage);
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    resized = Bitmap.createScaledBitmap(mBitmap,(int)(mBitmap.getWidth()*0.3), (int)(mBitmap.getHeight()*0.3), true);
+                    //profile_image.setImageBitmap(resized);
+                    if (resized != null) {
+                        imagePathData = getEncoded64ImageStringFromBitmap(resized);
+                        System.out.println(""+imagePathData);
+                        //uploadFile();
+                        //uploadImage(EditProfileActivity.this);
+                    }
+                    String[] filePathColumn = {MediaStore.Images.Media.DATA};
+                    Cursor cursor = getContentResolver().query(selectedImage,
+                            filePathColumn, null, null, null);
+
+                    type_image = getContentResolver().getType(selectedImage);
+
+                    if (type_image.equals(null)) type_image = "images/jpeg";
+
+                    cursor.moveToFirst();
+
+                    int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+                    picturePath = cursor.getString(columnIndex);
+                    cursor.close();
+
+                    try{
+                        File file = new File(picturePath);
+                        long length = file.length();
+                        length = length/1024;
+                        uploadFilePath = file.getPath();
+                        //uploadFileName.setText(file.getPath());
+                    } catch(Exception e) {
+                        System.out.println("File not found : " + e.getMessage() + e);
+                    }
+
+                    if (picturePath.isEmpty() || picturePath == null) {
+                        Toast.makeText(MyCoursesPageActivity.this, "Unable to capture the image..Please try again", Toast.LENGTH_LONG).show();
+
+                    }
+                } else {
+                    Toast.makeText(MyCoursesPageActivity.this,
+                                    "Image Loading Failed", Toast.LENGTH_LONG)
+                            .show();
+                }
+            } else if (resultCode == Activity.RESULT_CANCELED) {
+
+                Toast.makeText(MyCoursesPageActivity.this,
+                                "User cancelled file upload", Toast.LENGTH_LONG)
+                        .show();
+            } else {
+                // failed to capture image
+                Toast.makeText(MyCoursesPageActivity.this,
+                                "Sorry! Failed to load file", Toast.LENGTH_LONG)
+                        .show();
+            }
+        }
+
+    }
+
+    private void copyStream(InputStream input, OutputStream output) throws IOException {
+        byte[] buffer = new byte[1024];
+        int bytesRead;
+        while ((bytesRead = input.read(buffer)) != -1) {
+            output.write(buffer, 0, bytesRead);
+        }
+    }
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        uploadFilePath = image.getAbsolutePath();
+        return image;
     }
 
     public String getEncoded64ImageStringFromBitmap(Bitmap bitmap) {

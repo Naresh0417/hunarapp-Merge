@@ -853,6 +853,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
     public void onSubmit(View view) {
         if (strFilePath != null && !strFilePath.isEmpty()) {
+            hocLoadingDialog.showLoadingDialog();
             uploadAssignment(this);
         } else
             Toast.makeText(this, "Please select assignment file", Toast.LENGTH_SHORT).show();
@@ -1039,7 +1040,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                             if (!jsonObject.getJSONObject("lesson_details").getString("assignment").isEmpty()) {
                                 layoutUpload.setVisibility(View.VISIBLE);
                             } else {
-                                layoutUpload.setVisibility(View.GONE);
+                                layoutUpload.setVisibility(View.VISIBLE);
                             }
 
                             facultyFeedBack = jsonObject.getString("faculty_feedback");
@@ -1359,7 +1360,6 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
         final String mRequestBody = params.toString();
 
-        hocLoadingDialog.showLoadingDialog();
         StringRequest sr = new StringRequest(Request.Method.POST, ApiConstants.uploadAssignment, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -1390,7 +1390,6 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
             @Override
             public byte[] getBody() throws AuthFailureError {
-                hocLoadingDialog.hideDialog();
                 try {
                     return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
                 } catch (UnsupportedEncodingException uee) {
