@@ -131,9 +131,13 @@ public class LanguageSelectionActivity extends AppCompatActivity {
                 if (isChecked) {
                     chbHindi.setChecked(false);
                     chbEnglish.setTextColor(getResources().getColor(R.color.dark_pink));
+                    langPref = "en";
+                    languageSelected = "English";
                 } else {
                     chbHindi.setChecked(true);
                     chbEnglish.setTextColor(getResources().getColor(R.color.muted_blue));
+                    langPref = "hi";
+                    languageSelected = "Hindi";
                 }
             }
         });
@@ -144,9 +148,13 @@ public class LanguageSelectionActivity extends AppCompatActivity {
                 if (isChecked) {
                     chbEnglish.setChecked(false);
                     chbHindi.setTextColor(getResources().getColor(R.color.dark_pink));
+                    langPref = "hi";
+                    languageSelected = "Hindi";
                 } else {
                     chbEnglish.setChecked(true);
                     chbHindi.setTextColor(getResources().getColor(R.color.muted_blue));
+                    langPref = "en";
+                    languageSelected = "English";
                 }
             }
         });

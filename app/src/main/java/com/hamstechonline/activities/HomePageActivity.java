@@ -297,9 +297,11 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                 LessonLog = "";
                 ActivityLog = "Home Page";
                 PagenameLog = "Language Selection";
-                getLogEvent(HomePageActivity.this);
+                /*getLogEvent(HomePageActivity.this);
                 Intent intent = new Intent(HomePageActivity.this, ChooseLanguage.class);
-                startActivity(intent);
+                startActivity(intent);*/
+                Intent recommendedCourses = new Intent(HomePageActivity.this, ChooseFavouriteCourse.class);
+                startActivity(recommendedCourses);
             }
         });
 
@@ -558,8 +560,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                     otherEnglishListLayout.setVisibility(View.VISIBLE);
 
                     subListAdapter = new SubListAdapter(HomePageActivity.this,response.body().getEnglish());
-                    listRecommended.setLayoutManager(new GridLayoutManager(HomePageActivity.this, 2));
-                    listRecommended.addItemDecoration(new GridSpacingItemDecoration(2,10,false));
+                    listRecommended.setLayoutManager(new LinearLayoutManager(HomePageActivity.this, RecyclerView.HORIZONTAL, false));
                     listRecommended.setAdapter(subListAdapter);
 
                     /*subListAdapter = new SubListAdapter(HomePageActivity.this,catListHindi);
@@ -579,15 +580,14 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
 
                     if (response.body().getMiniLessons().size() > 4) {
                         arraySize = 4;
-                        txtSeeMore.setVisibility(View.VISIBLE);
+                        txtSeeMore.setVisibility(View.GONE);
                     } else {
                         arraySize = response.body().getMiniLessons().size();
                         txtSeeMore.setVisibility(View.GONE);
                     }
                     miniCoursesArrayList = response.body().getMiniLessons();
                     miniCoursesListAdapter = new MiniCoursesListAdapter(HomePageActivity.this,response.body().getMiniLessons(), arraySize);
-                    listMiniLessons.setLayoutManager(new GridLayoutManager(HomePageActivity.this, 2));
-                    listMiniLessons.addItemDecoration(new GridSpacingItemDecoration(2,10,false));
+                    listMiniLessons.setLayoutManager(new LinearLayoutManager(HomePageActivity.this, RecyclerView.HORIZONTAL, false));
                     listMiniLessons.setAdapter(miniCoursesListAdapter);
 
                     storiesSliderCardPagerAdapter = new StoriesSliderCardPagerAdapter(HomePageActivity.this,response.body().getSuccessStories());
@@ -917,7 +917,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 Glide.with(context)
                         .load(datamodels.get(position).getImageUrl())

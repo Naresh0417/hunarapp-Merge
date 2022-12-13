@@ -174,7 +174,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
     DownloadManager downloadManager;
 
-    String strFilePath = "";
+    String strFilePath = "",assignment="";
     File assignmentFile = null;
 
     TextView txtCallRequest, txtChat;
@@ -664,7 +664,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if(resultCode == Activity.RESULT_OK) {
-                /*if(data.getClipData() != null) {
+                if(data.getClipData() != null) {
                     imageUrls.clear();
                     int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
                     for(int i = 0; i < count; i++) {
@@ -694,8 +694,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                         textAssignFile.setText(""+data.getClipData().getItemAt(0).getUri());
                     }
                     Log.e("imageUri","676    "+imageUrls.size());
-                }*/
-                if (requestCode == REQUEST_GALLERY && null != data) {
+                }
+                /*if (requestCode == REQUEST_GALLERY && null != data) {
 
                     try {
                         assignmentFile = createImageFile();
@@ -706,7 +706,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                         copyStream(inputStream, fileOutputStream);
                         fileOutputStream.close();
                         inputStream.close();
-
+                        assignment = imageToBase64(strFilePath);
                         if (strFilePath != null && !strFilePath.isEmpty())
                             textAssignFile.setText(strFilePath);
                     } catch (Exception e) {
@@ -714,7 +714,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                     }
                 } else {
                     Toast.makeText(this, "Selected items failed to load", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             } else if(data.getData() != null) {
                 String imagePath = data.getData().getPath();
                 //do something with the image (save it to some directory or whatever you need to do with it here)
@@ -799,16 +799,16 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         strFilePath = "";
         assignmentFile = null;
         textAssignFile.setText(getString(R.string.select_files));
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        /*Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         // Ask specifically for something that can be opened:
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_GALLERY);
+        startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_GALLERY);*/
 
-        /*Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*"); //allows any image file type. Change * to specific extension to limit it
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GALLERY);*/
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GALLERY);
     }
 
     public void onClickUpload(View view) {
@@ -852,7 +852,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
     }
 
     public void onSubmit(View view) {
-        if (strFilePath != null && !strFilePath.isEmpty()) {
+        if (imageUrls.size() > 0) {
             uploadAssignment(this);
         } else
             Toast.makeText(this, "Please select assignment file", Toast.LENGTH_SHORT).show();
@@ -1039,7 +1039,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                             if (!jsonObject.getJSONObject("lesson_details").getString("assignment").isEmpty()) {
                                 layoutUpload.setVisibility(View.VISIBLE);
                             } else {
-                                layoutUpload.setVisibility(View.GONE);
+                                layoutUpload.setVisibility(View.VISIBLE);
                             }
 
                             facultyFeedBack = jsonObject.getString("faculty_feedback");
@@ -1075,7 +1075,6 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
             @Override
             public byte[] getBody() throws AuthFailureError {
-                hocLoadingDialog.hideDialog();
                 try {
                     return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
                 } catch (UnsupportedEncodingException uee) {
@@ -1144,7 +1143,6 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
             @Override
             public byte[] getBody() throws AuthFailureError {
-                hocLoadingDialog.hideDialog();
                 try {
                     return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
                 } catch (UnsupportedEncodingException uee) {
@@ -1352,7 +1350,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
             params.put("course_id", courseId);
             params.put("lesson_id", lessonId);
             //params.put("assignment", imageUrls);
-            params.put("assignment", imageToBase64(strFilePath));
+            params.put("assignment", imageUrls);
         } catch (JSONException e) {
             e.printStackTrace();
         }

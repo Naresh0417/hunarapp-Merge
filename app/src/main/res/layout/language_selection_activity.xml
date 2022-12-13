@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_margin="20dp">
+            android:layout_margin="20dp"
+            android:layout_gravity="center">
 
             <ImageView
                 android:layout_width="150dp"
@@ -21,7 +23,7 @@
                 android:src="@drawable/hunar_logo"
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center_horizontal"
-                android:visibility="invisible"/>
+                android:visibility="gone"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -49,6 +51,7 @@
                 android:text="@string/chooseLanguage_hindi"
                 android:textColor="@color/dark_grey_blue"
                 android:textSize="20sp"
+                android:layout_marginBottom="20dp"
                 android:textStyle="bold" />
 
             <CheckBox
@@ -61,10 +64,10 @@
                 android:fontFamily="sans-serif"
                 android:textSize="25sp"
                 android:gravity="center"
-                android:paddingLeft="30dp"
+                android:paddingStart="30dp"
                 android:textStyle="bold"
                 android:background="@drawable/checkbox_english_text"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal" />
 
             <CheckBox
                 android:id="@+id/chbHindi"
@@ -76,6 +79,7 @@
                 android:fontFamily="sans-serif"
                 android:textSize="25sp"
                 android:gravity="center"
+                android:layout_marginTop="20dp"
                 android:paddingLeft="30dp"
                 android:textStyle="bold"
                 android:background="@drawable/checkbox_hindi_text"
@@ -86,9 +90,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="none"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:visibility="gone">
             </androidx.recyclerview.widget.RecyclerView>
-
 
             <Button
                 android:id="@+id/btnNext"
@@ -96,12 +100,12 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lblNext"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
+                android:textColor="@color/muted_blue"
                 android:fontFamily="@font/dinprobold"
                 android:textStyle="bold"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="35dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/button_shape_orange"/>
+                android:background="@drawable/bgshape_circle_blue"/>
 
         </LinearLayout>
 

@@ -39,7 +39,7 @@
                 android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@null"
+                android:background="@drawable/bgshape_circle_gray"
                 android:hint="@string/lblName"
                 android:gravity="center_horizontal"
                 android:textColorHint="@color/black"
@@ -47,15 +47,11 @@
                 android:padding="10dp"
                 android:textColor="@color/black" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"/>
-
-            <RelativeLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:background="@drawable/bgshape_circle_gray">
 
                 <LinearLayout
                     android:id="@+id/linCountryCode"
@@ -70,19 +66,19 @@
                         app:ccp_textSize="13sp"
                         android:gravity="center"/>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/gray"/>
-
                 </LinearLayout>
+
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/gray"
+                    />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="7dp"
-                    android:layout_toRightOf="@+id/linCountryCode">
+                    android:layout_marginLeft="7dp">
 
                     <EditText
                         android:id="@+id/txtMobile"
@@ -99,14 +95,9 @@
                         android:importantForAutofill="no"
                         android:inputType="number"/>
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/gray"/>
-
                 </LinearLayout>
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <AutoCompleteTextView
                 android:layout_width="match_parent"
@@ -116,16 +107,11 @@
                 android:layout_marginTop="15dp"
                 android:hint="@string/City"
                 android:textColorHint="@color/black_two"
-                android:background="@null"
+                android:background="@drawable/bgshape_circle_gray"
                 android:gravity="center_horizontal"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:textSize="15sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/gray"/>
 
             <LinearLayout
                 android:id="@+id/linOtpLayout"
@@ -185,14 +171,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/lblStartLearning"
                 android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:fontFamily="@font/dinprobold"
+                android:textColor="@color/muted_blue"
+                android:fontFamily="sans-serif"
                 android:textStyle="bold"
                 android:paddingRight="20dp"
                 android:paddingLeft="20dp"
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/button_shape_orange"/>
+                android:background="@drawable/border_pink_strok"/>
 
             <Button
                 android:id="@+id/btnVerify"
@@ -260,6 +246,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:textSize="15sp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/muted_blue"
                     android:text="@string/AlreadyMember"/>
 
                 <TextView
@@ -270,7 +258,7 @@
                     android:textSize="15sp"
                     android:text="@string/lblSignHere"
                     android:layout_marginLeft="5dp"
-                    android:textColor="@color/dark_grey_blue"
+                    android:textColor="@color/dark_pink"
                     />
             </LinearLayout>
 

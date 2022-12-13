@@ -215,6 +215,9 @@
         <activity android:name=".activities.ChooseLanguage"
             android:screenOrientation="unspecified"
             android:exported="true"/>
+        <activity android:name=".activities.ChooseFavouriteCourse"
+            android:screenOrientation="unspecified"
+            android:exported="true" />
         <activity android:name=".activities.BuzzActivity"
             android:screenOrientation="unspecified"
             android:exported="true"/>

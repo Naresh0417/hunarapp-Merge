@@ -50,6 +50,7 @@ public class AppsFlyerEventsHelper {
         properties.addAttribute(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
         properties.addAttribute(AppsFlyerEventParameter.KEY_LANGUAGE,langPref);
         MoEHelper.getInstance(context).trackEvent(AppsFlyerEventParameter.EVENT_REGISTRATION,properties);
+        MoEHelper.getInstance(context).trackEvent(AppsFlyerEventParameter.EVENT_LANGUAGE,properties);
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);

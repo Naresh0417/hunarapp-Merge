@@ -516,6 +516,7 @@ public class LoginActivity extends AppCompatActivity {
                                         .addAttribute(AppsFlyerEventParameter.KEY_LANGUAGE,langPref)
                                         .setNonInteractive();
                                 MoEHelper.getInstance(LoginActivity.this).trackEvent("login",properties);
+                                MoEHelper.getInstance(LoginActivity.this).trackEvent(AppsFlyerEventParameter.EVENT_LANGUAGE,properties);
                                 MoEHelper.getInstance(LoginActivity.this).setFirstName(objData.getString("name"));
                                 MoEHelper.getInstance(LoginActivity.this).setNumber(objData.getString("phone"));
                                 MoEHelper.getInstance(LoginActivity.this).setUniqueId(objData.getString("phone"));

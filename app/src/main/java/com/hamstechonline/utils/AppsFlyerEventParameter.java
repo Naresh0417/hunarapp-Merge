@@ -3,6 +3,7 @@ package com.hamstechonline.utils;
 public class AppsFlyerEventParameter {
 
     public static String EVENT_REGISTRATION = "registration";
+    public static String EVENT_LANGUAGE = "language";
     public static String EVENT_INTENT = "intent_click";
     public static String EVENT_ENROLL = "enroll";
     public static String EVENT_CONTACTUS = "contact_us";

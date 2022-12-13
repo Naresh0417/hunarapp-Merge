@@ -32,13 +32,16 @@ import com.facebook.appevents.AppEventsLogger;
 import com.hamstechonline.R;
 import com.hamstechonline.datamodel.CategoryDatamodel;
 import com.hamstechonline.utils.ApiConstants;
+import com.hamstechonline.utils.AppsFlyerEventParameter;
 import com.hamstechonline.utils.GridSpacingItemDecoration;
 import com.hamstechonline.utils.HocLoadingDialog;
 import com.hamstechonline.utils.LogEventsActivity;
 import com.hamstechonline.utils.UserDataConstants;
+import com.moe.pushlibrary.MoEHelper;
 import com.moengage.core.DataCenter;
 import com.moengage.core.LogLevel;
 import com.moengage.core.MoEngage;
+import com.moengage.core.Properties;
 import com.moengage.core.config.LogConfig;
 import com.moengage.core.config.NotificationConfig;
 
@@ -62,6 +65,7 @@ public class ChooseLanguage extends AppCompatActivity {
     private Locale myLocale;
     LogEventsActivity logEventsActivity;
     AppEventsLogger logger;
+    Properties properties;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,6 +98,9 @@ public class ChooseLanguage extends AppCompatActivity {
             public void onClick(View v) {
                 logLanguageEvent(languageSelected);
                 getLogEvent(ChooseLanguage.this);
+                properties = new Properties();
+                properties.addAttribute(AppsFlyerEventParameter.KEY_LANGUAGE,langPref);
+                MoEHelper.getInstance(ChooseLanguage.this).trackEvent(AppsFlyerEventParameter.EVENT_LANGUAGE,properties);
                 if (getIntent().getStringExtra("pageName")!= null){
                     changeLang(langPref);
                     finish();
