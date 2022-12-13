@@ -1040,7 +1040,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                             if (!jsonObject.getJSONObject("lesson_details").getString("assignment").isEmpty()) {
                                 layoutUpload.setVisibility(View.VISIBLE);
                             } else {
-                                layoutUpload.setVisibility(View.VISIBLE);
+                                layoutUpload.setVisibility(View.GONE);
                             }
 
                             facultyFeedBack = jsonObject.getString("faculty_feedback");
