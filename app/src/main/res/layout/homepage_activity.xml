@@ -569,7 +569,8 @@
                         android:orientation="vertical"
                         android:paddingLeft="7dp"
                         android:paddingRight="7dp"
-                        android:layout_marginTop="10dp" >
+                        android:layout_marginTop="10dp"
+                        android:visibility="gone">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -624,6 +625,7 @@
                         android:orientation="vertical"
                         android:background="@drawable/sucess_story_bg"
                         android:padding="8dp"
+                        android:layout_marginTop="15dp"
                         android:layout_marginBottom="8dp">
 
                         <TextView

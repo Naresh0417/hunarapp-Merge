@@ -384,7 +384,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             @Override
             public void onClick(View v) {
                 ActivityLog = "Submit your post";
-                PagenameLog = "MyCourse page";
+                PagenameLog = "Discussions";
                 getLogEvent(MyCoursesPageActivity.this);
                 DiscussionUploadPopUp();
             }
