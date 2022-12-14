@@ -1,5 +1,6 @@
 package com.hamstechonline.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -49,7 +50,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         try {
             holder.txtBranchName.setText(branchNames.get(position).toString());
             holder.txtCenterAddress.setText(branchAddress.get(position).toString());
