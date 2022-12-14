@@ -872,7 +872,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                             LessonLog = dataBuzz.get(position).getTitle();
                             ActivityLog = "Like";
                             PagenameLog = "Discussions";
-                            CourseLog = "";
+                            //CourseLog = "";
                             getLogEvent(context);
                             imgLikeUnlike.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like, 0,0,0);
                             ActivityLog = ""+dataBuzz.get(position).getPostid();
@@ -897,9 +897,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                         //dataBuzz
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Comment";
-                        PagenameLog = "MyCourse page";
+                        PagenameLog = "Discussions";
                         getLogEvent(context);
-                        buzzDetailsDialog = new DiscussionDetailsDialog(MyCoursesPageActivity.this, position,dataBuzz,term_id,courseId);
+                        buzzDetailsDialog = new DiscussionDetailsDialog(MyCoursesPageActivity.this, position,dataBuzz,term_id,courseId,CourseLog);
                         buzzDetailsDialog.showLoadingDialog();
                     }
                 });
@@ -914,9 +914,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                         //dataBuzz
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Clicked on discussions post";
-                        PagenameLog = "MyCourse page";
+                        PagenameLog = "Discussions";
                         getLogEvent(context);
-                        buzzDetailsDialog = new DiscussionDetailsDialog(MyCoursesPageActivity.this, position,dataBuzz,term_id,courseId);
+                        buzzDetailsDialog = new DiscussionDetailsDialog(MyCoursesPageActivity.this, position,dataBuzz,term_id,courseId,CourseLog);
                         buzzDetailsDialog.showLoadingDialog();
                     }
                 });
@@ -926,7 +926,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                     public void onClick(View v) {
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Share";
-                        PagenameLog = "MyCourse page";
+                        PagenameLog = "Discussions";
                         getLogEvent(context);
                         if (dataBuzz.get(position).getVideourl().equals("")) {
                             Intent shareIntent = new Intent(Intent.ACTION_SEND);

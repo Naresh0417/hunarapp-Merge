@@ -1,5 +1,6 @@
 package com.hamstechonline.activities.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -88,7 +89,7 @@ public class DiscussionDetailsDialog {
     SharedPreferences prefs;
     LogEventsActivity logEventsActivity;
     AppEventsLogger logger;
-    String PagenameLog,activityLog = "",mp4URL = "",lessonEvent,ActivityLog,mobile,fullname,email,course_id;
+    String PagenameLog,CourseLog = "",mp4URL = "",lessonEvent,ActivityLog,mobile,fullname,email,course_id;
     Bundle params;
     ApiInterface apiService;
     BuzzCommentsAdapter buzzCommentsAdapter;
@@ -102,13 +103,14 @@ public class DiscussionDetailsDialog {
     CommentReportDialoge reportDialoge;
 
     public DiscussionDetailsDialog(Context context, int position, List<Discussions> dataMainList, String term_id,
-                                   String course_id) {
+                                   String course_id, String CourseLog) {
         this.context = context;
         this.position = position;
         this.bundle = bundle;
         this.course_id = course_id;
         this.dataMainList = dataMainList;
         this.term_id = term_id;
+        this.CourseLog = CourseLog;
         this.likesInterface = (LikesInterface) this.context;
     }
 
@@ -196,7 +198,7 @@ public class DiscussionDetailsDialog {
             public void onClick(View v) {
                 lessonEvent = dataBuzz.get(position).getTitle();
                 ActivityLog = "Share";
-                PagenameLog = "Discussions Posts";
+                PagenameLog = "Discussions";
                 getLogEvent(context);
                 if (dataMainList.get(position).getVideourl().equals("")) {
                     //getLogEvent(context);
@@ -231,7 +233,7 @@ public class DiscussionDetailsDialog {
             @Override
             public void onStateChange(YouTubePlayer youTubePlayer, PlayerConstants.PlayerState state) {
                 super.onStateChange(youTubePlayer, state);
-                ActivityLog = "Hunar Post";
+                ActivityLog = "Discussions";
                 if (state.toString().equals("PLAYING")){
                     PagenameLog = "Video start";
                     getLogEvent(context);
@@ -343,7 +345,7 @@ public class DiscussionDetailsDialog {
             @Override
             public void onResponse(Call<SaveCommentRequest> call, Response<SaveCommentRequest> response) {
                 ActivityLog = "Comment Posted";
-                PagenameLog = "Hunar Posts";
+                PagenameLog = "Discussions";
                 getLogEvent(context);
                 userInputComment.setText("");
                 userInputComment.setHint("Type your comment here...");
@@ -417,18 +419,18 @@ public class DiscussionDetailsDialog {
                     //hocLoadingDialog.hideDialog();
                     //getBuzzList(BuzzActivity.this);
                     if (dataBuzz.get(position).getLikedislike() == 1) {
-                        lessonEvent = dataBuzz.get(position).getTitle();
+                        /*lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "UnLike";
-                        PagenameLog = "Hunar Posts";
+                        PagenameLog = "Discussions";
                         getLogEvent(context);
                         dataBuzz.get(position).setLikedislike(0);
                         imgLikeUnlike.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_unlike, 0, 0, 0);
                         likesCount.setText((Integer.parseInt(dataBuzz.get(position).getLikes())) + " Likes " +
-                                +dataBuzz.get(position).getComments()+" "+dataBuzz.get(position).getComments() + " Comments");
+                                +dataBuzz.get(position).getComments()+" "+dataBuzz.get(position).getComments() + " Comments");*/
                     } else {
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Like";
-                        PagenameLog = "Hunar Posts";
+                        PagenameLog = "Discussions";
                         getLogEvent(context);
                         dataBuzz.get(position).setLikedislike(1);
                         imgLikeUnlike.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_like, 0, 0, 0);
@@ -490,7 +492,7 @@ public class DiscussionDetailsDialog {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 holder.txtUserName.setText(dataBuzz.get(position).getName());
                 holder.txtComment.setText(dataBuzz.get(position).getComment());
@@ -545,8 +547,8 @@ public class DiscussionDetailsDialog {
             data.put("mobile", mobile);
             data.put("fullname",fullname);
             data.put("email",UserDataConstants.userMail);
-            data.put("category","");
-            data.put("course","");
+            data.put("category","MyCourses page");
+            data.put("course",CourseLog);
             data.put("lesson",lessonEvent);
             data.put("activity",ActivityLog);
             data.put("pagename",PagenameLog);

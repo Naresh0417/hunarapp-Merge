@@ -141,7 +141,7 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
     EditText txtName, txtPhone, txtAddress, txtPincode, txtCity, txtEmail, txtState, txtCountry;
     HocLoadingDialog hocLoadingDialog;
     LogEventsActivity logEventsActivity;
-    String CategoryName, CourseLog, LessonLog, ActivityLog, PagenameLog;
+    String CategoryName="", CourseLog, LessonLog, ActivityLog, PagenameLog;
     Dialog dialog;
     String langPref = "Language", mRequestBody, selectedPayment, htmlAllTaxesString, tracking_id = "",razorpayOrderid;
     SharedPreferences prefs;
@@ -333,6 +333,7 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
                     listSelectedNames.setAdapter(listSelectedNamesAdapter);
                     listSummaryItems.setLayoutManager(new LinearLayoutManager(EnrolNowActivity.this, RecyclerView.VERTICAL, false));
                     listSummaryItems.setAdapter(listSelectedNamesAdapter);
+                    CourseLog = selectedNames.toString();
                     LessonLog = "Payment Plan";
                     ActivityLog = "fullAmount";
                     PagenameLog = "Enrol page";
@@ -362,6 +363,7 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
                     listSelectedNames.setAdapter(listSelectedNamesAdapter);
                     listSummaryItems.setLayoutManager(new LinearLayoutManager(EnrolNowActivity.this, RecyclerView.VERTICAL, false));
                     listSummaryItems.setAdapter(listSelectedNamesAdapter);
+                    CourseLog = selectedNames.toString();
                     LessonLog = "Payment Plan";
                     ActivityLog = "Installment";
                     PagenameLog = "Enrol page";
@@ -786,6 +788,7 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
                                     for (int i = 0; i < coursesList.size(); i++) {
                                         if (Integer.parseInt(coursesList.get(i).getCategoryId()) == position) {
                                             position = i;
+                                            CourseLog = coursesList.get(i).getCategory_Title();
                                         }
                                     }
                                     txtPremiumTitle.setText(getResources().getString(R.string.lblPremium));
@@ -2269,11 +2272,12 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
         call.enqueue(new Callback<PaymentSuccessResponse>() {
             @Override
             public void onResponse(Call<PaymentSuccessResponse> call, retrofit2.Response<PaymentSuccessResponse> response) {
-                if (response.body().getMesssage().equalsIgnoreCase("Payment updated successfully"))
+                if (response.body().getMesssage().equalsIgnoreCase("Payment updated successfully")) {
                     //OnlineSuccessfulPopUp();
-                    onlinePaymentSuccessful(EnrolNowActivity.this);
-                else
-                    Toast.makeText(EnrolNowActivity.this, "Failed to update payment details", Toast.LENGTH_SHORT).show();
+                    ActivityLog = "Payment Success";
+                    getLogEvent(EnrolNowActivity.this);
+                onlinePaymentSuccessful(EnrolNowActivity.this);
+            } else Toast.makeText(EnrolNowActivity.this, "Failed to update payment details", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -2382,7 +2386,8 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
+                ActivityLog = "Fill details";
+                getLogEvent(EnrolNowActivity.this);
                 AfterOrder();
             }
         });
