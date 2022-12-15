@@ -133,9 +133,9 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
     DrawerLayout drawer;
     NavigationView navSideMenu;
     LinearLayout linearLessonContent, layoutUpload,lessonsContentLayout,playerLayout;
-    TextView headerTitle, txtDescription, txtLessonName, txtImageText, textPercentage, textAssignFile;
-    RelativeLayout layoutHeader,assignmentDown,studyDown,feedbackDown;
-    CardView cardAssignmentPdf,cardStudyPdf,cardFacultyFeedback;
+    TextView headerTitle, txtDescription, txtLessonName, txtImageText, textPercentage, textAssignFile, txtLiveClassLbl;
+    RelativeLayout layoutHeader,assignmentDown,studyDown,feedbackDown, btnLiveClass;
+    CardView cardAssignmentPdf,cardStudyPdf,cardFacultyFeedback,layoutPercentage;
     UserDataBase userDataBase;
     ApiInterface apiService;
     HocLoadingDialog hocLoadingDialog;
@@ -147,7 +147,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
     LinearLayout fabPrevious, fabNext,layoutFeedback,layoutPercent,layoutStudentWorks;
     PercentView percentView;
     VerticalPdfViewPager pdfViewStudy, pdfViewAssign;
-    private String mp4URL = "", postStatus = "", postId, pdfURL, assignURL,facultyFeedBack,assignmentText = "",videoThumbnailURL = "";
+    private String mp4URL = "", postStatus = "", postId, pdfURL, assignURL,facultyFeedBack,assignmentText = "",
+            submitAssignment,videoThumbnailURL = "";
     List<Lesson> coursesList = new ArrayList<>();
     List<String> imageUrls = new ArrayList<>();
     ArrayList<StudentsWork> arrayListStudentWork = new ArrayList<>();
@@ -170,11 +171,11 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
     Bundle dataBundle;
     ImageButton stickyWhatsApp;
 
-    String courseId, lessonId;
+    String courseId, lessonId, liveWebURL = "";
 
     DownloadManager downloadManager;
 
-    String strFilePath = "";
+    String strFilePath = "",assignment="";
     File assignmentFile = null;
 
     TextView txtCallRequest, txtChat;
@@ -230,6 +231,9 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         layoutStudentWorks = findViewById(R.id.layoutStudentWorks);
         lessonsContentLayout = findViewById(R.id.lessonsContentLayout);
         playerLayout = findViewById(R.id.playerLayout);
+        btnLiveClass = findViewById(R.id.btnLiveClass);
+        txtLiveClassLbl = findViewById(R.id.txtLiveClassLbl);
+        layoutPercentage = findViewById(R.id.layoutPercentage);
 
         percentView = findViewById(R.id.percentView);
         textPercentage = findViewById(R.id.textPercentage);
@@ -382,7 +386,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                 Intent i = new Intent(Intent.ACTION_VIEW);
 
                 try {
-                    String url = "https://api.whatsapp.com/send?phone=" + "919010100240" + "&text=" +
+                    String url = "https://api.whatsapp.com/send?phone=" + "919666664757" + "&text=" +
                             URLEncoder.encode(getResources().getString(R.string.chat_student_guide), "UTF-8");
                     i.setPackage("com.whatsapp");
                     i.setData(Uri.parse(url));
@@ -393,6 +397,15 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        btnLiveClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyCoursesLessonsPage.this, LiveFashionWebview.class);
+                intent.putExtra("URL",liveWebURL);
+                startActivity(intent);
             }
         });
 
@@ -664,7 +677,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if(resultCode == Activity.RESULT_OK) {
-                /*if(data.getClipData() != null) {
+                if(data.getClipData() != null) {
                     imageUrls.clear();
                     int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
                     for(int i = 0; i < count; i++) {
@@ -694,8 +707,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                         textAssignFile.setText(""+data.getClipData().getItemAt(0).getUri());
                     }
                     Log.e("imageUri","676    "+imageUrls.size());
-                }*/
-                if (requestCode == REQUEST_GALLERY && null != data) {
+                }
+                /*if (requestCode == REQUEST_GALLERY && null != data) {
 
                     try {
                         assignmentFile = createImageFile();
@@ -714,7 +727,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                     }
                 } else {
                     Toast.makeText(this, "Selected items failed to load", Toast.LENGTH_SHORT).show();
-                }
+                }*/
             } else if(data.getData() != null) {
                 String imagePath = data.getData().getPath();
                 //do something with the image (save it to some directory or whatever you need to do with it here)
@@ -799,16 +812,16 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         strFilePath = "";
         assignmentFile = null;
         textAssignFile.setText(getString(R.string.select_files));
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        /*Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         // Ask specifically for something that can be opened:
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         intent.setType("image/*");
-        startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_GALLERY);
+        startActivityForResult(Intent.createChooser(intent, "Select File"), REQUEST_GALLERY);*/
 
-        /*Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*"); //allows any image file type. Change * to specific extension to limit it
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GALLERY);*/
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), REQUEST_GALLERY);
     }
 
     public void onClickUpload(View view) {
@@ -852,7 +865,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
     }
 
     public void onSubmit(View view) {
-        if (strFilePath != null && !strFilePath.isEmpty()) {
+        if (imageUrls.size() > 0) {
             hocLoadingDialog.showLoadingDialog();
             uploadAssignment(this);
         } else
@@ -1044,6 +1057,12 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                             }
 
                             facultyFeedBack = jsonObject.getString("faculty_feedback");
+                            submitAssignment = jsonObject.getString("submit_assignment");
+                            if (submitAssignment.equalsIgnoreCase("yes")) {
+                                layoutUpload.setVisibility(View.GONE);
+                            } else {
+                                layoutUpload.setVisibility(View.VISIBLE);
+                            }
                             if (!facultyFeedBack.isEmpty()) {
                                 layoutFeedback.setVisibility(View.VISIBLE);
                                 feedbackByFaculty.setText(facultyFeedBack);
@@ -1352,8 +1371,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
             params.put("phone", UserDataConstants.userMobile);
             params.put("course_id", courseId);
             params.put("lesson_id", lessonId);
-            //params.put("assignment", imageUrls);
-            params.put("assignment", imageToBase64(strFilePath));
+            params.put("assignment", imageUrls);
+            //params.put("assignment", imageToBase64(strFilePath));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1371,6 +1390,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                         strFilePath = "";
                         assignmentFile = null;
                         textAssignFile.setText(getString(R.string.select_files));
+                        layoutUpload.setVisibility(View.GONE);
                         uploadSuccessPopUp();
                     }
                 } catch (Exception e) {
@@ -1591,12 +1611,29 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
             layoutPercent.setVisibility(View.GONE);
         }
         percentView.setPercentage(nPercent);
-        if (coursesList.get(listPosition).getVideoUrl().equalsIgnoreCase("")){
+        if (coursesList.get(listPosition).getType().equalsIgnoreCase("live")){
             videoThumbnailURL = coursesList.get(listPosition).getVideo_thumbnail();
             playerLayout.setVisibility(View.GONE);
+            layoutPercentage.setVisibility(View.GONE);
+            btnLiveClass.setVisibility(View.VISIBLE);
+            txtLiveClassLbl.setText("Live Class");
+            liveWebURL = coursesList.get(listPosition).getVideoUrl();
+            if (coursesList.get(listPosition).getVideoUrl().equalsIgnoreCase("")) btnLiveClass.setClickable(false);
+            else btnLiveClass.setClickable(true);
+        } else if (coursesList.get(listPosition).getType().equalsIgnoreCase("nsdc_exam")){
+            videoThumbnailURL = coursesList.get(listPosition).getVideo_thumbnail();
+            playerLayout.setVisibility(View.GONE);
+            layoutPercentage.setVisibility(View.GONE);
+            btnLiveClass.setVisibility(View.VISIBLE);
+            txtLiveClassLbl.setText("NSDC Exam");
+            liveWebURL = coursesList.get(listPosition).getVideoUrl();
+            if (coursesList.get(listPosition).getVideoUrl().equalsIgnoreCase("")) btnLiveClass.setClickable(false);
+            else btnLiveClass.setClickable(true);
         } else {
             mp4URL = coursesList.get(listPosition).getVideoUrl();
             playerLayout.setVisibility(View.VISIBLE);
+            layoutPercentage.setVisibility(View.VISIBLE);
+            btnLiveClass.setVisibility(View.GONE);
         }
 
         findViewById(R.id.layoutMaterial).setVisibility(View.GONE);
@@ -1651,11 +1688,13 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         textPercentage.setText(coursesList.get(listPosition).getWatchedPercentage() + "%");
         int nPercent = Integer.parseInt(coursesList.get(listPosition).getWatchedPercentage());
         percentView.setPercentage(nPercent);
-        if (coursesList.get(listPosition).getVideoUrl().equalsIgnoreCase("")){
+        if (coursesList.get(listPosition).getType().equalsIgnoreCase("live")){
             videoThumbnailURL = coursesList.get(listPosition).getVideo_thumbnail();
             playerLayout.setVisibility(View.GONE);
+            btnLiveClass.setVisibility(View.VISIBLE);
         } else {
             mp4URL = coursesList.get(listPosition).getVideoUrl();
+            btnLiveClass.setVisibility(View.GONE);
 
         }
 

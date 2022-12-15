@@ -1,6 +1,7 @@
 package com.hamstechonline.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -788,7 +789,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final DiscussionsAdapter.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final DiscussionsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 txtDescription.setText(dataBuzz.get(position).getDescription());
                 //txtTitle.setVisibility(View.GONE);
@@ -1516,7 +1517,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.ic_sucess_payment)
                 .into(progressBar);
-        paymentComment.setText(getResources().getString(R.string.call_request_accepted));
+        //paymentComment.setText(getResources().getString(R.string.call_request_accepted));
 
         dialog.show();
 

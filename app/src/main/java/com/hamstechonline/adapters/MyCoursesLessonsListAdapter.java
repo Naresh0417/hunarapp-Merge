@@ -1,5 +1,6 @@
 package com.hamstechonline.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -93,7 +94,7 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         try {
 
             if (isExpand){
@@ -124,12 +125,12 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
                 public void onClick(View v) {
                     if (lessonsArray.get(position).getLockValue().equalsIgnoreCase("0")) {
                         lockPopup();
-                    } else if (lessonsArray.get(position).getType().equalsIgnoreCase("nsdc_exam") ||
+                    } /*else if (lessonsArray.get(position).getType().equalsIgnoreCase("nsdc_exam") ||
                             lessonsArray.get(position).getType().equalsIgnoreCase("live")){
                         Intent intent = new Intent(context, LiveFashionWebview.class);
                         intent.putExtra("URL",lessonsArray.get(position).getVideoUrl());
                         context.startActivity(intent);
-                    } else {
+                    } */else {
                         for (int i =0; i< originalListArray.size(); i++) {
                             if (originalListArray.get(i).getLessonId().equalsIgnoreCase(lessonsArray.get(position).getLessonId())) {
                                 lessonPositionId = i;

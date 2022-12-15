@@ -292,7 +292,7 @@ public class LessonsFragment extends Fragment {
                             CourseLog = coursesList.get(position).getCourse_title();
                             LessonLog = coursesList.get(position).getLesson_title();
                             ActivityLog = "Click";
-                            PagenameLog = "Course Page";
+                            PagenameLog = "Enrol Page";
                             getLogEvent(context);
                             new AppsFlyerEventsHelper(context).EventEnroll();
                             Intent intent = new Intent(context, EnrolNowActivity.class);
