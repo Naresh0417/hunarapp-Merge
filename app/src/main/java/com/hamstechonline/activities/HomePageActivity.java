@@ -128,8 +128,9 @@ import retrofit2.Callback;
 
 public class HomePageActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView listRecommended,listCategory,listHindi,listGovtHindi,listGovtEnglish,listMiniLessons;
+    RecyclerView listRecommended,listCategory,listHindi,listGovtHindi,listGovtEnglish,listMiniLessons,listPopularCourses;
     SubListAdapter subListAdapter;
+    PopularCoursesAdapter popularCoursesAdapter;
     CategoryCoursesAdapter categoryCoursesAdapter;
     MyCoursesAdapter recommendedCoursesAdapter,govtCourseHindiAdapter,govtCourseEnglishAdapter;
     MiniCoursesListAdapter miniCoursesListAdapter;
@@ -237,6 +238,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         mycoursePrevious = findViewById(R.id.mycoursePrevious);
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
         gifSuccessStory = findViewById(R.id.gifSuccessStory);
+        listPopularCourses = findViewById(R.id.listPopularCourses);
 
         navigation.setOnNavigationItemSelectedListener(this);
         navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
@@ -562,6 +564,10 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                     subListAdapter = new SubListAdapter(HomePageActivity.this,response.body().getEnglish());
                     listRecommended.setLayoutManager(new LinearLayoutManager(HomePageActivity.this, RecyclerView.HORIZONTAL, false));
                     listRecommended.setAdapter(subListAdapter);
+
+                    popularCoursesAdapter = new PopularCoursesAdapter(HomePageActivity.this,response.body().getEnglish());
+                    listPopularCourses.setLayoutManager(new LinearLayoutManager(HomePageActivity.this, RecyclerView.VERTICAL, false));
+                    listPopularCourses.setAdapter(popularCoursesAdapter);
 
                     /*subListAdapter = new SubListAdapter(HomePageActivity.this,catListHindi);
                     listCategory.setLayoutManager(new GridLayoutManager(HomePageActivity.this, 2));
@@ -894,6 +900,73 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
             howtoUseApp.showLoadingDialog();
         } catch (NullPointerException e){
             e.printStackTrace();
+        }
+    }
+
+    public class PopularCoursesAdapter extends RecyclerView.Adapter<PopularCoursesAdapter.ViewHolder> {
+        Context context;
+        List<EnglishCategory> datamodels;
+
+        public PopularCoursesAdapter(Context context,List<EnglishCategory> datamodels){
+            this.context=context;
+            this.datamodels = datamodels;
+        }
+
+        @NonNull
+        @Override
+        public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            LayoutInflater inflater = LayoutInflater.from(
+                    parent.getContext());
+            View v = inflater.inflate(R.layout.popular_courses_adapter, parent, false);
+            ViewHolder vh = new ViewHolder(v);
+            return vh;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
+            try {
+                Glide.with(context)
+                        .load(datamodels.get(position).getImageUrl())
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .error(R.mipmap.ic_launcher)
+                        .into(holder.courseImage);
+
+                holder.txtCourseName.setText(datamodels.get(position).getCategoryname());
+                holder.txtDescription.setText(datamodels.get(position).getCategoryDescription());
+                /*holder.listLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        CategoryName = datamodels.get(position).getCategoryname()+" "+datamodels.get(position).getLanguage();
+                        CourseLog = "";LessonLog = "";ActivityLog = "Click";PagenameLog = "Dashboard";
+                        params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, datamodels.get(position).getCategoryname());
+                        logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                        getLogEvent(HomePageActivity.this);
+                        new AppsFlyerEventsHelper(context).EventCategory(CategoryName);
+                        getSubCategoriesList(HomePageActivity.this,datamodels.get(position).getCategoryId(),datamodels.get(position).getLanguage());
+
+                    }
+                });*/
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return datamodels.size();
+        }
+
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            ImageView courseImage;
+            TextView txtCourseName,txtDescription;
+            RelativeLayout listLayout;
+
+            public ViewHolder(@NonNull View view) {
+                super(view);
+                courseImage = view.findViewById(R.id.courseImage);
+                txtCourseName = view.findViewById(R.id.txtCourseName);
+                txtDescription = view.findViewById(R.id.txtDescription);
+            }
         }
     }
 

@@ -54,7 +54,7 @@
                 android:layout_marginBottom="20dp"
                 android:textStyle="bold" />
 
-            <CheckBox
+            <Button
                 android:id="@+id/chbEnglish"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -66,10 +66,10 @@
                 android:gravity="center"
                 android:paddingStart="30dp"
                 android:textStyle="bold"
-                android:background="@drawable/checkbox_english_text"
+                android:background="@drawable/english_check"
                 android:layout_gravity="center_horizontal" />
 
-            <CheckBox
+            <Button
                 android:id="@+id/chbHindi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -82,7 +82,7 @@
                 android:layout_marginTop="20dp"
                 android:paddingLeft="30dp"
                 android:textStyle="bold"
-                android:background="@drawable/checkbox_hindi_text"
+                android:background="@drawable/hindi_txt_check"
                 android:layout_gravity="center_horizontal" />
 
             <androidx.recyclerview.widget.RecyclerView

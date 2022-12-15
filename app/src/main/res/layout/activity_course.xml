@@ -335,7 +335,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="130dp"
                             android:layout_marginTop="8dp"
-                            android:visibility="gone"/>
+                            android:visibility="visible"/>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -346,7 +346,7 @@
                             android:textColor="@color/muted_blue"
                             android:layout_marginTop="8dp"
                             android:text="@string/grow_your_skill_with_similar_courses"
-                            android:visibility="gone"/>
+                            android:visibility="visible"/>
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/listSimilarCourses"
@@ -354,7 +354,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="7dp"
                             android:scrollbars="none"
-                            android:visibility="gone"/>
+                            android:visibility="visible"/>
 
                         <LinearLayout
                             android:id="@+id/floatBtns"
@@ -406,6 +406,46 @@
                         android:layout_height="match_parent"
                         android:visibility="visible"
                         android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/textFile"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentLeft="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginRight="10dp"
+                                android:layout_toLeftOf="@+id/textSubmit"
+                                android:background="@drawable/bgshape_circle"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/dinpro"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:text="Have A Doubt? Ask Here ..."
+                                android:textColor="@color/gray"
+                                android:textSize="14dp" />
+
+                            <TextView
+                                android:id="@+id/textSubmit"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="right"
+                                android:background="@drawable/bgshape_circle"
+                                android:drawablePadding="10dp"
+                                android:fontFamily="@font/helveticabold"
+                                android:foreground="?attr/selectableItemBackground"
+                                android:gravity="center"
+                                android:text="@string/file_submit"
+                                android:textColor="@color/muted_blue"
+                                android:textSize="14dp"
+                                android:textStyle="bold" />
+                        </RelativeLayout>
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/discussionList"

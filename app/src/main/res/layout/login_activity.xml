@@ -40,51 +40,54 @@
                 android:layout_marginTop="15dp">
 
                 <LinearLayout
-                    android:id="@+id/linCountryCode"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bgshape_circle_gray">
 
-                    <com.hbb20.CountryCodePicker
-                        android:id="@+id/ccp"
-                        android:layout_width="120dp"
-                        android:layout_height="50dp"
-                        app:ccp_textSize="13sp"
-                        android:gravity="center"/>
+                    <LinearLayout
+                        android:id="@+id/linCountryCode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <com.hbb20.CountryCodePicker
+                            android:id="@+id/ccp"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
+                            app:ccp_textSize="13sp"
+                            android:gravity="center"/>
+
+                    </LinearLayout>
 
                     <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/gray"/>
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:background="@color/gray"
+                        />
 
-                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginLeft="7dp">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="7dp"
-                    android:layout_toRightOf="@+id/linCountryCode">
+                        <EditText
+                            android:id="@+id/txtMobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:background="@null"
+                            android:hint="@string/lblMobileNumber"
+                            android:layout_toRightOf="@+id/ccp"
+                            android:gravity="center_horizontal"
+                            android:textColorHint="@color/gray"
+                            android:padding="10dp"
+                            android:maxLength="10"
+                            android:textColor="@color/black"
+                            android:importantForAutofill="no"
+                            android:inputType="number"/>
 
-                    <EditText
-                        android:id="@+id/txtMobile"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="@null"
-                        android:hint="@string/lblMobileNumber"
-                        android:layout_toRightOf="@+id/ccp"
-                        android:gravity="center_horizontal"
-                        android:textColorHint="@color/black"
-                        android:padding="10dp"
-                        android:maxLength="10"
-                        android:importantForAutofill="no"
-                        android:textColor="@color/black"
-                        android:inputType="number"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:background="@color/gray"/>
+                    </LinearLayout>
 
                 </LinearLayout>
 
