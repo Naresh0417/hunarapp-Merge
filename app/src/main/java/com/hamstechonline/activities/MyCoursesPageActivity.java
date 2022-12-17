@@ -752,7 +752,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             public void onResponse(Call<CallWithFacultyResponse> call, Response<CallWithFacultyResponse> response) {
                 hocLoadingDialog.hideDialog();
                 if (response.body().getStatus().equalsIgnoreCase("ok")) {
-                    OnlineSuccessfulPopUp(MyCoursesPageActivity.this);
+                    VideoCallPopUp(MyCoursesPageActivity.this);
                 }
             }
 
@@ -1518,6 +1518,57 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 .error(R.drawable.ic_sucess_payment)
                 .into(progressBar);
         //paymentComment.setText(getResources().getString(R.string.call_request_accepted));
+
+        dialog.show();
+
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomePageActivity.class);
+                dialog.dismiss();
+                //startActivity(intent);
+            }
+        });
+
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK &&
+                        event.getAction() == KeyEvent.ACTION_UP &&
+                        !event.isCanceled()) {
+                    Intent intent = new Intent(context, HomePageActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    public void VideoCallPopUp(Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setContentView(R.layout.payment_sucess);
+        dialog.setCancelable(false);
+
+        ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
+        ImageView progressBar = dialog.findViewById(R.id.progressBar);
+        LinearLayout onlinePaymentLayout = dialog.findViewById(R.id.onlinePaymentLayout);
+        LinearLayout cod_layout = dialog.findViewById(R.id.cod_layout);
+        TextView paymentComment = dialog.findViewById(R.id.paymentComment);
+
+        onlinePaymentLayout.setVisibility(View.VISIBLE);
+        cod_layout.setVisibility(View.GONE);
+
+        Glide.with(context)
+                .load(R.drawable.ic_sucess_payment)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.ic_sucess_payment)
+                .into(progressBar);
+        paymentComment.setText(getResources().getString(R.string.call_request_accepted));
 
         dialog.show();
 
