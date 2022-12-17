@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.appsflyer.AppsFlyerLib;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -57,7 +56,6 @@ public class SocialMediaEventsHelper {
         eventData.put(SocialMediaEventsParameters.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
         eventData.put(SocialMediaEventsParameters.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(SocialMediaEventsParameters.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, SocialMediaEventsParameters.EVENT_REGISTRATION,eventData);
         mFirebaseAnalytics.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS, params);
         mFirebaseAnalytics.logEvent(SocialMediaEventsParameters.EVENT_REGISTRATION, params);
     }
@@ -66,14 +64,12 @@ public class SocialMediaEventsHelper {
         logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT,params);
         logger.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS);
         mFirebaseAnalytics.logEvent(SocialMediaEventsParameters.EVENT_CONTACTUS, params);
-        AppsFlyerLib.getInstance().trackEvent(context, SocialMediaEventsParameters.EVENT_CONTACTUS,eventData);
         mFirebaseAnalytics.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS, params);
     }
     public void EventRegisterCourse() {
         logger.logEvent(SocialMediaEventsParameters.EVENT_REGISTERCOURSE, params);
         logger.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS);
         mFirebaseAnalytics.logEvent(SocialMediaEventsParameters.EVENT_REGISTERCOURSE, params);
-        AppsFlyerLib.getInstance().trackEvent(context, SocialMediaEventsParameters.EVENT_REGISTERCOURSE,eventData);
         mFirebaseAnalytics.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS, params);
     }
     public void EventCourseWatched(String courseName) {
@@ -82,7 +78,6 @@ public class SocialMediaEventsHelper {
         logger.logEvent(SocialMediaEventsParameters.EVENT_COURSES_WATCHED, params);
         logger.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS);
         mFirebaseAnalytics.logEvent(SocialMediaEventsParameters.EVENT_COURSES_WATCHED, params);
-        AppsFlyerLib.getInstance().trackEvent(context, SocialMediaEventsParameters.EVENT_COURSES_WATCHED,eventData);
         mFirebaseAnalytics.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS, params);
     }
     public void EventAccordion(String EventName){
@@ -93,7 +88,6 @@ public class SocialMediaEventsHelper {
         mFirebaseAnalytics.logEvent(SocialMediaEventsParameters.EVENT_ACCORDION, params);
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, SocialMediaEventsParameters.EVENT_ACCORDION,eventData);
         mFirebaseAnalytics.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS, params);
 
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);

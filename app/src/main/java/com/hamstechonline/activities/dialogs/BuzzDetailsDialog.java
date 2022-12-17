@@ -425,14 +425,14 @@ public class BuzzDetailsDialog {
                     //getBuzzList(BuzzActivity.this);
                     //likesInterface.setIsLiked(1);
                     if (dataBuzz.get(position).getLikedislike() == 1) {
-                        lessonEvent = dataBuzz.get(position).getTitle();
+                        /*lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "UnLike";
                         PagenameLog = "Hunar Posts";
                         getLogEvent(context);
                         dataBuzz.get(position).setLikedislike(0);
                         imgLikeUnlike.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_unlike, 0, 0, 0);
                         likesCount.setText((Integer.parseInt(dataBuzz.get(position).getLikes())) + " Likes " +
-                                dataBuzz.get(position).getComments() + " Comments");
+                                dataBuzz.get(position).getComments() + " Comments");*/
                     } else {
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Like";

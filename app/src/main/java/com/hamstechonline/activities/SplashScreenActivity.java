@@ -22,9 +22,6 @@ import android.widget.ImageView;
 
 import com.android.installreferrer.api.InstallReferrerClient;
 import com.android.installreferrer.api.ReferrerDetails;
-import com.appsflyer.AppsFlyerLib;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.FacebookSdk;
 import com.facebook.applinks.AppLinkData;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -89,8 +86,6 @@ public class SplashScreenActivity extends AppCompatActivity  {
         FacebookSdk.fullyInitialize();
         setAdvertiserIDCollectionEnabled(true);
         FacebookSdk.sdkInitialize(this);
-        //AppsFlyerLib.getInstance().startTracking(this);
-        AppsFlyerLib.getInstance().startTracking(this);
         userDataBase = new UserDataBase(this);
 
         AppLinkData.fetchDeferredAppLinkData(this,

@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import com.appsflyer.AppsFlyerLib;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -43,7 +42,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_REGISTRATION,eventData);
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
         properties.addAttribute(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
@@ -67,7 +65,6 @@ public class AppsFlyerEventsHelper {
         logger.logEvent(SocialMediaEventsParameters.KEY_ENROLL_NOW,params);
         mFirebaseAnalytics.logEvent(SocialMediaEventsParameters.KEY_ENROLL_NOW, params);
         mFirebaseAnalytics.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS, params);
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_ENROLL,eventData);
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
         properties.addAttribute(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
@@ -83,7 +80,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_CONTACTUS,eventData);
         logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT,params);
         logger.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS);
         mFirebaseAnalytics.logEvent(SocialMediaEventsParameters.EVENT_CONTACTUS, params);
@@ -146,7 +142,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_CATEGORY,category);
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_ACCORDION,eventData);
 
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -162,7 +157,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
         eventData.put(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         eventData.put(AppsFlyerEventParameter.KEY_CATEGORY,category);
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_CATEGORY,eventData);
 
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -181,7 +175,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_COURSE_NAME,course);
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_COURSE,eventData);
 
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -200,7 +193,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_CATEGORY,category);
         eventData.put(AppsFlyerEventParameter.KEY_COURSE_NAME,course);
         eventData.put(AppsFlyerEventParameter.KEY_LESSON_NAME,lesson);
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_LESSON,eventData);
 
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -221,7 +213,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_NOTIFICATION,notification);
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_NOTIFICATION,eventData);
 
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -241,7 +232,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_COURSE_NAME,course);
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_ADMISSION,eventData);
 
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -263,7 +253,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_LESSON_NAME,lesson);
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, eventName,eventData);
 
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -283,7 +272,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.KEY_SuccessStories,eventData);
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
         properties.addAttribute(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
@@ -299,7 +287,6 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
-        AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.KEY_ABOUTUS,eventData);
         properties.addAttribute(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         properties.addAttribute(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
         properties.addAttribute(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
