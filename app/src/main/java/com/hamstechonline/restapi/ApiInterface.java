@@ -2,6 +2,7 @@ package com.hamstechonline.restapi;
 
 import com.hamstechonline.activities.lesson.LessonData;
 import com.hamstechonline.activities.splash.VersionRequest;
+import com.hamstechonline.datamodel.CaptureShipmentDetails;
 import com.hamstechonline.datamodel.CheckStudent;
 import com.hamstechonline.datamodel.CalculateCoursePayment;
 import com.hamstechonline.datamodel.CallWithFacultyResponse;
@@ -152,4 +153,7 @@ public interface ApiInterface {
 
     @POST("http://android.hamstechonline.com/api/list/checkStudent")
     Call<CheckStudent> getCheckStudent(@Body CheckStudent savePostReport);
+
+    @POST("http://android.hamstechonline.com/api/list/captureShipmentDetails")
+    Call<CaptureShipmentDetails> getShipmentDetailsCall(@Body CaptureShipmentDetails captureShipmentDetails);
 }

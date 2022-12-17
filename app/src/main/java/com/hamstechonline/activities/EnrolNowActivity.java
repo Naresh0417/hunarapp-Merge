@@ -59,6 +59,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hamstechonline.R;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.CalculateCoursePayment;
+import com.hamstechonline.datamodel.CaptureShipmentDetails;
 import com.hamstechonline.datamodel.CategoryDatamodel;
 import com.hamstechonline.datamodel.PaymentSuccessResponse;
 import com.hamstechonline.restapi.ApiClient;
@@ -243,8 +244,8 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
             @Override
             public void onClick(View view) {
 
-                if (ValidateInputs()) {
-                    learnSuccess();
+                if (ValidateShipmentInputs()) {
+                    CaptureShipmentDetails();
 
                     /*Toast.makeText(EnrolNowActivity.this, "service pending", Toast.LENGTH_SHORT).show();
                     createOnineOrder(EnrolNowActivity.this);*/
@@ -682,6 +683,25 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
             boolean result = IsValid(txtName, getResources().getString(R.string.lblName))
                     && IsValid(txtPhone, getResources().getString(R.string.enterMobileNumber))
                     && IsValid(txtAddress, getResources().getString(R.string.Address))
+                    && IsValid(txtPincode, getResources().getString(R.string.Pincode))
+                    && IsValid(txtCity, getResources().getString(R.string.City));
+            return result;
+        } else if (txtPincode.getText().toString().trim().length() == 0) {
+            boolean result = IsValid(txtPincode, getResources().getString(R.string.Pincode));
+            return result;
+        } else if (txtPincode.getText().toString().trim().length() < 6) {
+            Toast.makeText(EnrolNowActivity.this, getResources().getString(R.string.validPincode), Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return false;
+    }
+
+    private boolean ValidateShipmentInputs() {
+        if (txtPincode.getText().toString().trim().length() == 6) {
+            boolean result = IsValid(txtCountry, "Enter Country name")
+                    //&& IsValid(txtPhone, getResources().getString(R.string.enterMobileNumber))
+                    && IsValid(txtAddress, getResources().getString(R.string.Address))
+                    && IsValid(txtState, "enter State")
                     && IsValid(txtPincode, getResources().getString(R.string.Pincode))
                     && IsValid(txtCity, getResources().getString(R.string.City));
             return result;
@@ -2283,6 +2303,28 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
             @Override
             public void onFailure(Call<PaymentSuccessResponse> call, Throwable t) {
                 Toast.makeText(EnrolNowActivity.this, "Failed to update payment details", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public void CaptureShipmentDetails() {
+        CaptureShipmentDetails captureShipmentDetails = new CaptureShipmentDetails("Hamstech", getResources().getString(R.string.lblApiKey),
+                userDataBase.getUserMobileNumber(1), txtCountry.getText().toString().trim(),
+                txtState.getText().toString().trim(), txtCity.getText().toString().trim(),
+                txtPincode.getText().toString().trim(), txtAddress.getText().toString().trim());
+        Call<CaptureShipmentDetails> call = apiService.getShipmentDetailsCall(captureShipmentDetails);
+        call.enqueue(new Callback<CaptureShipmentDetails>() {
+            @Override
+            public void onResponse(Call<CaptureShipmentDetails> call, retrofit2.Response<CaptureShipmentDetails> response) {
+                if (response.body().getStatus().equalsIgnoreCase("success")) {
+                    //OnlineSuccessfulPopUp();
+                    learnSuccess();
+            } else Toast.makeText(EnrolNowActivity.this, "Failed to update Shipment details", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<CaptureShipmentDetails> call, Throwable t) {
+                Toast.makeText(EnrolNowActivity.this, "Failed to update Shipment details", Toast.LENGTH_SHORT).show();
             }
         });
     }
