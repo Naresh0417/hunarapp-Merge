@@ -30,6 +30,7 @@ import com.hamstechonline.datamodel.UploadPostResponse;
 import com.hamstechonline.datamodel.UserBlockReport;
 import com.hamstechonline.datamodel.UserReplyCommentData;
 import com.hamstechonline.datamodel.VersionUpload;
+import com.hamstechonline.datamodel.favourite.FavouriteResponse;
 import com.hamstechonline.datamodel.homepage.HomepageResponse;
 import com.hamstechonline.datamodel.mycources.DownloadCertificate;
 import com.hamstechonline.datamodel.mycources.MyCoursesResponse;
@@ -152,4 +153,7 @@ public interface ApiInterface {
 
     @POST("http://android.hamstechonline.com/api/list/checkStudent")
     Call<CheckStudent> getCheckStudent(@Body CheckStudent savePostReport);
+
+    @POST("http://android.hamstechonline.com/api/list/getFavouriteCategories")
+    Call<FavouriteResponse> getFavouriteResponse(@Body FavouriteResponse favouriteResponse);
 }

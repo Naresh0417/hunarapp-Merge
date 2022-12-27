@@ -10,7 +10,7 @@
         android:id="@+id/listLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/white_course_bg">
+        android:background="@drawable/pink_course_bg">
 
         <ImageView
             android:id="@+id/imgCategory"

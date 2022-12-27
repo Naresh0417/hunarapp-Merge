@@ -246,7 +246,6 @@ public class SplashScreenActivity extends AppCompatActivity  {
             @Override
             public void onResponse(Call<VersionUpload> call, Response<VersionUpload> response) {
                 checkDeepLink();
-
             }
 
             @Override

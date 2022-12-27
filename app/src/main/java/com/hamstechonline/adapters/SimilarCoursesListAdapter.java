@@ -60,8 +60,6 @@ public class SimilarCoursesListAdapter extends RecyclerView.Adapter<SimilarCours
         TextView txtSimilarTitle;
         public ViewHolder(@NonNull View view) {
             super(view);
-            imsSimilar = view.findViewById(R.id.imsSimilar);
-            txtSimilarTitle = view.findViewById(R.id.txtSimilarTitle);
         }
     }
 }

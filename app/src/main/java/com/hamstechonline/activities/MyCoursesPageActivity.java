@@ -14,7 +14,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -60,26 +59,20 @@ import com.facebook.appevents.AppEventsLogger;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.hamstechonline.R;
-import com.hamstechonline.activities.dialogs.BuzzDetailsDialog;
 import com.hamstechonline.activities.dialogs.DiscussionDetailsDialog;
 import com.hamstechonline.activities.dialogs.ReportBlockDialoge;
-import com.hamstechonline.activities.dialogs.ReportDialoge;
 import com.hamstechonline.adapters.FacultySliderAdapter;
 import com.hamstechonline.adapters.MyCourseOverviewAdapter;
-import com.hamstechonline.adapters.MyCoursePagerAdapter;
 import com.hamstechonline.adapters.MyCoursesLessonsListAdapter;
 import com.hamstechonline.adapters.SimilarCoursesListAdapter;
 import com.hamstechonline.database.UserDataBase;
-import com.hamstechonline.datamodel.BuzzDataModel;
 import com.hamstechonline.datamodel.CallWithFacultyResponse;
 import com.hamstechonline.datamodel.Discussions;
 import com.hamstechonline.datamodel.DiscussionsModel;
-import com.hamstechonline.datamodel.HocTodayData;
 import com.hamstechonline.datamodel.LastLessonDetails;
 import com.hamstechonline.datamodel.PayinstallmentRequest;
 import com.hamstechonline.datamodel.PaymentSuccessResponse;
 import com.hamstechonline.datamodel.UploadPostDisscussions;
-import com.hamstechonline.datamodel.UploadPostResponse;
 import com.hamstechonline.datamodel.mycources.Lesson;
 import com.hamstechonline.datamodel.mycources.MyCoursesResponse;
 import com.hamstechonline.fragments.NavigationFragment;
@@ -218,7 +211,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         logEventsActivity = new LogEventsActivity();
         hocLoadingDialog = new HocLoadingDialog(MyCoursesPageActivity.this);
 
-        txtLessons.setBackground(getResources().getDrawable(R.drawable.border_pink_strok));
+        txtLessons.setBackground(getResources().getDrawable(R.drawable.top_pink_strok));
         txtLessons.setTextColor(getResources().getColor(R.color.dark_pink));
         txtDiscussion.setBackgroundColor(getResources().getColor(R.color.white));
         txtDiscussion.setTextColor(getResources().getColor(R.color.muted_blue));
@@ -247,7 +240,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         txtLessons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtLessons.setBackground(getResources().getDrawable(R.drawable.border_pink_strok));
+                txtLessons.setBackground(getResources().getDrawable(R.drawable.top_pink_strok));
                 txtLessons.setTextColor(getResources().getColor(R.color.dark_pink));
                 txtDiscussion.setBackgroundColor(getResources().getColor(R.color.white));
                 txtDiscussion.setTextColor(getResources().getColor(R.color.muted_blue));
@@ -265,7 +258,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             public void onClick(View v) {
                 txtLessons.setBackgroundColor(getResources().getColor(R.color.white));
                 txtLessons.setTextColor(getResources().getColor(R.color.muted_blue));
-                txtDiscussion.setBackground(getResources().getDrawable(R.drawable.border_pink_strok));
+                txtDiscussion.setBackground(getResources().getDrawable(R.drawable.top_pink_strok));
                 txtDiscussion.setTextColor(getResources().getColor(R.color.dark_pink));
                 discussionLayout.setVisibility(View.VISIBLE);
                 lessonsLayout.setVisibility(View.GONE);

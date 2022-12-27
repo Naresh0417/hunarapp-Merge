@@ -33,6 +33,8 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -64,7 +66,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class CoursePageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class CoursePageActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     List tabs;
     TabLayout tabLayout;
@@ -73,10 +75,9 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
     DrawerLayout drawer;
     NavigationView navSideMenu;
     NavigationFragment navigationFragment;
-    BottomNavigationView navigation;
     RelativeLayout layoutHeader;
     CheckBox imgSearch;
-    TextView headerTitle,txtCourseName;
+    TextView headerTitle,txtCourseName, txtLessons, txtDetails;
     View view;
     SearchFragment searchFragment;
     UserDataBase userDataBase;
@@ -92,6 +93,8 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
     AppEventsLogger logger;
     Bundle params;
     ImageButton stickyWhatsApp;
+    LinearLayout layoutContact,layoutHome;
+    ImageView imgHunarClub;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,7 +110,6 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
         viewPager_home = findViewById(R.id.view_pager);
         navSideMenu = findViewById(R.id.navSideMenu);
         drawer = findViewById(R.id.drawer_layout);
-        navigation = findViewById(R.id.navigation);
         imgSearch = findViewById(R.id.imgSearch);
         headerTitle = findViewById(R.id.headerTitle);
         view = findViewById(R.id.searchLayout);
@@ -115,9 +117,11 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
         layoutHeader = findViewById(R.id.layoutHeader);
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
-
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
+        layoutHome = findViewById(R.id.layoutHome);
+        layoutContact = findViewById(R.id.layoutContact);
+        imgHunarClub = findViewById(R.id.imgHunarClub);
+        txtLessons = findViewById(R.id.txtLessons);
+        txtDetails = findViewById(R.id.txtDetails);
 
         userDataBase = new UserDataBase(this);
         logger = AppEventsLogger.newLogger(this);
@@ -219,6 +223,7 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
             }
         });
 
+
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset) {
@@ -258,6 +263,45 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
             }
         });
 
+        layoutHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityLog = "";
+                PagenameLog = "Home Page";
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
+                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                getLogEvent(CoursePageActivity.this);
+                Intent intentCourses = new Intent(CoursePageActivity.this, HomePageActivity.class);
+                startActivity(intentCourses);
+            }
+        });
+
+        layoutContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityLog = "Home page";
+                PagenameLog = "Contact Page";
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
+                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                getLogEvent(CoursePageActivity.this);
+                new AppsFlyerEventsHelper(CoursePageActivity.this).EventContactus();
+                Intent about = new Intent(CoursePageActivity.this, ContactActivity.class);
+                startActivity(about);
+            }
+        });
+        imgHunarClub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityLog = "Click";
+                PagenameLog = "Hunar Club";
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
+                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                getLogEvent(CoursePageActivity.this);
+                Intent hamstech = new Intent(CoursePageActivity.this, BuzzActivity.class);
+                startActivity(hamstech);
+            }
+        });
+
         for (int i=0;i<tabs.size();i++) {
             RelativeLayout relativeLayout = (RelativeLayout)
                     LayoutInflater.from(this).inflate(R.layout.tabs, tabLayout, false);
@@ -292,6 +336,39 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
             }
         });
 
+        txtLessons.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
+        txtLessons.setTextColor(getResources().getColor(R.color.dark_pink));
+        txtDetails.setBackgroundResource(0);
+        txtDetails.setTextColor(getResources().getColor(R.color.muted_blue));
+        viewPager_home.setCurrentItem(0);
+
+        txtLessons.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtLessons.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
+                txtLessons.setTextColor(getResources().getColor(R.color.dark_pink));
+                txtDetails.setBackgroundResource(0);
+                txtDetails.setTextColor(getResources().getColor(R.color.muted_blue));
+                ActivityLog = "Trial Lessons";
+                PagenameLog = "Tab selected";
+                viewPager_home.setCurrentItem(0);
+                getLogEvent(CoursePageActivity.this);
+            }
+        });
+        txtDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtDetails.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
+                txtDetails.setTextColor(getResources().getColor(R.color.dark_pink));
+                txtLessons.setBackgroundResource(0);
+                txtLessons.setTextColor(getResources().getColor(R.color.muted_blue));
+                ActivityLog = "Course Details";
+                PagenameLog = "Tab selected";
+                viewPager_home.setCurrentItem(1);
+                getLogEvent(CoursePageActivity.this);
+            }
+        });
+
     }
 
     @Override
@@ -299,11 +376,9 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
         super.onConfigurationChanged(newConfiguration);
         youTubePlayerView.getPlayerUiController().getMenu().dismiss();
         if (newConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            navigation.setVisibility(View.GONE);
             layoutHeader.setVisibility(View.GONE);
             txtCourseName.setVisibility(View.GONE);
         } else {
-            navigation.setVisibility(View.VISIBLE);
             layoutHeader.setVisibility(View.VISIBLE);
             txtCourseName.setVisibility(View.VISIBLE);
         }
@@ -312,80 +387,7 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
     @Override
     protected void onStart() {
         drawer.closeDrawers();
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
         super.onStart();
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CoursePageActivity.this);
-                Intent intentCourses = new Intent(CoursePageActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                CoursePageActivity.this.finish();
-                return true;
-            case R.id.navigation_chat:
-                PagenameLog = "chat with whatsapp";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CoursePageActivity.this);
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CoursePageActivity.this);
-                Intent enrol = new Intent(CoursePageActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                CoursePageActivity.this.finish();
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CoursePageActivity.this);
-                Intent hamstech = new Intent(CoursePageActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                CoursePageActivity.this.finish();
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                getLogEvent(CoursePageActivity.this);
-                Intent about = new Intent(CoursePageActivity.this, ContactActivity.class);
-                startActivity(about);
-                CoursePageActivity.this.finish();
-                return true;
-        }
-        return false;
     }
 
     public void sideMenu(View view){

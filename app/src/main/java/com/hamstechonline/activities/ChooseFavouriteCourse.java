@@ -18,12 +18,14 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +41,13 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hamstechonline.R;
+import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.CategoryDatamodel;
+import com.hamstechonline.datamodel.HocResponse;
+import com.hamstechonline.datamodel.favourite.FavouriteCourse;
+import com.hamstechonline.datamodel.favourite.FavouriteResponse;
+import com.hamstechonline.restapi.ApiClient;
+import com.hamstechonline.restapi.ApiInterface;
 import com.hamstechonline.utils.ApiConstants;
 import com.hamstechonline.utils.GridSpacingItemDecoration;
 import com.hamstechonline.utils.HocLoadingDialog;
@@ -59,6 +67,9 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+
 public class ChooseFavouriteCourse extends AppCompatActivity {
 
     RecyclerView listGrid;
@@ -69,7 +80,8 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
     HocLoadingDialog hocLoadingDialog;
     String langPref = "Language";
     SharedPreferences prefs;
-    ImageButton stickyWhatsApp;
+    ApiInterface apiService;
+    UserDataBase userDataBase;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,9 +94,9 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
 
         listGrid = findViewById(R.id.listGrid);
         linearList = findViewById(R.id.linearList);
-        stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
 
         hocLoadingDialog = new HocLoadingDialog(this);
+        apiService = ApiClient.getClient().create(ApiInterface.class);
 
         prefs = getSharedPreferences("Hindi", Activity.MODE_PRIVATE);
         //prefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -97,118 +109,44 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
                 .build();
         MoEngage.initialise(moEngage);
 
-        getCategories(this);
+        userDataBase = new UserDataBase(this);
 
-        stickyWhatsApp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-            }
-        });
+        getCategories();
 
     }
     public void Homepage(View view) {
-        if (positions.size() != 0) {
+        Intent intent = new Intent(ChooseFavouriteCourse.this, HomePageActivity.class);
+        startActivity(intent);
+        /*if (positions.size() != 0) {
             setRecommendedTopics(ChooseFavouriteCourse.this);
-        } else Toast.makeText(this, "Please select at lease one course", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "Please select at lease one course", Toast.LENGTH_SHORT).show();*/
     }
 
-    public void getCategories(final Context context) {
-        RequestQueue queue = Volley.newRequestQueue(context);
-        JSONObject params = new JSONObject();
-        JSONObject metaData = new JSONObject();
-        try {
-            params.put("appname","Hamstech");
-            params.put("page","topics");
-            params.put("apikey",getResources().getString(R.string.lblApiKey));
-            params.put("lang",langPref);
-            metaData.put("metadata", params);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        hocLoadingDialog.showLoadingDialog();
-        final String mRequestBody = metaData.toString();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, ApiConstants.getTopics,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            coursesList.clear();
-                            if (jsonObject.getString("status").equals("ok")) {
-                                if (jsonObject.isNull("topicslist")){
-                                    Toast.makeText(ChooseFavouriteCourse.this, "No data found", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    JSONArray jsonArray = jsonObject.getJSONArray("topicslist");
-
-                                    for (int i = 0; i<jsonArray.length(); i++) {
-                                        JSONObject object = jsonArray.getJSONObject(i);
-
-                                        CategoryDatamodel datamodel = new CategoryDatamodel();
-                                        datamodel.setCategoryId(object.getString("topicId"));
-                                        datamodel.setCategoryname(object.getString("topic_name"));
-                                        datamodel.setCat_image_url(object.getString("topic_image"));
-                                        datamodel.setCategory_description(object.getString("topic_description"));
-                                        datamodel.setStatus(object.getString("status"));
-
-                                        coursesList.add(datamodel);
-                                    }
-                                    chooseTopicsAdapter = new ChooseTopicsAdapter(ChooseFavouriteCourse.this,coursesList);
-                                    listGrid.setLayoutManager(new LinearLayoutManager(ChooseFavouriteCourse.this, RecyclerView.VERTICAL, false));
-                                    listGrid.setAdapter(chooseTopicsAdapter);
-                                }
-                            }
-                            hocLoadingDialog.hideDialog();
-                            linearList.setVisibility(View.VISIBLE);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(ChooseFavouriteCourse.this, error.toString(), Toast.LENGTH_LONG).show();
-                    }
-                }) {
+    public void getCategories() {
+        FavouriteResponse hocResponse = new FavouriteResponse("Hamstech", getResources().getString(R.string.lblApiKey),userDataBase.getUserMobileNumber(1), langPref);
+        Call<FavouriteResponse> call = apiService.getFavouriteResponse(hocResponse);
+        call.enqueue(new Callback<FavouriteResponse>() {
             @Override
-            public String getBodyContentType() {
-                return "application/json; charset=utf-8";
-            }
-
-            @Override
-            public byte[] getBody() throws AuthFailureError {
-                try {
-                    return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
-                } catch (UnsupportedEncodingException uee) {
-                    VolleyLog.wtf("Unsupported Encoding while trying to get the bytes of %s using %s", mRequestBody, "utf-8");
-                    Toast.makeText(ChooseFavouriteCourse.this, "Please try again", Toast.LENGTH_SHORT).show();
-                    return null;
+            public void onResponse(Call<FavouriteResponse> call, retrofit2.Response<FavouriteResponse> response) {
+                if (response.body().getCourses() != null) {
+                    chooseTopicsAdapter = new ChooseTopicsAdapter(ChooseFavouriteCourse.this,response.body().getCourses());
+                    listGrid.setLayoutManager(new LinearLayoutManager(ChooseFavouriteCourse.this, RecyclerView.VERTICAL, false));
+                    listGrid.setAdapter(chooseTopicsAdapter);
                 }
             }
 
-        };
+            @Override
+            public void onFailure(Call<FavouriteResponse> call, Throwable t) {
 
-        queue.add(stringRequest);
-
+            }
+        });
     }
-
     public class ChooseTopicsAdapter extends RecyclerView.Adapter<ChooseTopicsAdapter.ViewHolder> {
 
         Context context;
-        ArrayList<CategoryDatamodel> coursesList = new ArrayList<>();
+        List<FavouriteCourse> coursesList = new ArrayList<>();
 
-        public ChooseTopicsAdapter(Context context,ArrayList<CategoryDatamodel> coursesList){
+        public ChooseTopicsAdapter(Context context,List<FavouriteCourse> coursesList){
             this.context=context;
             this.coursesList = coursesList;
         }
@@ -226,10 +164,11 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
             try {
-                final boolean[] itemChecked = {false};
-                holder.txtDescription.setText(coursesList.get(position).getCategoryname());
+                //holder.cardMainLayout.setCardBackgroundColor(context.getResources.getColor(R.color.transparent));
+                holder.txtDescription.setText(coursesList.get(position).getDescription());
+                holder.txtTitle.setText(coursesList.get(position).getTitle());
                 Glide.with(context)
-                        .load(coursesList.get(position).getCat_image_url())
+                        .load(coursesList.get(position).getImage())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .error(R.mipmap.ic_launcher)
                         .into(holder.imgCategory);
@@ -237,26 +176,7 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        if (itemChecked[0] == false) {
-                            if (positions.size() == 5) {
-                                choosePopup(context);
-                            } else {
-                                holder.itemCheck.setChecked(true);
-                                holder.itemCheck.setVisibility(View.VISIBLE);
-                                positions.add(coursesList.get(position).getCategoryId());
-                                itemChecked[0] = true;
-                            }
-
-                        } else {
-                            holder.itemCheck.setVisibility(View.GONE);
-                            holder.itemCheck.setChecked(false);
-                            itemChecked[0] = false;
-                            for (int i = 0; i < positions.size(); i++){
-                                if (positions.get(i).equals(coursesList.get(position).getCategoryId())){
-                                    positions.remove(positions.get(i));
-                                }
-                            }
-                        }
+                        saveLocale(coursesList.get(position).getType());
                     }
                 });
             } catch (Exception e){
@@ -272,13 +192,16 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
         public class ViewHolder extends RecyclerView.ViewHolder {
             ImageView imgCategory;
             CheckBox itemCheck;
-            TextView txtDescription;
+            TextView txtDescription, txtTitle;
+            RelativeLayout cardMainLayout;
 
             public ViewHolder(@NonNull View view) {
                 super(view);
                 imgCategory = view.findViewById(R.id.imgCategory);
                 itemCheck = view.findViewById(R.id.itemCheck);
                 txtDescription = view.findViewById(R.id.txtDescription);
+                txtTitle = view.findViewById(R.id.txtTitle);
+                cardMainLayout = view.findViewById(R.id.cardMainLayout);
             }
         }
     }
@@ -294,6 +217,17 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
         dialog.setCancelable(true);
 
         dialog.show();
+    }
+
+    public void saveLocale(String course){
+        SharedPreferences prefs = getSharedPreferences("Category", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("Category", course);
+        editor.commit();
+
+        Intent intent = new Intent(ChooseFavouriteCourse.this,HomePageActivity.class);
+        startActivity(intent);
+        ChooseFavouriteCourse.this.finish();
     }
 
     public void setRecommendedTopics(Context context){

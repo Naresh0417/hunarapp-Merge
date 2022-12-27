@@ -319,7 +319,7 @@
     <string name="payTm">Paytm\n
     (एक्स्ट्रा 5% डिस्काउंट)</string>
     <string name="cod">कैश ऑन डिलीवरी</string>
-    <string name="txt_terms_conditions"><small><font color='#848383'>By clicking above, I agree to the </font></small>Terms and Conditions</string>
+    <string name="txt_terms_conditions"><u>Terms &amp; Conditions\nPrivacy Policy</u></string>
     <string name="txt_click_here"><u>यहाँ क्लिक करके</u></string>
     <string name="txt_click_here_desc">हुनर लर्निंग ऐप डाउनलोड कीजिए, लॉगिन कीजिए और अपना कोर्स शुरू कीजिए!</string>
     <string name="start_your_courses">अपना कोर्स शुरू करने के लिए,इन 3 स्टेप को फॉलो कीजिए:</string>
@@ -471,4 +471,5 @@
 अभी सब्मिट करें</string>
     <string name="complete_your_course_to_download">अपना सर्टिफिकेट डाउनलोड करने के लिए अपना कोर्स पूरा करें</string>
     <string name="chooseLanguage_hindi">अपनी भाषा चुनिए</string>
+    <string name="select_skip"><u>छोड़ें</u></string>
 </resources>

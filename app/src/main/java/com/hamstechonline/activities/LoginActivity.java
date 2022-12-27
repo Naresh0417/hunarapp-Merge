@@ -525,7 +525,7 @@ public class LoginActivity extends AppCompatActivity {
                                 } else {
                                     dh.updatetUserId(new UserDatamodel(objData.getString("name"),objData.getString("phone")));
                                 }
-                                Intent intent = new Intent(LoginActivity.this,HomePageActivity.class);
+                                Intent intent = new Intent(LoginActivity.this,ChooseFavouriteCourse.class);
                                 startActivity(intent);
                                 LoginActivity.this.finish();
                                 eventType = "Clicked on Verify";

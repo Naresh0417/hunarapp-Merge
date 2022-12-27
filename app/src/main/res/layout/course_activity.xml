@@ -124,13 +124,51 @@
                     android:visibility="gone"
                     />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/shadow_white_strok">
+
+                    <TextView
+                        android:id="@+id/txtLessons"
+                        android:layout_width="0dp"
+                        android:layout_height="53.3dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:layout_marginTop="-2dp"
+                        android:textSize="16sp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/muted_blue"
+                        android:gravity="center"
+                        android:text="Trial Lessons"/>
+
+                    <TextView
+                        android:id="@+id/txtDetails"
+                        android:layout_width="0dp"
+                        android:layout_height="53.3dp"
+                        android:layout_weight="1"
+                        android:fontFamily="sans-serif"
+                        android:textStyle="bold"
+                        android:layout_marginTop="-2dp"
+                        android:textSize="16sp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/muted_blue"
+                        android:gravity="center"
+                        android:text="Course Details"/>
+
+                </LinearLayout>
+
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tab_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="55dp"
                     app:tabMode="fixed"
-                    android:background="@drawable/tab_background"
-                    app:tabIndicatorHeight="2dp">
+                    android:background="@drawable/course_tab_selector_bg"
+                    android:visibility="gone">
 
                 </com.google.android.material.tabs.TabLayout>
 
@@ -147,18 +185,87 @@
         </RelativeLayout>
 
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <ImageView
+            android:id="@+id/imgHunarClub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/club_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent"/>
+
+        <RelativeLayout
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:itemBackground="@color/white"
-            android:foreground="?attr/selectableItemBackground"
-            app:itemIconTint="@drawable/navigation_selector"
-            app:itemTextColor="@color/pinkish_grey"
-            android:theme="@style/menu_text_style"
-            app:menu="@menu/navigation"
-            app:labelVisibilityMode="labeled"/>
+            android:background="@android:color/transparent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:padding="5dp"
+                android:background="@android:color/transparent">
+
+                <LinearLayout
+                    android:id="@+id/layoutHome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/home_icon"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lblHome"
+                        android:fontFamily="sans-serif"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutContact"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/contact_us"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contactUs"
+                        android:fontFamily="sans-serif"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <ImageButton
             android:id="@+id/stickyWhatsApp"

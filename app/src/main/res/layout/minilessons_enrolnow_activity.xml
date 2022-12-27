@@ -325,7 +325,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/border_pink_strok"
+                        android:background="@drawable/top_pink_strok"
                         android:text="@string/recieve_payments"
                         android:textColor="@color/black_two"
                         android:fontFamily="sans-serif"

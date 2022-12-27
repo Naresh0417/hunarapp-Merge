@@ -1,5 +1,6 @@
 package com.hamstechonline.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import androidx.annotation.NonNull;
@@ -43,13 +44,13 @@ public class CategoryCoursesAdapter extends RecyclerView.Adapter<CategoryCourses
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(
                 parent.getContext());
-        View v = inflater.inflate(R.layout.courses_list_adapter, parent, false);
+        View v = inflater.inflate(R.layout.favourite_sub_list_adapter, parent, false);
         ViewHolder vh = new ViewHolder(v);
         return vh;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         try {
 
             Glide.with(context)

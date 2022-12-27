@@ -17,10 +17,10 @@ import androidx.annotation.Nullable;
 import com.android.volley.DefaultRetryPolicy;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import androidx.cardview.widget.CardView;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -31,7 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -42,7 +41,6 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageButton;
@@ -64,19 +62,15 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.FacebookSdk;
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
-import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.hamstechonline.R;
 import com.hamstechonline.adapters.CategoryCoursesAdapter;
 import com.hamstechonline.adapters.MyCoursePagerAdapter;
 import com.hamstechonline.adapters.MyCoursesAdapter;
-import com.hamstechonline.adapters.RecommendedCoursesAdapter;
 import com.hamstechonline.adapters.StoriesSliderCardPagerAdapter;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.CategoryDatamodel;
-import com.hamstechonline.datamodel.MiniCoursesModel;
-import com.hamstechonline.datamodel.UploadPostResponse;
-import com.hamstechonline.datamodel.VersionUpload;
+import com.hamstechonline.datamodel.favourite.FavouriteCategories;
+import com.hamstechonline.datamodel.favourite.FavouriteCourse;
 import com.hamstechonline.datamodel.homepage.EnglishCategory;
 import com.hamstechonline.datamodel.homepage.HomepageResponse;
 import com.hamstechonline.datamodel.homepage.MainVideo;
@@ -126,22 +120,20 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class HomePageActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class HomePageActivity extends AppCompatActivity{
 
-    RecyclerView listRecommended,listCategory,listHindi,listGovtHindi,listGovtEnglish,listMiniLessons,listPopularCourses;
+    RecyclerView listRecommended,listCategory,listHindi,listMiniLessons,listPopularCourses,listCourse;
     SubListAdapter subListAdapter;
     PopularCoursesAdapter popularCoursesAdapter;
     CategoryCoursesAdapter categoryCoursesAdapter;
-    MyCoursesAdapter recommendedCoursesAdapter,govtCourseHindiAdapter,govtCourseEnglishAdapter;
     MiniCoursesListAdapter miniCoursesListAdapter;
     DrawerLayout drawer;
-    BottomNavigationView navigation;
+    //BottomNavigationView navigation;
     NavigationFragment navigationFragment;
     NavigationView navSideMenu;
-    ImageView imgChooseLang,imgWhatsApp,imgFirst,imgSecond,btn_next,btn_previous,footer_ribbon,
-            imgPrevious,imgNext,mycoursePrevious,mycourseNext,gifSuccessStory;
-    TextView txtTitle,subListTitle,txtFirst,txtSecond,txtMoreClasses;
-    Button btnFirst,btnSecond,btnTrialClass;
+    ImageView imgChooseLang,imgWhatsApp,footer_ribbon,imgHunarClub,
+            imgPrevious,imgNext,mycoursePrevious,mycourseNext,gifSuccessStory,imgExpand;
+    TextView txtTitle,subListTitle;
     ArrayList<CategoryDatamodel> subCatList = new ArrayList<>();
     List<MainVideo> mainiVideo = new ArrayList<>();
     List<MoreTrialClass> moreClasses = new ArrayList<>();
@@ -152,18 +144,18 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
     SearchFragment searchFragment;
     String CategoryName,CourseLog,LessonLog,ActivityLog,PagenameLog;
     View view;
-    LinearLayout recommendedLayout,nsdcEnglishListLayout,nsdcHindiListLayout,otherEnglishListLayout,otherHindiListLayout;
+    LinearLayout recommendedLayout,otherEnglishListLayout,otherHindiListLayout;
     RelativeLayout layoutHeader;
     NestedScrollView mainLayout;
     FirebaseAnalytics mFirebaseAnalytics;
     ViewPager sliderView;
     WrapContentViewPager listTopicsRecommended;
-    int mMenuId, arraySize,currentPageBanner,mycoursePageBanner;
+    int mMenuId, arraySize,currentPageBanner,mycoursePageBanner, selectedItem = 509;
     Animation animation;
     UserDataBase userDataBase;
     LogEventsActivity logEventsActivity;
     HocLoadingDialog hocLoadingDialog;
-    String langPref = "Language",nextCourseId,previousCourseId,mp4URL;
+    String langPref = "Language",mp4URL,typeCat = "";
     SharedPreferences prefs;
     private Locale myLocale;
     RatingDialogue howtoUseAppDialogue;
@@ -177,13 +169,13 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
     YouTubePlayerView youTubePlayerView,videoCelebrityMentor;
     YouTubePlayer player,playerMentor;
     private StringBuilder logString;
-    int nextCount, imgPreviousCount, currentLeft, currentRight,imgNextCount;
     StoriesSliderCardPagerAdapter storiesSliderCardPagerAdapter;
     MyCoursePagerAdapter myCoursePagerAdapter;
     Handler handlerBanner;
     Timer timerBanner;
     Runnable updateBanner;
     DynamicWhatsAppChat dynamicWhatsAppChat;
+    LinearLayout layoutContact,layoutHome;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -199,7 +191,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         listCategory = findViewById(R.id.listCategory);
         listHindi = findViewById(R.id.listHindi);
         drawer = findViewById(R.id.drawer_layout);
-        navigation = findViewById(R.id.navigation);
+        //navigation = findViewById(R.id.navigation);
         navSideMenu = findViewById(R.id.navSideMenu);
         imgSearch = findViewById(R.id.imgSearch);
         txtTitle = findViewById(R.id.txtTitle);
@@ -207,27 +199,13 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         mainLayout = findViewById(R.id.mainLayout);
         listTopicsRecommended = findViewById(R.id.listTopicsRecommended);
         recommendedLayout = findViewById(R.id.recommendedLayout);
-        listGovtHindi = findViewById(R.id.listGovtHindi);
-        listGovtEnglish = findViewById(R.id.listGovtEnglish);
         imgChooseLang = findViewById(R.id.imgChooseLang);
-        nsdcEnglishListLayout = findViewById(R.id.nsdcEnglishListLayout);
-        nsdcHindiListLayout = findViewById(R.id.nsdcHindiListLayout);
         otherEnglishListLayout = findViewById(R.id.otherEnglishListLayout);
         otherHindiListLayout = findViewById(R.id.otherHindiListLayout);
         imgWhatsApp = findViewById(R.id.imgWhatsApp);
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         videoCelebrityMentor = findViewById(R.id.videoCelebrityMentor);
-        btnTrialClass = findViewById(R.id.btnTrialClass);
-        imgFirst = findViewById(R.id.imgFirst);
-        txtFirst = findViewById(R.id.txtFirst);
-        btnFirst = findViewById(R.id.btnFirst);
-        imgSecond = findViewById(R.id.imgSecond);
-        txtSecond = findViewById(R.id.txtSecond);
-        btnSecond = findViewById(R.id.btnSecond);
-        btn_next = findViewById(R.id.btn_next);
-        btn_previous = findViewById(R.id.btn_previous);
         layoutHeader = findViewById(R.id.layoutHeader);
-        txtMoreClasses = findViewById(R.id.txtMoreClasses);
         txtSeeMore = findViewById(R.id.txtSeeMore);
         listMiniLessons = findViewById(R.id.listMiniLessons);
         footer_ribbon = findViewById(R.id.footer_ribbon);
@@ -239,9 +217,14 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
         gifSuccessStory = findViewById(R.id.gifSuccessStory);
         listPopularCourses = findViewById(R.id.listPopularCourses);
+        listCourse = findViewById(R.id.listCourse);
+        imgExpand = findViewById(R.id.imgExpand);
+        layoutHome = findViewById(R.id.layoutHome);
+        layoutContact = findViewById(R.id.layoutContact);
+        imgHunarClub = findViewById(R.id.imgHunarClub);
 
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
+        /*navigation.setOnNavigationItemSelectedListener(this);
+        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);*/
 
         animation = AnimationUtils.loadAnimation(getApplicationContext(),
                 R.anim.slide_down);
@@ -286,10 +269,10 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         hocLoadingDialog = new HocLoadingDialog(this);
         prefs = getSharedPreferences("Hindi", Activity.MODE_PRIVATE);
         langPref = prefs.getString("Language", "en");
+        typeCat = prefs.getString("Category", "");
         changeLang(langPref);
 
         getResponse();
-
 
         imgChooseLang.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -299,11 +282,20 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                 LessonLog = "";
                 ActivityLog = "Home Page";
                 PagenameLog = "Language Selection";
-                /*getLogEvent(HomePageActivity.this);
+                getLogEvent(HomePageActivity.this);
                 Intent intent = new Intent(HomePageActivity.this, ChooseLanguage.class);
-                startActivity(intent);*/
-                Intent recommendedCourses = new Intent(HomePageActivity.this, ChooseFavouriteCourse.class);
-                startActivity(recommendedCourses);
+                startActivity(intent);
+            }
+        });
+
+        imgExpand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                selectedItem = 999;
+                subCatList.clear();
+                subListAdapter.notifyDataSetChanged();
+                listCourse.setVisibility(View.GONE);
+                imgExpand.setVisibility(View.GONE);
             }
         });
 
@@ -364,24 +356,50 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
             }
         });
 
+        layoutHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityLog = "";
+                PagenameLog = "Home Page";
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
+                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                getLogEvent(HomePageActivity.this);
+                Intent intentCourses = new Intent(HomePageActivity.this, HomePageActivity.class);
+                startActivity(intentCourses);
+            }
+        });
+
+        layoutContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityLog = "Home page";
+                PagenameLog = "Contact Page";
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
+                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                getLogEvent(HomePageActivity.this);
+                new AppsFlyerEventsHelper(HomePageActivity.this).EventContactus();
+                Intent about = new Intent(HomePageActivity.this, ContactActivity.class);
+                startActivity(about);
+            }
+        });
+        imgHunarClub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityLog = "Click";
+                PagenameLog = "Hunar Club";
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
+                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                getLogEvent(HomePageActivity.this);
+                Intent hamstech = new Intent(HomePageActivity.this, BuzzActivity.class);
+                startActivity(hamstech);
+            }
+        });
+
         stickyWhatsApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dynamicWhatsAppChat = new DynamicWhatsAppChat(HomePageActivity.this,"Home page","","");
                 dynamicWhatsAppChat.getChatNumber(userDataBase.getUserMobileNumber(1));
-            }
-        });
-
-        btn_next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onNextData();
-            }
-        });
-        btn_previous.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onPreviousData();
             }
         });
 
@@ -408,57 +426,6 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
             @Override
             public void onClick(View v) {
                 mycoursePreviousData();
-            }
-        });
-
-        imgFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomePageActivity.this, CoursePageActivity.class);
-                intent.putExtra("CategoryId", mainiVideo.get(currentLeft).getCourseId());
-                intent.putExtra("CategoryName", mainiVideo.get(currentLeft).getCourseTitle());
-                intent.putExtra("CourseName", mainiVideo.get(currentLeft).getCourseTitle());
-                intent.putExtra("description", mainiVideo.get(currentLeft).getCourseDescription());
-                intent.putExtra("language", mainiVideo.get(currentLeft).getCourseLanguage());
-                intent.putExtra("VideoUrl", mainiVideo.get(currentLeft).getVideoUrl());
-                intent.putExtra("statusNSDC", mainiVideo.get(currentLeft).getNsdcStatus());
-                startActivity(intent);
-            }
-        });
-        imgSecond.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(HomePageActivity.this, CoursePageActivity.class);
-                intent.putExtra("CategoryId", mainiVideo.get(currentRight).getCourseId());
-                intent.putExtra("CategoryName", mainiVideo.get(currentRight).getCourseTitle());
-                intent.putExtra("CourseName", mainiVideo.get(currentRight).getCourseTitle());
-                intent.putExtra("description", mainiVideo.get(currentRight).getCourseDescription());
-                intent.putExtra("language", mainiVideo.get(currentRight).getCourseLanguage());
-                intent.putExtra("VideoUrl", mainiVideo.get(currentRight).getVideoUrl());
-                intent.putExtra("statusNSDC", mainiVideo.get(currentRight).getNsdcStatus());
-                startActivity(intent);
-            }
-        });
-        btnFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lessonPageLeft(currentLeft);
-            }
-        });
-        btnSecond.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                lessonPageRight(currentRight);
-            }
-        });
-        btnTrialClass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSubCategoriesList(HomePageActivity.this,moreClasses.get(0).getCategoryId(),moreClasses.get(0).getCourseLanguage());
-                CategoryName = "";CourseLog = moreClasses.get(0).getCourseTitle();
-                LessonLog = ""; ActivityLog = "HomePage"; PagenameLog = "More Classes";
-                new AppsFlyerEventsHelper(HomePageActivity.this).EventCategory(CourseLog);
-                getLogEvent(HomePageActivity.this);
             }
         });
 
@@ -517,7 +484,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
     @Override
     protected void onResume() {
         super.onResume();
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
+        //navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
     }
 
     @Override
@@ -547,7 +514,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
     public void getResponse() {
         hocLoadingDialog.showLoadingDialog();
         HomepageResponse homepageResponse = new HomepageResponse("Hamstech","category",
-                getResources().getString(R.string.lblApiKey),langPref,userDataBase.getUserMobileNumber(1));
+                getResources().getString(R.string.lblApiKey),langPref,userDataBase.getUserMobileNumber(1),typeCat);
         Call<HomepageResponse> call = apiService.getHomepageResponse(homepageResponse);
         call.enqueue(new Callback<HomepageResponse>() {
             @Override
@@ -560,12 +527,13 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                     handlerBanner = new Handler();
                     timerBanner = new Timer();
                     otherEnglishListLayout.setVisibility(View.VISIBLE);
+                    listCourse.setVisibility(View.GONE);
 
-                    subListAdapter = new SubListAdapter(HomePageActivity.this,response.body().getEnglish());
+                    subListAdapter = new SubListAdapter(HomePageActivity.this,response.body().getEnglish(),selectedItem);
                     listRecommended.setLayoutManager(new LinearLayoutManager(HomePageActivity.this, RecyclerView.HORIZONTAL, false));
                     listRecommended.setAdapter(subListAdapter);
 
-                    popularCoursesAdapter = new PopularCoursesAdapter(HomePageActivity.this,response.body().getEnglish());
+                    popularCoursesAdapter = new PopularCoursesAdapter(HomePageActivity.this,response.body().getFavouriteCourse());
                     listPopularCourses.setLayoutManager(new LinearLayoutManager(HomePageActivity.this, RecyclerView.VERTICAL, false));
                     listPopularCourses.setAdapter(popularCoursesAdapter);
 
@@ -607,11 +575,11 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                             .error(R.mipmap.ic_launcher)
                             .into(footer_ribbon);
 
-                    Glide.with(HomePageActivity.this)
+                    /*Glide.with(HomePageActivity.this)
                             .load(response.body().getGif_image())
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .error(R.mipmap.ic_launcher)
-                            .into(gifSuccessStory);
+                            .into(gifSuccessStory);*/
 
                     if (UserDataConstants.notificationID!= null){
                         if(UserDataConstants.notificationID.equals("2570")){
@@ -652,7 +620,6 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
 
                     moreClasses = response.body().getMoreTrialClasses();
                     installYouTubeMentor(response.body().getCelebrity_mentor_video());
-                    onNextData();
                     //getTopicsList(HomePageActivity.this);
 
                     updateBanner = new Runnable() {
@@ -680,60 +647,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         });
     }
 
-    public void onNextData(){
-        if (nextCount < moreClasses.size()){
-            txtFirst.setText(moreClasses.get(nextCount).getCourseTitle());
-            Glide.with(this)
-                    .load(moreClasses.get(nextCount).getImageUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imgFirst);
-            UserDataConstants.lessonIdleft = moreClasses.get(nextCount).getLessonId();
-            nextCourseId = moreClasses.get(nextCount).getCategoryId();
-            currentLeft = nextCount;
-            nextCount = nextCount + 1;
-        }
-        if (nextCount < moreClasses.size()){
-            txtSecond.setText(moreClasses.get(nextCount).getCourseTitle());
-            Glide.with(this)
-                    .load(moreClasses.get(nextCount).getImageUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imgSecond);
-            UserDataConstants.lessonIdRight = moreClasses.get(nextCount).getLessonId();
-            currentRight = nextCount;
-            if (nextCount+1 >= moreClasses.size()) {
-                nextCount = nextCount - 2;
-                btn_next.setVisibility(View.INVISIBLE);
-                btn_previous.setVisibility(View.VISIBLE);
-            } else nextCount = nextCount + 1;
-        }
-    }
 
-    public void onPreviousData(){
-        if (nextCount < moreClasses.size()){
-            txtSecond.setText(moreClasses.get(nextCount).getCourseTitle());
-            Glide.with(this)
-                    .load(moreClasses.get(nextCount).getImageUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imgSecond);
-            UserDataConstants.lessonIdRight = moreClasses.get(nextCount).getLessonId();
-            currentRight = nextCount;
-            nextCount = nextCount - 1;
-        }
-        if (nextCount < moreClasses.size()){
-            txtFirst.setText(moreClasses.get(nextCount).getCourseTitle());
-            Glide.with(this)
-                    .load(moreClasses.get(nextCount).getImageUrl())
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
-                    .into(imgFirst);
-            UserDataConstants.lessonIdleft = moreClasses.get(nextCount).getLessonId();
-            previousCourseId = moreClasses.get(nextCount).getCategoryId();
-            currentLeft = nextCount;
-            if (nextCount == 0) {
-                btn_previous.setVisibility(View.INVISIBLE);
-                btn_next.setVisibility(View.VISIBLE);
-            }
-        }
-    }
     public void imgNextData(){
         if (storiesSliderCardPagerAdapter.getCount() == currentPageBanner) {
             currentPageBanner = 0;
@@ -779,24 +693,16 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         super.onConfigurationChanged(newConfiguration);
         youTubePlayerView.getPlayerUiController().getMenu().dismiss();
         if (newConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            nsdcHindiListLayout.setVisibility(View.GONE);
-            nsdcEnglishListLayout.setVisibility(View.GONE);
             layoutHeader.setVisibility(View.GONE);
-            btnTrialClass.setVisibility(View.GONE);
-            txtMoreClasses.setVisibility(View.GONE);
             recommendedLayout.setVisibility(View.GONE);
             otherEnglishListLayout.setVisibility(View.GONE);
-            navigation.setVisibility(View.GONE);
+            //navigation.setVisibility(View.GONE);
             stickyWhatsApp.setVisibility(View.GONE);
         } else {
-            nsdcHindiListLayout.setVisibility(View.VISIBLE);
-            nsdcEnglishListLayout.setVisibility(View.VISIBLE);
             layoutHeader.setVisibility(View.VISIBLE);
-            btnTrialClass.setVisibility(View.VISIBLE);
-            txtMoreClasses.setVisibility(View.VISIBLE);
             recommendedLayout.setVisibility(View.VISIBLE);
             otherEnglishListLayout.setVisibility(View.VISIBLE);
-            navigation.setVisibility(View.VISIBLE);
+            //navigation.setVisibility(View.VISIBLE);
             stickyWhatsApp.setVisibility(View.VISIBLE);
         }
     }
@@ -812,6 +718,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         finishAffinity();
     }
 
+/*
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         CategoryName = "";
@@ -849,9 +756,11 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                     i.setPackage("com.whatsapp");
                     i.setData(Uri.parse(url));
                     startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
+                    */
+/*if (i.resolveActivity(packageManager) != null) {
                         startActivity(i);
-                    }*/
+                    }*//*
+
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -887,6 +796,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
         }
         return false;
     }
+*/
     public void RadingDialogue(){
         try {
             howtoUseAppDialogue.showLoadingDialog();
@@ -905,9 +815,9 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
 
     public class PopularCoursesAdapter extends RecyclerView.Adapter<PopularCoursesAdapter.ViewHolder> {
         Context context;
-        List<EnglishCategory> datamodels;
+        List<FavouriteCategories> datamodels;
 
-        public PopularCoursesAdapter(Context context,List<EnglishCategory> datamodels){
+        public PopularCoursesAdapter(Context context,List<FavouriteCategories> datamodels){
             this.context=context;
             this.datamodels = datamodels;
         }
@@ -931,21 +841,29 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                         .error(R.mipmap.ic_launcher)
                         .into(holder.courseImage);
 
-                holder.txtCourseName.setText(datamodels.get(position).getCategoryname());
-                holder.txtDescription.setText(datamodels.get(position).getCategoryDescription());
-                /*holder.listLayout.setOnClickListener(new View.OnClickListener() {
+                holder.txtCourseName.setText(datamodels.get(position).getCourseTitle());
+                holder.txtDescription.setText(datamodels.get(position).getCourseTitle());
+                holder.listLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        CategoryName = datamodels.get(position).getCategoryname()+" "+datamodels.get(position).getLanguage();
+                        /*CategoryName = datamodels.get(position).getCategoryname()+" "+datamodels.get(position).getLanguage();
                         CourseLog = "";LessonLog = "";ActivityLog = "Click";PagenameLog = "Dashboard";
                         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, datamodels.get(position).getCategoryname());
                         logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
                         getLogEvent(HomePageActivity.this);
-                        new AppsFlyerEventsHelper(context).EventCategory(CategoryName);
-                        getSubCategoriesList(HomePageActivity.this,datamodels.get(position).getCategoryId(),datamodels.get(position).getLanguage());
+                        new AppsFlyerEventsHelper(context).EventCategory(CategoryName);*/
+                        /*Intent intent = new Intent(context, CoursePageActivity.class);
+                        intent.putExtra("CategoryId",datamodels.get(postn).getCategoryId());
+                        intent.putExtra("CategoryName",datamodels.get(postn).getCategoryname());
+                        intent.putExtra("CourseName",datamodels.get(postn).getCategory_Title());
+                        intent.putExtra("description",datamodels.get(postn).getCategory_description());
+                        intent.putExtra("language",datamodels.get(postn).getCategory_language());
+                        intent.putExtra("VideoUrl",datamodels.get(postn).getCatVideoUrl());
+                        intent.putExtra("statusNSDC",datamodels.get(postn).getStatusNSDC());
+                        context.startActivity(intent);*/
 
                     }
-                });*/
+                });
             } catch (Exception e){
                 e.printStackTrace();
             }
@@ -973,10 +891,12 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
     public class SubListAdapter extends RecyclerView.Adapter<SubListAdapter.ViewHolder> {
         Context context;
         List<EnglishCategory> datamodels;
+        int selectedItemCourse;
 
-        public SubListAdapter(Context context,List<EnglishCategory> datamodels){
+        public SubListAdapter(Context context,List<EnglishCategory> datamodels, int selectedItem){
             this.context=context;
             this.datamodels = datamodels;
+            this.selectedItemCourse = selectedItem;
         }
 
         @NonNull
@@ -998,11 +918,19 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                         .error(R.mipmap.ic_launcher)
                         .into(holder.imgCategory);
 
+                if (selectedItem == position) {
+                    holder.cardMainLayout.setBackground(context.getResources().getDrawable(R.drawable.cat_selct_pink));
+                } else {
+                    holder.cardMainLayout.setBackgroundResource(0);
+                }
+
                 holder.txtTopTitle.setText(datamodels.get(position).getCategoryname());
                 holder.txtBottomTitle.setText(datamodels.get(position).getCategoryDescription());
                 holder.listLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        //holder.cardMainLayout.setBackground(context.getResources().getDrawable(R.drawable.cat_selct_pink));
+                        selectedItem = position;
                         CategoryName = datamodels.get(position).getCategoryname()+" "+datamodels.get(position).getLanguage();
                         CourseLog = "";LessonLog = "";ActivityLog = "Click";PagenameLog = "Dashboard";
                         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, datamodels.get(position).getCategoryname());
@@ -1010,6 +938,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                         getLogEvent(HomePageActivity.this);
                         new AppsFlyerEventsHelper(context).EventCategory(CategoryName);
                         getSubCategoriesList(HomePageActivity.this,datamodels.get(position).getCategoryId(),datamodels.get(position).getLanguage());
+                        notifyDataSetChanged();
 
                     }
                 });
@@ -1027,6 +956,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
             ImageView imgCategory;
             TextView txtTopTitle,txtBottomTitle;
             RelativeLayout listLayout;
+            LinearLayout cardMainLayout;
 
             public ViewHolder(@NonNull View view) {
                 super(view);
@@ -1035,6 +965,7 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                 txtBottomTitle = view.findViewById(R.id.txtBottomTitle);
                 listLayout = view.findViewById(R.id.listLayout);
                 subListTitle = view.findViewById(R.id.subListTitle);
+                cardMainLayout = view.findViewById(R.id.cardMainLayout);
             }
         }
     }
@@ -1170,7 +1101,16 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
                             subCatList.add(dataModel);
                         }
                         hocLoadingDialog.hideDialog();
-                        ViewAllCources(subCatList);
+                        categoryCoursesAdapter = new CategoryCoursesAdapter(HomePageActivity.this,subCatList);
+                        listCourse.setLayoutManager(new LinearLayoutManager(HomePageActivity.this, RecyclerView.HORIZONTAL, false));
+                        listCourse.setAdapter(categoryCoursesAdapter);
+
+                        if (subCatList.size() > 0) {
+                            imgExpand.setVisibility(View.VISIBLE);
+                            listCourse.setVisibility(View.VISIBLE);
+                        } else imgExpand.setVisibility(View.GONE);
+
+                        //ViewAllCources(subCatList);
                     }
                 } catch(JSONException e){
                     e.printStackTrace();
@@ -1278,28 +1218,20 @@ public class HomePageActivity extends AppCompatActivity implements BottomNavigat
             @Override
             public void onYouTubePlayerEnterFullScreen() {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-                nsdcHindiListLayout.setVisibility(View.GONE);
-                nsdcEnglishListLayout.setVisibility(View.GONE);
                 layoutHeader.setVisibility(View.GONE);
-                btnTrialClass.setVisibility(View.GONE);
-                txtMoreClasses.setVisibility(View.GONE);
                 recommendedLayout.setVisibility(View.GONE);
                 otherEnglishListLayout.setVisibility(View.GONE);
-                navigation.setVisibility(View.GONE);
+                //navigation.setVisibility(View.GONE);
                 stickyWhatsApp.setVisibility(View.GONE);
             }
 
             @Override
             public void onYouTubePlayerExitFullScreen() {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                nsdcHindiListLayout.setVisibility(View.VISIBLE);
-                nsdcEnglishListLayout.setVisibility(View.VISIBLE);
                 layoutHeader.setVisibility(View.VISIBLE);
-                btnTrialClass.setVisibility(View.VISIBLE);
-                txtMoreClasses.setVisibility(View.VISIBLE);
                 recommendedLayout.setVisibility(View.VISIBLE);
                 otherEnglishListLayout.setVisibility(View.VISIBLE);
-                navigation.setVisibility(View.VISIBLE);
+                //navigation.setVisibility(View.VISIBLE);
                 stickyWhatsApp.setVisibility(View.VISIBLE);
             }
         });

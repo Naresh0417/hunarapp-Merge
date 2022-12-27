@@ -23,4 +23,6 @@
     <color name="yellow">#F7EFDC</color>
     <color name="light_grey">#666666</color>
     <color name="light_brown">#fffdee</color>
+    <color name="transparent">#00000000</color>
+    <color name="milkWhite">#F9FAEF</color>
 </resources>

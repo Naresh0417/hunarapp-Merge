@@ -1,5 +1,6 @@
 package com.hamstechonline.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -116,7 +117,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
                     startActivity(intent);
                     LanguageSelectionActivity.this.finish();
                 } else {
-                    finish();
+                    //finish();
                     Intent intent = new Intent(LanguageSelectionActivity.this, HomePageActivity.class);
                     startActivity(intent);
                     LanguageSelectionActivity.this.finish();
@@ -159,9 +160,9 @@ public class LanguageSelectionActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         c = dh.getCount();
-        if (c!=0){
+        /*if (c!=0){
             startActivity(new Intent(LanguageSelectionActivity.this,HomePageActivity.class));
-        }
+        }*/
     }
 
     public class LanguageSelectionAdapter extends RecyclerView.Adapter<LanguageSelectionAdapter.ViewHolder> {
@@ -186,7 +187,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
             try {
 
                 holder.txtLanguageName.setText(datamodels.get(position).getLangName());

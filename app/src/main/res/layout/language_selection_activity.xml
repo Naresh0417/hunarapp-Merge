@@ -18,12 +18,13 @@
             android:layout_gravity="center">
 
             <ImageView
-                android:layout_width="150dp"
-                android:layout_height="130dp"
-                android:src="@drawable/hunar_logo"
+                android:layout_width="230dp"
+                android:layout_height="110dp"
+                android:src="@drawable/hunar_online_logo"
                 android:layout_marginTop="30dp"
                 android:layout_gravity="center_horizontal"
-                android:visibility="gone"/>
+                android:visibility="visible"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -56,8 +57,8 @@
 
             <Button
                 android:id="@+id/chbEnglish"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="291dp"
+                android:layout_height="102dp"
                 android:button="@null"
                 android:text="English"
                 android:textColor="@color/dark_pink"
@@ -71,8 +72,8 @@
 
             <Button
                 android:id="@+id/chbHindi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="291dp"
+                android:layout_height="102dp"
                 android:button="@null"
                 android:text="हिंदी"
                 android:textColor="@color/muted_blue"

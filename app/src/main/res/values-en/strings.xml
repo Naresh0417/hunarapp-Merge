@@ -322,7 +322,7 @@ the last 4 digits of your mobile number to log in.</string>
     <string name="payTm">Paytm\n
     (Extra 5% Discount)</string>
     <string name="cod">Cash on Delivery</string>
-    <string name="txt_terms_conditions"><p><font color='#848383'>By clicking above, I agree to the </font></p>Terms and Conditions</string>
+    <string name="txt_terms_conditions"><u>Terms &amp; Conditions\nPrivacy Policy</u></string>
     <string name="txt_click_here"><u>Please Click Here</u></string>
     <string name="txt_click_here_desc">To download the Hunar Learning App,login and start your course!</string>
     <string name="start_your_courses">To start your course, just follow these 3 simple steps:</string>
@@ -464,4 +464,5 @@ the last 4 digits of your mobile number to log in.</string>
     <string name="call_request_accepted">Your request has been accepted!\nWe will call you shortly</string>
     <string name="complete_your_assignment">Complete your assignments to download the certificate</string>
     <string name="complete_your_course_to_download">Complete your course to download your certificate</string>
+    <string name="select_skip"><u>SKIP</u></string>
 </resources>

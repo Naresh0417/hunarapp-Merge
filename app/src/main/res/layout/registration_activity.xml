@@ -21,7 +21,37 @@
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:scaleType="fitXY"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:layout_width="230dp"
+                android:layout_height="110dp"
+                android:src="@drawable/hunar_online_logo"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="visible"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="0dp"
+                android:fontFamily="sans-serif"
+                android:text="Register Now to Get"
+                android:textColor="@color/dark_pink"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/muted_blue"
+                android:layout_marginTop="15dp"/>
+
+            <include
+                layout="@layout/register_branding_images"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -40,8 +70,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bgshape_circle_gray"
-                android:hint="@string/lblName"
-                android:gravity="center_horizontal"
+                android:hint="Enter Your Name"
+                android:gravity="center_vertical"
                 android:textColorHint="@color/gray"
                 android:layout_marginTop="20dp"
                 android:padding="10dp"
@@ -105,10 +135,10 @@
                 android:id="@+id/txtSelectCity"
                 android:padding="10dp"
                 android:layout_marginTop="15dp"
-                android:hint="@string/City"
+                android:hint="Enter City Name"
                 android:textColorHint="@color/gray"
                 android:background="@drawable/bgshape_circle_gray"
-                android:gravity="center_horizontal"
+                android:gravity="center_vertical"
                 android:maxLength="25"
                 android:maxLines="1"
                 android:textSize="15sp" />
@@ -167,18 +197,20 @@
 
             <Button
                 android:id="@+id/btnGetOtp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
                 android:text="@string/lblStartLearning"
                 android:textAllCaps="false"
                 android:textColor="@color/muted_blue"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
+                android:textSize="17sp"
+                android:paddingBottom="10dp"
                 android:paddingRight="20dp"
                 android:paddingLeft="20dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@drawable/border_pink_strok"/>
+                android:background="@drawable/pink_stroke_white"/>
 
             <Button
                 android:id="@+id/btnVerify"
@@ -238,14 +270,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center_horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
                     android:fontFamily="sans-serif"
                     android:textColor="@color/muted_blue"
                     android:text="@string/AlreadyMember"/>
@@ -255,7 +287,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:textSize="15sp"
+                    android:textSize="16sp"
+                    android:textAllCaps="true"
                     android:text="@string/lblSignHere"
                     android:layout_marginLeft="5dp"
                     android:textColor="@color/dark_pink"
@@ -271,6 +304,7 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="10dp"
+                android:gravity="center"
                 android:fontFamily="@font/dinprobold"/>
 
             <ImageView

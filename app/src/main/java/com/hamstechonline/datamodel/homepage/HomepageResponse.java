@@ -2,6 +2,8 @@ package com.hamstechonline.datamodel.homepage;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.hamstechonline.datamodel.favourite.FavouriteCategories;
+import com.hamstechonline.datamodel.favourite.FavouriteCourse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +34,9 @@ public class HomepageResponse {
     @SerializedName("my_courses")
     @Expose
     private ArrayList<MyCourse> myCourses = null;
+    @SerializedName("favourite_courses")
+    @Expose
+    private ArrayList<FavouriteCategories> favouriteCourse = null;
     @SerializedName("footer_ribbon_image")
     @Expose
     private String footerRibbonImage;
@@ -45,14 +50,15 @@ public class HomepageResponse {
     @Expose
     private String gif_image;
 
-    String appname, page, apikey, lang, phone;
+    String appname, page, apikey, lang, phone,type;
 
-    public HomepageResponse(String appname, String page, String apikey, String lang, String phone) {
+    public HomepageResponse(String appname, String page, String apikey, String lang, String phone,String type) {
         this.appname = appname;
         this.page = page;
         this.apikey = apikey;
         this.lang = lang;
         this.phone = phone;
+        this.type = type;
     }
 
     public String getStatus() {
@@ -149,5 +155,13 @@ public class HomepageResponse {
 
     public void setGif_image(String gif_image) {
         this.gif_image = gif_image;
+    }
+
+    public ArrayList<FavouriteCategories> getFavouriteCourse() {
+        return favouriteCourse;
+    }
+
+    public void setFavouriteCourse(ArrayList<FavouriteCategories> favouriteCourse) {
+        this.favouriteCourse = favouriteCourse;
     }
 }

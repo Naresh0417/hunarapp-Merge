@@ -18,11 +18,12 @@
             android:layout_height="match_parent"
             android:scrollbars="none"
             android:layout_above="@+id/navigation"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/milkWhite">
 
                 <RelativeLayout
                     android:id="@+id/layoutHeader"
@@ -105,206 +106,6 @@
                     android:visibility="visible">
 
                     <LinearLayout
-                        android:id="@+id/nsdcEnglishListLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/nsdcTextEnglish"
-                            android:textColor="@color/muted_blue"
-                            android:fontFamily="@font/dinprobold"
-                            android:textAllCaps="true"
-                            android:textSize="14sp"
-                            android:visibility="gone"/>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="7dp"
-                            android:id="@+id/listGovtEnglish"
-                            android:visibility="visible">
-                        </androidx.recyclerview.widget.RecyclerView>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/nsdcHindiListLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/nsdcTextHindi"
-                            android:textColor="@color/muted_blue"
-                            android:fontFamily="@font/dinprobold"
-                            android:textAllCaps="true"
-                            android:textSize="14sp"
-                            android:visibility="gone"/>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="7dp"
-                            android:id="@+id/listGovtHindi"
-                            android:visibility="visible">
-                        </androidx.recyclerview.widget.RecyclerView>
-
-                    </LinearLayout>
-
-                    <Button
-                        android:id="@+id/btnTrialClass"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/btnTrialClass"
-                        android:textColor="@color/white"
-                        android:textAllCaps="false"
-                        android:fontFamily="@font/dinpro"
-                        android:textStyle="bold"
-                        android:textSize="13.5sp"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_gravity="center_horizontal"
-                        android:background="@drawable/blue_button_bg"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="15dp"
-                        android:visibility="gone"/>
-
-                    <TextView
-                        android:id="@+id/txtMoreClasses"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/txtMoreClasses"
-                        android:textColor="@color/black_two"
-                        android:textStyle="bold"
-                        android:textSize="13.5sp"
-                        android:fontFamily="@font/dinpro"
-                        android:visibility="gone"/>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="7dp"
-                        android:visibility="gone">
-
-                        <ImageView
-                            android:id="@+id/btn_previous"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_previous"
-                            android:layout_alignParentLeft="true"
-                            android:layout_marginTop="65dp"
-                            android:layout_marginRight="7dp"
-                            android:visibility="invisible"/>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_horizontal"
-                            android:layout_toRightOf="@+id/btn_previous"
-                            android:layout_toLeftOf="@+id/btn_next">
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginRight="5dp">
-
-                                <ImageView
-                                    android:id="@+id/imgFirst"
-                                    android:layout_width="130dp"
-                                    android:layout_height="130dp"
-                                    android:src="@drawable/hoc_logo"/>
-                                <TextView
-                                    android:id="@+id/txtFirst"
-                                    android:layout_width="130dp"
-                                    android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:minLines="2"
-                                    android:maxLines="2"
-                                    android:gravity="center_horizontal"
-                                    android:layout_gravity="center_horizontal"/>
-
-                                <Button
-                                    android:id="@+id/btnFirst"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/btnFirst"
-                                    android:textColor="@color/white"
-                                    android:textAllCaps="false"
-                                    android:fontFamily="@font/dinpro"
-                                    android:textStyle="bold"
-                                    android:textSize="13.5sp"
-                                    android:paddingLeft="15dp"
-                                    android:paddingRight="15dp"
-                                    android:layout_marginTop="15dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:background="@drawable/blue_button_bg"
-                                    android:layout_marginBottom="15dp"
-                                    />
-
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical"
-                                android:layout_marginLeft="5dp">
-
-                                <ImageView
-                                    android:id="@+id/imgSecond"
-                                    android:layout_width="130dp"
-                                    android:layout_height="130dp"
-                                    android:src="@drawable/hoc_logo"/>
-                                <TextView
-                                    android:id="@+id/txtSecond"
-                                    android:layout_width="130dp"
-                                    android:layout_height="wrap_content"
-                                    android:text=""
-                                    android:minLines="2"
-                                    android:maxLines="2"
-                                    android:gravity="center_horizontal"
-                                    android:layout_gravity="center_horizontal"/>
-
-                                <Button
-                                    android:id="@+id/btnSecond"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/btnFirst"
-                                    android:textColor="@color/white"
-                                    android:textAllCaps="false"
-                                    android:fontFamily="@font/dinpro"
-                                    android:textStyle="bold"
-                                    android:textSize="13.5sp"
-                                    android:paddingLeft="15dp"
-                                    android:paddingRight="15dp"
-                                    android:layout_marginTop="15dp"
-                                    android:layout_gravity="center_horizontal"
-                                    android:background="@drawable/blue_button_bg"
-                                    android:layout_centerHorizontal="true"
-                                    android:layout_marginBottom="15dp"
-                                    />
-
-                            </LinearLayout>
-
-                        </LinearLayout>
-
-                        <ImageView
-                            android:id="@+id/btn_next"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:src="@drawable/ic_next"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginTop="65dp"
-                            android:layout_marginLeft="7dp"/>
-                    </RelativeLayout>
-                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -371,33 +172,6 @@
 
                     </LinearLayout>
 
-                <!--<LinearLayout
-                    android:id="@+id/myCoursesLayout"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:visibility="visible"
-                    android:layout_marginTop="5dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="My Courses"
-                        android:textColor="@color/muted_blue"
-                        android:fontFamily="@font/dinprobold"
-                        android:textAllCaps="true"
-                        android:textSize="17sp" />
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="7dp"
-                        android:id="@+id/listTopicsRecommended"
-                        android:visibility="visible">
-                    </androidx.recyclerview.widget.RecyclerView>
-
-                </LinearLayout>-->
-
                 <LinearLayout
                     android:id="@+id/otherEnglishListLayout"
                     android:layout_width="match_parent"
@@ -405,8 +179,8 @@
                     android:orientation="vertical"
                     android:visibility="gone"
                     android:layout_marginTop="5dp"
-                    android:paddingLeft="7dp"
-                    android:paddingRight="7dp">
+                    android:paddingLeft="0dp"
+                    android:paddingRight="0dp">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -415,6 +189,8 @@
                         android:textColor="@color/muted_blue"
                         android:fontFamily="@font/dinprobold"
                         android:textSize="17sp"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
                         android:layout_marginTop="10dp"/>
 
                     <TextView
@@ -425,7 +201,9 @@
                         android:textSize="15sp"
                         android:textColor="@color/black"
                         android:text="@string/_6_month_online_government_certified_courses_to_make_your_hobby_a_skill_and_a_business"
-                        android:layout_marginTop="7dp"/>
+                        android:layout_marginTop="7dp"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"/>
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="wrap_content"
@@ -441,13 +219,43 @@
                         android:textColor="@color/muted_blue"
                         android:fontFamily="@font/dinprobold"
                         android:textSize="17sp"
+                        android:paddingLeft="7dp"
+                        android:paddingRight="7dp"
                         android:layout_marginTop="10dp"/>
-                    <androidx.recyclerview.widget.RecyclerView
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/listCourse"
+                            android:layout_marginTop="270dp"
+                            android:visibility="gone"
+                            android:paddingTop="40dp"
+                            android:paddingLeft="30dp"
+                            android:background="@drawable/border_pink_gray_strok" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:id="@+id/listRecommended"/>
+
+
+                    </RelativeLayout>
+
+
+                    <ImageView
+                        android:id="@+id/imgExpand"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:src="@drawable/up_arrow"
+                        android:layout_gravity="right"
                         android:layout_marginTop="7dp"
-                        android:id="@+id/listRecommended">
-                    </androidx.recyclerview.widget.RecyclerView>
+                        android:visibility="gone"/>
+
                 </LinearLayout>
                     <LinearLayout
                         android:id="@+id/otherHindiListLayout"
@@ -499,10 +307,13 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="320dp"
                         android:orientation="vertical"
-                        android:background="@drawable/sucess_story_bg"
-                        android:layout_marginTop="5dp">
+                        android:background="@drawable/curved_bg_pink"
+                        android:layout_marginTop="5dp"
+                        android:paddingTop="20dp"
+                        android:layout_marginLeft="-8dp"
+                        android:layout_marginRight="-8dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -512,17 +323,17 @@
                             android:textSize="15sp"
                             android:fontFamily="sans-serif"
                             android:textStyle="bold"
-                            android:paddingLeft="15dp"
-                            android:paddingTop="8dp"
-                            android:paddingBottom="0dp"/>
+                            android:layout_marginLeft="30dp"
+                            android:paddingTop="8dp" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="255dp"
                             android:layout_marginTop="2dp"
                             android:layout_marginBottom="7dp"
+                            android:layout_marginLeft="10dp"
                             android:paddingLeft="8dp"
-                            android:paddingRight="8dp">
+                            android:paddingRight="16dp">
 
                             <androidx.viewpager.widget.ViewPager
                                 android:id="@+id/imageSlider"
@@ -549,6 +360,18 @@
 
                         </RelativeLayout>
 
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:orientation="vertical"
+                        android:paddingTop="20dp"
+                        android:background="@drawable/curved_bg_pink"
+                        android:layout_marginLeft="-8dp"
+                        android:layout_marginRight="-8dp"
+                        android:layout_marginTop="8dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -557,7 +380,7 @@
                             android:textSize="15sp"
                             android:fontFamily="sans-serif"
                             android:textStyle="bold"
-                            android:paddingLeft="15dp"
+                            android:paddingLeft="23dp"
                             android:layout_marginTop="8dp"/>
 
                         <TextView
@@ -568,14 +391,17 @@
                             android:textSize="14sp"
                             android:fontFamily="sans-serif"
                             android:textStyle="bold"
-                            android:paddingLeft="15dp"
+                            android:paddingLeft="23dp"
                             android:layout_marginTop="8dp"/>
 
                         <ImageView
                             android:id="@+id/gifSuccessStory"
                             android:layout_width="match_parent"
                             android:layout_height="120dp"
-                            android:layout_marginTop="4dp"/>
+                            android:layout_marginTop="4dp"
+                            android:paddingLeft="23dp"
+                            android:paddingRight="23dp"
+                            android:src="@drawable/join_hunar" />
 
                     </LinearLayout>
 
@@ -637,11 +463,16 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="320dp"
                         android:orientation="vertical"
-                        android:background="@drawable/sucess_story_bg"
-                        android:padding="8dp"
-                        android:layout_marginBottom="8dp">
+                        android:background="@drawable/curved_bg_pink"
+                        android:paddingTop="40dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginLeft="-8dp"
+                        android:layout_marginRight="-8dp"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:layout_marginTop="13dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -682,18 +513,87 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <ImageView
+            android:id="@+id/imgHunarClub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/club_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:background="@android:color/transparent"/>
+
+        <RelativeLayout
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            app:itemBackground="@color/white"
-            android:foreground="?attr/selectableItemBackground"
-            app:itemIconTint="@drawable/navigation_selector"
-            app:itemTextColor="@color/gray"
-            android:theme="@style/menu_text_style"
-            app:menu="@menu/navigation"
-            app:labelVisibilityMode="labeled"/>
+            android:background="@android:color/transparent">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:padding="5dp"
+                android:background="@android:color/transparent">
+
+                <LinearLayout
+                    android:id="@+id/layoutHome"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/home_icon"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lblHome"
+                        android:fontFamily="sans-serif"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/layoutContact"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/contact_us"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contactUs"
+                        android:fontFamily="sans-serif"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
         <ImageButton
             android:id="@+id/stickyWhatsApp"
@@ -714,7 +614,8 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:visibility="gone">
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navSideMenu"

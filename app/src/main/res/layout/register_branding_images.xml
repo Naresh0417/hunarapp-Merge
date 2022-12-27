@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:layout_marginTop="10dp">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:padding="5dp"
+        android:background="@android:color/transparent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/no_courses"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="50+\nContests"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textColor="@color/black_two"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/exciting_contests"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Exciting\nContests"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textColor="@color/black_two"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/register_hunarclub"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hunar\nClub"
+                android:fontFamily="sans-serif"
+                android:textStyle="bold"
+                android:textColor="@color/black_two"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

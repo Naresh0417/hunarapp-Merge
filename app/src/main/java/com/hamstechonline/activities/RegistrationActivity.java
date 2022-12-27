@@ -325,7 +325,7 @@ public class RegistrationActivity extends AppCompatActivity {
             }
         });
 
-        getSignupData();
+        //getSignupData();
         txtSelectCity.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -640,7 +640,7 @@ public class RegistrationActivity extends AppCompatActivity {
                                 eventType = "Clicked on Verify";
                                 getLogEvent(RegistrationActivity.this,objData.getString("phone"));
 
-                                Intent intent = new Intent(RegistrationActivity.this,HomePageActivity.class);
+                                Intent intent = new Intent(RegistrationActivity.this,ChooseFavouriteCourse.class);
                                 intent.putExtra("isNewRegister",true);
                                 startActivity(intent);
                                 RegistrationActivity.this.finish();
