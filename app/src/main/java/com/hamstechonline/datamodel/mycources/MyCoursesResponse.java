@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.hamstechonline.datamodel.CourseOverview;
 import com.hamstechonline.datamodel.ExpertFaculty;
 import com.hamstechonline.datamodel.LastLessonDetails;
+import com.hamstechonline.datamodel.SimilarCourse;
 
 import java.util.List;
 
@@ -46,6 +47,9 @@ public class MyCoursesResponse {
     @SerializedName("know_how_image")
     @Expose
     private String knowHowImage;
+    @SerializedName("similar_courses")
+    @Expose
+    private List<SimilarCourse> similarCourses = null;
 
     String appname, apikey, page, courseId, language, lang,phone,order_id;
     public MyCoursesResponse (String appname,String apikey,String page,String courseId,String language,String lang,
@@ -155,5 +159,13 @@ public class MyCoursesResponse {
 
     public void setExpertFaculty(List<ExpertFaculty> expertFaculty) {
         this.expertFaculty = expertFaculty;
+    }
+
+    public List<SimilarCourse> getSimilarCourses() {
+        return similarCourses;
+    }
+
+    public void setSimilarCourses(List<SimilarCourse> similarCourses) {
+        this.similarCourses = similarCourses;
     }
 }

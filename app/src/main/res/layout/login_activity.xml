@@ -21,17 +21,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:scaleType="fitXY"
-                android:layout_gravity="center_horizontal"/>
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:layout_width="230dp"
+                android:layout_height="110dp"
+                android:src="@drawable/hunar_online_logo"
+                android:layout_marginTop="30dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="visible"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/dinpro"
+                android:fontFamily="sans-serif"
                 android:text="@string/lblLoginOtp"
-                android:textColor="@color/dark_grey_blue"
-                android:textSize="15sp"
+                android:textColor="@color/muted_blue"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <RelativeLayout
@@ -250,7 +260,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:layout_gravity="bottom"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:visibility="gone"/>
 
         </LinearLayout>
 

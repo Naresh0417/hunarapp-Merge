@@ -88,7 +88,6 @@ public class NSDCExpandableListAdapter extends BaseExpandableListAdapter {
             LinearLayout linearMain = convertView.findViewById(R.id.linearMain);
             TextView txtDescription = convertView.findViewById(R.id.txtDescription);
             txtDescription.setText(Html.fromHtml(detailInfo.getName()));
-            linearMain.setBackgroundResource(R.color.light_gray);
             txtDescription.setText(Html.fromHtml(detailInfo.getName()));
             btnNext.setVisibility(View.GONE);
 

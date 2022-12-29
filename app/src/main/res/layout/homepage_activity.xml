@@ -29,7 +29,8 @@
                     android:id="@+id/layoutHeader"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp">
+                    android:padding="8dp"
+                    android:background="@drawable/top_line_bg">
 
                     <ImageView
                         android:id="@+id/imgSideMenu"
@@ -185,7 +186,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/professional_courses"
+                        android:text="Most Popular Courses"
                         android:textColor="@color/muted_blue"
                         android:fontFamily="@font/dinprobold"
                         android:textSize="17sp"
@@ -231,16 +232,16 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:id="@+id/listCourse"
-                            android:layout_marginTop="270dp"
+                            android:layout_marginTop="265dp"
                             android:visibility="gone"
-                            android:paddingTop="40dp"
-                            android:paddingLeft="30dp"
+                            android:paddingTop="20dp"
+                            android:paddingLeft="20dp"
                             android:background="@drawable/border_pink_gray_strok" />
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="7dp"
+                            android:layout_marginTop="0dp"
                             android:id="@+id/listRecommended"/>
 
 
@@ -364,7 +365,7 @@
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="200dp"
+                        android:layout_height="215dp"
                         android:orientation="vertical"
                         android:paddingTop="20dp"
                         android:background="@drawable/curved_bg_pink"
@@ -492,13 +493,11 @@
                             android:textColor="@color/black"
                             android:text="@string/learn_from_bollywood_s_top_fashion_designer_neeta_lulla_and_get_certified_by_her_too"/>
 
-                        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-                            android:id="@+id/videoCelebrityMentor"
+                        <ImageView
+                            android:id="@+id/imgMentorImage"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:showYouTubeButton="false"
-                            android:layout_marginTop="8dp"
-                            app:showFullScreenButton="false"/>
+                            android:layout_height="200dp"
+                            android:layout_marginTop="8dp"/>
 
                     </LinearLayout>
 
@@ -514,13 +513,13 @@
         </androidx.core.widget.NestedScrollView>
 
         <ImageView
-            android:id="@+id/imgHunarClub"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/club_icon"
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
-            android:background="@android:color/transparent"/>
+            android:background="@android:color/transparent"
+            android:visibility="gone"/>
 
         <RelativeLayout
             android:id="@+id/navigation"
@@ -548,7 +547,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/home_icon"/>
+                        android:background="@drawable/ic_home_black" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -559,6 +558,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/imgHunarClub"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -567,7 +567,15 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/hunarclub_selected" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hunar Club"
+                        android:fontFamily="sans-serif"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
                 </LinearLayout>
 
                 <LinearLayout

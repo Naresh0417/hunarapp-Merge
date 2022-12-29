@@ -1,9 +1,9 @@
-package com.hamstechonline.datamodel.favourite;
+package com.hamstechonline.datamodel;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FavouriteCategories {
+public class SimilarCourse {
 
     @SerializedName("courseId")
     @Expose
@@ -115,5 +115,6 @@ public class FavouriteCategories {
     public void setNsdcStatus(String nsdcStatus) {
         this.nsdcStatus = nsdcStatus;
     }
+
 
 }

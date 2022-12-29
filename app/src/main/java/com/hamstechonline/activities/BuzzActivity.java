@@ -1,6 +1,7 @@
 package com.hamstechonline.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.backup.BackupAgent;
@@ -140,7 +141,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
     BuzzDetailsDialog buzzDetailsDialog;
     ReportBlockDialoge reportDialoge;
     YourPostDialog yourPostDialog;
-    RadioButton btnHunarPosts, btnYourPosts;
+    TextView btnHunarPosts, btnYourPosts;
     ArrayList<Integer> courseIds = new ArrayList<>();
     ImageButton stickyWhatsApp;
     RelativeLayout submitPost;
@@ -213,44 +214,43 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
             ex.printStackTrace();
         }
 
+        btnHunarPosts.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
+        btnHunarPosts.setTextColor(getResources().getColor(R.color.dark_pink));
+        btnYourPosts.setBackgroundResource(0);
+        btnYourPosts.setTextColor(getResources().getColor(R.color.muted_blue));
         getOptionsData();
 
-        btnHunarPosts.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        btnHunarPosts.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    lessonEvent = "";
-                    ActivityLog = "Click";
-                    PagenameLog = "Hunar Posts";
-                    getLogEvent(BuzzActivity.this);
-                    btnHunarPosts.setTextColor(getResources().getColor(R.color.white));
-                    btnHunarPosts.setBackground(getDrawable(R.drawable.blue_button_bg));
-                    hocItemsList.setVisibility(View.VISIBLE);
-                    getOptionsData();
-                } else {
-                    btnHunarPosts.setTextColor(getResources().getColor(R.color.muted_blue));
-                    btnHunarPosts.setBackground(getDrawable(R.drawable.border_bg));
-                }
+            public void onClick(View view) {
+                btnHunarPosts.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
+                btnHunarPosts.setTextColor(getResources().getColor(R.color.dark_pink));
+                btnYourPosts.setBackgroundResource(0);
+                btnYourPosts.setTextColor(getResources().getColor(R.color.muted_blue));
+                lessonEvent = "";
+                ActivityLog = "Click";
+                PagenameLog = "Hunar Posts";
+                getLogEvent(BuzzActivity.this);
+                hocItemsList.setVisibility(View.VISIBLE);
+                getOptionsData();
             }
         });
 
-        btnYourPosts.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        btnYourPosts.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    lessonEvent = "";
-                    ActivityLog = "Click";
-                    PagenameLog = "My Post";
-                    getLogEvent(BuzzActivity.this);
-                    btnYourPosts.setTextColor(getResources().getColor(R.color.white));
-                    btnYourPosts.setBackground(getDrawable(R.drawable.blue_button_bg));
-                    hocItemsList.setVisibility(View.GONE);
-                    getUserPosts();
-                } else {
-                    btnYourPosts.setTextColor(getResources().getColor(R.color.muted_blue));
-                    btnYourPosts.setBackground(getDrawable(R.drawable.border_bg));
-                    hocItemsList.setVisibility(View.VISIBLE);
-                }
+            public void onClick(View view) {
+                lessonEvent = "";
+                ActivityLog = "Click";
+                PagenameLog = "My Post";
+                getLogEvent(BuzzActivity.this);
+                btnYourPosts.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
+                btnYourPosts.setTextColor(getResources().getColor(R.color.dark_pink));
+                btnHunarPosts.setBackgroundResource(0);
+                btnHunarPosts.setTextColor(getResources().getColor(R.color.muted_blue));
+                ActivityLog = "Course Details";
+                PagenameLog = "Tab selected";
+                hocItemsList.setVisibility(View.GONE);
+                getUserPosts();
             }
         });
 
@@ -477,7 +477,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 holder.txtTitle.setText(dataBuzz.get(position).getTitle());
                 holder.txtDescription.setText(dataBuzz.get(position).getDescription());
@@ -837,7 +837,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 holder.txtOption.setText(hocOptions.get(position).getName());
 
@@ -915,7 +915,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 holder.txtTitle.setText(dataBuzz.get(position).getTitle());
                 holder.txtDescription.setText(dataBuzz.get(position).getDescription());

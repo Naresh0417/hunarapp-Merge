@@ -49,6 +49,9 @@ public class HomepageResponse {
     @SerializedName("gif_image")
     @Expose
     private String gif_image;
+    @SerializedName("celebrity_mentor_image")
+    @Expose
+    private String celebrity_mentor_image;
 
     String appname, page, apikey, lang, phone,type;
 
@@ -155,6 +158,14 @@ public class HomepageResponse {
 
     public void setGif_image(String gif_image) {
         this.gif_image = gif_image;
+    }
+
+    public String getCelebrity_mentor_image() {
+        return celebrity_mentor_image;
+    }
+
+    public void setCelebrity_mentor_image(String celebrity_mentor_image) {
+        this.celebrity_mentor_image = celebrity_mentor_image;
     }
 
     public ArrayList<FavouriteCategories> getFavouriteCourse() {

@@ -212,6 +212,9 @@
         <activity android:name=".activities.OnBoardingActivity"
             android:screenOrientation="unspecified"
             android:exported="true"/>
+        <activity android:name=".activities.OnBoardingNewActivity"
+            android:screenOrientation="unspecified"
+            android:exported="true"/>
         <activity android:name=".activities.ChooseLanguage"
             android:screenOrientation="unspecified"
             android:exported="true"/>

@@ -1,6 +1,7 @@
 package com.hamstechonline.activities;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -108,13 +109,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MyCoursesPageActivity extends AppCompatActivity implements LikesInterface,
-        BottomNavigationView.OnNavigationItemSelectedListener, PaymentResultWithDataListener {
+public class MyCoursesPageActivity extends AppCompatActivity implements LikesInterface, PaymentResultWithDataListener {
 
     DrawerLayout drawer;
     TextView txtLessons,txtDiscussion,txtChat,txtCallRequest,txtDescription,txtNextLessons,txtTitle;
     RecyclerView lessonsList,listSimilarCourses,listOverview,discussionList;
-    BottomNavigationView navigation;
+    //BottomNavigationView navigation;
     ImageView imgKnowHow,imgNextLesson,playButton,imgWhatsApp;
     CheckBox txtSeeAll,overviewExpand;
     ImageButton stickyWhatsApp;
@@ -156,6 +156,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
     DiscussionDetailsDialog buzzDetailsDialog;
     DynamicWhatsAppChat dynamicWhatsAppChat;
     ReportBlockDialoge reportDialoge;
+    LinearLayout layoutContact,layoutHome,imgHunarClub;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -168,7 +169,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         setContentView(R.layout.activity_course);
 
         drawer = findViewById(R.id.drawer_layout);
-        navigation = findViewById(R.id.navigation);
+        //navigation = findViewById(R.id.navigation);
         navSideMenu = findViewById(R.id.navSideMenu);
         txtLessons = findViewById(R.id.txtLessons);
         txtDiscussion = findViewById(R.id.txtDiscussion);
@@ -196,9 +197,12 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         lessonsExpand = findViewById(R.id.lessonsExpand);
         imgWhatsApp = findViewById(R.id.imgWhatsApp);
         txtTitle = findViewById(R.id.txtTitle);
+        layoutHome = findViewById(R.id.layoutHome);
+        layoutContact = findViewById(R.id.layoutContact);
+        imgHunarClub = findViewById(R.id.imgHunarClub);
 
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
+        //navigation.setOnNavigationItemSelectedListener(this);
+        //navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
 
         logger = AppEventsLogger.newLogger(this);
         params = new Bundle();
@@ -211,9 +215,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         logEventsActivity = new LogEventsActivity();
         hocLoadingDialog = new HocLoadingDialog(MyCoursesPageActivity.this);
 
-        txtLessons.setBackground(getResources().getDrawable(R.drawable.top_pink_strok));
+        txtLessons.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
         txtLessons.setTextColor(getResources().getColor(R.color.dark_pink));
-        txtDiscussion.setBackgroundColor(getResources().getColor(R.color.white));
+        txtDiscussion.setBackgroundResource(0);
         txtDiscussion.setTextColor(getResources().getColor(R.color.muted_blue));
 
         prefs = getSharedPreferences("Hindi", Activity.MODE_PRIVATE);
@@ -240,9 +244,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         txtLessons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtLessons.setBackground(getResources().getDrawable(R.drawable.top_pink_strok));
+                txtLessons.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
                 txtLessons.setTextColor(getResources().getColor(R.color.dark_pink));
-                txtDiscussion.setBackgroundColor(getResources().getColor(R.color.white));
+                txtDiscussion.setBackgroundResource(0);
                 txtDiscussion.setTextColor(getResources().getColor(R.color.muted_blue));
                 discussionLayout.setVisibility(View.GONE);
                 submitPost.setVisibility(View.GONE);
@@ -256,9 +260,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         txtDiscussion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                txtLessons.setBackgroundColor(getResources().getColor(R.color.white));
+                txtLessons.setBackgroundResource(0);
                 txtLessons.setTextColor(getResources().getColor(R.color.muted_blue));
-                txtDiscussion.setBackground(getResources().getDrawable(R.drawable.top_pink_strok));
+                txtDiscussion.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
                 txtDiscussion.setTextColor(getResources().getColor(R.color.dark_pink));
                 discussionLayout.setVisibility(View.VISIBLE);
                 lessonsLayout.setVisibility(View.GONE);
@@ -269,9 +273,44 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             }
         });
 
-        similarCoursesListAdapter = new SimilarCoursesListAdapter(this);
-        listSimilarCourses.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
-        listSimilarCourses.setAdapter(similarCoursesListAdapter);
+        layoutHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityLog = "";
+                PagenameLog = "MyCourse page";
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
+                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                getLogEvent(MyCoursesPageActivity.this);
+                Intent intentCourses = new Intent(MyCoursesPageActivity.this, HomePageActivity.class);
+                startActivity(intentCourses);
+            }
+        });
+
+        layoutContact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityLog = "Course page";
+                PagenameLog = "Contact Page";
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
+                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                getLogEvent(MyCoursesPageActivity.this);
+                new AppsFlyerEventsHelper(MyCoursesPageActivity.this).EventContactus();
+                Intent about = new Intent(MyCoursesPageActivity.this, ContactActivity.class);
+                startActivity(about);
+            }
+        });
+        imgHunarClub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityLog = "Click";
+                PagenameLog = "MyCourse page";
+                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
+                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                getLogEvent(MyCoursesPageActivity.this);
+                Intent hamstech = new Intent(MyCoursesPageActivity.this, BuzzActivity.class);
+                startActivity(hamstech);
+            }
+        });
 
         expandLessonsList.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -506,6 +545,10 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 listFaculty.setOffscreenPageLimit(response.body().getExpertFaculty().size());
                 listFaculty.setAdapter(facultySliderAdapter);
 
+                similarCoursesListAdapter = new SimilarCoursesListAdapter(MyCoursesPageActivity.this,response.body().getSimilarCourses());
+                listSimilarCourses.setLayoutManager(new LinearLayoutManager(MyCoursesPageActivity.this, RecyclerView.HORIZONTAL, false));
+                listSimilarCourses.setAdapter(similarCoursesListAdapter);
+
                 Glide.with(MyCoursesPageActivity.this)
                         .load(response.body().getKnowHowImage())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -646,86 +689,10 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
     @Override
     protected void onResume() {
         super.onResume();
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
+        //navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
     }
     public void sideMenu(View view){
         drawer.openDrawer(Gravity.LEFT);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        CategoryName = "";
-        CourseLog = "";
-        LessonLog = "";
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                ActivityLog = "";
-                PagenameLog = "Home Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(this);
-                Intent intentCourses = new Intent(this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                ActivityLog = "Home Page";
-                PagenameLog = "chat with whatsapp";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "chat with whatsapp");
-                logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT,params);
-                getLogEvent(this);
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                ActivityLog = "Home page";
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(this);
-                Intent enrol = new Intent(this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                ActivityLog = "Click";
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(this);
-                Intent hamstech = new Intent(this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                ActivityLog = "Home page";
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(this);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                Intent about = new Intent(this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
     }
 
     public void getCallWithFaculty() {
@@ -775,7 +742,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final DiscussionsAdapter.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull final DiscussionsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 txtDescription.setText(dataBuzz.get(position).getDescription());
                 //txtTitle.setVisibility(View.GONE);
@@ -785,7 +752,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                     txtExternalLink.setText(dataBuzz.get(position).getExternallink());
                     txtExternalLink.setVisibility(View.VISIBLE);
                 }
-                if (!dataBuzz.get(position).getImage().isEmpty()) {
+                if (!dataBuzz.get(position).getProfilePic().isEmpty()) {
                     Glide.with(MyCoursesPageActivity.this)
                             .load(dataBuzz.get(position).getImage())
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -797,7 +764,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                     txtUserName.setVisibility(View.VISIBLE);
                 } else if (!dataBuzz.get(position).getName().isEmpty()) {
                     txtUserName.setText(dataBuzz.get(position).getName());
-                    profile_image.setVisibility(View.GONE);
+                    profile_image.setVisibility(View.VISIBLE);
                     txtUserName.setVisibility(View.VISIBLE);
                 } else if (!dataBuzz.get(position).getNameFirstCharacter().isEmpty()) {
                     txtUserNameChar.setText(dataBuzz.get(position).getNameFirstCharacter());

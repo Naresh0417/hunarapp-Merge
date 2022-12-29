@@ -120,7 +120,7 @@ import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTube
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class HomePageActivity extends AppCompatActivity{
+public class HomePageActivity extends AppCompatActivity {
 
     RecyclerView listRecommended,listCategory,listHindi,listMiniLessons,listPopularCourses,listCourse;
     SubListAdapter subListAdapter;
@@ -131,7 +131,7 @@ public class HomePageActivity extends AppCompatActivity{
     //BottomNavigationView navigation;
     NavigationFragment navigationFragment;
     NavigationView navSideMenu;
-    ImageView imgChooseLang,imgWhatsApp,footer_ribbon,imgHunarClub,
+    ImageView imgMentorImage,imgChooseLang,imgWhatsApp,footer_ribbon,
             imgPrevious,imgNext,mycoursePrevious,mycourseNext,gifSuccessStory,imgExpand;
     TextView txtTitle,subListTitle;
     ArrayList<CategoryDatamodel> subCatList = new ArrayList<>();
@@ -166,7 +166,7 @@ public class HomePageActivity extends AppCompatActivity{
 
     ApiInterface apiService;
 
-    YouTubePlayerView youTubePlayerView,videoCelebrityMentor;
+    YouTubePlayerView youTubePlayerView;
     YouTubePlayer player,playerMentor;
     private StringBuilder logString;
     StoriesSliderCardPagerAdapter storiesSliderCardPagerAdapter;
@@ -175,7 +175,7 @@ public class HomePageActivity extends AppCompatActivity{
     Timer timerBanner;
     Runnable updateBanner;
     DynamicWhatsAppChat dynamicWhatsAppChat;
-    LinearLayout layoutContact,layoutHome;
+    LinearLayout layoutContact,layoutHome,imgHunarClub;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -204,7 +204,6 @@ public class HomePageActivity extends AppCompatActivity{
         otherHindiListLayout = findViewById(R.id.otherHindiListLayout);
         imgWhatsApp = findViewById(R.id.imgWhatsApp);
         youTubePlayerView = findViewById(R.id.youtube_player_view);
-        videoCelebrityMentor = findViewById(R.id.videoCelebrityMentor);
         layoutHeader = findViewById(R.id.layoutHeader);
         txtSeeMore = findViewById(R.id.txtSeeMore);
         listMiniLessons = findViewById(R.id.listMiniLessons);
@@ -222,6 +221,7 @@ public class HomePageActivity extends AppCompatActivity{
         layoutHome = findViewById(R.id.layoutHome);
         layoutContact = findViewById(R.id.layoutContact);
         imgHunarClub = findViewById(R.id.imgHunarClub);
+        imgMentorImage = findViewById(R.id.imgMentorImage);
 
         /*navigation.setOnNavigationItemSelectedListener(this);
         navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);*/
@@ -265,7 +265,6 @@ public class HomePageActivity extends AppCompatActivity{
 
         //getReviewInfo();
         getLifecycle().addObserver(youTubePlayerView);
-        getLifecycle().addObserver(videoCelebrityMentor);
         hocLoadingDialog = new HocLoadingDialog(this);
         prefs = getSharedPreferences("Hindi", Activity.MODE_PRIVATE);
         langPref = prefs.getString("Language", "en");
@@ -575,11 +574,11 @@ public class HomePageActivity extends AppCompatActivity{
                             .error(R.mipmap.ic_launcher)
                             .into(footer_ribbon);
 
-                    /*Glide.with(HomePageActivity.this)
-                            .load(response.body().getGif_image())
+                    Glide.with(HomePageActivity.this)
+                            .load(response.body().getCelebrity_mentor_image())
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .error(R.mipmap.ic_launcher)
-                            .into(gifSuccessStory);*/
+                            .into(imgMentorImage);
 
                     if (UserDataConstants.notificationID!= null){
                         if(UserDataConstants.notificationID.equals("2570")){
@@ -619,7 +618,6 @@ public class HomePageActivity extends AppCompatActivity{
                     mainiVideo.add(response.body().getMainVideo());
 
                     moreClasses = response.body().getMoreTrialClasses();
-                    installYouTubeMentor(response.body().getCelebrity_mentor_video());
                     //getTopicsList(HomePageActivity.this);
 
                     updateBanner = new Runnable() {
@@ -718,8 +716,7 @@ public class HomePageActivity extends AppCompatActivity{
         finishAffinity();
     }
 
-/*
-    @Override
+    /*@Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         CategoryName = "";
         CourseLog = "";
@@ -756,10 +753,9 @@ public class HomePageActivity extends AppCompatActivity{
                     i.setPackage("com.whatsapp");
                     i.setData(Uri.parse(url));
                     startActivity(i);
-                    */
-/*if (i.resolveActivity(packageManager) != null) {
+if (i.resolveActivity(packageManager) != null) {
                         startActivity(i);
-                    }*//*
+                    }
 
                 } catch (Exception e){
                     e.printStackTrace();
@@ -795,8 +791,7 @@ public class HomePageActivity extends AppCompatActivity{
                 return true;
         }
         return false;
-    }
-*/
+    }*/
     public void RadingDialogue(){
         try {
             howtoUseAppDialogue.showLoadingDialog();
@@ -842,25 +837,25 @@ public class HomePageActivity extends AppCompatActivity{
                         .into(holder.courseImage);
 
                 holder.txtCourseName.setText(datamodels.get(position).getCourseTitle());
-                holder.txtDescription.setText(datamodels.get(position).getCourseTitle());
+                holder.txtDescription.setText(datamodels.get(position).getCourseDescription());
                 holder.listLayout.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        /*CategoryName = datamodels.get(position).getCategoryname()+" "+datamodels.get(position).getLanguage();
+                        CategoryName = datamodels.get(position).getCategoryname()+" "+datamodels.get(position).getLanguage();
                         CourseLog = "";LessonLog = "";ActivityLog = "Click";PagenameLog = "Dashboard";
                         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, datamodels.get(position).getCategoryname());
                         logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
                         getLogEvent(HomePageActivity.this);
-                        new AppsFlyerEventsHelper(context).EventCategory(CategoryName);*/
-                        /*Intent intent = new Intent(context, CoursePageActivity.class);
-                        intent.putExtra("CategoryId",datamodels.get(postn).getCategoryId());
-                        intent.putExtra("CategoryName",datamodels.get(postn).getCategoryname());
-                        intent.putExtra("CourseName",datamodels.get(postn).getCategory_Title());
-                        intent.putExtra("description",datamodels.get(postn).getCategory_description());
-                        intent.putExtra("language",datamodels.get(postn).getCategory_language());
-                        intent.putExtra("VideoUrl",datamodels.get(postn).getCatVideoUrl());
-                        intent.putExtra("statusNSDC",datamodels.get(postn).getStatusNSDC());
-                        context.startActivity(intent);*/
+                        new AppsFlyerEventsHelper(context).EventCategory(CategoryName);
+                        Intent intent = new Intent(context, CoursePageActivity.class);
+                        intent.putExtra("CategoryId",datamodels.get(position).getCourseId());
+                        intent.putExtra("CategoryName",datamodels.get(position).getCategoryname());
+                        intent.putExtra("CourseName",datamodels.get(position).getCourseTitle());
+                        intent.putExtra("description",datamodels.get(position).getCourseDescription());
+                        intent.putExtra("language",datamodels.get(position).getLanguage());
+                        intent.putExtra("VideoUrl",datamodels.get(position).getVideoUrl());
+                        intent.putExtra("statusNSDC",datamodels.get(position).getNsdcStatus());
+                        context.startActivity(intent);
 
                     }
                 });
@@ -1237,36 +1232,6 @@ public class HomePageActivity extends AppCompatActivity{
         });
     }
 
-
-
-    public void installYouTubeMentor(String mentorVideo) {
-        videoCelebrityMentor.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
-            @Override
-            public void onReady(@NonNull com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer youTubePlayer) {
-                playerMentor = youTubePlayer;
-                playerMentor.loadVideo(mentorVideo, 0);
-                playerMentor.pause();
-            }
-            @Override
-            public void onStateChange(com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer youTubePlayer, PlayerConstants.PlayerState state) {
-                super.onStateChange(youTubePlayer, state);
-                ActivityLog = "Home Page";
-                CategoryName = "";
-                LessonLog = "";
-                CourseLog = "Your Celebrity Mentor";
-                if (state.toString().equals("PLAYING")){
-                    PagenameLog = "Video start";
-                    getLogEvent(HomePageActivity.this);
-                } else if (state.toString().equals("PAUSED")){
-                    PagenameLog = "Video paused";
-                    getLogEvent(HomePageActivity.this);
-                } else if (state.toString().equals("STOPPED")){
-                    PagenameLog = "Video stopped";
-                    getLogEvent(HomePageActivity.this);
-                }
-            }
-        });
-    }
     public void saveLocale(String lang){
         SharedPreferences prefs = getSharedPreferences("Hindi", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();

@@ -33,7 +33,7 @@
                 android:layout_marginTop="0dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/chooseLanguage"
-                android:textColor="@color/dark_grey_blue"
+                android:textColor="@color/muted_blue"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
@@ -50,7 +50,7 @@
                 android:layout_marginTop="15dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/chooseLanguage_hindi"
-                android:textColor="@color/dark_grey_blue"
+                android:textColor="@color/muted_blue"
                 android:textSize="20sp"
                 android:layout_marginBottom="20dp"
                 android:textStyle="bold" />

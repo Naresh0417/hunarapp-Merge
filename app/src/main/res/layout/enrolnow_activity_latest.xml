@@ -613,7 +613,8 @@
                             android:layout_gravity="center"
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="30dp"
-                            android:fontFamily="@font/dinprobold"
+                            android:fontFamily="sans-serif"
+                            android:gravity="center"
                             android:text="@string/txt_one_step"
                             android:textColor="@color/muted_blue"
                             android:textSize="16sp" />

@@ -15,7 +15,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/navigation">
+            android:layout_above="@+id/navigation"
+            android:background="@color/milkWhite">
 
             <RelativeLayout
                 android:id="@+id/layoutHeader"
@@ -61,39 +62,43 @@
                 android:orientation="vertical"
                 android:layout_below="@+id/layoutHeader">
 
-                <RadioGroup
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="60dp"
+                    android:orientation="horizontal"
                     android:weightSum="2"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="5dp"
+                    android:background="@drawable/shadow_white_strok">
 
-                    <RadioButton
+                    <TextView
                         android:id="@+id/btnHunarPosts"
                         android:layout_width="0dp"
-                        android:layout_height="38dp"
-                        android:text="@string/hunar_posts"
+                        android:layout_height="53.3dp"
                         android:layout_weight="1"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:checked="true"
                         android:fontFamily="sans-serif"
-                        android:textColor="@color/white"
-                        android:background="@drawable/blue_button_bg"
-                        android:layout_margin="7dp"/>
+                        android:textStyle="bold"
+                        android:layout_marginTop="-2dp"
+                        android:textSize="16sp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/muted_blue"
+                        android:gravity="center"
+                        android:text="@string/hunar_posts"/>
 
-                    <RadioButton
+                    <TextView
                         android:id="@+id/btnYourPosts"
                         android:layout_width="0dp"
-                        android:layout_height="38dp"
-                        android:text="@string/your_posts"
+                        android:layout_height="53.3dp"
                         android:layout_weight="1"
-                        android:gravity="center"
-                        android:button="@null"
                         android:fontFamily="sans-serif"
-                        android:background="@drawable/border_bg"
-                        android:layout_margin="7dp"/>
+                        android:textStyle="bold"
+                        android:layout_marginTop="-2dp"
+                        android:textSize="16sp"
+                        android:paddingTop="5dp"
+                        android:textColor="@color/muted_blue"
+                        android:gravity="center"
+                        android:text="@string/your_posts"/>
 
-                </RadioGroup>
+                </LinearLayout>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/hocItemsList"

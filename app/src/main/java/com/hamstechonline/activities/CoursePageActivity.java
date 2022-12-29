@@ -44,8 +44,10 @@ import com.hamstechonline.adapters.CourseViewPagerAdapter;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.fragments.SearchFragment;
+import com.hamstechonline.utils.ApiConstants;
 import com.hamstechonline.utils.AppsFlyerEventsHelper;
 import com.hamstechonline.utils.LogEventsActivity;
+import com.hamstechonline.utils.SharedPrefsUtils;
 import com.hamstechonline.utils.UserDataConstants;
 import com.moengage.core.DataCenter;
 import com.moengage.core.LogLevel;
@@ -77,12 +79,12 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
     NavigationFragment navigationFragment;
     RelativeLayout layoutHeader;
     CheckBox imgSearch;
-    TextView headerTitle,txtCourseName, txtLessons, txtDetails;
+    TextView headerTitle,txtCourseName, txtLessons, txtDetails,btnEnrollNow;
     View view;
     SearchFragment searchFragment;
     UserDataBase userDataBase;
     int mMenuId;
-    String CategoryName,CourseLog="",LessonLog = "",ActivityLog="",PagenameLog="",langPref = "Language", mobile = "",
+    String CategoryName,CatId = "",CourseLog="",LessonLog = "",ActivityLog="",PagenameLog="",langPref = "Language", mobile = "",
             fullname = "",email = "";
     SharedPreferences prefs;
     private Locale myLocale;
@@ -93,8 +95,8 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
     AppEventsLogger logger;
     Bundle params;
     ImageButton stickyWhatsApp;
-    LinearLayout layoutContact,layoutHome;
-    ImageView imgHunarClub;
+    LinearLayout layoutContact,layoutHome,imgHunarClub;
+    SharedPrefsUtils sharedPrefsUtils;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -122,6 +124,7 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
         imgHunarClub = findViewById(R.id.imgHunarClub);
         txtLessons = findViewById(R.id.txtLessons);
         txtDetails = findViewById(R.id.txtDetails);
+        btnEnrollNow = findViewById(R.id.btnEnrollNow);
 
         userDataBase = new UserDataBase(this);
         logger = AppEventsLogger.newLogger(this);
@@ -133,6 +136,8 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
         ActivityLog = "Course Page";
 
         logEventsActivity = new LogEventsActivity();
+
+        sharedPrefsUtils = new SharedPrefsUtils(CoursePageActivity.this, getString(R.string.app_name));
 
         MoEngage moEngage = new MoEngage.Builder(getApplication(), "UUN7GSHBBH1UT5GCHI2EQ1KY")
                 .setDataCenter(DataCenter.DATA_CENTER_3)
@@ -154,6 +159,7 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
             txtCourseName.setText(getIntent().getStringExtra("description"));
             CategoryName = getIntent().getStringExtra("CategoryName");
             CourseLog = getIntent().getStringExtra("CourseName");
+            CatId = getIntent().getStringExtra("CategoryId");
         }
         if (getIntent().getStringExtra("notificationId")!= null){
             PagenameLog = "Course Page";
@@ -223,6 +229,13 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
             }
         });
 
+        btnEnrollNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                EnrolNow(Integer.parseInt(CatId));
+            }
+        });
+
 
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -267,7 +280,7 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View view) {
                 ActivityLog = "";
-                PagenameLog = "Home Page";
+                PagenameLog = "Course page";
                 params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
                 logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
                 getLogEvent(CoursePageActivity.this);
@@ -279,7 +292,7 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
         layoutContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityLog = "Home page";
+                ActivityLog = "Course page";
                 PagenameLog = "Contact Page";
                 params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
                 logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
@@ -293,7 +306,7 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onClick(View view) {
                 ActivityLog = "Click";
-                PagenameLog = "Hunar Club";
+                PagenameLog = "Course page";
                 params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
                 logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
                 getLogEvent(CoursePageActivity.this);
@@ -369,6 +382,14 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
             }
         });
 
+    }
+
+    public void EnrolNow(int catId){
+        new AppsFlyerEventsHelper(CoursePageActivity.this).EventEnroll();
+        Intent intent = new Intent(CoursePageActivity.this,EnrolNowActivity.class);
+        sharedPrefsUtils.setSharedPrefBoolean(ApiConstants.isFromCourse, true);
+        intent.putExtra("getCourseId",catId);
+        startActivity(intent);
     }
 
     @Override

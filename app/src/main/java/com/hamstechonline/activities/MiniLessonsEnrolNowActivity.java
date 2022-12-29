@@ -1,5 +1,6 @@
 package com.hamstechonline.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
@@ -589,7 +590,7 @@ public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements Bo
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -679,7 +680,7 @@ public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements Bo
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 float courseAmount = 0;
                 DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -1166,7 +1167,7 @@ public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements Bo
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 holder.txtTitle.setText(optionNames[position]);
                 Glide.with(context)

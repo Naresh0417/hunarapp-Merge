@@ -19,6 +19,7 @@ import com.hamstechonline.datamodel.HocTodayResponse;
 import com.hamstechonline.datamodel.LikesCountData;
 import com.hamstechonline.datamodel.LoginSignupData;
 import com.hamstechonline.datamodel.MyCourseGetChatNumber;
+import com.hamstechonline.datamodel.OnBoardingRequest;
 import com.hamstechonline.datamodel.PayinstallmentRequest;
 import com.hamstechonline.datamodel.PaymentSuccessResponse;
 import com.hamstechonline.datamodel.SaveCommentReply;
@@ -156,4 +157,7 @@ public interface ApiInterface {
 
     @POST("http://android.hamstechonline.com/api/list/getFavouriteCategories")
     Call<FavouriteResponse> getFavouriteResponse(@Body FavouriteResponse favouriteResponse);
+
+    @POST("http://android.hamstechonline.com/api/list/getOnboardingVideo")
+    Call<OnBoardingRequest> getOnBoardResponse(@Body OnBoardingRequest onBoardingRequest);
 }

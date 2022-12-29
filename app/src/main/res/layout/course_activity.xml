@@ -15,7 +15,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/navigation">
+            android:layout_above="@id/navigation"
+            android:background="@color/milkWhite">
 
             <RelativeLayout
                 android:id="@+id/layoutHeader"
@@ -184,16 +185,6 @@
 
         </RelativeLayout>
 
-
-        <ImageView
-            android:id="@+id/imgHunarClub"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/club_icon"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            android:background="@android:color/transparent"/>
-
         <RelativeLayout
             android:id="@+id/navigation"
             android:layout_width="match_parent"
@@ -220,7 +211,7 @@
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/home_icon"/>
+                        android:background="@drawable/ic_home_black" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -231,6 +222,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/imgHunarClub"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -239,7 +231,15 @@
 
                     <ImageView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/hunarclub_selected" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hunar Club"
+                        android:fontFamily="sans-serif"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -266,6 +266,22 @@
             </LinearLayout>
 
         </RelativeLayout>
+
+        <TextView
+            android:id="@+id/btnEnrollNow"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="110dp"
+            android:textColor="@color/muted_blue"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp"
+            android:text="Enroll Now For Full Course"
+            android:background="@drawable/btn_blue_stroke_white"
+            />
 
         <ImageButton
             android:id="@+id/stickyWhatsApp"

@@ -2,85 +2,100 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00FFFFFF"
-    android:orientation="vertical">
+    android:background="@color/milkWhite">
 
-    <LinearLayout
-        android:id="@+id/linearMain"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="8dp"
-        android:background="#00FFFFFF"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:scrollbars="none">
 
-        <ImageView
-            android:layout_width="230dp"
-            android:layout_height="110dp"
-            android:src="@drawable/hunar_online_logo"
-            android:layout_marginTop="20dp"
-            android:layout_gravity="center_horizontal"
-            android:visibility="visible"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/helveticabold"
-            android:text="Hi! Let's help you choose\n your favourite courses!"
-            android:textColor="@color/muted_blue"
-            android:textSize="15sp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/helveticabold"
-            android:text="@string/chooseFiveTopics"
-            android:textColor="@color/dark_slate_blue"
-            android:textSize="12sp"
-            android:visibility="gone" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearList"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btnRecommended"
-        android:layout_below="@+id/linearMain"
-        android:layout_marginTop="15dp"
-        android:layout_marginBottom="10dp">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/listGrid"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
-            android:background="#00FFFFFF"
-            android:scrollbars="none">
+            android:orientation="vertical">
 
-        </androidx.recyclerview.widget.RecyclerView>
-    </LinearLayout>
+            <LinearLayout
+                android:id="@+id/linearMain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="8dp"
+                android:background="#00FFFFFF"
+                android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/btnRecommended"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="15dp"
-        android:background="@null"
-        android:fontFamily="sans-serif"
-        android:onClick="Homepage"
-        android:text="@string/select_skip"
-        android:textAllCaps="true"
-        android:textColor="@color/muted_blue"
-        android:textSize="17sp"
-        android:textStyle="bold" />
+                <ImageView
+                    android:layout_width="230dp"
+                    android:layout_height="110dp"
+                    android:src="@drawable/hunar_online_logo"
+                    android:layout_marginTop="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:visibility="visible"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/helveticabold"
+                    android:text="Hi! Let's help you choose\n your favourite courses!"
+                    android:textColor="@color/muted_blue"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:fontFamily="@font/helveticabold"
+                    android:text="@string/chooseFiveTopics"
+                    android:textColor="@color/dark_slate_blue"
+                    android:textSize="12sp"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/btnRecommended"
+                android:layout_below="@+id/linearMain"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/listGrid"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:background="#00FFFFFF"
+                    android:scrollbars="none">
+
+                </androidx.recyclerview.widget.RecyclerView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/btnRecommended"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="20dp"
+                android:background="@null"
+                android:fontFamily="sans-serif"
+                android:layout_gravity="center_horizontal"
+                android:onClick="Homepage"
+                android:text="@string/select_skip"
+                android:textAllCaps="true"
+                android:textColor="@color/muted_blue"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

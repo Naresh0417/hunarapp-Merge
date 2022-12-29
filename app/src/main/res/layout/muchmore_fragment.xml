@@ -36,24 +36,23 @@
 
             <LinearLayout
                 android:id="@+id/btnEnrolNow"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
                 android:orientation="vertical"
-                android:background="@drawable/button_shape_orange"
+                android:background="@drawable/pink_stroke_white"
                 android:padding="10dp"
-                android:layout_marginTop="7dp"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
                 android:visibility="visible">
 
                 <TextView
                     android:id="@+id/txtTotalFee"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/dinpro"
+                    android:textColor="@color/muted_blue"
+                    android:fontFamily="sans-serif"
                     android:textSize="15sp"
+                    android:layout_marginTop="5dp"
                     android:text="@string/enrolNow"
                     android:textAllCaps="true"
                     android:textStyle="bold"/>
