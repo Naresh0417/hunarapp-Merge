@@ -151,7 +151,7 @@ public class SplashScreenActivity extends AppCompatActivity  {
                             String newToken = instanceIdResult.getToken();
                             gcm_id = newToken;
                             getLogEvent(SplashScreenActivity.this);
-                            startActivity(new Intent(SplashScreenActivity.this,OnBoardingActivity.class));
+                            startActivity(new Intent(SplashScreenActivity.this,LanguageSelectionActivity.class));
 
                         }
                     });

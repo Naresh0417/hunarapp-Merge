@@ -54,7 +54,7 @@
             android:id="@+id/lessonLock"
             android:layout_width="18dp"
             android:layout_height="16dp"
-            android:background="@drawable/ic_lock"
+            android:background="@drawable/ic_lock_blue"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:visibility="gone"/>

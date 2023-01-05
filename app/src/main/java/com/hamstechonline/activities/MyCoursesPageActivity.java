@@ -41,6 +41,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -76,6 +77,8 @@ import com.hamstechonline.datamodel.PaymentSuccessResponse;
 import com.hamstechonline.datamodel.UploadPostDisscussions;
 import com.hamstechonline.datamodel.mycources.Lesson;
 import com.hamstechonline.datamodel.mycources.MyCoursesResponse;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.restapi.ApiClient;
 import com.hamstechonline.restapi.ApiInterface;
@@ -112,10 +115,11 @@ import retrofit2.Response;
 public class MyCoursesPageActivity extends AppCompatActivity implements LikesInterface, PaymentResultWithDataListener {
 
     DrawerLayout drawer;
-    TextView txtLessons,txtDiscussion,txtChat,txtCallRequest,txtDescription,txtNextLessons,txtTitle;
+    TextView txtLessons,txtDiscussion,txtChat,txtCallRequest,txtDescription,txtNextLessons,txtTitle,textSubmit;
     RecyclerView lessonsList,listSimilarCourses,listOverview,discussionList;
+    EditText textFile;
     //BottomNavigationView navigation;
-    ImageView imgKnowHow,imgNextLesson,playButton,imgWhatsApp;
+    ImageView imgKnowHow,imgNextLesson,playButton,imgWhatsApp,lessonLock;
     CheckBox txtSeeAll,overviewExpand;
     ImageButton stickyWhatsApp;
     RelativeLayout submitPost,lessonsExpand,facultyLayput;
@@ -125,11 +129,11 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
     LogEventsActivity logEventsActivity;
     String CategoryName = "",CourseLog = "",LessonLog="",ActivityLog,PagenameLog;
     String courseId,language,langPref = "Language",mobile = "",tracking_id = "",
-            fullname = "",email = "",mp4URL,intLike = "100",likevalueCount = "",lessonEvent,order_id;
+            fullname = "",email = "",mp4URL,intLike = "100",likevalueCount = "",lessonEvent,order_id,footerMenuStatus;
     AppEventsLogger logger;
     boolean likeStatus = false;
     Bundle params;
-    SharedPreferences prefs;
+    SharedPreferences prefs,footerStatus;
     UserDataBase userDataBase;
     ApiInterface apiService;
     private MyCourseOverviewAdapter overviewAdapter;
@@ -156,7 +160,6 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
     DiscussionDetailsDialog buzzDetailsDialog;
     DynamicWhatsAppChat dynamicWhatsAppChat;
     ReportBlockDialoge reportDialoge;
-    LinearLayout layoutContact,layoutHome,imgHunarClub;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -197,9 +200,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         lessonsExpand = findViewById(R.id.lessonsExpand);
         imgWhatsApp = findViewById(R.id.imgWhatsApp);
         txtTitle = findViewById(R.id.txtTitle);
-        layoutHome = findViewById(R.id.layoutHome);
-        layoutContact = findViewById(R.id.layoutContact);
-        imgHunarClub = findViewById(R.id.imgHunarClub);
+        lessonLock = findViewById(R.id.lessonLock);
+        textSubmit = findViewById(R.id.textSubmit);
+        textFile = findViewById(R.id.textFile);
 
         //navigation.setOnNavigationItemSelectedListener(this);
         //navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
@@ -273,44 +276,18 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             }
         });
 
-        layoutHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityLog = "";
-                PagenameLog = "MyCourse page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(MyCoursesPageActivity.this);
-                Intent intentCourses = new Intent(MyCoursesPageActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-            }
-        });
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        layoutContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityLog = "Course page";
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(MyCoursesPageActivity.this);
-                new AppsFlyerEventsHelper(MyCoursesPageActivity.this).EventContactus();
-                Intent about = new Intent(MyCoursesPageActivity.this, ContactActivity.class);
-                startActivity(about);
-            }
-        });
-        imgHunarClub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityLog = "Click";
-                PagenameLog = "MyCourse page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(MyCoursesPageActivity.this);
-                Intent hamstech = new Intent(MyCoursesPageActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-            }
-        });
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "MyCourse page").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "MyCourse page")
+                    .commit();
+        }
 
         expandLessonsList.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -406,6 +383,27 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             }
         });
 
+        textSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityLog = "Ask here";
+                PagenameLog = "MyCourse page";
+                getLogEvent(MyCoursesPageActivity.this);
+                uploadConentent = textFile.getText().toString().trim();
+                uploadTitle = "";
+                if (uploadConentent.equalsIgnoreCase("")){
+                    Toast.makeText(MyCoursesPageActivity.this, "Fields should not be empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    ActivityLog = "Upload Post";
+                    textFile.setText("");
+                    textFile.setHint("Have A Doubt? Ask Here ...");
+                    hocLoadingDialog.showLoadingDialog();
+                    uploadFile();
+                    uploadConentent = ""; uploadFilePath = ""; uploadTitle = "";
+                }
+            }
+        });
+
         submitPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -469,7 +467,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
     @Override
     protected void onRestart() {
         super.onRestart();
-        startActivity(getIntent());
+        //startActivity(getIntent());
     }
 
     public void lockPopup() {
@@ -482,7 +480,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         dialog.setContentView(R.layout.lock_popup);
         dialog.setCancelable(true);
 
-        Button btnNext = dialog.findViewById(R.id.btnNext);
+        TextView btnNext = dialog.findViewById(R.id.btnNext);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -560,6 +558,12 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                         .apply(RequestOptions.bitmapTransform(new RoundedCorners(20)))
                         .error(R.mipmap.ic_launcher)
                         .into(imgNextLesson);
+
+                if (response.body().getLastLessonDetails().getLockValue().equalsIgnoreCase("0")){
+                    lessonLock.setVisibility(View.VISIBLE);
+                } else {
+                    lessonLock.setVisibility(View.GONE);
+                }
 
 
                 for (int k =0; k<response.body().getLessons().size(); k++) {
@@ -1070,6 +1074,8 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 uploadTitle = "";
                 if (uploadConentent.equalsIgnoreCase("")){
                     Toast.makeText(MyCoursesPageActivity.this, "Fields should not be empty", Toast.LENGTH_SHORT).show();
+                } else if (imagePathData.equalsIgnoreCase("")){
+                    Toast.makeText(MyCoursesPageActivity.this, "Select an Image", Toast.LENGTH_SHORT).show();
                 } else {
                     ActivityLog = "Upload Post";
                     userInputContent.setText("");

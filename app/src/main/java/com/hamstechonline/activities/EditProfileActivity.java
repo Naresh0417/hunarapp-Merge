@@ -25,6 +25,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -57,6 +59,8 @@ import com.hamstechonline.R;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.editprofile.datamodel.MentorResponse;
 import com.hamstechonline.editprofile.datamodel.ProfileData;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.restapi.ApiClient;
 import com.hamstechonline.restapi.ApiInterface;
@@ -87,7 +91,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class EditProfileActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class EditProfileActivity extends AppCompatActivity {
 
     Spinner spnWhyHamstech,spnAge,spnWork,spnLanguage;
     private static final int FILE_SELECT_CODE = 0;
@@ -99,7 +103,6 @@ public class EditProfileActivity extends AppCompatActivity implements BottomNavi
     AutoCompleteTextView txtSelectCity;
     EditText txtEmail,txtUserName;
     DrawerLayout drawer;
-    BottomNavigationView navigation;
     NavigationFragment navigationFragment;
     NavigationView navSideMenu;
     Button btnSave;
@@ -113,8 +116,8 @@ public class EditProfileActivity extends AppCompatActivity implements BottomNavi
     int mMenuId;
     HocLoadingDialog hocLoadingDialog;
     LogEventsActivity logEventsActivity;
-    String langPref = "Language",selectedLanguage,PagenameLog = "", is_student = "no";
-    SharedPreferences prefs;
+    String langPref = "Language",selectedLanguage,PagenameLog = "", is_student = "no",footerMenuStatus;
+    SharedPreferences prefs,footerStatus;
     private Locale myLocale;
     AppEventsLogger logger;
     Bundle params;
@@ -135,7 +138,6 @@ public class EditProfileActivity extends AppCompatActivity implements BottomNavi
         spnLanguage = findViewById(R.id.spnLanguage);
         profile_image = findViewById(R.id.profile_image);
         drawer = findViewById(R.id.drawer_layout);
-        navigation = findViewById(R.id.navigation);
         navSideMenu = findViewById(R.id.navSideMenu);
         btnSave = findViewById(R.id.btnSave);
         txtUserMobile = findViewById(R.id.txtUserMobile);
@@ -177,8 +179,6 @@ public class EditProfileActivity extends AppCompatActivity implements BottomNavi
                 .add(R.id.navSideMenu, navigationFragment, "")
                 .commit();
 
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
         MoEngage moEngage = new MoEngage.Builder(getApplication(), "UUN7GSHBBH1UT5GCHI2EQ1KY")
                 .setDataCenter(DataCenter.DATA_CENTER_3)
                 .configureNotificationMetaData(new NotificationConfig(R.drawable.generic_notification, R.drawable.generic_notification, R.color.dark_grey_blue, "sound", true, true, true))
@@ -199,6 +199,19 @@ public class EditProfileActivity extends AppCompatActivity implements BottomNavi
                 else is_student = "no";
             }
         });
+
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "About Us").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "About Us")
+                    .commit();
+        }
 
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -265,7 +278,6 @@ public class EditProfileActivity extends AppCompatActivity implements BottomNavi
     @Override
     protected void onStart() {
         drawer.closeDrawers();
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
         super.onStart();
     }
     private boolean ValidateInputs() {
@@ -281,71 +293,6 @@ public class EditProfileActivity extends AppCompatActivity implements BottomNavi
             return false;
         }
         return true;
-    }
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(EditProfileActivity.this);
-                Intent intentCourses = new Intent(EditProfileActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                PagenameLog = "Chat support";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "chat with whatsapp");
-                logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT,params);
-                getLogEvent(EditProfileActivity.this);
-
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(EditProfileActivity.this);
-                Intent enrol = new Intent(EditProfileActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(EditProfileActivity.this);
-                Intent hamstech = new Intent(EditProfileActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                getLogEvent(EditProfileActivity.this);
-                Intent about = new Intent(EditProfileActivity.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
     }
 
     public void sideMenu(View view){

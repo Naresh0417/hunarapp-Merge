@@ -25,6 +25,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentManager;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -78,6 +79,8 @@ import com.hamstechonline.datamodel.homepage.MiniLesson;
 import com.hamstechonline.datamodel.homepage.MoreTrialClass;
 import com.hamstechonline.datamodel.homepage.MyCourse;
 import com.hamstechonline.datamodel.homepage.SuccessStory;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.fragments.SearchFragment;
 import com.hamstechonline.restapi.ApiClient;
@@ -142,6 +145,7 @@ public class HomePageActivity extends AppCompatActivity {
     ArrayList<MyCourse> myCourseList = new ArrayList<>();
     CheckBox imgSearch, txtSeeMore;
     SearchFragment searchFragment;
+    FooterNavigationUnPaid footerNavigationUnPaid;
     String CategoryName,CourseLog,LessonLog,ActivityLog,PagenameLog;
     View view;
     LinearLayout recommendedLayout,otherEnglishListLayout,otherHindiListLayout;
@@ -155,8 +159,8 @@ public class HomePageActivity extends AppCompatActivity {
     UserDataBase userDataBase;
     LogEventsActivity logEventsActivity;
     HocLoadingDialog hocLoadingDialog;
-    String langPref = "Language",mp4URL,typeCat = "";
-    SharedPreferences prefs;
+    String langPref = "Language",mp4URL,typeCat = "",footerMenuStatus;
+    SharedPreferences prefs,footerStatus;
     private Locale myLocale;
     RatingDialogue howtoUseAppDialogue;
     HowtoUseAppDialogue howtoUseApp;
@@ -176,6 +180,7 @@ public class HomePageActivity extends AppCompatActivity {
     Runnable updateBanner;
     DynamicWhatsAppChat dynamicWhatsAppChat;
     LinearLayout layoutContact,layoutHome,imgHunarClub;
+    FragmentTransaction ft;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -249,6 +254,8 @@ public class HomePageActivity extends AppCompatActivity {
                 .add(R.id.navSideMenu, navigationFragment, "")
                 .commit();
 
+        ft = getSupportFragmentManager().beginTransaction();
+
         FacebookSdk.setAutoInitEnabled(true);
         FacebookSdk.fullyInitialize();
         //setAdvertiserIDCollectionEnabled(true);
@@ -267,6 +274,8 @@ public class HomePageActivity extends AppCompatActivity {
         getLifecycle().addObserver(youTubePlayerView);
         hocLoadingDialog = new HocLoadingDialog(this);
         prefs = getSharedPreferences("Hindi", Activity.MODE_PRIVATE);
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
         langPref = prefs.getString("Language", "en");
         typeCat = prefs.getString("Category", "");
         changeLang(langPref);
@@ -318,6 +327,16 @@ public class HomePageActivity extends AppCompatActivity {
 
             }
         });
+        if (savedInstanceState == null) {
+            if (footerMenuStatus.equalsIgnoreCase("paid")) {
+                //footerNavigationPaid = FooterNavigationPaid.newInstance();
+                ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Home Page").commit();
+            } else {
+                //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+                ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Home Page")
+                        .commit();
+            }
+        }
         imgSearch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -496,9 +515,11 @@ public class HomePageActivity extends AppCompatActivity {
         super.onStop();
     }
 
+    @SuppressLint("SuspiciousIndentation")
     @Override
     protected void onDestroy() {
         try {
+            if (timerBanner !=null)
             timerBanner.cancel();
         } catch (Exception r) {
             r.printStackTrace();
@@ -544,10 +565,15 @@ public class HomePageActivity extends AppCompatActivity {
                     if (response.body().getMyCourses().size() > 0) {
                         recommendedLayout.setVisibility(View.VISIBLE);
                         myCourseList = response.body().getMyCourses();
-
+                        footerMenuStatus = "paid";
                         myCoursePagerAdapter = new MyCoursePagerAdapter(HomePageActivity.this,myCourseList);
                         listTopicsRecommended.setOffscreenPageLimit(myCourseList.size());
                         listTopicsRecommended.setAdapter(myCoursePagerAdapter);
+                    } else {
+                        SharedPreferences.Editor editor = footerStatus.edit();
+                        editor.putString("footerStatus", "unpaid");
+                        editor.commit();
+
                     }
 
 
@@ -838,7 +864,7 @@ if (i.resolveActivity(packageManager) != null) {
 
                 holder.txtCourseName.setText(datamodels.get(position).getCourseTitle());
                 holder.txtDescription.setText(datamodels.get(position).getCourseDescription());
-                holder.listLayout.setOnClickListener(new View.OnClickListener() {
+                holder.txtStartLearning.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         CategoryName = datamodels.get(position).getCategoryname()+" "+datamodels.get(position).getLanguage();
@@ -871,7 +897,7 @@ if (i.resolveActivity(packageManager) != null) {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             ImageView courseImage;
-            TextView txtCourseName,txtDescription;
+            TextView txtCourseName,txtDescription,txtStartLearning;
             RelativeLayout listLayout;
 
             public ViewHolder(@NonNull View view) {
@@ -879,6 +905,7 @@ if (i.resolveActivity(packageManager) != null) {
                 courseImage = view.findViewById(R.id.courseImage);
                 txtCourseName = view.findViewById(R.id.txtCourseName);
                 txtDescription = view.findViewById(R.id.txtDescription);
+                txtStartLearning = view.findViewById(R.id.txtStartLearning);
             }
         }
     }

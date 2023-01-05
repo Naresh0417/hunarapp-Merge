@@ -1,5 +1,6 @@
 package com.hamstechonline.adapters;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -93,7 +94,7 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         try {
 
             if (isExpand){
@@ -192,7 +193,8 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
         dialog.setContentView(R.layout.lock_popup);
         dialog.setCancelable(true);
 
-        Button btnNext = dialog.findViewById(R.id.btnNext);
+        TextView btnNext = dialog.findViewById(R.id.btnNext);
+        ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
 
         try {
             mobile = userDataBase.getUserMobileNumber(1);
@@ -204,6 +206,13 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
             @Override
             public void onClick(View v) {
                 PayInstallmentAPi(order_id);
+            }
+        });
+
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
             }
         });
 

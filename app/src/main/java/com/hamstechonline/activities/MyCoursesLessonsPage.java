@@ -8,6 +8,7 @@ import android.app.DownloadManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -60,6 +61,8 @@ import com.hamstechonline.datamodel.CallWithFacultyResponse;
 import com.hamstechonline.datamodel.StudentsWork;
 import com.hamstechonline.datamodel.homepage.SuccessStory;
 import com.hamstechonline.datamodel.mycources.Lesson;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.fragments.VideoDialogue;
 import com.hamstechonline.restapi.ApiClient;
@@ -111,6 +114,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 
@@ -123,19 +127,19 @@ import es.voghdev.pdfviewpager.library.adapter.PdfScale;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class MyCoursesLessonsPage extends AppCompatActivity {
 
     private final int REQUEST_GALLERY = 101;
     private final int REQUEST_MULTI_GALLERY = 201;
     private final int PERMISSION_REQUEST_READ_EXTERNAL_STORAGE = 102;
 
-    BottomNavigationView navigation;
+    RelativeLayout navigation;
     DrawerLayout drawer;
     NavigationView navSideMenu;
     LinearLayout linearLessonContent, layoutUpload,lessonsContentLayout,playerLayout;
-    TextView headerTitle, txtDescription, txtLessonName, txtImageText, textPercentage, textAssignFile;
-    RelativeLayout layoutHeader,assignmentDown,studyDown,feedbackDown;
-    CardView cardAssignmentPdf,cardStudyPdf,cardFacultyFeedback;
+    TextView headerTitle, txtDescription, txtLessonName, txtImageText, textPercentage, textAssignFile, txtLiveClassLbl;
+    RelativeLayout layoutHeader,assignmentDown,studyDown,feedbackDown, btnLiveClass;
+    CardView cardAssignmentPdf,cardStudyPdf,cardFacultyFeedback,layoutPercentage;
     UserDataBase userDataBase;
     ApiInterface apiService;
     HocLoadingDialog hocLoadingDialog;
@@ -147,7 +151,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
     LinearLayout fabPrevious, fabNext,layoutFeedback,layoutPercent,layoutStudentWorks;
     PercentView percentView;
     VerticalPdfViewPager pdfViewStudy, pdfViewAssign;
-    private String mp4URL = "", postStatus = "", postId, pdfURL, assignURL,facultyFeedBack,assignmentText = "",videoThumbnailURL = "";
+    private String mp4URL = "", postStatus = "", postId, pdfURL, assignURL,facultyFeedBack,assignmentText = "",
+            submitAssignment,videoThumbnailURL = "",footerMenuStatus;
     List<Lesson> coursesList = new ArrayList<>();
     List<String> imageUrls = new ArrayList<>();
     ArrayList<StudentsWork> arrayListStudentWork = new ArrayList<>();
@@ -170,8 +175,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
     Bundle dataBundle;
     ImageButton stickyWhatsApp;
 
-    String courseId, lessonId;
-
+    String courseId, lessonId, liveWebURL = "";
+    SharedPreferences footerStatus;
     DownloadManager downloadManager;
 
     String strFilePath = "",assignment="";
@@ -230,6 +235,9 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         layoutStudentWorks = findViewById(R.id.layoutStudentWorks);
         lessonsContentLayout = findViewById(R.id.lessonsContentLayout);
         playerLayout = findViewById(R.id.playerLayout);
+        btnLiveClass = findViewById(R.id.btnLiveClass);
+        txtLiveClassLbl = findViewById(R.id.txtLiveClassLbl);
+        layoutPercentage = findViewById(R.id.layoutPercentage);
 
         percentView = findViewById(R.id.percentView);
         textPercentage = findViewById(R.id.textPercentage);
@@ -249,9 +257,6 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         hocLoadingDialog = new HocLoadingDialog(this);
         logEventsActivity = new LogEventsActivity();
         dataBundle = new Bundle();
-
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
 
         navigationFragment = NavigationFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -335,11 +340,23 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         });
 
         UserDataConstants.lessonId = "";
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "MyCourses Lessons").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "MyCourses Lessons")
+                    .commit();
+        }
         stickyWhatsApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
-                LessonLog =
+                LessonLog = "";
                 ActivityLog = "Sticky whatsapp";
                 PagenameLog = "MyCourses Lessons";
                 getLogEvent(MyCoursesLessonsPage.this);
@@ -382,7 +399,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                 Intent i = new Intent(Intent.ACTION_VIEW);
 
                 try {
-                    String url = "https://api.whatsapp.com/send?phone=" + "919010100240" + "&text=" +
+                    String url = "https://api.whatsapp.com/send?phone=" + "919666664757" + "&text=" +
                             URLEncoder.encode(getResources().getString(R.string.chat_student_guide), "UTF-8");
                     i.setPackage("com.whatsapp");
                     i.setData(Uri.parse(url));
@@ -393,6 +410,15 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+            }
+        });
+
+        btnLiveClass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MyCoursesLessonsPage.this, LiveFashionWebview.class);
+                intent.putExtra("URL",liveWebURL);
+                startActivity(intent);
             }
         });
 
@@ -522,68 +548,6 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         });
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                logContactusEvent(PagenameLog);
-                Intent intentCourses = new Intent(MyCoursesLessonsPage.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                CategoryName = "";
-                CourseLog = "";
-                LessonLog = "";
-                ActivityLog = "";
-                PagenameLog = "chat with whatsapp";
-                getLogEvent(MyCoursesLessonsPage.this);
-
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone=" + "919010100240" + "&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                logContactusEvent(PagenameLog);
-                Intent enrol = new Intent(MyCoursesLessonsPage.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                logContactusEvent(PagenameLog);
-                Intent hamstech = new Intent(MyCoursesLessonsPage.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                logContactusEvent(PagenameLog);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                Intent about = new Intent(MyCoursesLessonsPage.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
-    }
 
     public void sideMenu(View view) {
         drawer.openDrawer(Gravity.LEFT);
@@ -694,6 +658,25 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                         textAssignFile.setText(""+data.getClipData().getItemAt(0).getUri());
                     }
                     Log.e("imageUri","676    "+imageUrls.size());
+                } else if(data.getData() != null) {
+                    String imagePath = data.getData().getPath();
+                    try {
+                        assignmentFile = createImageFile();
+
+                        InputStream inputStream = getContentResolver().openInputStream(data.getData());
+                        FileOutputStream fileOutputStream = new FileOutputStream(assignmentFile);
+                        // Copying
+                        copyStream(inputStream, fileOutputStream);
+                        fileOutputStream.close();
+                        inputStream.close();
+                        assignment = imageToBase64(strFilePath);
+                        imageUrls.add(assignment);
+                        if (strFilePath != null && !strFilePath.isEmpty())
+                            textAssignFile.setText(strFilePath);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    //do something with the image (save it to some directory or whatever you need to do with it here)
                 }
                 /*if (requestCode == REQUEST_GALLERY && null != data) {
 
@@ -853,6 +836,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
     public void onSubmit(View view) {
         if (imageUrls.size() > 0) {
+            hocLoadingDialog.showLoadingDialog();
             uploadAssignment(this);
         } else
             Toast.makeText(this, "Please select assignment file", Toast.LENGTH_SHORT).show();
@@ -1039,10 +1023,16 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                             if (!jsonObject.getJSONObject("lesson_details").getString("assignment").isEmpty()) {
                                 layoutUpload.setVisibility(View.VISIBLE);
                             } else {
-                                layoutUpload.setVisibility(View.VISIBLE);
+                                layoutUpload.setVisibility(View.GONE);
                             }
 
                             facultyFeedBack = jsonObject.getString("faculty_feedback");
+                            submitAssignment = jsonObject.getString("submit_assignment");
+                            if (submitAssignment.equalsIgnoreCase("yes")) {
+                                layoutUpload.setVisibility(View.GONE);
+                            } else {
+                                layoutUpload.setVisibility(View.VISIBLE);
+                            }
                             if (!facultyFeedBack.isEmpty()) {
                                 layoutFeedback.setVisibility(View.VISIBLE);
                                 feedbackByFaculty.setText(facultyFeedBack);
@@ -1075,6 +1065,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
             @Override
             public byte[] getBody() throws AuthFailureError {
+                hocLoadingDialog.hideDialog();
                 try {
                     return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
                 } catch (UnsupportedEncodingException uee) {
@@ -1143,6 +1134,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
             @Override
             public byte[] getBody() throws AuthFailureError {
+                hocLoadingDialog.hideDialog();
                 try {
                     return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
                 } catch (UnsupportedEncodingException uee) {
@@ -1357,7 +1349,6 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
         final String mRequestBody = params.toString();
 
-        hocLoadingDialog.showLoadingDialog();
         StringRequest sr = new StringRequest(Request.Method.POST, ApiConstants.uploadAssignment, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -1369,6 +1360,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
                         strFilePath = "";
                         assignmentFile = null;
                         textAssignFile.setText(getString(R.string.select_files));
+                        layoutUpload.setVisibility(View.GONE);
                         uploadSuccessPopUp();
                     }
                 } catch (Exception e) {
@@ -1388,7 +1380,6 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
 
             @Override
             public byte[] getBody() throws AuthFailureError {
-                hocLoadingDialog.hideDialog();
                 try {
                     return mRequestBody == null ? null : mRequestBody.getBytes("utf-8");
                 } catch (UnsupportedEncodingException uee) {
@@ -1590,12 +1581,29 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
             layoutPercent.setVisibility(View.GONE);
         }
         percentView.setPercentage(nPercent);
-        if (coursesList.get(listPosition).getVideoUrl().equalsIgnoreCase("")){
+        if (coursesList.get(listPosition).getType().equalsIgnoreCase("live")){
             videoThumbnailURL = coursesList.get(listPosition).getVideo_thumbnail();
             playerLayout.setVisibility(View.GONE);
+            layoutPercentage.setVisibility(View.GONE);
+            btnLiveClass.setVisibility(View.VISIBLE);
+            txtLiveClassLbl.setText("Live Class");
+            liveWebURL = coursesList.get(listPosition).getVideoUrl();
+            if (coursesList.get(listPosition).getVideoUrl().equalsIgnoreCase("")) btnLiveClass.setClickable(false);
+            else btnLiveClass.setClickable(true);
+        } else if (coursesList.get(listPosition).getType().equalsIgnoreCase("nsdc_exam")){
+            videoThumbnailURL = coursesList.get(listPosition).getVideo_thumbnail();
+            playerLayout.setVisibility(View.GONE);
+            layoutPercentage.setVisibility(View.GONE);
+            btnLiveClass.setVisibility(View.VISIBLE);
+            txtLiveClassLbl.setText("NSDC Exam");
+            liveWebURL = coursesList.get(listPosition).getVideoUrl();
+            if (coursesList.get(listPosition).getVideoUrl().equalsIgnoreCase("")) btnLiveClass.setClickable(false);
+            else btnLiveClass.setClickable(true);
         } else {
             mp4URL = coursesList.get(listPosition).getVideoUrl();
             playerLayout.setVisibility(View.VISIBLE);
+            layoutPercentage.setVisibility(View.VISIBLE);
+            btnLiveClass.setVisibility(View.GONE);
         }
 
         findViewById(R.id.layoutMaterial).setVisibility(View.GONE);
@@ -1650,11 +1658,13 @@ public class MyCoursesLessonsPage extends AppCompatActivity implements BottomNav
         textPercentage.setText(coursesList.get(listPosition).getWatchedPercentage() + "%");
         int nPercent = Integer.parseInt(coursesList.get(listPosition).getWatchedPercentage());
         percentView.setPercentage(nPercent);
-        if (coursesList.get(listPosition).getVideoUrl().equalsIgnoreCase("")){
+        if (coursesList.get(listPosition).getType().equalsIgnoreCase("live")){
             videoThumbnailURL = coursesList.get(listPosition).getVideo_thumbnail();
             playerLayout.setVisibility(View.GONE);
+            btnLiveClass.setVisibility(View.VISIBLE);
         } else {
             mp4URL = coursesList.get(listPosition).getVideoUrl();
+            btnLiveClass.setVisibility(View.GONE);
 
         }
 

@@ -1,5 +1,6 @@
 package com.hamstechonline.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -16,6 +17,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,6 +48,8 @@ import com.google.android.material.navigation.NavigationView;
 import com.hamstechonline.R;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.LessonsDataModel;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.utils.AppsFlyerEventsHelper;
 import com.hamstechonline.utils.ApiConstants;
@@ -70,10 +75,10 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Locale;
 
-public class SuccessStoryActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class SuccessStoryActivity extends AppCompatActivity {
 
     DrawerLayout drawer;
-    BottomNavigationView navigation;
+    RelativeLayout navigation;
     NavigationFragment navigationFragment;
     NavigationView navSideMenu;
     RecyclerView listItems;
@@ -91,9 +96,9 @@ public class SuccessStoryActivity extends AppCompatActivity implements BottomNav
     YouTubePlayer player;
     YouTubePlayerView youTubePlayerView;
 
-    private String mp4URL = "",notiTitle = "",mobile = "",fullname = "",email = "";
+    private String mp4URL = "",notiTitle = "",mobile = "",fullname = "",email = "",footerMenuStatus;
     String langPref = "Language";
-    SharedPreferences prefs;
+    SharedPreferences prefs,footerStatus;
     private Locale myLocale;
     AppEventsLogger logger;
     Bundle params;
@@ -112,9 +117,6 @@ public class SuccessStoryActivity extends AppCompatActivity implements BottomNav
         listItems = findViewById(R.id.listItems);
         headerTitle = findViewById(R.id.headerTitle);
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
-
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_enrol).setChecked(true);
 
         hocLoadingDialog = new HocLoadingDialog(this);
         navigationFragment = NavigationFragment.newInstance();
@@ -159,6 +161,19 @@ public class SuccessStoryActivity extends AppCompatActivity implements BottomNav
             getLogEvent(this);
         }
 
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Success stories").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Success stories")
+                    .commit();
+        }
+
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset)
@@ -198,73 +213,7 @@ public class SuccessStoryActivity extends AppCompatActivity implements BottomNav
             }
         });
     }
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent intentCourses = new Intent(SuccessStoryActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                notiTitle = "";
-                ActivityLog = "";
-                PagenameLog = "chat with whatsapp";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "chat with whatsapp");
-                logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT,params);
-                getLogEvent(SuccessStoryActivity.this);
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent enrol = new Intent(SuccessStoryActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent hamstech = new Intent(SuccessStoryActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                Intent about = new Intent(SuccessStoryActivity.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-
-        return true;
-    }
     public void sideMenu(View view){
         drawer.openDrawer(Gravity.LEFT);
     }
@@ -310,7 +259,7 @@ public class SuccessStoryActivity extends AppCompatActivity implements BottomNav
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
             try {
                 holder.txtTitle.setText(dataArrayList.get(position).getLesson_title());
                 holder.txtDescription.setText(dataArrayList.get(position).getLesson_description());

@@ -42,7 +42,6 @@ import com.hamstechonline.activities.ChooseTopisActivity;
 import com.hamstechonline.activities.EditProfileActivity;
 import com.hamstechonline.activities.EnrolNowActivity;
 import com.hamstechonline.activities.FaqsActivity;
-import com.hamstechonline.activities.HamstechTodayActivity;
 import com.hamstechonline.activities.HomePageActivity;
 import com.hamstechonline.activities.LiveFashionWebview;
 import com.hamstechonline.activities.NotificationsActivity;

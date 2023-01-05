@@ -1,7 +1,9 @@
 package com.hamstechonline.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.FragmentManager;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +30,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hamstechonline.R;
 import com.hamstechonline.adapters.FaqsAdapter;
 import com.hamstechonline.database.UserDataBase;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.utils.AppsFlyerEventsHelper;
 import com.hamstechonline.utils.LogEventsActivity;
@@ -45,17 +50,17 @@ import java.net.URLEncoder;
 public class FaqsActivity extends AppCompatActivity {
 
     DrawerLayout drawer;
-    BottomNavigationView navigation;
     NavigationFragment navigationFragment;
     NavigationView navSideMenu;
     RecyclerView listItems;
     FaqsAdapter faqsAdapter;
     UserDataBase userDataBase;
-    String PagenameLog;
+    String PagenameLog,footerMenuStatus;
     LogEventsActivity logEventsActivity;
     AppEventsLogger logger;
     Bundle params;
     ImageButton stickyWhatsApp;
+    SharedPreferences footerStatus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -64,12 +69,10 @@ public class FaqsActivity extends AppCompatActivity {
         setContentView(R.layout.faqs_activity);
 
         drawer = findViewById(R.id.drawer_layout);
-        navigation = findViewById(R.id.navigation);
         navSideMenu = findViewById(R.id.navSideMenu);
         listItems = findViewById(R.id.listItems);
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
 
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         userDataBase = new UserDataBase(this);
         logEventsActivity = new LogEventsActivity();
@@ -124,67 +127,20 @@ public class FaqsActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    PagenameLog = "Home Page";
-                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                    logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                    Intent intentCourses = new Intent(FaqsActivity.this, HomePageActivity.class);
-                    startActivity(intentCourses);
-                    return true;
-                case R.id.navigation_chat:
-                    PagenameLog = "chat with whatsapp";
-                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "chat with whatsapp");
-                    logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT,params);
-                    PackageManager packageManager = getPackageManager();
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-
-                    try {
-                        String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                                URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                        i.setPackage("com.whatsapp");
-                        i.setData(Uri.parse(url));
-                        startActivity(i);
-                        /*if (i.resolveActivity(packageManager) != null) {
-                            startActivity(i);
-                        }*/
-                    } catch (Exception e){
-                        e.printStackTrace();
-                    }
-                    return true;
-                case R.id.navigation_enrol:
-                    PagenameLog = "Success Story";
-                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                    logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                    Intent enrol = new Intent(FaqsActivity.this, SuccessStoryActivity.class);
-                    startActivity(enrol);
-                    return true;
-                case R.id.navigation_today:
-                    PagenameLog = "Hunar Club";
-                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                    logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                    Intent hamstech = new Intent(FaqsActivity.this, BuzzActivity.class);
-                    startActivity(hamstech);
-                    return true;
-                case R.id.navigation_aboutus:
-                    PagenameLog = "Contact Page";
-                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                    logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                    new AppsFlyerEventsHelper(FaqsActivity.this).EventContactus();
-                    Intent about = new Intent(FaqsActivity.this, ContactActivity.class);
-                    startActivity(about);
-                    return true;
-            }
-            return false;
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "About Us").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "About Us")
+                    .commit();
         }
-    };
+    }
 
     public void sideMenu(View view){
         drawer.openDrawer(Gravity.LEFT);

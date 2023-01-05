@@ -224,7 +224,7 @@ public class MyCoursePagerAdapter extends PagerAdapter implements PaymentResultW
                 intent.putExtra("CourseName",datamodels.get(position).getCourseTitle());
                 intent.putExtra("description",datamodels.get(position).getCourseTitle());
                 intent.putExtra("language",datamodels.get(position).getLanguage());
-                intent.putExtra("VideoUrl",datamodels.get(position).getVideoUrl());
+                //intent.putExtra("VideoUrl",datamodels.get(position).getVideoUrl());
                 intent.putExtra("order_id",datamodels.get(position).getOrderId());
                 intent.putExtra("email",datamodels.get(position).getEmail());
                 intent.putExtra("statusNSDC","0");

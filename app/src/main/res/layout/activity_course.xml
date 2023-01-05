@@ -17,7 +17,8 @@
             android:id="@+id/layoutHeader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="8dp"
+            android:background="@drawable/bottom_line_bg">
 
             <ImageView
                 android:id="@+id/imgSideMenu"
@@ -221,6 +222,15 @@
                                 android:layout_alignParentBottom="true"
                                 android:layout_margin="8dp"/>
 
+                            <ImageView
+                                android:id="@+id/lessonLock"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
+                                android:src="@drawable/ic_lock_blue"
+                                android:layout_alignParentRight="true"
+                                android:layout_margin="8dp"
+                                android:visibility="gone"/>
+
                             <TextView
                                 android:id="@+id/txtNextLessons"
                                 android:layout_width="200dp"
@@ -411,7 +421,7 @@
                             android:background="@drawable/bgshape_circle"
                             android:orientation="horizontal">
 
-                            <TextView
+                            <EditText
                                 android:id="@+id/textFile"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -421,9 +431,10 @@
                                 android:layout_toLeftOf="@+id/textSubmit"
                                 android:drawablePadding="10dp"
                                 android:fontFamily="@font/dinpro"
-                                android:foreground="?attr/selectableItemBackground"
-                                android:text="Have A Doubt? Ask Here ..."
+                                android:hint="Have A Doubt? Ask Here ..."
                                 android:textColor="@color/dark_pink"
+                                android:textColorHint="@color/dark_pink"
+                                android:background="@null"
                                 android:textSize="14dp" />
 
                             <TextView
@@ -464,83 +475,14 @@
         <RelativeLayout
             android:id="@+id/navigation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="62dp"
             android:layout_alignParentBottom="true"
             android:background="@android:color/transparent">
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <FrameLayout
+                android:id="@+id/footer_menu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:padding="5dp"
-                android:background="@android:color/transparent">
-
-                <LinearLayout
-                    android:id="@+id/layoutHome"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_home_black" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lblHome"
-                        android:fontFamily="sans-serif"
-                        android:textSize="12sp"
-                        android:layout_marginTop="2dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/imgHunarClub"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/hunarclub_selected" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hunar Club"
-                        android:fontFamily="sans-serif"
-                        android:textSize="12sp"
-                        android:layout_marginTop="2dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layoutContact"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/contact_us"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/contactUs"
-                        android:fontFamily="sans-serif"
-                        android:textSize="12sp"
-                        android:layout_marginTop="2dp"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
+                android:layout_height="wrap_content"/>
         </RelativeLayout>
 
 

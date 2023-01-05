@@ -14,6 +14,9 @@ public class MentorResponse {
     private List<Whyhamstech> whyhamstech = null;
     @SerializedName("languages")
     private List<Language> languages = null;
+    @SerializedName("mandatory")
+    @Expose
+    private String mandatory;
 
     @SerializedName("lang")
     private String lang;
@@ -52,5 +55,13 @@ public class MentorResponse {
 
     public void setLanguages(List<Language> languages) {
         this.languages = languages;
+    }
+
+    public String getMandatory() {
+        return mandatory;
+    }
+
+    public void setMandatory(String mandatory) {
+        this.mandatory = mandatory;
     }
 }

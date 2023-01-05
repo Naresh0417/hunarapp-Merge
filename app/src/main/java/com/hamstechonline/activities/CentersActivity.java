@@ -1,7 +1,9 @@
 package com.hamstechonline.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -10,11 +12,11 @@ import androidx.annotation.Nullable;
 
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.FragmentManager;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -27,6 +29,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hamstechonline.R;
 import com.hamstechonline.adapters.CentersAdapter;
 import com.hamstechonline.database.UserDataBase;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.utils.GridSpacingItemDecoration;
 import com.hamstechonline.utils.LogEventsActivity;
@@ -42,16 +46,16 @@ import org.json.JSONObject;
 
 import java.net.URLEncoder;
 
-public class CentersActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class CentersActivity extends AppCompatActivity {
 
-    BottomNavigationView navigation;
     NavigationFragment navigationFragment;
     NavigationView navSideMenu;
     DrawerLayout drawer;
     RecyclerView listItems;
     CentersAdapter centersAdapter;
     UserDataBase userDataBase;
-    String PagenameLog;
+    String PagenameLog,footerMenuStatus;
+    SharedPreferences footerStatus;
     int mMenuId;
     LogEventsActivity logEventsActivity;
     AppEventsLogger logger;
@@ -65,13 +69,9 @@ public class CentersActivity extends AppCompatActivity implements BottomNavigati
         setContentView(R.layout.centers_activity);
 
         drawer = findViewById(R.id.drawer_layout);
-        navigation = findViewById(R.id.navigation);
         navSideMenu = findViewById(R.id.navSideMenu);
         listItems = findViewById(R.id.listItems);
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
-
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
 
         userDataBase = new UserDataBase(this);
         logEventsActivity = new LogEventsActivity();
@@ -110,6 +110,19 @@ public class CentersActivity extends AppCompatActivity implements BottomNavigati
             }
         });
 
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Our Centers").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Our Centers")
+                    .commit();
+        }
+
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
             public void onDrawerSlide(View drawerView, float slideOffset)
@@ -133,72 +146,6 @@ public class CentersActivity extends AppCompatActivity implements BottomNavigati
             }
         });
 
-    }
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CentersActivity.this);
-                Intent intentCourses = new Intent(CentersActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                PagenameLog = "chat with whatsapp";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "chat with whatsapp");
-                logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT,params);
-                getLogEvent(CentersActivity.this);
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CentersActivity.this);
-                Intent enrol = new Intent(CentersActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CentersActivity.this);
-                Intent hamstech = new Intent(CentersActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CentersActivity.this);
-                Intent about = new Intent(CentersActivity.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
     }
 
     public void sideMenu(View view){
@@ -227,7 +174,6 @@ public class CentersActivity extends AppCompatActivity implements BottomNavigati
     @Override
     protected void onStart() {
         drawer.closeDrawers();
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
         super.onStart();
     }
 }

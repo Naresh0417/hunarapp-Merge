@@ -112,16 +112,9 @@ public class LanguageSelectionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 logLanguageEvent(languageSelected);
                 changeLang(langPref);
-                if (getIntent().getStringExtra("pageName")!= null){
-                    Intent intent = new Intent(LanguageSelectionActivity.this, OnBoardingNewActivity.class);
-                    startActivity(intent);
-                    LanguageSelectionActivity.this.finish();
-                } else {
-                    //finish();
-                    Intent intent = new Intent(LanguageSelectionActivity.this, HomePageActivity.class);
-                    startActivity(intent);
-                    LanguageSelectionActivity.this.finish();
-                }
+                Intent intent = new Intent(LanguageSelectionActivity.this, OnBoardingNewActivity.class);
+                startActivity(intent);
+                LanguageSelectionActivity.this.finish();
             }
         });
 

@@ -5,7 +5,32 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:layout_gravity="center_horizontal"
-    android:background="@color/light_gray">
+    android:background="@drawable/border_gray_strok">
+
+    <ImageView
+        android:id="@+id/imgCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end"
+        android:padding="5dp"
+        android:src="@drawable/ic_closee" />
+
+    <ImageView
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/ic_lock_pink"
+        android:layout_gravity="center_horizontal"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pay Your Next Installment to\nContinue Watching Your Lessons!"
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/black_two"/>
 
     <TextView
         android:id="@+id/txtDialogTitle"
@@ -18,23 +43,21 @@
         android:visibility="gone"
         android:textColor="@color/muted_blue"/>
 
-    <Button
+    <TextView
         android:id="@+id/btnNext"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pay_your_instalment"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:fontFamily="@font/dinpro"
-        android:textStyle="bold"
-        android:textSize="15sp"
-        android:paddingLeft="15dp"
-        android:paddingRight="15dp"
-        android:layout_marginTop="15dp"
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="0dp"
+        android:paddingBottom="10dp"
+        android:background="@drawable/pink_stroke_white"
+        android:fontFamily="sans-serif"
+        android:text="@string/paynow"
+        android:textAllCaps="false"
+        android:gravity="center"
+        android:textColor="@color/muted_blue"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/button_shape_orange"
-        android:layout_marginBottom="15dp"
-        />
+        android:textSize="15sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/txtContent"
@@ -44,6 +67,7 @@
         android:fontFamily="@font/dinprobold"
         android:textSize="18sp"
         android:gravity="center_horizontal"
-        android:textColor="@color/muted_blue"/>
+        android:textColor="@color/muted_blue"
+        android:visibility="gone"/>
 
 </LinearLayout>

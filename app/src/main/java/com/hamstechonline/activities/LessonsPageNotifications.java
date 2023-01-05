@@ -1,9 +1,11 @@
 package com.hamstechonline.activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -31,6 +33,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
@@ -52,6 +55,8 @@ import com.hamstechonline.R;
 import com.hamstechonline.activities.lesson.LessonData;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.LessonsDataModel;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.restapi.ApiClient;
 import com.hamstechonline.restapi.ApiInterface;
@@ -85,14 +90,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class LessonsPageNotifications extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class LessonsPageNotifications extends AppCompatActivity {
 
-    BottomNavigationView navigation;
     DrawerLayout drawer;
     NavigationView navSideMenu;
     LinearLayout txtPdfTitle,linearLessonContent,playerLayout;
     TextView headerTitle,txtDescription,txtLessonName,txtImageText;
-    RelativeLayout layoutHeader,nextMainLayout;
+    RelativeLayout layoutHeader,nextMainLayout,navigation;
     UserDataBase userDataBase;
     HocLoadingDialog hocLoadingDialog;
     LogEventsActivity logEventsActivity;
@@ -100,13 +104,12 @@ public class LessonsPageNotifications extends AppCompatActivity implements Botto
     ImageView imgLike,btnShare,imgLesson;
     TextView nextLessonTitle,previousLessonTitle;
     LinearLayout fabPrevious,fabNext;
-    private String mp4URL = "",postStatus = "",postId,pdfURL;
+    private String mp4URL = "",postStatus = "",postId,pdfURL,footerMenuStatus;
     ArrayList<LessonsDataModel> coursesList = new ArrayList<>();
     int intNext = 0,intPrevious = 0,mMenuId;
+    SharedPreferences footerStatus;
 
-    RecyclerView listItems;
     NavigationFragment navigationFragment;
-    Button btnEnrolNow;
     CardView btnEnrollLesson;
     CircleImageView profile_image;
     LinearLayout linProfile;
@@ -131,7 +134,6 @@ public class LessonsPageNotifications extends AppCompatActivity implements Botto
         setContentView(R.layout.lessons_page_activity);
 
         drawer = findViewById(R.id.drawer_layout);
-        navigation = findViewById(R.id.navigation);
         navSideMenu = findViewById(R.id.navSideMenu);
         headerTitle = findViewById(R.id.headerTitle);
         txtLessonName = findViewById(R.id.txtLessonName);
@@ -143,7 +145,6 @@ public class LessonsPageNotifications extends AppCompatActivity implements Botto
         btnShare = findViewById(R.id.btnShare);
         txtImageText = findViewById(R.id.txtImageText);
         imgLesson = findViewById(R.id.imgLesson);
-        txtPdfTitle = findViewById(R.id.txtPdfTitle);
         nextLessonTitle = findViewById(R.id.nextLessonTitle);
         previousLessonTitle = findViewById(R.id.previousLessonTitle);
         fabPrevious = findViewById(R.id.fabPrevious);
@@ -151,22 +152,14 @@ public class LessonsPageNotifications extends AppCompatActivity implements Botto
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         playerLayout = findViewById(R.id.playerLayout);
 
-        listItems = findViewById(R.id.listItems);
-        profile_image = findViewById(R.id.profile_image);
-        linProfile = findViewById(R.id.linProfile);
-        txtUserMobile = findViewById(R.id.txtUserMobile);
-        txtUserName = findViewById(R.id.txtUserName);
-        btnEnrolNow = findViewById(R.id.btnEnrolNow);
         nextMainLayout = findViewById(R.id.nextMainLayout);
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
+        navigation = findViewById(R.id.navigation);
 
         hocLoadingDialog = new HocLoadingDialog(this);
         logEventsActivity = new LogEventsActivity();
 
         nextMainLayout.setVisibility(View.GONE);
-
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
 
         navigationFragment = NavigationFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -283,6 +276,19 @@ public class LessonsPageNotifications extends AppCompatActivity implements Botto
         });
         UserDataConstants.lessonId = "";
 
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Lessons page").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Lessons page")
+                    .commit();
+        }
+
         stickyWhatsApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -323,68 +329,6 @@ public class LessonsPageNotifications extends AppCompatActivity implements Botto
             }
         });
 
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                logContactusEvent(PagenameLog);
-                Intent intentCourses = new Intent(LessonsPageNotifications.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                CategoryName = "";
-                CourseLog = "";
-                        LessonLog = "";
-                ActivityLog = "";
-                PagenameLog = "chat with whatsapp";
-                getLogEvent(LessonsPageNotifications.this);
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                logContactusEvent(PagenameLog);
-                Intent enrol = new Intent(LessonsPageNotifications.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                logContactusEvent(PagenameLog);
-                Intent hamstech = new Intent(LessonsPageNotifications.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                logContactusEvent(PagenameLog);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                Intent about = new Intent(LessonsPageNotifications.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
     }
 
     public void sideMenu(View view){

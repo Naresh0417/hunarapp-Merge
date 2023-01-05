@@ -46,7 +46,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
+                android:layout_height="1.5dp"
                 android:background="@color/muted_blue"
                 android:layout_marginTop="15dp"/>
 
@@ -312,7 +312,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:layout_gravity="bottom"
-                android:scaleType="fitXY"/>
+                android:scaleType="fitXY"
+                android:visibility="gone"/>
 
         </LinearLayout>
     </ScrollView>

@@ -13,7 +13,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"
+            android:background="@color/milkWhite"
             android:padding="7dp">
 
             <RelativeLayout
@@ -1358,17 +1358,17 @@
         android:src="@drawable/ic_whatsapp_circle"
         />
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <RelativeLayout
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="62dp"
         android:layout_alignParentBottom="true"
-        android:foreground="?attr/selectableItemBackground"
-        android:theme="@style/menu_text_style"
-        app:itemBackground="@color/white"
-        app:itemIconTint="@drawable/navigation_selector"
-        app:itemTextColor="@color/pinkish_grey"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/navigation" />
+        android:background="@android:color/transparent">
+
+        <FrameLayout
+            android:id="@+id/footer_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
 
 </RelativeLayout>

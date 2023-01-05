@@ -224,6 +224,9 @@
         <activity android:name=".activities.BuzzActivity"
             android:screenOrientation="unspecified"
             android:exported="true"/>
+        <activity android:name=".activities.LiveClassesActivity"
+            android:screenOrientation="unspecified"
+            android:exported="true"/>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDGcJJs7LBnnZ3OY6aobe3ozdoN8voN_KY"/>

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:elevation="40dp"
+    android:gravity="center"
+    android:padding="10dp">
+
+    <ImageView
+        android:id="@+id/imgCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end"
+        android:padding="5dp"
+        android:src="@drawable/ic_closee" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imgCancel"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_lock_pink" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="This Live Class is Exclusively for"
+            android:textColor="@color/muted_blue"
+            android:textSize="20sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helveticabold"
+            android:gravity="center"
+            android:padding="0dp"
+            android:text="CATEGORY NAME"
+            android:textColor="@color/muted_blue"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/helveticabold"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="Students Only! \n\n To Watch this Class, \n Just Give a Missed Call on:"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/txtWatchNow"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="0dp"
+            android:paddingBottom="10dp"
+            android:background="@drawable/pink_stroke_white"
+            android:fontFamily="sans-serif"
+            android:text="+91 00000 00000"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:textColor="@color/muted_blue"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</RelativeLayout>

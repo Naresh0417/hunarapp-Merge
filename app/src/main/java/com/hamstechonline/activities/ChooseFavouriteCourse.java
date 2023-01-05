@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -41,11 +42,16 @@ import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.hamstechonline.R;
+import com.hamstechonline.adapters.MyCoursePagerAdapter;
+import com.hamstechonline.adapters.StoriesSliderCardPagerAdapter;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.CategoryDatamodel;
 import com.hamstechonline.datamodel.HocResponse;
 import com.hamstechonline.datamodel.favourite.FavouriteCourse;
 import com.hamstechonline.datamodel.favourite.FavouriteResponse;
+import com.hamstechonline.datamodel.homepage.HomepageResponse;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.restapi.ApiClient;
 import com.hamstechonline.restapi.ApiInterface;
 import com.hamstechonline.utils.ApiConstants;
@@ -66,6 +72,8 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -78,8 +86,8 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
     LinearLayout linearList;
     List<String> positions = new ArrayList<>();
     HocLoadingDialog hocLoadingDialog;
-    String langPref = "Language";
-    SharedPreferences prefs;
+    String langPref = "Language",footerMenuStatus,typeCat = "";
+    SharedPreferences prefs,footerStatus;
     ApiInterface apiService;
     UserDataBase userDataBase;
 
@@ -101,6 +109,8 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
         prefs = getSharedPreferences("Hindi", Activity.MODE_PRIVATE);
         //prefs = PreferenceManager.getDefaultSharedPreferences(this);
         langPref = prefs.getString("Language", "");
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
 
         MoEngage moEngage = new MoEngage.Builder(getApplication(), "UUN7GSHBBH1UT5GCHI2EQ1KY")
                 .setDataCenter(DataCenter.DATA_CENTER_3)
@@ -110,7 +120,7 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
         MoEngage.initialise(moEngage);
 
         userDataBase = new UserDataBase(this);
-
+        getResponse();
         getCategories();
 
     }
@@ -121,6 +131,46 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
             setRecommendedTopics(ChooseFavouriteCourse.this);
         } else Toast.makeText(this, "Please select at lease one course", Toast.LENGTH_SHORT).show();*/
     }
+
+    public void getResponse() {
+        hocLoadingDialog.showLoadingDialog();
+        HomepageResponse homepageResponse = new HomepageResponse("Hamstech","category",
+                getResources().getString(R.string.lblApiKey),langPref,userDataBase.getUserMobileNumber(1),typeCat);
+        Call<HomepageResponse> call = apiService.getHomepageResponse(homepageResponse);
+        call.enqueue(new Callback<HomepageResponse>() {
+            @Override
+            public void onResponse(Call<HomepageResponse> call, retrofit2.Response<HomepageResponse> response) {
+                hocLoadingDialog.hideDialog();
+                if (response.body().getEnglish() != null) {
+
+                    /*subListAdapter = new SubListAdapter(HomePageActivity.this,catListHindi);
+                    listCategory.setLayoutManager(new GridLayoutManager(HomePageActivity.this, 2));
+                    listCategory.addItemDecoration(new GridSpacingItemDecoration(2,30,false));
+                    listCategory.setAdapter(subListAdapter);*/
+
+                    if (response.body().getMyCourses().size() > 0) {
+                        footerMenuStatus = "paid";
+                        SharedPreferences.Editor editor = footerStatus.edit();
+                        editor.putString("footerStatus", "paid");
+                        editor.commit();
+
+                    } else {
+                        SharedPreferences.Editor editor = footerStatus.edit();
+                        editor.putString("footerStatus", "unpaid");
+                        editor.commit();
+
+                    }
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<HomepageResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
 
     public void getCategories() {
         FavouriteResponse hocResponse = new FavouriteResponse("Hamstech", getResources().getString(R.string.lblApiKey),userDataBase.getUserMobileNumber(1), langPref);

@@ -18,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
@@ -42,11 +43,14 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hamstechonline.R;
 import com.hamstechonline.adapters.CourseViewPagerAdapter;
 import com.hamstechonline.database.UserDataBase;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.fragments.SearchFragment;
 import com.hamstechonline.utils.ApiConstants;
 import com.hamstechonline.utils.AppsFlyerEventsHelper;
 import com.hamstechonline.utils.LogEventsActivity;
+import com.hamstechonline.utils.NonSwipeableViewPager;
 import com.hamstechonline.utils.SharedPrefsUtils;
 import com.hamstechonline.utils.UserDataConstants;
 import com.moengage.core.DataCenter;
@@ -72,7 +76,7 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
 
     List tabs;
     TabLayout tabLayout;
-    ViewPager viewPager_home;
+    NonSwipeableViewPager viewPager_home;
     CourseViewPagerAdapter courseViewPagerAdapter;
     DrawerLayout drawer;
     NavigationView navSideMenu;
@@ -85,8 +89,8 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
     UserDataBase userDataBase;
     int mMenuId;
     String CategoryName,CatId = "",CourseLog="",LessonLog = "",ActivityLog="",PagenameLog="",langPref = "Language", mobile = "",
-            fullname = "",email = "";
-    SharedPreferences prefs;
+            fullname = "",email = "",footerMenuStatus;
+    SharedPreferences prefs,footerStatus;
     private Locale myLocale;
     YouTubePlayer player;
     String mp4URL = "";
@@ -95,7 +99,6 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
     AppEventsLogger logger;
     Bundle params;
     ImageButton stickyWhatsApp;
-    LinearLayout layoutContact,layoutHome,imgHunarClub;
     SharedPrefsUtils sharedPrefsUtils;
 
     @Override
@@ -119,9 +122,6 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
         layoutHeader = findViewById(R.id.layoutHeader);
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
-        layoutHome = findViewById(R.id.layoutHome);
-        layoutContact = findViewById(R.id.layoutContact);
-        imgHunarClub = findViewById(R.id.imgHunarClub);
         txtLessons = findViewById(R.id.txtLessons);
         txtDetails = findViewById(R.id.txtDetails);
         btnEnrollNow = findViewById(R.id.btnEnrollNow);
@@ -276,44 +276,18 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
             }
         });
 
-        layoutHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityLog = "";
-                PagenameLog = "Course page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CoursePageActivity.this);
-                Intent intentCourses = new Intent(CoursePageActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-            }
-        });
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        layoutContact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityLog = "Course page";
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CoursePageActivity.this);
-                new AppsFlyerEventsHelper(CoursePageActivity.this).EventContactus();
-                Intent about = new Intent(CoursePageActivity.this, ContactActivity.class);
-                startActivity(about);
-            }
-        });
-        imgHunarClub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ActivityLog = "Click";
-                PagenameLog = "Course page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(CoursePageActivity.this);
-                Intent hamstech = new Intent(CoursePageActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-            }
-        });
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Course page").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Course page")
+                    .commit();
+        }
 
         for (int i=0;i<tabs.size();i++) {
             RelativeLayout relativeLayout = (RelativeLayout)

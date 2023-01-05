@@ -61,6 +61,8 @@ import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.CalculateCoursePayment;
 import com.hamstechonline.datamodel.CategoryDatamodel;
 import com.hamstechonline.datamodel.PaymentSuccessResponse;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.restapi.ApiClient;
 import com.hamstechonline.restapi.ApiInterface;
 import com.hamstechonline.utils.ApiConstants;
@@ -95,16 +97,16 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class EnrolNowActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
+public class EnrolNowActivity extends AppCompatActivity implements
         PaymentResultWithDataListener {
 
-    BottomNavigationView navigation;
     TextView amountPreferred, amountPremium, txtPreferredTitle, txtPremiumTitle, txtDiscountAmount, txtTaxesAmount, txtGrandTotal,
             txtAddCourse, txtFinalAmount, txtViewOrderSummary, txtTankyouChoose, txtDiscountText, paymentTotal, paymentDiscountAmount,
             amounttotal,txtInstalment,txtSecondInstalment,txtAddDiscount;
@@ -143,8 +145,8 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
     LogEventsActivity logEventsActivity;
     String CategoryName, CourseLog, LessonLog, ActivityLog, PagenameLog;
     Dialog dialog;
-    String langPref = "Language", mRequestBody, selectedPayment, htmlAllTaxesString, tracking_id = "",razorpayOrderid;
-    SharedPreferences prefs;
+    String langPref = "Language", mRequestBody, selectedPayment, htmlAllTaxesString, tracking_id = "",razorpayOrderid,footerMenuStatus;
+    SharedPreferences prefs,footerStatus;
     List<String> categories = new ArrayList<String>();
     List<String> enrollment_type = new ArrayList<String>();
     List<String> payment_mode = new ArrayList<String>();
@@ -174,7 +176,6 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
                 m_strEmail = savedInstanceState.getString("Email");
         }
 
-        navigation = findViewById(R.id.navigation);
         listItems = findViewById(R.id.listItems);
         spnSelectLanguage = findViewById(R.id.spnSelectLanguage);
         linCourses = findViewById(R.id.linCourses);
@@ -263,8 +264,6 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
         MoEngage.initialise(moEngage);
 
         txtPhone.setEnabled(false);
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
 
         userDataBase = new UserDataBase(this);
         dialog = new Dialog(this);
@@ -313,6 +312,19 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
         getCategories(this);
         htmlAllTaxesString = getResources().getString(R.string.txtInclusiveAllTaxes);
         Checkout.preload(getApplicationContext());
+
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Enrol page").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Enrol page")
+                    .commit();
+        }
 
         linearPreferred.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -565,14 +577,12 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
     @Override
     protected void onStart() {
         super.onStart();
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         try {
-            navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
             updatetv_back_ground();
         } catch (NullPointerException ex) {
             ex.printStackTrace();
@@ -856,73 +866,6 @@ public class EnrolNowActivity extends AppCompatActivity implements BottomNavigat
         } else {
             listCourse.setVisibility(View.VISIBLE);
         }
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        CategoryName = "";
-        CourseLog = "";
-        LessonLog = "";
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, params);
-                Intent intentCourses = new Intent(EnrolNowActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                ActivityLog = "enrol now";
-                PagenameLog = "chat with whatsapp";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, params);
-                getLogEvent(EnrolNowActivity.this);
-
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone=" + "919010100240" + "&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, params);
-                Intent enrol = new Intent(EnrolNowActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, params);
-                Intent hamstech = new Intent(EnrolNowActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, params);
-                Intent about = new Intent(EnrolNowActivity.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
     }
 
     public void CalculateCoursePaymentApi() {

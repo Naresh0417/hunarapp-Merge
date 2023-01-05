@@ -115,7 +115,7 @@ public class RegistrationActivity extends AppCompatActivity {
     Button btnGetOtp, btnResend, btnVerify;
     EditText txtOTP, txtName, txtMobile;
     TextView txtExpire,otpMessage,txtLogin,txtTermsCond;
-    boolean isNet,isTimeOut = false;
+    boolean isNet,isTimeOut = false,mandatory = false;
     String userName, resMobile, otptimestamp, cityName = "", getPincode = "", getAddress = "", getState = "",
             getCountryName = "", countrycode,networkType = "",lastNumber,selectedCity="";
     String eventType = "";
@@ -207,6 +207,16 @@ public class RegistrationActivity extends AppCompatActivity {
                 countrycode = countryCodePicker.getSelectedCountryCode();
                 if (!validateName()){
                     return;
+                }
+                if (mandatory) {
+                    selectedCity = txtSelectCity.getText().toString().trim();
+                    if (selectedCity.equalsIgnoreCase("")){
+                        if (!ValidateInputCity()) {
+                            return;
+                        }
+                    }
+                } else {
+                    selectedCity = "";
                 }
                 if (countryCodePicker.getSelectedCountryCode().equals("91")) {
                     lengthMobile = 10;
@@ -349,6 +359,20 @@ public class RegistrationActivity extends AppCompatActivity {
         };
     }
 
+    private boolean ValidateInputCity() {
+
+        boolean result = IsValidCity(txtSelectCity, "Select City Name");
+        return result;
+    }
+
+    private boolean IsValidCity(AutoCompleteTextView txtText, String validationMessage) {
+        if (txtText.getText().toString().trim().equals("")) {
+            txtText.setError(validationMessage);
+            return false;
+        }
+        return true;
+    }
+
     public void getBlockApi() {
         CheckStudent checkStudent = new CheckStudent("Hamstech", getResources().getString(R.string.lblApiKey),
                 resMobile);
@@ -433,6 +457,10 @@ public class RegistrationActivity extends AppCompatActivity {
                 txtSelectCity.setThreshold(2);
                 txtSelectCity.setAdapter(dataAdapter);
 
+                if (response.body().getMandatory().equalsIgnoreCase("yes")) {
+                    mandatory = true;
+                } else mandatory = false;
+
             }
 
             @Override
@@ -486,8 +514,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private boolean ValidateInputs() {
 
         boolean result = IsValid(txtName, "Enter Name") &&
-                IsValid(txtMobile, "Enter Mobile Number") &&
-                IsValid(txtSelectCity, "Enter City");
+                IsValid(txtMobile, "Enter Mobile Number");
         return result;
     }
 
@@ -511,7 +538,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 jsonObject.put("page", "registration");
                 jsonObject.put("name", userName);
                 jsonObject.put("phone", resMobile);
-                jsonObject.put("cityName", txtSelectCity.getText().toString().trim());
+                jsonObject.put("cityName", selectedCity);
                 jsonObject.put("user_address", getAddress);
                 jsonObject.put("user_state", getState);
                 jsonObject.put("user_pincode", getPincode);
@@ -566,6 +593,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             btnGetOtp.setVisibility(View.GONE);
                             btnVerify.setVisibility(View.VISIBLE);
                             txtMobile.setEnabled(false);
+                            txtSelectCity.setEnabled(false);
                             txtName.setEnabled(false);
                             countDownTimer.start();
                             eventType = "Clicked on OTP";

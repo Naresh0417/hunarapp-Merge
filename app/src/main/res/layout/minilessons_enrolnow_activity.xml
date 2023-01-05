@@ -433,17 +433,17 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <RelativeLayout
         android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="62dp"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/white"
-        android:foreground="?attr/selectableItemBackground"
-        app:itemIconTint="@drawable/navigation_selector"
-        app:itemTextColor="@color/pinkish_grey"
-        android:theme="@style/menu_text_style"
-        app:menu="@menu/navigation"
-        app:labelVisibilityMode="labeled"/>
+        android:background="@android:color/transparent">
+
+        <FrameLayout
+            android:id="@+id/footer_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
 
 </RelativeLayout>

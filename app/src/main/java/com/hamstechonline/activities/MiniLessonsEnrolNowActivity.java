@@ -38,6 +38,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,6 +64,8 @@ import com.hamstechonline.datamodel.FlashOfferResponse;
 import com.hamstechonline.datamodel.MiniCoursesModel;
 import com.hamstechonline.datamodel.PayinstallmentRequest;
 import com.hamstechonline.datamodel.PaymentSuccessResponse;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.restapi.ApiClient;
 import com.hamstechonline.restapi.ApiInterface;
 import com.hamstechonline.utils.ApiConstants;
@@ -96,10 +99,10 @@ import java.util.Locale;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener,
+public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements
         PaymentResultWithDataListener {
 
-    BottomNavigationView navigation;
+    RelativeLayout navigation;
     TextView txtFinalAmount, txtViewOrderSummary;
     LinearLayout paymentOptions, txtChat, callUs, howtoPay, linearQR;
     CheckBox viewSummayDetails;
@@ -115,7 +118,7 @@ public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements Bo
     float finalAmount;
     long orderID;
     String course_type = "Preferred", selectLaguage = "", discount_percentage, orderType,
-            mobile = "", fullname = "", email = "", razorpayOrderid, paymentName, offerImage, rezorOrderID;
+            mobile = "", fullname = "", email = "", footerMenuStatus,razorpayOrderid, paymentName, offerImage, rezorOrderID;
     UserDataBase userDataBase;
     RadioGroup radioGroup;
     ArrayList<String> selectedNames = new ArrayList<>();
@@ -141,6 +144,7 @@ public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements Bo
     PaymentsOptionsAdapter paymentsOptionsAdapter;
     String[] optionNames = {"Gpay", "Paytm", "PhonePe", "BharatPe", "Debit Card/ Credit Card", "Net Banking", "Other Payments"};
     DynamicWhatsAppChat dynamicWhatsAppChat;
+    SharedPreferences footerStatus;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -171,9 +175,6 @@ public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements Bo
 
         hocLoadingDialog = new HocLoadingDialog(this);
         logEventsActivity = new LogEventsActivity();
-
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
 
         userDataBase = new UserDataBase(this);
         dialog = new Dialog(this);
@@ -241,6 +242,19 @@ public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements Bo
                 }
             }
         });
+
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "About Us").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "About Us")
+                    .commit();
+        }
 
         paymentsOptionsAdapter = new PaymentsOptionsAdapter(MiniLessonsEnrolNowActivity.this);
         optionsList.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
@@ -333,14 +347,12 @@ public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements Bo
     @Override
     protected void onStart() {
         super.onStart();
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         try {
-            navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
         } catch (NullPointerException ex) {
             ex.printStackTrace();
         }
@@ -480,77 +492,6 @@ public class MiniLessonsEnrolNowActivity extends AppCompatActivity implements Bo
 
         };
         queue.add(stringRequest);
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        CategoryName = "";
-        CourseLog = "";
-        LessonLog = "";
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                if (flashInput == 1) FlashSalePopUp();
-                else {
-                    params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                    logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, params);
-                    Intent intentCourses = new Intent(MiniLessonsEnrolNowActivity.this, HomePageActivity.class);
-                    startActivity(intentCourses);
-                }
-
-                return true;
-            case R.id.navigation_chat:
-                ActivityLog = "enrol now";
-                PagenameLog = "chat with whatsapp";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, params);
-                getLogEvent(MiniLessonsEnrolNowActivity.this);
-
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone=" + "919010100240" + "&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, params);
-                Intent enrol = new Intent(MiniLessonsEnrolNowActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, params);
-                Intent hamstech = new Intent(MiniLessonsEnrolNowActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING, params);
-                Intent about = new Intent(MiniLessonsEnrolNowActivity.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
     }
 
     public void getEnrolNotification(String course_id) {

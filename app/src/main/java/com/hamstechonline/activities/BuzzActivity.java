@@ -83,6 +83,8 @@ import com.hamstechonline.datamodel.LikesCountData;
 import com.hamstechonline.datamodel.UploadPostResponse;
 import com.hamstechonline.datamodel.mycources.UploadResponse;
 import com.hamstechonline.fragments.BuzzDetailsFragment;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.restapi.ApiClient;
 import com.hamstechonline.restapi.ApiInterface;
@@ -115,10 +117,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 
-public class BuzzActivity extends AppCompatActivity implements LikesInterface,BottomNavigationView.OnNavigationItemSelectedListener {
+public class BuzzActivity extends AppCompatActivity implements LikesInterface {
 
     DrawerLayout drawer;
-    BottomNavigationView navigation;
+    //BottomNavigationView navigation;
+    RelativeLayout navigation;
     NavigationFragment navigationFragment;
     NavigationView navSideMenu;
     RecyclerView listItems, hocItemsList;
@@ -129,8 +132,8 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
     ArrayList<BuzzDataModel> dataArrayList = new ArrayList<>();
     UserDataBase userDataBase;
     int mMenuId;
-    String langPref,term_id = "",mobile,fullname,email = "";
-    SharedPreferences prefs;
+    String langPref,term_id = "",mobile,fullname,email = "",footerMenuStatus;
+    SharedPreferences prefs,footerStatus;
     HocLoadingDialog hocLoadingDialog;
     String PagenameLog,ActivityLog = "",postId = "",mp4URL = "",lessonEvent="",resultLikesCount,resultCommentCount;
     LogEventsActivity logEventsActivity;
@@ -174,8 +177,8 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
         submitPost = findViewById(R.id.submitPost);
 
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_today).setChecked(true);
+        /*navigation.setOnNavigationItemSelectedListener(this);
+        navigation.getMenu().findItem(R.id.navigation_today).setChecked(true);*/
 
         userDataBase = new UserDataBase(this);
         logEventsActivity = new LogEventsActivity();
@@ -193,7 +196,9 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
         dataBundle = new Bundle();
 
         prefs = getSharedPreferences("Hindi", Activity.MODE_PRIVATE);
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
         langPref = prefs.getString("Language", "en");
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
 
         apiService = ApiClient.getClient().create(ApiInterface.class);
 
@@ -218,6 +223,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
         btnHunarPosts.setTextColor(getResources().getColor(R.color.dark_pink));
         btnYourPosts.setBackgroundResource(0);
         btnYourPosts.setTextColor(getResources().getColor(R.color.muted_blue));
+
         getOptionsData();
 
         btnHunarPosts.setOnClickListener(new View.OnClickListener() {
@@ -311,7 +317,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
 
     }
 
-    @Override
+    /*@Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         mMenuId = item.getItemId();
         for (int i = 0; i < navigation.getMenu().size(); i++) {
@@ -347,9 +353,9 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
                     i.setPackage("com.whatsapp");
                     i.setData(Uri.parse(url));
                     startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
+                    *//*if (i.resolveActivity(packageManager) != null) {
                         startActivity(i);
-                    }*/
+                    }*//*
                 } catch (Exception e){
                     e.printStackTrace();
                 }
@@ -381,7 +387,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
                 return true;
         }
         return false;
-    }
+    }*/
 
     public void sideMenu(View view){
         drawer.openDrawer(Gravity.LEFT);
@@ -402,6 +408,15 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
             @Override
             public void onResponse(Call<HocTodayResponse> call, retrofit2.Response<HocTodayResponse> response) {
                 hocLoadingDialog.hideDialog();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                if (footerMenuStatus.equalsIgnoreCase("paid")) {
+                    //footerNavigationPaid = FooterNavigationPaid.newInstance();
+                    ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Hunar Club").commit();
+                } else {
+                    //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+                    ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Hunar Club")
+                            .commit();
+                }
                 if (response.body().getHocTodayData() != null) {
                     buzzAdapter = new BuzzAdapter(BuzzActivity.this,response.body().getHocTodayData());
                     listItems.setLayoutManager(new LinearLayoutManager(BuzzActivity.this, RecyclerView.VERTICAL, false));
@@ -1182,8 +1197,8 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
             @Override
             public void onClick(View v) {
                 uploadConentent = userInputContent.getText().toString().trim();
-                uploadTitle = userInputTitle.getText().toString().trim();
-                if (picturePath.equalsIgnoreCase("") || uploadTitle.equalsIgnoreCase("") ||
+                uploadTitle = "";
+                if (picturePath.equalsIgnoreCase("") ||
                         uploadConentent.equalsIgnoreCase("")){
                     Toast.makeText(BuzzActivity.this, "Fields should not be empty", Toast.LENGTH_SHORT).show();
                 } else {
@@ -1201,7 +1216,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface,Bo
 
     public void uploadFile() {
         UploadPostResponse uploadResponse = new UploadPostResponse("Hamstech", getResources().getString(R.string.lblApiKey),
-                uploadTitle,uploadConentent,userDataBase.getUserMobileNumber(1),"image",imagePathData,langPref);
+                uploadConentent,uploadTitle,userDataBase.getUserMobileNumber(1),"image",imagePathData,langPref);
         Call<UploadPostResponse> call = apiService.getUploadPost(uploadResponse);
         call.enqueue(new Callback<UploadPostResponse>() {
             @Override

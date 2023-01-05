@@ -27,6 +27,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.facebook.appevents.AppEventsConstants;
@@ -38,6 +39,8 @@ import com.hamstechonline.R;
 import com.hamstechonline.adapters.CourseViewPagerAdapter;
 import com.hamstechonline.adapters.MiniCourseViewPagerAdapter;
 import com.hamstechonline.database.UserDataBase;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.fragments.SearchFragment;
 import com.hamstechonline.utils.AppsFlyerEventsHelper;
@@ -62,7 +65,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
-public class MiniLessonsCourseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener, BottomNavigationView.OnNavigationItemSelectedListener {
+public class MiniLessonsCourseActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     List tabs;
     TabLayout tabLayout;
@@ -71,7 +74,7 @@ public class MiniLessonsCourseActivity extends AppCompatActivity implements Adap
     DrawerLayout drawer;
     NavigationView navSideMenu;
     NavigationFragment navigationFragment;
-    BottomNavigationView navigation;
+    RelativeLayout navigation;
     RelativeLayout layoutHeader;
     CheckBox imgSearch;
     TextView headerTitle,txtCourseName;
@@ -80,8 +83,8 @@ public class MiniLessonsCourseActivity extends AppCompatActivity implements Adap
     UserDataBase userDataBase;
     int mMenuId;
     String CategoryName,CourseLog,LessonLog = "",ActivityLog,PagenameLog,langPref = "Language", mobile = "",
-            fullname = "",email = "";
-    SharedPreferences prefs;
+            fullname = "",email = "",footerMenuStatus;
+    SharedPreferences prefs, footerStatus;
     private Locale myLocale;
     YouTubePlayer player;
     String mp4URL = "";
@@ -111,9 +114,6 @@ public class MiniLessonsCourseActivity extends AppCompatActivity implements Adap
         txtCourseName = findViewById(R.id.txtCourseName);
         layoutHeader = findViewById(R.id.layoutHeader);
         youTubePlayerView = findViewById(R.id.youtube_player_view);
-
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
 
         userDataBase = new UserDataBase(this);
         logger = AppEventsLogger.newLogger(this);
@@ -195,6 +195,19 @@ public class MiniLessonsCourseActivity extends AppCompatActivity implements Adap
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             }
         });
+
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Course Page").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Course Page")
+                    .commit();
+        }
 
         drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
             @Override
@@ -290,76 +303,7 @@ public class MiniLessonsCourseActivity extends AppCompatActivity implements Adap
     @Override
     protected void onStart() {
         drawer.closeDrawers();
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
         super.onStart();
-    }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent intentCourses = new Intent(MiniLessonsCourseActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                MiniLessonsCourseActivity.this.finish();
-                return true;
-            case R.id.navigation_chat:
-                PagenameLog = "chat with whatsapp";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent enrol = new Intent(MiniLessonsCourseActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                MiniLessonsCourseActivity.this.finish();
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent hamstech = new Intent(MiniLessonsCourseActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                MiniLessonsCourseActivity.this.finish();
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                Intent about = new Intent(MiniLessonsCourseActivity.this, ContactActivity.class);
-                startActivity(about);
-                MiniLessonsCourseActivity.this.finish();
-                return true;
-        }
-        return false;
     }
 
     public void sideMenu(View view){

@@ -17,6 +17,8 @@ import com.hamstechonline.datamodel.GetDynamicData;
 import com.hamstechonline.datamodel.HocResponse;
 import com.hamstechonline.datamodel.HocTodayResponse;
 import com.hamstechonline.datamodel.LikesCountData;
+import com.hamstechonline.datamodel.LiveClassRegistrationResponse;
+import com.hamstechonline.datamodel.LiveClassesResponse;
 import com.hamstechonline.datamodel.LoginSignupData;
 import com.hamstechonline.datamodel.MyCourseGetChatNumber;
 import com.hamstechonline.datamodel.OnBoardingRequest;
@@ -160,4 +162,13 @@ public interface ApiInterface {
 
     @POST("http://android.hamstechonline.com/api/list/getOnboardingVideo")
     Call<OnBoardingRequest> getOnBoardResponse(@Body OnBoardingRequest onBoardingRequest);
+
+    @POST("http://android.hamstechonline.com/api/list/getLiveClasses")
+    Call<LiveClassesResponse> getYourLiveClasses(@Body LiveClassesResponse liveClassesResponse);
+
+    @POST("http://android.hamstechonline.com/api/list/getAllLiveClasses")
+    Call<LiveClassesResponse> getYourAllLiveClasses(@Body LiveClassesResponse liveClassesResponse);
+
+    @POST("http://android.hamstechonline.com/api/list/liveClassRegistration")
+    Call<LiveClassRegistrationResponse> getLiveClassRegistration(@Body LiveClassRegistrationResponse liveClassesResponse);
 }

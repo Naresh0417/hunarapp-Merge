@@ -30,7 +30,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="8dp"
-                    android:background="@drawable/top_line_bg">
+                    android:background="@drawable/bottom_line_bg">
 
                     <ImageView
                         android:id="@+id/imgSideMenu"
@@ -524,9 +524,14 @@
         <RelativeLayout
             android:id="@+id/navigation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="62dp"
             android:layout_alignParentBottom="true"
             android:background="@android:color/transparent">
+
+            <FrameLayout
+                android:id="@+id/footer_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -534,7 +539,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="3"
                 android:padding="5dp"
-                android:background="@android:color/transparent">
+                android:background="@android:color/transparent"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:id="@+id/layoutHome"
@@ -623,7 +629,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         android:background="@color/white"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navSideMenu"

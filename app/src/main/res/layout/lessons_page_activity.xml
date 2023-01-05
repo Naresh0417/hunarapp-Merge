@@ -19,11 +19,13 @@
             android:layout_above="@+id/navigation"
             android:fillViewport="true"
             android:scrollbars="none"
+            android:background="@color/milkWhite"
             android:visibility="visible">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/milkWhite">
 
                 <RelativeLayout
                     android:id="@+id/layoutHeader"
@@ -32,7 +34,8 @@
                     android:clipToPadding="false"
                     android:elevation="5dp"
                     android:padding="8dp"
-                    android:paddingBottom="5dp">
+                    android:paddingBottom="5dp"
+                    android:background="@drawable/bottom_line_bg">
 
                     <ImageView
                         android:id="@+id/imgSideMenu"
@@ -133,6 +136,7 @@
                         android:orientation="vertical"
                         android:layout_margin="5dp">
                         <androidx.cardview.widget.CardView
+                            android:id="@+id/layoutPercentage"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
@@ -419,8 +423,10 @@
                             android:layout_height="wrap_content"
                             android:padding="3dp"
                             android:layout_margin="5dp"
-                            android:background="@drawable/border_blue">
+                            android:background="@drawable/border_blue"
+                            android:visibility="gone">
                             <TextView
+                                android:id="@+id/txtLiveClassLbl"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Live Class"
@@ -617,7 +623,7 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="5dp"
                             android:orientation="vertical"
-                            android:visibility="gone">
+                            android:visibility="visible">
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -853,18 +859,18 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <RelativeLayout
             android:id="@+id/navigation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="62dp"
             android:layout_alignParentBottom="true"
-            android:foreground="?attr/selectableItemBackground"
-            android:theme="@style/menu_text_style"
-            app:itemBackground="@color/white"
-            app:itemIconTint="@drawable/navigation_selector"
-            app:itemTextColor="@color/pinkish_grey"
-            app:labelVisibilityMode="labeled"
-            app:menu="@menu/navigation" />
+            android:background="@android:color/transparent">
+
+            <FrameLayout
+                android:id="@+id/footer_menu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
 
         <ImageButton
             android:id="@+id/stickyWhatsApp"

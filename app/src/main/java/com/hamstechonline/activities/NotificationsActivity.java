@@ -1,5 +1,6 @@
 package com.hamstechonline.activities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -21,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.FragmentManager;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,6 +50,8 @@ import com.android.volley.toolbox.Volley;
 import com.hamstechonline.R;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.LessonsDataModel;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.utils.AppsFlyerEventsHelper;
 import com.hamstechonline.utils.ApiConstants;
@@ -71,10 +75,10 @@ import java.util.ArrayList;
 import it.sephiroth.android.library.imagezoom.ImageViewTouch;
 import it.sephiroth.android.library.imagezoom.ImageViewTouchBase;
 
-public class NotificationsActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class NotificationsActivity extends AppCompatActivity {
 
     DrawerLayout drawer;
-    BottomNavigationView navigation;
+    RelativeLayout navigation;
     NavigationFragment navigationFragment;
     NavigationView navSideMenu;
     RecyclerView listItems;
@@ -83,13 +87,13 @@ public class NotificationsActivity extends AppCompatActivity implements BottomNa
     UserDataBase userDataBase;
     int mMenuId;
     String langPref;
-    SharedPreferences prefs;
+    SharedPreferences prefs,footerStatus;
     HocLoadingDialog hocLoadingDialog;
     ArrayList<LessonsDataModel> notificationDetail = new ArrayList<>();
     ImageViewTouch imageView;
     ImageView imgCancel;
     TextView txtTitle,txtDescription;
-    String PagenameLog,activityLog = "",postId;
+    String PagenameLog,activityLog = "",postId,footerMenuStatus;
     LogEventsActivity logEventsActivity;
     AppEventsLogger logger;
     Bundle params;
@@ -109,9 +113,6 @@ public class NotificationsActivity extends AppCompatActivity implements BottomNa
         navSideMenu = findViewById(R.id.navSideMenu);
         listItems = findViewById(R.id.listItems);
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
-
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
 
         userDataBase = new UserDataBase(this);
         logEventsActivity = new LogEventsActivity();
@@ -158,6 +159,18 @@ public class NotificationsActivity extends AppCompatActivity implements BottomNa
 
             }
         });
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Notifications page").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Notifications page")
+                    .commit();
+        }
         stickyWhatsApp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,71 +190,6 @@ public class NotificationsActivity extends AppCompatActivity implements BottomNa
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent intentCourses = new Intent(NotificationsActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                activityLog = "";
-                PagenameLog = "chat with whatsapp";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "chat with whatsapp");
-                logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT,params);
-                getLogEvent(NotificationsActivity.this);
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent enrol = new Intent(NotificationsActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent hamstech = new Intent(NotificationsActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                Intent about = new Intent(NotificationsActivity.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
-    }
-
     public void sideMenu(View view){
         drawer.openDrawer(Gravity.LEFT);
     }
@@ -249,7 +197,6 @@ public class NotificationsActivity extends AppCompatActivity implements BottomNa
     @Override
     protected void onStart() {
         drawer.closeDrawers();
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
         super.onStart();
     }
 
@@ -359,7 +306,7 @@ public class NotificationsActivity extends AppCompatActivity implements BottomNa
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
             try {
                 holder.txtTitle.setText(dataNotifications.get(position).getLesson_title());
                 holder.txtDescription.setText(dataNotifications.get(position).getLesson_description());

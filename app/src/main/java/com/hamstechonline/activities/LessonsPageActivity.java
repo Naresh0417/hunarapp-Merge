@@ -1,9 +1,11 @@
 package com.hamstechonline.activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
@@ -31,6 +33,7 @@ import androidx.cardview.widget.CardView;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.DisplayMetrics;
@@ -53,6 +56,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hamstechonline.R;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.LessonsDataModel;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.utils.AppsFlyerEventsHelper;
 import com.hamstechonline.utils.ApiConstants;
@@ -81,9 +86,8 @@ import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class LessonsPageActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+public class LessonsPageActivity extends AppCompatActivity {
 
-    BottomNavigationView navigation;
     DrawerLayout drawer;
     NavigationView navSideMenu;
     LinearLayout txtPdfTitle,linearLessonContent,playerLayout;
@@ -96,10 +100,10 @@ public class LessonsPageActivity extends AppCompatActivity implements BottomNavi
     ImageView imgLike,btnShare,imgLesson;
     TextView nextLessonTitle,previousLessonTitle;
     LinearLayout fabPrevious,fabNext;
-    private String mp4URL = "",postStatus = "",postId,pdfURL;
+    private String mp4URL = "",postStatus = "",postId,pdfURL,footerMenuStatus;
     ArrayList<LessonsDataModel> coursesList = new ArrayList<>();
     int intNext = 0,intPrevious = 0,mMenuId;
-
+    SharedPreferences footerStatus;
     RecyclerView listItems;
     NavigationFragment navigationFragment;
     Button btnEnrolNow;
@@ -126,7 +130,6 @@ public class LessonsPageActivity extends AppCompatActivity implements BottomNavi
         setContentView(R.layout.normal_lessons_page);
 
         drawer = findViewById(R.id.drawer_layout);
-        navigation = findViewById(R.id.navigation);
         navSideMenu = findViewById(R.id.navSideMenu);
         headerTitle = findViewById(R.id.headerTitle);
         txtLessonName = findViewById(R.id.txtLessonName);
@@ -147,19 +150,10 @@ public class LessonsPageActivity extends AppCompatActivity implements BottomNavi
         playerLayout = findViewById(R.id.playerLayout);
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
 
-        listItems = findViewById(R.id.listItems);
-        profile_image = findViewById(R.id.profile_image);
-        linProfile = findViewById(R.id.linProfile);
-        txtUserMobile = findViewById(R.id.txtUserMobile);
-        txtUserName = findViewById(R.id.txtUserName);
-        btnEnrolNow = findViewById(R.id.btnEnrolNow);
         nextMainLayout = findViewById(R.id.nextMainLayout);
 
         hocLoadingDialog = new HocLoadingDialog(this);
         logEventsActivity = new LogEventsActivity();
-
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
 
         navigationFragment = NavigationFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -183,6 +177,19 @@ public class LessonsPageActivity extends AppCompatActivity implements BottomNavi
                 .configureLogs(new LogConfig(LogLevel.VERBOSE, true))
                 .build();
         MoEngage.initialise(moEngage);
+
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Lessons page").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Lessons page")
+                    .commit();
+        }
 
         getLifecycle().addObserver(youTubePlayerView);
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
@@ -330,67 +337,6 @@ public class LessonsPageActivity extends AppCompatActivity implements BottomNavi
 
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                PagenameLog = "Home Page";
-                logContactusEvent(PagenameLog);
-                Intent intentCourses = new Intent(LessonsPageActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                CategoryName = "";
-                CourseLog = "";
-                LessonLog = "";
-                ActivityLog = "";
-                PagenameLog = "chat with whatsapp";
-                getLogEvent(LessonsPageActivity.this);
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                logContactusEvent(PagenameLog);
-                Intent enrol = new Intent(LessonsPageActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                logContactusEvent(PagenameLog);
-                Intent hamstech = new Intent(LessonsPageActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                logContactusEvent(PagenameLog);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                Intent about = new Intent(LessonsPageActivity.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
-    }
 
     public void sideMenu(View view){
         drawer.openDrawer(Gravity.LEFT);
@@ -400,7 +346,6 @@ public class LessonsPageActivity extends AppCompatActivity implements BottomNavi
         super.onConfigurationChanged(newConfiguration);
         youTubePlayerView.getPlayerUiController().getMenu().dismiss();
         if (newConfiguration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            navigation.setVisibility(View.GONE);
             layoutHeader.setVisibility(View.GONE);
             txtLessonName.setVisibility(View.GONE);
             txtDescription.setVisibility(View.GONE);
@@ -411,7 +356,6 @@ public class LessonsPageActivity extends AppCompatActivity implements BottomNavi
             int height = displayMetrics.heightPixels;
             playerLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, height));
         } else {
-            navigation.setVisibility(View.VISIBLE);
             layoutHeader.setVisibility(View.VISIBLE);
             txtLessonName.setVisibility(View.VISIBLE);
             txtDescription.setVisibility(View.VISIBLE);

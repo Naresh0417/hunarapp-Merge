@@ -22,7 +22,8 @@
                 android:id="@+id/layoutHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:padding="8dp"
+                android:background="@drawable/bottom_line_bg">
 
                 <ImageView
                     android:id="@+id/imgSideMenu"
@@ -173,13 +174,12 @@
 
                 </com.google.android.material.tabs.TabLayout>
 
-                <androidx.viewpager.widget.ViewPager
+                <com.hamstechonline.utils.NonSwipeableViewPager
                     android:id="@+id/view_pager"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_behavior="@string/appbar_scrolling_view_behavior">
+                    android:layout_height="wrap_content">
 
-                </androidx.viewpager.widget.ViewPager>
+                </com.hamstechonline.utils.NonSwipeableViewPager>
 
             </LinearLayout>
 
@@ -188,91 +188,21 @@
         <RelativeLayout
             android:id="@+id/navigation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="62dp"
             android:layout_alignParentBottom="true"
             android:background="@android:color/transparent">
 
-            <LinearLayout
-                android:orientation="horizontal"
+            <FrameLayout
+                android:id="@+id/footer_menu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="3"
-                android:padding="5dp"
-                android:background="@android:color/transparent">
-
-                <LinearLayout
-                    android:id="@+id/layoutHome"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/ic_home_black" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lblHome"
-                        android:fontFamily="sans-serif"
-                        android:textSize="12sp"
-                        android:layout_marginTop="2dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/imgHunarClub"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/hunarclub_selected" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hunar Club"
-                        android:fontFamily="sans-serif"
-                        android:textSize="12sp"
-                        android:layout_marginTop="2dp"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/layoutContact"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:orientation="vertical"
-                    android:gravity="center_horizontal">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/contact_us"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/contactUs"
-                        android:fontFamily="sans-serif"
-                        android:textSize="12sp"
-                        android:layout_marginTop="2dp"/>
-                </LinearLayout>
-
-            </LinearLayout>
-
+                android:layout_height="wrap_content"/>
         </RelativeLayout>
-
         <TextView
             android:id="@+id/btnEnrollNow"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="110dp"
+            android:layout_marginBottom="100dp"
             android:textColor="@color/muted_blue"
             android:fontFamily="sans-serif"
             android:gravity="center"

@@ -22,7 +22,8 @@
                 android:id="@+id/layoutHeader"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp">
+                android:padding="8dp"
+                android:background="@drawable/bottom_line_bg">
 
                 <ImageView
                     android:id="@+id/imgSideMenu"
@@ -122,8 +123,21 @@
 
         </RelativeLayout>
 
+    <RelativeLayout
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/transparent">
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
+        <FrameLayout
+            android:id="@+id/footer_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </RelativeLayout>
+
+
+        <!--<com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -134,7 +148,8 @@
             app:itemTextColor="@color/pinkish_grey"
             android:theme="@style/menu_text_style"
             app:menu="@menu/navigation"
-            app:labelVisibilityMode="labeled"/>
+            android:visibility="gone"
+            app:labelVisibilityMode="labeled"/>-->
 
         <LinearLayout
             android:layout_width="match_parent"

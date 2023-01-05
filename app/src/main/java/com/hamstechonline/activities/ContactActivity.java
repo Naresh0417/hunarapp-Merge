@@ -1,7 +1,9 @@
 package com.hamstechonline.activities;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -15,6 +17,7 @@ import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.FragmentManager;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
@@ -42,6 +45,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hamstechonline.R;
 import com.hamstechonline.adapters.CentersAdapter;
 import com.hamstechonline.database.UserDataBase;
+import com.hamstechonline.fragments.FooterNavigationPaid;
+import com.hamstechonline.fragments.FooterNavigationUnPaid;
 import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.utils.ApiConstants;
 import com.hamstechonline.utils.DynamicWhatsAppChat;
@@ -62,9 +67,8 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-public class ContactActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class ContactActivity extends AppCompatActivity {
 
-    BottomNavigationView navigation;
     NavigationFragment navigationFragment;
     NavigationView navSideMenu;
     TextView btnRequestCall,txtChatUs,txtCallUs;
@@ -74,8 +78,9 @@ public class ContactActivity extends AppCompatActivity implements BottomNavigati
     UserDataBase userDataBase;
     int mMenuId;
     HocLoadingDialog hocLoadingDialog;
+    SharedPreferences footerStatus;
     LogEventsActivity logEventsActivity;
-    String ActivityLog,PagenameLog,lessonLog,mobile = "",fullname = "",email = "";
+    String ActivityLog,PagenameLog,lessonLog,mobile = "",fullname = "",email = "",footerMenuStatus;
     AppEventsLogger logger;
     Bundle params;
     FirebaseAnalytics firebaseAnalytics;
@@ -92,7 +97,6 @@ public class ContactActivity extends AppCompatActivity implements BottomNavigati
         setContentView(R.layout.contact_activity);
 
         drawer = findViewById(R.id.drawer_layout);
-        navigation = findViewById(R.id.navigation);
         navSideMenu = findViewById(R.id.navSideMenu);
         listItems = findViewById(R.id.listItems);
         btnRequestCall = findViewById(R.id.btnRequestCall);
@@ -103,8 +107,6 @@ public class ContactActivity extends AppCompatActivity implements BottomNavigati
         userDataBase = new UserDataBase(this);
         logEventsActivity = new LogEventsActivity();
         params = new Bundle();
-        navigation.setOnNavigationItemSelectedListener(this);
-        navigation.getMenu().findItem(R.id.navigation_aboutus).setChecked(true);
 
         navigationFragment = NavigationFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -114,6 +116,10 @@ public class ContactActivity extends AppCompatActivity implements BottomNavigati
         listItems.setFocusable(false);
 
         hocLoadingDialog = new HocLoadingDialog(this);
+
+        footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         MoEngage moEngage = new MoEngage.Builder(getApplication(), "UUN7GSHBBH1UT5GCHI2EQ1KY")
                 .setDataCenter(DataCenter.DATA_CENTER_3)
@@ -134,6 +140,15 @@ public class ContactActivity extends AppCompatActivity implements BottomNavigati
             email = "";
         } catch (NullPointerException ex){
             ex.printStackTrace();
+        }
+
+        if (footerMenuStatus.equalsIgnoreCase("paid")) {
+            //footerNavigationPaid = FooterNavigationPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationPaid(), "Contact Us").commit();
+        } else {
+            //footerNavigationUnPaid = FooterNavigationUnPaid.newInstance();
+            ft.replace(R.id.footer_menu, new FooterNavigationUnPaid(), "Contact Us")
+                    .commit();
         }
 
         if (getIntent().getStringExtra("notificationId")!= null){
@@ -211,72 +226,6 @@ public class ContactActivity extends AppCompatActivity implements BottomNavigati
         });
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                lessonLog = "";
-                PagenameLog = "Home Page";
-                ActivityLog = "Contact Us Page";
-                logContactusEvent(PagenameLog);
-                getLogEvent(ContactActivity.this);
-                Intent intentCourses = new Intent(ContactActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                lessonLog = "";
-                ActivityLog = "Contact Us Page";
-                PagenameLog = "chat with whatsapp";
-                logContactusEvent(PagenameLog);
-                getLogEvent(ContactActivity.this);
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    /*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*/
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                logContactusEvent(PagenameLog);
-                Intent enrol = new Intent(ContactActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                PagenameLog = "Hunar Club";
-                lessonLog = "";
-                ActivityLog = "Contact Us Page";
-                getLogEvent(ContactActivity.this);
-                logContactusEvent(PagenameLog);
-                Intent hamstech = new Intent(ContactActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                PagenameLog = "Contact Page";
-                logContactusEvent(PagenameLog);
-                Intent about = new Intent(ContactActivity.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-
-        return false;
-    }
     public void sideMenu(View view){
         drawer.openDrawer(Gravity.LEFT);
     }
@@ -289,7 +238,6 @@ public class ContactActivity extends AppCompatActivity implements BottomNavigati
     @Override
     protected void onStart() {
         drawer.closeDrawers();
-        navigation.getMenu().findItem(R.id.navigation_aboutus).setChecked(true);
         super.onStart();
     }
 
