@@ -146,7 +146,7 @@
                         android:paddingTop="5dp"
                         android:textColor="@color/muted_blue"
                         android:gravity="center"
-                        android:text="Trial Lessons"/>
+                        android:text="@string/trial_lessons"/>
 
                     <TextView
                         android:id="@+id/txtDetails"
@@ -160,7 +160,7 @@
                         android:paddingTop="5dp"
                         android:textColor="@color/muted_blue"
                         android:gravity="center"
-                        android:text="Course Details"/>
+                        android:text="@string/course_details"/>
 
                 </LinearLayout>
 
@@ -200,7 +200,7 @@
         <TextView
             android:id="@+id/btnEnrollNow"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="100dp"
             android:textColor="@color/muted_blue"
@@ -210,7 +210,7 @@
             android:textStyle="bold"
             android:paddingBottom="8dp"
             android:text="Enroll Now For Full Course"
-            android:background="@drawable/btn_blue_stroke_white"
+            android:background="@drawable/enrol_now_blue_strok"
             />
 
         <ImageButton

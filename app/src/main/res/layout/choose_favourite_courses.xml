@@ -38,7 +38,7 @@
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="5dp"
                     android:fontFamily="@font/helveticabold"
-                    android:text="Hi! Let's help you choose\n your favourite courses!"
+                    android:text="@string/hi_let_s_help_you_choose_n_your_favourite_courses"
                     android:textColor="@color/muted_blue"
                     android:textSize="15sp" />
 

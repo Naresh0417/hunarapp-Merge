@@ -37,6 +37,11 @@ public class AppsFlyerEventsHelper {
         langPref = prefs.getString("Language", "en");
     }
 
+    public void EventInstallation(String gcmId){
+        properties.addAttribute(AppsFlyerEventParameter.KEY_GCMID,gcmId);
+        MoEHelper.getInstance(context).trackEvent(AppsFlyerEventParameter.EVENT_INSTALLATION,properties);
+    }
+
     public void EventRegistration(){
         eventData.put(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -120,7 +125,9 @@ public class AppsFlyerEventsHelper {
         eventData.put(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         eventData.put(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
         //AppsFlyerLib.getInstance().trackEvent(context, AppsFlyerEventParameter.EVENT_CONTACTUS,eventData);
-        logger.logEvent(AppEventsConstants.EVENT_NAME_ACHIEVED_LEVEL,params);
+        logger.logEvent(AppEventsConstants.EVENT_NAME_ADDED_TO_WISHLIST,params);
+        logger.logEvent(AppEventsConstants.EVENT_NAME_INITIATED_CHECKOUT,params);
+        logger.logEvent(AppEventsConstants.EVENT_NAME_PURCHASED,params);
         logger.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS);
         mFirebaseAnalytics.logEvent(SocialMediaEventsParameters.EVENT_NAME_SUBSCRIBE, params);
         mFirebaseAnalytics.logEvent(AppEventsConstants.EVENT_NAME_SPENT_CREDITS, params);

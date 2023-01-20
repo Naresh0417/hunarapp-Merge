@@ -1,7 +1,9 @@
 package com.hamstechonline.activities;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -10,6 +12,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,6 +25,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +33,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -241,14 +248,55 @@ public class ContactActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    public void RequestCallBack(){
-        LayoutInflater li = getLayoutInflater();
-        View layout = li.inflate(R.layout.request_dialogue,(ViewGroup) findViewById(R.id.custom_toast_layout));
-        Toast toast = new Toast(getApplicationContext());
-        toast.setView(layout);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER, 0,0);
-        toast.show();
+    public void OnlineSuccessfulPopUp(Context context) {
+        final Dialog dialog = new Dialog(context);
+        dialog.getWindow();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setContentView(R.layout.payment_sucess);
+        dialog.setCancelable(false);
+
+        ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
+        ImageView progressBar = dialog.findViewById(R.id.progressBar);
+        LinearLayout onlinePaymentLayout = dialog.findViewById(R.id.onlinePaymentLayout);
+        LinearLayout cod_layout = dialog.findViewById(R.id.cod_layout);
+        TextView paymentComment = dialog.findViewById(R.id.paymentComment);
+
+        onlinePaymentLayout.setVisibility(View.VISIBLE);
+        cod_layout.setVisibility(View.GONE);
+
+        Glide.with(context)
+                .load(R.drawable.ic_sucess_payment)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.ic_sucess_payment)
+                .into(progressBar);
+        paymentComment.setText(getResources().getString(R.string.call_request_accepted));
+
+        dialog.show();
+
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, HomePageActivity.class);
+                dialog.dismiss();
+                //startActivity(intent);
+            }
+        });
+
+        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
+                if (keyCode == KeyEvent.KEYCODE_BACK &&
+                        event.getAction() == KeyEvent.ACTION_UP &&
+                        !event.isCanceled()) {
+                    Intent intent = new Intent(context, HomePageActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     public void WebLink(View view){
@@ -280,7 +328,7 @@ public class ContactActivity extends AppCompatActivity {
                     JSONObject object = jo.getJSONObject("status");
                     if (object.getInt("status")==200){
                         hocLoadingDialog.hideDialog();
-                        RequestCallBack();
+                        OnlineSuccessfulPopUp(ContactActivity.this);
                     } else {
                         hocLoadingDialog.hideDialog();
                         Toast.makeText(ContactActivity.this, ""+jo.getString("messsage"), Toast.LENGTH_SHORT).show();

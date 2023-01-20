@@ -79,6 +79,7 @@ import com.hamstechonline.datamodel.HocOptionsData;
 import com.hamstechonline.datamodel.HocResponse;
 import com.hamstechonline.datamodel.HocTodayData;
 import com.hamstechonline.datamodel.HocTodayResponse;
+import com.hamstechonline.datamodel.HunarClubPostClick;
 import com.hamstechonline.datamodel.LikesCountData;
 import com.hamstechonline.datamodel.UploadPostResponse;
 import com.hamstechonline.datamodel.mycources.UploadResponse;
@@ -317,78 +318,6 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
 
     }
 
-    /*@Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
-
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                lessonEvent = "";
-                ActivityLog = "Hunar Club";
-                PagenameLog = "Home Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(BuzzActivity.this);
-                Intent intentCourses = new Intent(BuzzActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                lessonEvent = "";
-                ActivityLog = "";
-                PagenameLog = "chat with whatsapp";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "chat with whatsapp");
-                logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT,params);
-                getLogEvent(BuzzActivity.this);
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-                    *//*if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }*//*
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent enrol = new Intent(BuzzActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                lessonEvent = "";
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                Intent hamstech = new Intent(BuzzActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                lessonEvent = "";
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(BuzzActivity.this);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                Intent about = new Intent(BuzzActivity.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
-    }*/
-
     public void sideMenu(View view){
         drawer.openDrawer(Gravity.LEFT);
     }
@@ -596,6 +525,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Post Click";
                         PagenameLog = "Hunar Posts";
+                        saveHunarClubPost(dataBuzz.get(position).getPostid());
                         getLogEvent(context);
                         buzzDetailsDialog = new BuzzDetailsDialog(BuzzActivity.this, position,dataBuzz,term_id);
                         buzzDetailsDialog.showLoadingDialog();
@@ -613,6 +543,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Comment";
                         PagenameLog = "Hunar Posts";
+                        saveHunarClubPost(dataBuzz.get(position).getPostid());
                         getLogEvent(context);
                         buzzDetailsDialog = new BuzzDetailsDialog(BuzzActivity.this, position,dataBuzz,term_id);
                         buzzDetailsDialog.showLoadingDialog();
@@ -624,6 +555,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Share";
                         PagenameLog = "Hunar Posts";
+                        saveHunarClubShare(dataBuzz.get(position).getPostid());
                         getLogEvent(context);
                         if (dataBuzz.get(position).getVideourl().equals("")) {
                             Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -1149,6 +1081,43 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
             queue.add(sr);
         }
 
+    }
+
+    public void saveHunarClubPost(int postId) {
+        HunarClubPostClick hocResponse = new HunarClubPostClick("Hamstech", getResources().getString(R.string.lblApiKey),
+                postId,userDataBase.getUserMobileNumber(1),"hunarclub" );
+        Call<HunarClubPostClick> call = apiService.getHunarClubPost(hocResponse);
+        call.enqueue(new Callback<HunarClubPostClick>() {
+            @Override
+            public void onResponse(Call<HunarClubPostClick> call, retrofit2.Response<HunarClubPostClick> response) {
+                if (response.body().getStatus().equals("")) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HunarClubPostClick> call, Throwable t) {
+
+            }
+        });
+    }
+    public void saveHunarClubShare(int postId) {
+        HunarClubPostClick hocResponse = new HunarClubPostClick("Hamstech", getResources().getString(R.string.lblApiKey),
+                postId,userDataBase.getUserMobileNumber(1),"hunarclub" );
+        Call<HunarClubPostClick> call = apiService.getHunarClubShare(hocResponse);
+        call.enqueue(new Callback<HunarClubPostClick>() {
+            @Override
+            public void onResponse(Call<HunarClubPostClick> call, retrofit2.Response<HunarClubPostClick> response) {
+                if (response.body().getStatus().equals("")) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HunarClubPostClick> call, Throwable t) {
+
+            }
+        });
     }
 
     public void OnlineSuccessfulPopUp() {

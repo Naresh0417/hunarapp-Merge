@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="40dp"
-    android:background="@color/white"
+    android:layout_height="280dp"
+    android:background="@drawable/discussion_post_submit_success"
     android:layout_centerInParent="true">
 
     <LinearLayout
@@ -13,13 +12,22 @@
         android:orientation="vertical"
         android:gravity="center"
         android:layout_centerInParent="true"
-        android:layout_below="@id/imgCancel"
+        android:background="@drawable/discussion_post_success_stroke"
         android:padding="15dp"
+        android:layout_margin="10dp"
         android:visibility="visible">
 
         <ImageView
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:id="@+id/imgCancel"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="-5dp"
+            android:src="@drawable/disscussion_post_close"
+            android:layout_gravity="right" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:id="@+id/progressBar"
             android:visibility="visible"/>
 
@@ -27,10 +35,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/thanks_for_your_submission"
-            android:textColor="@color/muted_blue"
+            android:textColor="@color/black_two"
             android:textSize="20sp"
-            android:fontFamily="@font/dinpro"
+            android:fontFamily="sans-serif"
             android:gravity="center"
+            android:textStyle="bold"
             android:layout_marginTop="15dp"/>
 
         <TextView
@@ -41,18 +50,9 @@
             android:textSize="18sp"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:layout_marginTop="15dp"/>
+            android:layout_marginTop="5dp"/>
 
 
     </LinearLayout>
-
-    <ImageView
-        android:id="@+id/imgCancel"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:src="@drawable/ic_cross"
-        android:layout_alignParentEnd="true"
-        android:padding="6dp"
-        android:layout_margin="5dp"/>
 
 </RelativeLayout>

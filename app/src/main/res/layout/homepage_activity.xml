@@ -186,7 +186,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Most Popular Courses"
+                        android:text="@string/most_popular_courses"
                         android:textColor="@color/muted_blue"
                         android:fontFamily="@font/dinprobold"
                         android:textSize="17sp"
@@ -216,7 +216,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="All Courses"
+                        android:text="@string/all_courses"
                         android:textColor="@color/muted_blue"
                         android:fontFamily="@font/dinprobold"
                         android:textSize="17sp"

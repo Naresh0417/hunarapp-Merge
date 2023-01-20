@@ -71,6 +71,7 @@ import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.CallWithFacultyResponse;
 import com.hamstechonline.datamodel.Discussions;
 import com.hamstechonline.datamodel.DiscussionsModel;
+import com.hamstechonline.datamodel.HunarClubPostClick;
 import com.hamstechonline.datamodel.LastLessonDetails;
 import com.hamstechonline.datamodel.PayinstallmentRequest;
 import com.hamstechonline.datamodel.PaymentSuccessResponse;
@@ -856,6 +857,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Comment";
                         PagenameLog = "MyCourse page";
+                        saveHunarClubPost(dataBuzz.get(position).getPostid());
                         getLogEvent(context);
                         buzzDetailsDialog = new DiscussionDetailsDialog(MyCoursesPageActivity.this, position,dataBuzz,term_id,courseId);
                         buzzDetailsDialog.showLoadingDialog();
@@ -873,6 +875,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Clicked on discussions post";
                         PagenameLog = "MyCourse page";
+                        saveHunarClubPost(dataBuzz.get(position).getPostid());
                         getLogEvent(context);
                         buzzDetailsDialog = new DiscussionDetailsDialog(MyCoursesPageActivity.this, position,dataBuzz,term_id,courseId);
                         buzzDetailsDialog.showLoadingDialog();
@@ -885,6 +888,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                         lessonEvent = dataBuzz.get(position).getTitle();
                         ActivityLog = "Share";
                         PagenameLog = "MyCourse page";
+                        saveHunarClubShare(dataBuzz.get(position).getPostid());
                         getLogEvent(context);
                         if (dataBuzz.get(position).getVideourl().equals("")) {
                             Intent shareIntent = new Intent(Intent.ACTION_SEND);
@@ -1237,9 +1241,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         ImageView progressBar = dialog.findViewById(R.id.progressBar);
 
         Glide.with(MyCoursesPageActivity.this)
-                .load(R.drawable.ic_sucess_payment)
+                .load(R.drawable.discussion_post_submit_thumsup)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.ic_sucess_payment)
+                .error(R.drawable.discussion_post_submit_thumsup)
                 .into(progressBar);
 
         dialog.show();
@@ -1406,6 +1410,43 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                     return true;
                 }
                 return false;
+            }
+        });
+    }
+
+    public void saveHunarClubPost(int postId) {
+        HunarClubPostClick hocResponse = new HunarClubPostClick("Hamstech", getResources().getString(R.string.lblApiKey),
+                postId,userDataBase.getUserMobileNumber(1),"discussions" );
+        Call<HunarClubPostClick> call = apiService.getHunarClubPost(hocResponse);
+        call.enqueue(new Callback<HunarClubPostClick>() {
+            @Override
+            public void onResponse(Call<HunarClubPostClick> call, retrofit2.Response<HunarClubPostClick> response) {
+                if (response.body().getStatus().equals("")) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HunarClubPostClick> call, Throwable t) {
+
+            }
+        });
+    }
+    public void saveHunarClubShare(int postId) {
+        HunarClubPostClick hocResponse = new HunarClubPostClick("Hamstech", getResources().getString(R.string.lblApiKey),
+                postId,userDataBase.getUserMobileNumber(1),"discussions" );
+        Call<HunarClubPostClick> call = apiService.getHunarClubShare(hocResponse);
+        call.enqueue(new Callback<HunarClubPostClick>() {
+            @Override
+            public void onResponse(Call<HunarClubPostClick> call, retrofit2.Response<HunarClubPostClick> response) {
+                if (response.body().getStatus().equals("")) {
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HunarClubPostClick> call, Throwable t) {
+
             }
         });
     }

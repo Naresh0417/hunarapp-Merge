@@ -87,7 +87,7 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
     List<String> positions = new ArrayList<>();
     HocLoadingDialog hocLoadingDialog;
     String langPref = "Language",footerMenuStatus,typeCat = "";
-    SharedPreferences prefs,footerStatus;
+    SharedPreferences prefs,footerStatus,catType;
     ApiInterface apiService;
     UserDataBase userDataBase;
 
@@ -110,6 +110,7 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
         //prefs = PreferenceManager.getDefaultSharedPreferences(this);
         langPref = prefs.getString("Language", "");
         footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        catType = getSharedPreferences("Category", Activity.MODE_PRIVATE);
         footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
 
         MoEngage moEngage = new MoEngage.Builder(getApplication(), "UUN7GSHBBH1UT5GCHI2EQ1KY")
@@ -225,8 +226,14 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
                 holder.imgCategory.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-                        saveLocale(coursesList.get(position).getType());
+                        SharedPreferences.Editor editor = catType.edit();
+                        editor.putString("Category", coursesList.get(position).getType());
+                        editor.commit();
+                        Intent intent = new Intent(ChooseFavouriteCourse.this,HomePageActivity.class);
+                        intent.putExtra("Category",coursesList.get(position).getType());
+                        startActivity(intent);
+                        ChooseFavouriteCourse.this.finish();
+                        //saveLocale(coursesList.get(position).getType());
                     }
                 });
             } catch (Exception e){
@@ -270,10 +277,12 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
     }
 
     public void saveLocale(String course){
-        SharedPreferences prefs = getSharedPreferences("Category", Activity.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putString("Category", course);
-        editor.commit();
+
+        if (typeCat.equalsIgnoreCase("")) {
+            SharedPreferences.Editor editor = catType.edit();
+            editor.putString("Category", course);
+            editor.commit();
+        }
 
         Intent intent = new Intent(ChooseFavouriteCourse.this,HomePageActivity.class);
         startActivity(intent);

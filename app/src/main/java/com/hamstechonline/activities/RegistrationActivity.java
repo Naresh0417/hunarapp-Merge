@@ -125,7 +125,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private LocationManager locationManager;
     private String provider;
     Location location;
-    int lengthMobile = 0,downSpeed = 0, upSpeed = 0,c;
+    int lengthMobile = 0,downSpeed = 0, upSpeed = 0,c, intTimer = 2;
     String gcm_id;
     Criteria criteria;
     CountDownTimer countDownTimer;
@@ -350,10 +350,12 @@ public class RegistrationActivity extends AppCompatActivity {
                 long sec = ((millisUntilFinished / 1000) % 60);
                 txtExpire.setText("OTP "+getResources().getString(R.string.expireIn)
                         +String.format("%02d", sec)+" seconds");
+                intTimer = 1;
             }
 
             @Override
             public void onFinish() {
+                intTimer = 2;
                 getBlockApi();
             }
         };
@@ -588,6 +590,7 @@ public class RegistrationActivity extends AppCompatActivity {
                         JSONObject object = jsonObject.getJSONObject("status");
                         JSONObject objData = object.getJSONObject("metadata");
                         if (object.getString("data").equals("OTP Sent Successfully")) {
+                            txtSelectCity.setEnabled(false);
                             otptimestamp = String.valueOf(objData.getInt("timestamp"));
                             linOtpLayout.setVisibility(View.VISIBLE);
                             btnGetOtp.setVisibility(View.GONE);
@@ -850,6 +853,9 @@ public class RegistrationActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        if (intTimer == 1) {
+            countDownTimer.cancel();
+        }
         finishAffinity();
     }
 }

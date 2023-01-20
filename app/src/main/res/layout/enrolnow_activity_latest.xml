@@ -150,53 +150,47 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <androidx.cardview.widget.CardView
+                    <RelativeLayout
                         android:id="@+id/linearadddiscount"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="7dp">
+                        android:layout_height="55dp"
+                        android:background="@drawable/learn_anothercourse_shadow_bg"
+                        android:onClick="ViewAllCources"
+                        android:padding="10dp"
+                        android:layout_marginTop="10dp">
 
-                        <RelativeLayout
-                            android:layout_width="match_parent"
+                        <ImageView
+                            android:id="@+id/iv_learndiscount"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/learn_discount" />
+
+                        <TextView
+                            android:id="@+id/txtAddDiscount"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@color/light_pink"
-                            android:foreground="?attr/selectableItemBackground"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_toRightOf="@+id/iv_learndiscount"
+                            android:fontFamily="@font/dinprobold"
+                            android:text="@string/learnanother"
+                            android:textColor="@color/black_two"
+                            android:textSize="16sp"
+                            android:paddingBottom="6dp"/>
+
+                        <TextView
+                            android:id="@+id/txtAddCourse"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:fontFamily="@font/dinprobold"
                             android:onClick="ViewAllCources"
-                            android:padding="10dp">
+                            android:text="@string/txtAddCourse"
+                            android:textColor="@color/black_two"
+                            android:visibility="gone" />
+                    </RelativeLayout>
 
-                            <ImageView
-                                android:id="@+id/iv_learndiscount"
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_centerVertical="true"
-                                android:src="@drawable/learn_discount" />
-
-                            <TextView
-                                android:id="@+id/txtAddDiscount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_centerVertical="true"
-                                android:layout_marginLeft="5dp"
-                                android:layout_toRightOf="@+id/iv_learndiscount"
-                                android:fontFamily="@font/dinprobold"
-                                android:text="@string/learnanother"
-                                android:textColor="@color/black_two"
-                                android:textSize="16sp" />
-
-                            <TextView
-                                android:id="@+id/txtAddCourse"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentRight="true"
-                                android:fontFamily="@font/dinprobold"
-                                android:onClick="ViewAllCources"
-                                android:text="@string/txtAddCourse"
-                                android:textColor="@color/black_two"
-                                android:visibility="gone" />
-                        </RelativeLayout>
-                    </androidx.cardview.widget.CardView>
 
                     <CheckBox
                         android:id="@+id/checkboxNSDC"
@@ -250,19 +244,17 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="140dp"
-                            android:background="@color/white"
+                            android:layout_height="170dp"
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <androidx.cardview.widget.CardView
+                            <LinearLayout
                                 android:id="@+id/linearPremium"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_margin="5dp"
                                 android:layout_weight="1"
-                                app:cardCornerRadius="5dp"
-                                app:cardElevation="5dp">
+                                android:background="@drawable/extra_discount_bg_shadow">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -328,16 +320,15 @@
 
                                 </LinearLayout>
 
-                            </androidx.cardview.widget.CardView>
+                            </LinearLayout>
 
-                            <androidx.cardview.widget.CardView
+                            <LinearLayout
                                 android:id="@+id/linearPreferred"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_margin="5dp"
                                 android:layout_weight="1"
-                                app:cardCornerRadius="5dp"
-                                app:cardElevation="5dp">
+                                android:background="@drawable/extra_discount_bg_shadow">
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -391,7 +382,7 @@
 
                                 </LinearLayout>
 
-                            </androidx.cardview.widget.CardView>
+                            </LinearLayout>
 
                         </LinearLayout>
 
@@ -501,15 +492,11 @@
                             android:textColor="@color/light_grey"
                             android:textSize="16sp" />
 
-                        <androidx.cardview.widget.CardView
+                        <LinearLayout
                             android:id="@+id/linearonlinepay"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/border_gray_strok"
-                            android:minHeight="60dp"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="5dp">
+                            android:layout_height="90dp"
+                            android:background="@drawable/extra_discount_bg_shadow">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -517,7 +504,7 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:orientation="horizontal"
-                                android:padding="10dp">
+                                android:paddingLeft="20dp">
 
                                 <ImageView
                                     android:layout_width="40dp"
@@ -570,17 +557,13 @@
                                 </LinearLayout>
                             </LinearLayout>
 
-                        </androidx.cardview.widget.CardView>
+                        </LinearLayout>
 
-                        <androidx.cardview.widget.CardView
+                        <LinearLayout
                             android:id="@+id/linearcashdelevery"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:background="@drawable/border_gray_strok"
-                            android:minHeight="60dp"
-                            app:cardCornerRadius="5dp"
-                            app:cardElevation="5dp">
+                            android:layout_height="90dp"
+                            android:background="@drawable/extra_discount_bg_shadow">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -588,7 +571,7 @@
                                 android:layout_gravity="center"
                                 android:gravity="center"
                                 android:orientation="horizontal"
-                                android:padding="10dp">
+                                android:paddingLeft="25dp">
 
                                 <ImageView
                                     android:layout_width="40dp"
@@ -605,7 +588,7 @@
                                     android:textColor="@color/muted_blue" />
                             </LinearLayout>
 
-                        </androidx.cardview.widget.CardView>
+                        </LinearLayout>
 
                         <TextView
                             android:layout_width="match_parent"
@@ -617,26 +600,30 @@
                             android:gravity="center"
                             android:text="@string/txt_one_step"
                             android:textColor="@color/muted_blue"
+                            android:textStyle="bold"
                             android:textSize="16sp" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_above="@+id/navigation"
-                            android:layout_margin="5dp">
+                            android:layout_margin="5dp"
+                            android:layout_marginTop="10dp">
 
                             <Button
                                 android:id="@+id/btnNext"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_height="52dp"
                                 android:layout_centerHorizontal="true"
-                                android:background="@drawable/button_shape_gray"
+                                android:background="@drawable/payment_blue_strok"
                                 android:enabled="false"
                                 android:fontFamily="@font/dinprobold"
                                 android:onClick="PaymentDetails"
                                 android:text="Pay now"
-                                android:textColor="@color/white"
+                                android:textColor="@color/muted_blue"
                                 android:textSize="16sp"
+                                android:layout_marginTop="5dp"
+                                android:paddingBottom="8dp"
                                 android:textStyle="bold" />
 
                             <LinearLayout

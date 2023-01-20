@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textColor="@color/black_two"
+            android:textColor="@color/pink"
             android:fontFamily="@font/dinpro"
             android:textSize="16sp"
             android:drawableLeft="@drawable/file_light_15_512"

@@ -38,6 +38,7 @@ import com.hamstechonline.R;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.CategoryDatamodel;
 import com.hamstechonline.utils.ApiConstants;
+import com.hamstechonline.utils.AppsFlyerEventsHelper;
 import com.hamstechonline.utils.GridSpacingItemDecoration;
 import com.hamstechonline.utils.HocLoadingDialog;
 import com.hamstechonline.utils.LogEventsActivity;
@@ -104,8 +105,11 @@ public class LanguageSelectionActivity extends AppCompatActivity {
             public void onSuccess(InstanceIdResult instanceIdResult) {
                 String newToken = instanceIdResult.getToken();
                 gcm_id = newToken;
+                new AppsFlyerEventsHelper(LanguageSelectionActivity.this).EventInstallation(gcm_id);
             }
         });
+
+
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override

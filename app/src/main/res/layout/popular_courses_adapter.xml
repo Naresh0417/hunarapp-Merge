@@ -62,7 +62,7 @@
                 android:paddingBottom="10dp"
                 android:background="@drawable/pink_stroke_white"
                 android:fontFamily="sans-serif"
-                android:text="Start Learning!"
+                android:text="@string/start_learning"
                 android:gravity="center"
                 android:textColor="@color/muted_blue"
                 android:textSize="15sp"

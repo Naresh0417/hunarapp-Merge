@@ -81,7 +81,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Live Class"
+                android:text="@string/live_class_tag"
                 android:fontFamily="sans-serif"
                 android:textSize="12sp"
                 android:layout_marginTop="2dp"/>

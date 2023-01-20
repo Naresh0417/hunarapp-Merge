@@ -125,11 +125,11 @@ public class LiveClassesActivity extends AppCompatActivity {
                 if (txtYourClassesType.getText().toString().equalsIgnoreCase("Upcoming Classes")) {
                     txtYourClassesType.setBackground(getResources().getDrawable(R.drawable.btn_blue_stroke_white));
                     txtYourClassesType.setTextColor(getResources().getColor(R.color.muted_blue));
-                    txtYourClassesType.setText("Previous Classes");
+                    txtYourClassesType.setText(getResources().getString(R.string.previous_classes));
                     getYourLiveClassesList("upcoming");
 
                 } else {
-                    txtYourClassesType.setText("Upcoming Classes");
+                    txtYourClassesType.setText(R.string.upcoming_classes);
                     txtYourClassesType.setBackground(getResources().getDrawable(R.drawable.pink_stroke_white));
                     txtYourClassesType.setTextColor(getResources().getColor(R.color.pink));
                     getYourLiveClassesList("previous");
@@ -147,7 +147,7 @@ public class LiveClassesActivity extends AppCompatActivity {
                     getAllLiveClassesList("upcoming");
 
                 } else {
-                    txtAllClassesType.setText("Upcoming Classes");
+                    txtAllClassesType.setText(R.string.upcoming_classes);
                     txtAllClassesType.setBackground(getResources().getDrawable(R.drawable.pink_stroke_white));
                     txtAllClassesType.setTextColor(getResources().getColor(R.color.pink));
                     getAllLiveClassesList("previous");
@@ -291,10 +291,10 @@ public class LiveClassesActivity extends AppCompatActivity {
 
                 if (yourLiveClassType.equalsIgnoreCase("Upcoming Classes")) {
                     holder.txtDaysLeft.setVisibility(View.GONE);
-                    holder.txtWatchNow.setText("WATCH NOW");
+                    holder.txtWatchNow.setText(R.string.watch_now);
                 } else if (yourLiveClassType.equalsIgnoreCase("Previous Classes")){
                     holder.txtDaysLeft.setVisibility(View.VISIBLE);
-                    holder.txtWatchNow.setText("REGISTER NOW");
+                    holder.txtWatchNow.setText(R.string.register_now);
                 }
 
                 holder.txtWatchNow.setOnClickListener(new View.OnClickListener() {
@@ -382,10 +382,10 @@ public class LiveClassesActivity extends AppCompatActivity {
 
                 if (allLiveClassType.equalsIgnoreCase("Upcoming Classes")) {
                     holder.txtDaysLeft.setVisibility(View.GONE);
-                    holder.txtWatchNow.setText("WATCH NOW");
+                    holder.txtWatchNow.setText(R.string.watch_now);
                 } else if (allLiveClassType.equalsIgnoreCase("Previous Classes")){
                     holder.txtDaysLeft.setVisibility(View.VISIBLE);
-                    holder.txtWatchNow.setText("REGISTER NOW");
+                    holder.txtWatchNow.setText(getResources().getString(R.string.register_now));
                 }
 
                 holder.listLayout.setOnClickListener(new View.OnClickListener() {

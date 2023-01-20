@@ -16,6 +16,7 @@ import com.hamstechonline.datamodel.GetChatNumber;
 import com.hamstechonline.datamodel.GetDynamicData;
 import com.hamstechonline.datamodel.HocResponse;
 import com.hamstechonline.datamodel.HocTodayResponse;
+import com.hamstechonline.datamodel.HunarClubPostClick;
 import com.hamstechonline.datamodel.LikesCountData;
 import com.hamstechonline.datamodel.LiveClassRegistrationResponse;
 import com.hamstechonline.datamodel.LiveClassesResponse;
@@ -171,4 +172,10 @@ public interface ApiInterface {
 
     @POST("http://android.hamstechonline.com/api/list/liveClassRegistration")
     Call<LiveClassRegistrationResponse> getLiveClassRegistration(@Body LiveClassRegistrationResponse liveClassesResponse);
+
+    @POST("http://android.hamstechonline.com/api/list/savePostVisits")
+    Call<HunarClubPostClick> getHunarClubPost(@Body HunarClubPostClick hunarClubPostClick);
+
+    @POST("http://android.hamstechonline.com/api/list/savePostShares")
+    Call<HunarClubPostClick> getHunarClubShare(@Body HunarClubPostClick hunarClubPostClick);
 }

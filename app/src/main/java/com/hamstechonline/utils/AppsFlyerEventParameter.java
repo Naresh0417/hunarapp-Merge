@@ -13,6 +13,7 @@ public class AppsFlyerEventParameter {
     public static String EVENT_LESSON = "lesson";
     public static String EVENT_NOTIFICATION = "notification";
     public static String EVENT_ADMISSION = "admission";
+    public static String EVENT_INSTALLATION = "installation";
 
     public static String KEY_MOBILE_NUMBER = "mobile_number";
     public static String KEY_USER_NAME = "user_name";
@@ -32,4 +33,5 @@ public class AppsFlyerEventParameter {
     public static String KEY_LANGUAGE = "language";
     public static String KEY_SuccessStories = "Success_Stories";
     public static String KEY_ABOUTUS = "about_us";
+    public static String KEY_GCMID = "gcm_id";
 }

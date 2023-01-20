@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -160,7 +161,7 @@ public class HomePageActivity extends AppCompatActivity {
     LogEventsActivity logEventsActivity;
     HocLoadingDialog hocLoadingDialog;
     String langPref = "Language",mp4URL,typeCat = "",footerMenuStatus;
-    SharedPreferences prefs,footerStatus;
+    SharedPreferences prefs,footerStatus,typeCateSharedPreferences;
     private Locale myLocale;
     RatingDialogue howtoUseAppDialogue;
     HowtoUseAppDialogue howtoUseApp;
@@ -275,9 +276,12 @@ public class HomePageActivity extends AppCompatActivity {
         hocLoadingDialog = new HocLoadingDialog(this);
         prefs = getSharedPreferences("Hindi", Activity.MODE_PRIVATE);
         footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
+        typeCateSharedPreferences = getSharedPreferences("Category", Activity.MODE_PRIVATE);
         footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
         langPref = prefs.getString("Language", "en");
-        typeCat = prefs.getString("Category", "");
+
+        typeCat = typeCateSharedPreferences.getString("Category", "");
+        Log.e("typeCat","282   "+typeCat);
         changeLang(langPref);
 
         getResponse();
@@ -742,82 +746,7 @@ public class HomePageActivity extends AppCompatActivity {
         finishAffinity();
     }
 
-    /*@Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        CategoryName = "";
-        CourseLog = "";
-        LessonLog = "";
-        mMenuId = item.getItemId();
-        for (int i = 0; i < navigation.getMenu().size(); i++) {
-            MenuItem menuItem = navigation.getMenu().getItem(i);
-            boolean isChecked = menuItem.getItemId() == item.getItemId();
-            menuItem.setChecked(isChecked);
-        }
 
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                ActivityLog = "";
-                PagenameLog = "Home Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(HomePageActivity.this);
-                Intent intentCourses = new Intent(HomePageActivity.this, HomePageActivity.class);
-                startActivity(intentCourses);
-                return true;
-            case R.id.navigation_chat:
-                ActivityLog = "Home Page";
-                PagenameLog = "chat with whatsapp";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, "chat with whatsapp");
-                logger.logEvent(AppEventsConstants.EVENT_NAME_CONTACT,params);
-                getLogEvent(HomePageActivity.this);
-                PackageManager packageManager = getPackageManager();
-                Intent i = new Intent(Intent.ACTION_VIEW);
-
-                try {
-                    String url = "https://api.whatsapp.com/send?phone="+ "919010100240" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
-                    i.setPackage("com.whatsapp");
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
-if (i.resolveActivity(packageManager) != null) {
-                        startActivity(i);
-                    }
-
-                } catch (Exception e){
-                    e.printStackTrace();
-                }
-                return true;
-            case R.id.navigation_enrol:
-                ActivityLog = "Home page";
-                PagenameLog = "Success Story";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(HomePageActivity.this);
-                Intent enrol = new Intent(HomePageActivity.this, SuccessStoryActivity.class);
-                startActivity(enrol);
-                return true;
-            case R.id.navigation_today:
-                ActivityLog = "Click";
-                PagenameLog = "Hunar Club";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(HomePageActivity.this);
-                Intent hamstech = new Intent(HomePageActivity.this, BuzzActivity.class);
-                startActivity(hamstech);
-                return true;
-            case R.id.navigation_aboutus:
-                ActivityLog = "Home page";
-                PagenameLog = "Contact Page";
-                params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
-                logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
-                getLogEvent(HomePageActivity.this);
-                new AppsFlyerEventsHelper(this).EventContactus();
-                Intent about = new Intent(HomePageActivity.this, ContactActivity.class);
-                startActivity(about);
-                return true;
-        }
-        return false;
-    }*/
     public void RadingDialogue(){
         try {
             howtoUseAppDialogue.showLoadingDialog();
@@ -957,6 +886,7 @@ if (i.resolveActivity(packageManager) != null) {
                         CourseLog = "";LessonLog = "";ActivityLog = "Click";PagenameLog = "Dashboard";
                         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, datamodels.get(position).getCategoryname());
                         logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
+                        hocLoadingDialog.showLoadingDialog();
                         getLogEvent(HomePageActivity.this);
                         new AppsFlyerEventsHelper(context).EventCategory(CategoryName);
                         getSubCategoriesList(HomePageActivity.this,datamodels.get(position).getCategoryId(),datamodels.get(position).getLanguage());
@@ -1090,7 +1020,6 @@ if (i.resolveActivity(packageManager) != null) {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        hocLoadingDialog.showLoadingDialog();
 
         final String mRequestBody = metaData.toString();
 

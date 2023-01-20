@@ -472,4 +472,20 @@
     <string name="complete_your_course_to_download">अपना सर्टिफिकेट डाउनलोड करने के लिए अपना कोर्स पूरा करें</string>
     <string name="chooseLanguage_hindi">अपनी भाषा चुनिए</string>
     <string name="select_skip"><u>छोड़ें</u></string>
+    <string name="start_learning">सीखना शुरू करें!</string>
+    <string name="live_class_tag">लाइव क्लास</string>
+    <string name="register_now_to_get">अभी रजिस्टर करें और पाएं</string>
+    <string name="enter_your_name">आपका नाम</string>
+    <string name="enter_city_name">आपके शहर का नाम</string>
+    <string name="hi_let_s_help_you_choose_n_your_favourite_courses">हैलो! चलिए आपके पसंदीदा\nकोर्स चुनने में आपकी मदद करते हैं! </string>
+    <string name="most_popular_courses">सबसे पॉपुलर कोर्सेस</string>
+    <string name="all_courses">सभी कोर्सेस</string>
+    <string name="trial_lessons">ट्रायल लेसंस</string>
+    <string name="course_details">कोर्स डिटेल्स</string>
+    <string name="your_live_classes">आपकी लाइव क्लासेस</string>
+    <string name="previous_classes">पिछली क्लासेस</string>
+    <string name="all_live_classes">सभी लाइव क्लासेस</string>
+    <string name="register_now">अभी एनरोल करें</string>
+    <string name="watch_now">अभी देखिए</string>
+    <string name="upcoming_classes">अपकमिंग क्लासेस</string>
 </resources>
