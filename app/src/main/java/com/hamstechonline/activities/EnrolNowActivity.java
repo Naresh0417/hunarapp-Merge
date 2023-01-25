@@ -299,14 +299,14 @@ public class EnrolNowActivity extends AppCompatActivity implements
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         mFirebaseAnalytics.setUserId(userDataBase.getUserMobileNumber(1));
 
-        linearPreferred.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
-        linearPremium.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
+        linearPreferred.setBackgroundResource(R.drawable.unselect_payment_method);
+        linearPremium.setBackgroundResource(R.drawable.unselect_payment_method);
 //        txtPreferredTitle.setTextColor(getResources().getColor(R.color.black_two));
 //        amountPreferred.setTextColor(getResources().getColor(R.color.black_two));
 //        txtPremiumTitle.setTextColor(getResources().getColor(R.color.black_two));
 
-        linearonlinepay.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
-        linearcashdelevery.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
+        linearonlinepay.setBackgroundResource(R.drawable.unselect_payment_method);
+        linearcashdelevery.setBackgroundResource(R.drawable.unselect_payment_method);
 
         validateHorizontalCourseList();
 
@@ -336,7 +336,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
                     course_type = "Preferred";
                     logEnrolEvent(course_type, "Selected");
                     linearPreferred.setBackgroundResource(R.drawable.payment_method_blue_shadow);
-                    linearPremium.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
+                    linearPremium.setBackgroundResource(R.drawable.unselect_payment_method);
                     //txtPreferredTitle.setTextColor(getResources().getColor(R.color.white));
                     //amountPreferred.setTextColor(getResources().getColor(R.color.white));
                     //txtPremiumTitle.setTextColor(getResources().getColor(R.color.black_two));
@@ -364,7 +364,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
                     selectedPlan = 2;
                     course_type = "Premium";
                     logEnrolEvent(course_type, "Selected");
-                    linearPreferred.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
+                    linearPreferred.setBackgroundResource(R.drawable.unselect_payment_method);
                     linearPremium.setBackgroundResource(R.drawable.payment_method_blue_shadow);
                     //txtPreferredTitle.setTextColor(getResources().getColor(R.color.black_two));
                     //amountPreferred.setTextColor(getResources().getColor(R.color.black_two));
@@ -988,8 +988,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
                             checkboxNSDC.setChecked(false);
                             linearPreferred.setEnabled(false);
                             linearPremium.setEnabled(false);
-                            linearPreferred.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
-                            linearPremium.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
+                            linearPreferred.setBackgroundResource(R.drawable.unselect_payment_method);
+                            linearPremium.setBackgroundResource(R.drawable.unselect_payment_method);
                             txtPreferredTitle.setTextColor(getResources().getColor(R.color.muted_blue));
                             amountPreferred.setTextColor(getResources().getColor(R.color.muted_blue));
                             txtPremiumTitle.setTextColor(getResources().getColor(R.color.muted_blue));
@@ -1091,8 +1091,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
                     checkboxNSDC.setChecked(false);
                     linearPreferred.setEnabled(false);
                     linearPremium.setEnabled(false);
-                    linearPreferred.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
-                    linearPremium.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
+                    linearPreferred.setBackgroundResource(R.drawable.unselect_payment_method);
+                    linearPremium.setBackgroundResource(R.drawable.unselect_payment_method);
                     txtPreferredTitle.setTextColor(getResources().getColor(R.color.black_two));
                     amountPreferred.setTextColor(getResources().getColor(R.color.black_two));
                     txtPremiumTitle.setTextColor(getResources().getColor(R.color.black_two));
@@ -1184,8 +1184,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
                                         checkboxNSDC.setChecked(false);
                                         linearPreferred.setEnabled(false);
                                         linearPremium.setEnabled(false);
-                                        linearPreferred.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
-                                        linearPremium.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
+                                        linearPreferred.setBackgroundResource(R.drawable.unselect_payment_method);
+                                        linearPremium.setBackgroundResource(R.drawable.unselect_payment_method);
                                         txtPreferredTitle.setTextColor(getResources().getColor(R.color.muted_blue));
                                         amountPreferred.setTextColor(getResources().getColor(R.color.muted_blue));
                                         txtPremiumTitle.setTextColor(getResources().getColor(R.color.muted_blue));
@@ -1196,7 +1196,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
                                         course_type = "Preferred";
                                         logEnrolEvent(course_type, "Selected");
                                         linearPreferred.setBackgroundResource(R.drawable.payment_method_blue_shadow);
-                                        linearPremium.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
+                                        linearPremium.setBackgroundResource(R.drawable.unselect_payment_method);
                                         //txtPreferredTitle.setTextColor(getResources().getColor(R.color.white));
                                         //amountPreferred.setTextColor(getResources().getColor(R.color.white));
                                         //txtPremiumTitle.setTextColor(getResources().getColor(R.color.black_two));
@@ -1767,7 +1767,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
         if (selectedPlan == 1) {
             if (listDetails.size() != 0) {
                 linearPreferred.setBackgroundResource(R.drawable.payment_method_blue_shadow);
-                linearPremium.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
+                linearPremium.setBackgroundResource(R.drawable.unselect_payment_method);
                 //txtPreferredTitle.setTextColor(getResources().getColor(R.color.white));
                 //amountPreferred.setTextColor(getResources().getColor(R.color.white));
                 //txtPremiumTitle.setTextColor(getResources().getColor(R.color.black_two));
@@ -1871,8 +1871,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
                 planNSDC = 2;
                 linearPreferred.setEnabled(false);
                 linearPremium.setEnabled(false);
-                linearPreferred.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
-                linearPremium.setBackgroundResource(R.drawable.extra_discount_bg_shadow);
+                linearPreferred.setBackgroundResource(R.drawable.unselect_payment_method);
+                linearPremium.setBackgroundResource(R.drawable.unselect_payment_method);
                 //txtPreferredTitle.setTextColor(getResources().getColor(R.color.black_two));
                 //amountPreferred.setTextColor(getResources().getColor(R.color.black_two));
                 //txtPremiumTitle.setTextColor(getResources().getColor(R.color.black_two));

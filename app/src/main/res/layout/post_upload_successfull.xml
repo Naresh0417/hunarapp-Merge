@@ -32,6 +32,7 @@
             android:visibility="visible"/>
 
         <TextView
+            android:id="@+id/txtlabelBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/thanks_for_your_submission"
@@ -43,6 +44,7 @@
             android:layout_marginTop="15dp"/>
 
         <TextView
+            android:id="@+id/txtlabelNormal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/it_will_be_reviewed_and_posted_within_24_hours"

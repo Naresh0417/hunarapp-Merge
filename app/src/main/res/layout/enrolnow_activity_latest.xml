@@ -293,7 +293,7 @@
                                         android:fontFamily="@font/dinprobold"
                                         android:text="@string/lblPremium"
                                         android:textAllCaps="true"
-                                        android:textColor="@color/black_two"
+                                        android:textColor="@color/muted_blue"
                                         android:textSize="13sp" />
 
                                     <TextView
@@ -377,7 +377,7 @@
                                         android:gravity="center_horizontal"
                                         android:text="@string/lblPreferred"
                                         android:textAllCaps="true"
-                                        android:textColor="@color/black_two"
+                                        android:textColor="@color/muted_blue"
                                         android:textSize="13sp" />
 
                                 </LinearLayout>

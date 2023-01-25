@@ -609,6 +609,19 @@ public class HomePageActivity extends AppCompatActivity {
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .error(R.mipmap.ic_launcher)
                             .into(imgMentorImage);
+                    if (langPref.equalsIgnoreCase("en")){
+                        Glide.with(HomePageActivity.this)
+                                .load(R.drawable.join_hunar)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .error(R.drawable.join_hunar)
+                                .into(gifSuccessStory);
+                    } else {
+                        Glide.with(HomePageActivity.this)
+                                .load(R.drawable.join_hunar_hindi)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .error(R.drawable.join_hunar_hindi)
+                                .into(gifSuccessStory);
+                    }
 
                     if (UserDataConstants.notificationID!= null){
                         if(UserDataConstants.notificationID.equals("2570")){

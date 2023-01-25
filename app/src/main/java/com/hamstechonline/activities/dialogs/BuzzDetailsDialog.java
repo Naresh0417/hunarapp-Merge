@@ -1,5 +1,6 @@
 package com.hamstechonline.activities.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -77,8 +78,9 @@ public class BuzzDetailsDialog {
     Dialog dialog;
     ImageView imageView;
     int position = 0;
-    ImageView imgHamstech, imgZoom,imgPlayButton;
-    TextView txtTitle, txtDescription,txtExternalLink,likesCount,txtPost, txtUserName, imgLikeUnlike;
+    ImageView imgHamstech, imgZoom,imgPlayButton,profile_image;
+    TextView txtTitle, txtDescription,txtExternalLink,likesCount,txtPost, txtUserName, imgLikeUnlike,txtUserNamePost,
+            txtUserNameChar;
     LinearLayout btnShare;
     RecyclerView listComments;
     RelativeLayout player_youtube;
@@ -141,6 +143,9 @@ public class BuzzDetailsDialog {
         txtUserName = dialog.findViewById(R.id.txtUserName);
         youTubePlayerView = dialog.findViewById(R.id.youtube_player_view);
         player_youtube = dialog.findViewById(R.id.player_youtube);
+        profile_image = dialog.findViewById(R.id.profile_image);
+        txtUserNamePost = dialog.findViewById(R.id.txtUserNamePost);
+        txtUserNameChar = dialog.findViewById(R.id.txtUserNameChar);
 
         userDataBase = new UserDataBase(context);
         logEventsActivity = new LogEventsActivity();
@@ -268,6 +273,35 @@ public class BuzzDetailsDialog {
                     if (!dataBuzz.get(position).getExternallink().isEmpty()) {
                         txtExternalLink.setText(dataBuzz.get(position).getExternallink());
                         txtExternalLink.setVisibility(View.VISIBLE);
+                    }
+
+                    if (!dataBuzz.get(position).getProfile_pic().isEmpty()) {
+                        Glide.with(context)
+                                .load(dataBuzz.get(position).getProfile_pic())
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .error(R.mipmap.ic_launcher)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(profile_image);
+                        profile_image.setVisibility(View.VISIBLE);
+                        if (!dataBuzz.get(position).getName().isEmpty()) {
+                            txtUserNamePost.setText(dataBuzz.get(position).getName());
+                            txtUserNamePost.setVisibility(View.VISIBLE);
+                        }
+                    } else if (!dataBuzz.get(position).getName().isEmpty()) {
+                        txtUserNamePost.setText(dataBuzz.get(position).getName());
+                        Glide.with(context)
+                                .load(R.drawable.profile_hunarclub)
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .error(R.drawable.profile_hunarclub)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(profile_image);
+                        txtUserNamePost.setVisibility(View.VISIBLE);
+                    } else if (!dataBuzz.get(position).getName_first_character().isEmpty()) {
+                        txtUserNameChar.setText(dataBuzz.get(position).getName_first_character());
+                        profile_image.setVisibility(View.GONE);
+                        txtUserNameChar.setVisibility(View.VISIBLE);
                     }
 
                     if (dataBuzz.get(position).getVideourl().equals("")) {
@@ -498,7 +532,7 @@ public class BuzzDetailsDialog {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 holder.txtUserName.setText(dataBuzz.get(position).getName());
                 holder.txtComment.setText(dataBuzz.get(position).getComment());

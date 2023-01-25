@@ -248,53 +248,36 @@ public class ContactActivity extends AppCompatActivity {
         super.onStart();
     }
 
-    public void OnlineSuccessfulPopUp(Context context) {
-        final Dialog dialog = new Dialog(context);
+    public void uploadSuccessPopUp(){
+        final Dialog dialog = new Dialog(ContactActivity.this);
         dialog.getWindow();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.setContentView(R.layout.payment_sucess);
+        dialog.setContentView(R.layout.post_upload_successfull);
         dialog.setCancelable(false);
 
         ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
         ImageView progressBar = dialog.findViewById(R.id.progressBar);
-        LinearLayout onlinePaymentLayout = dialog.findViewById(R.id.onlinePaymentLayout);
-        LinearLayout cod_layout = dialog.findViewById(R.id.cod_layout);
-        TextView paymentComment = dialog.findViewById(R.id.paymentComment);
+        TextView txtlabelBold = dialog.findViewById(R.id.txtlabelBold);
+        TextView txtlabelNormal = dialog.findViewById(R.id.txtlabelNormal);
 
-        onlinePaymentLayout.setVisibility(View.VISIBLE);
-        cod_layout.setVisibility(View.GONE);
+        txtlabelNormal.setVisibility(View.GONE);
 
-        Glide.with(context)
-                .load(R.drawable.ic_sucess_payment)
+        txtlabelBold.setText(getResources().getString(R.string.call_request_accepted));
+
+        Glide.with(ContactActivity.this)
+                .load(R.drawable.discussion_post_submit_thumsup)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.ic_sucess_payment)
+                .error(R.drawable.discussion_post_submit_thumsup)
                 .into(progressBar);
-        paymentComment.setText(getResources().getString(R.string.call_request_accepted));
 
         dialog.show();
 
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, HomePageActivity.class);
                 dialog.dismiss();
-                //startActivity(intent);
-            }
-        });
-
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK &&
-                        event.getAction() == KeyEvent.ACTION_UP &&
-                        !event.isCanceled()) {
-                    Intent intent = new Intent(context, HomePageActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                return false;
             }
         });
     }
@@ -328,7 +311,7 @@ public class ContactActivity extends AppCompatActivity {
                     JSONObject object = jo.getJSONObject("status");
                     if (object.getInt("status")==200){
                         hocLoadingDialog.hideDialog();
-                        OnlineSuccessfulPopUp(ContactActivity.this);
+                        uploadSuccessPopUp();
                     } else {
                         hocLoadingDialog.hideDialog();
                         Toast.makeText(ContactActivity.this, ""+jo.getString("messsage"), Toast.LENGTH_SHORT).show();

@@ -27,10 +27,10 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="50+\nContests"
+                android:text="55+\nContests"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
-                android:textColor="@color/black_two"
+                android:textColor="@color/purple"
                 android:textSize="13sp"
                 android:gravity="center"
                 android:layout_marginTop="2dp"/>
@@ -53,7 +53,7 @@
                 android:text="Exciting\nContests"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
-                android:textColor="@color/black_two"
+                android:textColor="@color/purple"
                 android:textSize="13sp"
                 android:gravity="center"
                 android:layout_marginTop="2dp"/>
@@ -76,7 +76,7 @@
                 android:text="Hunar\nClub"
                 android:fontFamily="sans-serif"
                 android:textStyle="bold"
-                android:textColor="@color/black_two"
+                android:textColor="@color/purple"
                 android:textSize="13sp"
                 android:gravity="center"
                 android:layout_marginTop="2dp"/>

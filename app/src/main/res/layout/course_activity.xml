@@ -209,7 +209,7 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:paddingBottom="8dp"
-            android:text="Enroll Now For Full Course"
+            android:text="@string/enroll_now_for_full_course"
             android:background="@drawable/enrol_now_blue_strok"
             />
 

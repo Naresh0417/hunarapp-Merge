@@ -51,35 +51,39 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="65dp"
                     android:layout_marginTop="15dp"
-                    android:background="@drawable/bgshape_circle_gray">
+                    android:background="@drawable/editfield_bllue_stroke">
 
                     <LinearLayout
                         android:id="@+id/linCountryCode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp">
 
                         <com.hbb20.CountryCodePicker
                             android:id="@+id/ccp"
                             android:layout_width="120dp"
                             android:layout_height="50dp"
-                            app:ccp_textSize="13sp"
-                            android:gravity="center"/>
+                            app:ccp_textSize="13sp" />
 
                     </LinearLayout>
 
                     <View
                         android:layout_width="1dp"
-                        android:layout_height="match_parent"
-                        android:background="@color/gray"
-                        />
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="5dp"
+                        android:background="@color/gray" />
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="7dp">
 
                         <EditText

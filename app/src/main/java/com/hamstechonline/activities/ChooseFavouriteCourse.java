@@ -232,7 +232,7 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
                         Intent intent = new Intent(ChooseFavouriteCourse.this,HomePageActivity.class);
                         intent.putExtra("Category",coursesList.get(position).getType());
                         startActivity(intent);
-                        ChooseFavouriteCourse.this.finish();
+                        //ChooseFavouriteCourse.this.finish();
                         //saveLocale(coursesList.get(position).getType());
                     }
                 });

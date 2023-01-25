@@ -132,7 +132,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
     HocOptionsAdapter hocOptionsAdapter;
     ArrayList<BuzzDataModel> dataArrayList = new ArrayList<>();
     UserDataBase userDataBase;
-    int mMenuId;
+    int mMenuId,selectedOption = 0;
     String langPref,term_id = "",mobile,fullname,email = "",footerMenuStatus;
     SharedPreferences prefs,footerStatus;
     HocLoadingDialog hocLoadingDialog;
@@ -444,7 +444,13 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
                     }
                 } else if (!dataBuzz.get(position).getName().isEmpty()) {
                     holder.txtUserName.setText(dataBuzz.get(position).getName());
-                    holder.profile_image.setVisibility(View.GONE);
+                    Glide.with(BuzzActivity.this)
+                            .load(R.drawable.profile_hunarclub)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .error(R.drawable.profile_hunarclub)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(holder.profile_image);
                     holder.txtUserName.setVisibility(View.VISIBLE);
                 } else if (!dataBuzz.get(position).getName_first_character().isEmpty()) {
                     holder.txtUserNameChar.setText(dataBuzz.get(position).getName_first_character());
@@ -788,10 +794,22 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
             try {
                 holder.txtOption.setText(hocOptions.get(position).getName());
 
+                if (selectedOption == position) {
+                    holder.txtOption.setTextColor(getResources().getColor(R.color.white));
+                    holder.txtOption.setBackground(getDrawable(R.drawable.blue_button_bg));
+                    holder.txtOption.setPadding(20, 0, 20, 0);
+                    courseIds.add(hocOptions.get(position).getTermId());
+                } else {
+                    holder.txtOption.setTextColor(getResources().getColor(R.color.muted_blue));
+                    holder.txtOption.setBackground(getDrawable(R.drawable.border_bg));
+                    holder.txtOption.setPadding(20, 0, 20, 0);
+                }
+
                 holder.txtOption.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                         if (isChecked) {
+                            courseIds.clear();
                             ActivityLog = hocOptions.get(position).getName();
                             PagenameLog = "Hunar Posts";
                             getLogEvent(context);
@@ -799,6 +817,8 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
                             holder.txtOption.setBackground(getDrawable(R.drawable.blue_button_bg));
                             holder.txtOption.setPadding(20, 0, 20, 0);
                             courseIds.add(hocOptions.get(position).getTermId());
+                            notifyDataSetChanged();
+                            selectedOption = position;
                         } else {
                             holder.txtOption.setTextColor(getResources().getColor(R.color.muted_blue));
                             holder.txtOption.setBackground(getDrawable(R.drawable.border_bg));

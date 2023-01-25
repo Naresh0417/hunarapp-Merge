@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/language_bg">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -68,46 +69,51 @@
             <EditText
                 android:id="@+id/txtName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bgshape_circle_gray"
+                android:layout_height="60dp"
+                android:background="@drawable/editfield_bllue_stroke"
                 android:hint="@string/enter_your_name"
                 android:gravity="center_vertical"
                 android:textColorHint="@color/gray"
                 android:layout_marginTop="20dp"
-                android:padding="10dp"
+                android:paddingLeft="20dp"
+                android:paddingBottom="7dp"
                 android:textColor="@color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="65dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/bgshape_circle_gray">
+                android:background="@drawable/editfield_bllue_stroke">
 
                 <LinearLayout
                     android:id="@+id/linCountryCode"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="10dp">
 
                     <com.hbb20.CountryCodePicker
                         android:id="@+id/ccp"
                         android:layout_width="120dp"
                         android:layout_height="50dp"
-                        app:ccp_textSize="13sp"
-                        android:gravity="center"/>
+                        app:ccp_textSize="13sp" />
 
                 </LinearLayout>
 
                 <View
                     android:layout_width="1dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/gray"
-                    />
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="5dp"
+                    android:background="@color/gray" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginLeft="7dp">
 
                     <EditText
@@ -131,13 +137,14 @@
 
             <AutoCompleteTextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:id="@+id/txtSelectCity"
-                android:padding="10dp"
+                android:paddingLeft="20dp"
+                android:paddingBottom="7dp"
                 android:layout_marginTop="15dp"
                 android:hint="@string/enter_city_name"
                 android:textColorHint="@color/gray"
-                android:background="@drawable/bgshape_circle_gray"
+                android:background="@drawable/editfield_bllue_stroke"
                 android:gravity="center_vertical"
                 android:maxLength="25"
                 android:maxLines="1"

@@ -68,6 +68,7 @@ import com.hamstechonline.adapters.MyCourseOverviewAdapter;
 import com.hamstechonline.adapters.MyCoursesLessonsListAdapter;
 import com.hamstechonline.adapters.SimilarCoursesListAdapter;
 import com.hamstechonline.database.UserDataBase;
+import com.hamstechonline.datamodel.AskDoubtResponse;
 import com.hamstechonline.datamodel.CallWithFacultyResponse;
 import com.hamstechonline.datamodel.Discussions;
 import com.hamstechonline.datamodel.DiscussionsModel;
@@ -277,6 +278,25 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             }
         });
 
+        imgKnowHow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ActivityLog = "Know How";
+                PagenameLog = "MyCourse page";
+                getLogEvent(MyCoursesPageActivity.this);
+                Intent i = new Intent(Intent.ACTION_VIEW);
+                try {
+                    String url = "https://api.whatsapp.com/send?phone="+ "917670903072" +"&text=" +
+                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
+                    i.setPackage("com.whatsapp");
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        });
+
         footerStatus = getSharedPreferences("footerStatus", Activity.MODE_PRIVATE);
         footerMenuStatus = footerStatus.getString("footerStatus", "unpaid");
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -396,10 +416,10 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                     Toast.makeText(MyCoursesPageActivity.this, "Fields should not be empty", Toast.LENGTH_SHORT).show();
                 } else {
                     ActivityLog = "Upload Post";
+                    askDoubtApi(textFile.getText().toString().trim(),Integer.parseInt(courseId));
                     textFile.setText("");
                     textFile.setHint("Have A Doubt? Ask Here ...");
                     hocLoadingDialog.showLoadingDialog();
-                    uploadFile();
                     uploadConentent = ""; uploadFilePath = ""; uploadTitle = "";
                 }
             }
@@ -1228,6 +1248,23 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             }
         });
     }
+    public void askDoubtApi(String doubt,int postId) {
+        AskDoubtResponse hocResponse = new AskDoubtResponse("Hamstech", getResources().getString(R.string.lblApiKey),
+                "discussions",userDataBase.getUserMobileNumber(1),doubt,postId);
+        Call<AskDoubtResponse> call = apiService.askDoubtApi(hocResponse);
+        call.enqueue(new Callback<AskDoubtResponse>() {
+            @Override
+            public void onResponse(Call<AskDoubtResponse> call, retrofit2.Response<AskDoubtResponse> response) {
+                hocLoadingDialog.hideDialog();
+                uploadSuccessPopUp();
+            }
+
+            @Override
+            public void onFailure(Call<AskDoubtResponse> call, Throwable t) {
+                hocLoadingDialog.hideDialog();
+            }
+        });
+    }
     public void uploadSuccessPopUp(){
         final Dialog dialog = new Dialog(MyCoursesPageActivity.this);
         dialog.getWindow();
@@ -1364,52 +1401,35 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         });
     }
     public void OnlineSuccessfulPopUp(Context context) {
-        final Dialog dialog = new Dialog(context);
+        final Dialog dialog = new Dialog(MyCoursesPageActivity.this);
         dialog.getWindow();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.setContentView(R.layout.payment_sucess);
+        dialog.setContentView(R.layout.post_upload_successfull);
         dialog.setCancelable(false);
 
         ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
         ImageView progressBar = dialog.findViewById(R.id.progressBar);
-        LinearLayout onlinePaymentLayout = dialog.findViewById(R.id.onlinePaymentLayout);
-        LinearLayout cod_layout = dialog.findViewById(R.id.cod_layout);
-        TextView paymentComment = dialog.findViewById(R.id.paymentComment);
+        TextView txtlabelBold = dialog.findViewById(R.id.txtlabelBold);
+        TextView txtlabelNormal = dialog.findViewById(R.id.txtlabelNormal);
 
-        onlinePaymentLayout.setVisibility(View.VISIBLE);
-        cod_layout.setVisibility(View.GONE);
+        txtlabelNormal.setVisibility(View.GONE);
 
-        Glide.with(context)
-                .load(R.drawable.ic_sucess_payment)
+        txtlabelBold.setText(getResources().getString(R.string.call_request_accepted));
+
+        Glide.with(MyCoursesPageActivity.this)
+                .load(R.drawable.discussion_post_submit_thumsup)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.ic_sucess_payment)
+                .error(R.drawable.discussion_post_submit_thumsup)
                 .into(progressBar);
-        paymentComment.setText(getResources().getString(R.string.call_request_accepted));
 
         dialog.show();
 
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, HomePageActivity.class);
                 dialog.dismiss();
-                //startActivity(intent);
-            }
-        });
-
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK &&
-                        event.getAction() == KeyEvent.ACTION_UP &&
-                        !event.isCanceled()) {
-                    Intent intent = new Intent(context, HomePageActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                return false;
             }
         });
     }

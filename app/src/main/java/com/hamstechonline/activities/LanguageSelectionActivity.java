@@ -129,7 +129,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
                 chbEnglish.setTextColor(getResources().getColor(R.color.dark_pink));
                 chbHindi.setTextColor(getResources().getColor(R.color.muted_blue));
                 chbHindi.setBackground(getResources().getDrawable(R.drawable.hindi_txt_check));
-                btnNext.setText(getResources().getString(R.string.lblNext));
+                btnNext.setText("NEXT");
                 langPref = "en";
                 languageSelected = "English";
             }
