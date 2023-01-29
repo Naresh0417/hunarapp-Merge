@@ -195,7 +195,7 @@ public class SplashScreenActivity extends AppCompatActivity  {
                             finish();
                         } else {
 
-                            startActivity(new Intent(SplashScreenActivity.this,ChooseFavouriteCourse.class));
+                            startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
                         }
                     }
                 })

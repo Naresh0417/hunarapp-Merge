@@ -1250,7 +1250,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
     }
     public void askDoubtApi(String doubt,int postId) {
         AskDoubtResponse hocResponse = new AskDoubtResponse("Hamstech", getResources().getString(R.string.lblApiKey),
-                "discussions",userDataBase.getUserMobileNumber(1),doubt,postId);
+                "discussions",userDataBase.getUserMobileNumber(1),doubt,postId,langPref);
         Call<AskDoubtResponse> call = apiService.askDoubtApi(hocResponse);
         call.enqueue(new Callback<AskDoubtResponse>() {
             @Override
