@@ -47,6 +47,7 @@ import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.restapi.ApiClient;
 import com.hamstechonline.restapi.ApiInterface;
 import com.hamstechonline.utils.AppsFlyerEventsHelper;
+import com.hamstechonline.utils.DynamicWhatsAppChat;
 import com.hamstechonline.utils.LogEventsActivity;
 import com.hamstechonline.utils.UserDataConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
@@ -66,7 +67,7 @@ public class LiveClassesActivity extends AppCompatActivity {
 
     UserDataBase userDataBase;
     ImageButton stickyWhatsApp;
-    String CategoryName,CourseLog,LessonLog,ActivityLog,PagenameLog,footerMenuStatus,
+    String CategoryName = "",CourseLog,LessonLog = "",ActivityLog,PagenameLog,footerMenuStatus,
             langPref = "Language",mp4URL = "";
     LogEventsActivity logEventsActivity;
     RecyclerView listYourLiveClassesList,listAllLiveClassesList;
@@ -83,6 +84,7 @@ public class LiveClassesActivity extends AppCompatActivity {
     ImageView imageView;
     YouTubePlayer player;
     YouTubePlayerView youTubePlayerView;
+    DynamicWhatsAppChat dynamicWhatsAppChat;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -134,6 +136,14 @@ public class LiveClassesActivity extends AppCompatActivity {
                     txtYourClassesType.setTextColor(getResources().getColor(R.color.pink));
                     getYourLiveClassesList("previous");
                 }
+            }
+        });
+
+        stickyWhatsApp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dynamicWhatsAppChat = new DynamicWhatsAppChat(LiveClassesActivity.this,"Live class","","");
+                dynamicWhatsAppChat.getChatNumber(userDataBase.getUserMobileNumber(1));
             }
         });
 
@@ -301,8 +311,16 @@ public class LiveClassesActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("REGISTER NOW")){
+                            CategoryName = "Your Live class";
+                            CourseLog = datamodels.get(position).getTitle();
+                            ActivityLog = "Register now";
+                            getLogEvent(LiveClassesActivity.this);
                             getLiveClassRegistration(datamodels.get(position),1);
                         } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("WATCH NOW")){
+                            CategoryName = "Your Live class";
+                            CourseLog = datamodels.get(position).getTitle();
+                            ActivityLog = "Watch now";
+                            getLogEvent(LiveClassesActivity.this);
                             imageViewPop(datamodels.get(position));
                         }
                     }
@@ -399,9 +417,17 @@ public class LiveClassesActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("REGISTER NOW")) {
+                        if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("REGISTERED")) {
+                            CategoryName = "All Live class";
+                            CourseLog = datamodels.get(position).getTitle();
+                            ActivityLog = "Registered";
+                            getLogEvent(LiveClassesActivity.this);
                             getLiveClassRegistration(datamodels.get(position),2);
                         } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("WATCH NOW")){
+                            CategoryName = "All Live class";
+                            CourseLog = datamodels.get(position).getTitle();
+                            ActivityLog = "Watch now";
+                            getLogEvent(LiveClassesActivity.this);
                             imageViewPop(datamodels.get(position));
                         }
 
@@ -636,7 +662,7 @@ public class LiveClassesActivity extends AppCompatActivity {
             data.put("course",CourseLog);
             data.put("lesson",LessonLog);
             data.put("activity",ActivityLog);
-            data.put("pagename",PagenameLog);
+            data.put("pagename","Live class");
             logEventsActivity.LogEventsActivity(context,data);
             metaData.put("metadata", params);
             metaData.put("data", data);

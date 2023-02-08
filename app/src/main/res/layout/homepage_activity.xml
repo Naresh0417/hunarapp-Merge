@@ -401,8 +401,7 @@
                             android:layout_height="120dp"
                             android:layout_marginTop="4dp"
                             android:paddingLeft="23dp"
-                            android:paddingRight="23dp"
-                            android:src="@drawable/join_hunar" />
+                            android:paddingRight="23dp" />
 
                     </LinearLayout>
 

@@ -886,6 +886,34 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
             try {
                 holder.txtTitle.setText(dataBuzz.get(position).getTitle());
                 holder.txtDescription.setText(dataBuzz.get(position).getDescription());
+                if (!dataBuzz.get(position).getProfile_pic().isEmpty()) {
+                    Glide.with(BuzzActivity.this)
+                            .load(dataBuzz.get(position).getProfile_pic())
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .error(R.mipmap.ic_launcher)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(holder.profile_image);
+                    holder.profile_image.setVisibility(View.VISIBLE);
+                    if (!dataBuzz.get(position).getName().isEmpty()) {
+                        holder.txtUserName.setText(dataBuzz.get(position).getName());
+                        holder.txtUserName.setVisibility(View.VISIBLE);
+                    }
+                } else if (!dataBuzz.get(position).getName().isEmpty()) {
+                    holder.txtUserName.setText(dataBuzz.get(position).getName());
+                    Glide.with(BuzzActivity.this)
+                            .load(R.drawable.profile_hunarclub)
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .error(R.drawable.profile_hunarclub)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(holder.profile_image);
+                    holder.txtUserName.setVisibility(View.VISIBLE);
+                } else if (!dataBuzz.get(position).getName_first_character().isEmpty()) {
+                    holder.txtUserNameChar.setText(dataBuzz.get(position).getName_first_character());
+                    holder.profile_image.setVisibility(View.GONE);
+                    holder.txtUserNameChar.setVisibility(View.VISIBLE);
+                }
                 if (dataBuzz.get(position).getVideourl().equals("")){
                     holder.imgHamstech.setVisibility(View.VISIBLE);
                     holder.imgPlayButton.setVisibility(View.GONE);
@@ -1020,8 +1048,10 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             ImageView imgHamstech, imgZoom,imgPlayButton, btnChat,imgReport;
-            TextView txtTitle, txtDescription,likesCount,imgLikeUnlike, txtComment;
+            TextView txtTitle, txtDescription,likesCount,imgLikeUnlike, txtComment,
+                    txtUserName,txtUserNameChar;
             LinearLayout btnShare;
+            CircleImageView profile_image;
 
             public ViewHolder(@NonNull View view) {
                 super(view);
@@ -1034,6 +1064,9 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
                 btnShare = view.findViewById(R.id.btnShare);
                 likesCount = view.findViewById(R.id.likesCount);
                 txtComment = view.findViewById(R.id.txtComment);
+                imgReport = view.findViewById(R.id.imgReport);
+                profile_image = view.findViewById(R.id.profile_image);
+                txtUserName = view.findViewById(R.id.txtUserName);
                 imgReport = view.findViewById(R.id.imgReport);
             }
 
@@ -1357,6 +1390,10 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
         ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
         ImageView progressBar = dialog.findViewById(R.id.progressBar);
 
+        ActivityLog = "Post submitted";
+        PagenameLog = "Hunar posts";
+        getLogEvent(BuzzActivity.this);
+
         Glide.with(BuzzActivity.this)
                 .load(R.drawable.ic_sucess_payment)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -1382,7 +1419,7 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
             data.put("mobile", mobile);
             data.put("fullname",fullname);
             data.put("email",UserDataConstants.userMail);
-            data.put("category","");
+            data.put("category","Hunar Club");
             data.put("course","");
             data.put("lesson",lessonEvent);
             data.put("activity",ActivityLog);

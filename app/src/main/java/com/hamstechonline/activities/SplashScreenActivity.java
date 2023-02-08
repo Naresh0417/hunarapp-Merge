@@ -60,7 +60,7 @@ public class SplashScreenActivity extends AppCompatActivity  {
     ImageView splashImg;
     String gcm_id;
     LogEventsActivity logEventsActivity;
-    String langPref = "Language";
+    String langPref = "en";
     SharedPreferences prefs;
     private Locale myLocale;
     private InstallReferrerClient mReferrerClient;
@@ -108,8 +108,13 @@ public class SplashScreenActivity extends AppCompatActivity  {
 
         prefs = getSharedPreferences("Hindi", Activity.MODE_PRIVATE);
         langPref = prefs.getString("Language", "");
-        changeLang(langPref);
-        getVersion();
+        Log.e("lang","111    "+langPref);
+        if (!langPref.isEmpty()) {
+            changeLang(langPref);
+        } else {
+            getVersion();
+        }
+
 
     }
 
@@ -188,13 +193,11 @@ public class SplashScreenActivity extends AppCompatActivity  {
                         //changeLang(langPref);
                         if (pendingDynamicLinkData != null) {
                             deepLink = pendingDynamicLinkData.getLink();
-                            Log.e("data","125   "+deepLink.toString());
                             Intent intent = new Intent(SplashScreenActivity.this,DynamicLinkingActivity.class);
                             intent.putExtra("deepLink",deepLink.toString());
                             startActivity(intent);
                             finish();
                         } else {
-
                             startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
                         }
                     }
@@ -203,7 +206,6 @@ public class SplashScreenActivity extends AppCompatActivity  {
                     @Override
                     public void onFailure(@NonNull Exception e) {
 
-                        Log.e("data","125   "+e.toString());
                         startActivity(new Intent(SplashScreenActivity.this,HomePageActivity.class));
                     }
                 });

@@ -57,6 +57,7 @@ import com.hamstechonline.restapi.ApiInterface;
 import com.hamstechonline.utils.ApiConstants;
 import com.hamstechonline.utils.GridSpacingItemDecoration;
 import com.hamstechonline.utils.HocLoadingDialog;
+import com.hamstechonline.utils.LogEventsActivity;
 import com.hamstechonline.utils.UserDataConstants;
 import com.moengage.core.DataCenter;
 import com.moengage.core.LogLevel;
@@ -90,6 +91,8 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
     SharedPreferences prefs,footerStatus,catType;
     ApiInterface apiService;
     UserDataBase userDataBase;
+    LogEventsActivity logEventsActivity;
+    String categoryLog="",ActivityLog,PagenameLog,lessonLog="",mobile = "",fullname = "",email = "";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -121,11 +124,24 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
         MoEngage.initialise(moEngage);
 
         userDataBase = new UserDataBase(this);
+
+        logEventsActivity = new LogEventsActivity();
+
+        try {
+            mobile = userDataBase.getUserMobileNumber(1);
+            fullname = userDataBase.getUserName(1);
+            email = "";
+        } catch (NullPointerException ex){
+            ex.printStackTrace();
+        }
         getResponse();
         getCategories();
 
     }
     public void Homepage(View view) {
+        ActivityLog = "Skipped Category";
+        PagenameLog = "Favourite Courses";
+        getLogEvent(ChooseFavouriteCourse.this);
         Intent intent = new Intent(ChooseFavouriteCourse.this, HomePageActivity.class);
         startActivity(intent);
         /*if (positions.size() != 0) {
@@ -229,6 +245,10 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
                         SharedPreferences.Editor editor = catType.edit();
                         editor.putString("Category", coursesList.get(position).getType());
                         editor.commit();
+                        categoryLog = coursesList.get(position).getType();
+                        ActivityLog = "Selected Category";
+                        PagenameLog = "Favourite Courses";
+                        getLogEvent(ChooseFavouriteCourse.this);
                         Intent intent = new Intent(ChooseFavouriteCourse.this,HomePageActivity.class);
                         intent.putExtra("Category",coursesList.get(position).getType());
                         startActivity(intent);
@@ -354,6 +374,25 @@ public class ChooseFavouriteCourse extends AppCompatActivity {
         };
 
         queue.add(sr);
+    }
+
+    public void getLogEvent(Context context){
+        JSONObject data = new JSONObject();
+        try {
+            data.put("apikey",context.getResources().getString(R.string.lblApiKey));
+            data.put("appname","Dashboard");
+            data.put("mobile", mobile);
+            data.put("fullname",fullname);
+            data.put("email",email);
+            data.put("category",categoryLog);
+            data.put("course","");
+            data.put("lesson",lessonLog);
+            data.put("activity",ActivityLog);
+            data.put("pagename",PagenameLog);
+            logEventsActivity.LogEventsActivity(context,data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

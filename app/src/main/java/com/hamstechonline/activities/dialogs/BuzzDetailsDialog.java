@@ -40,6 +40,7 @@ import com.facebook.appevents.AppEventsLogger;
 import com.hamstechonline.R;
 import com.hamstechonline.activities.BuzzActivity;
 import com.hamstechonline.activities.CoursePageActivity;
+import com.hamstechonline.activities.MyCoursesLessonsPage;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.BuzzDataModel;
 import com.hamstechonline.datamodel.CommentsData;
@@ -414,9 +415,9 @@ public class BuzzDetailsDialog {
         ImageView progressBar = dialog.findViewById(R.id.progressBar);
 
         Glide.with(context)
-                .load(R.drawable.ic_sucess_payment)
+                .load(R.drawable.discussion_post_submit_thumsup)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.ic_sucess_payment)
+                .error(R.drawable.discussion_post_submit_thumsup)
                 .into(progressBar);
 
         dialog.show();

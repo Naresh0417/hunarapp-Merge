@@ -160,7 +160,7 @@ public class HomePageActivity extends AppCompatActivity {
     UserDataBase userDataBase;
     LogEventsActivity logEventsActivity;
     HocLoadingDialog hocLoadingDialog;
-    String langPref = "Language",mp4URL,typeCat = "",footerMenuStatus;
+    String langPref = "Language",mp4URL,typeCat = "",footerMenuStatus,mobile = "";
     SharedPreferences prefs,footerStatus,typeCateSharedPreferences;
     private Locale myLocale;
     RatingDialogue howtoUseAppDialogue;
@@ -264,6 +264,8 @@ public class HomePageActivity extends AppCompatActivity {
 
         logString = new StringBuilder();
 
+        drawer.closeDrawers();
+
         MoEngage moEngage = new MoEngage.Builder(getApplication(), "UUN7GSHBBH1UT5GCHI2EQ1KY")
                 .setDataCenter(DataCenter.DATA_CENTER_3)
                 .configureNotificationMetaData(new NotificationConfig(R.drawable.generic_notification, R.drawable.generic_notification, R.color.dark_grey_blue, "sound", true, true, true))
@@ -281,7 +283,7 @@ public class HomePageActivity extends AppCompatActivity {
         langPref = prefs.getString("Language", "en");
 
         typeCat = typeCateSharedPreferences.getString("Category", "");
-        Log.e("typeCat","282   "+typeCat);
+        mobile = userDataBase.getUserMobileNumber(1);
         changeLang(langPref);
 
         getResponse();
@@ -476,7 +478,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 CategoryName = "";CourseLog = "";
-                LessonLog = ""; ActivityLog = "HomePage"; PagenameLog = "Hunar Club gif";
+                LessonLog = ""; ActivityLog = "Join the Hunar Club"; PagenameLog = "Home Page";
                 getLogEvent(HomePageActivity.this);
                 Intent intentBuzz = new Intent(HomePageActivity.this, BuzzActivity.class);
                 startActivity(intentBuzz);
@@ -495,18 +497,6 @@ public class HomePageActivity extends AppCompatActivity {
             view = new View(activity);
         }
         imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
-    }
-
-    @Override
-    protected void onStart() {
-        drawer.closeDrawers();
-        super.onStart();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        //navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
     }
 
     @Override
@@ -538,12 +528,14 @@ public class HomePageActivity extends AppCompatActivity {
     public void getResponse() {
         hocLoadingDialog.showLoadingDialog();
         HomepageResponse homepageResponse = new HomepageResponse("Hamstech","category",
-                getResources().getString(R.string.lblApiKey),langPref,userDataBase.getUserMobileNumber(1),typeCat);
+                getResources().getString(R.string.lblApiKey),langPref,mobile,typeCat);
+        Log.e("request","542    "+mobile);
         Call<HomepageResponse> call = apiService.getHomepageResponse(homepageResponse);
         call.enqueue(new Callback<HomepageResponse>() {
             @Override
             public void onResponse(Call<HomepageResponse> call, retrofit2.Response<HomepageResponse> response) {
                 hocLoadingDialog.hideDialog();
+                Log.e("request","548    "+response.body().getMyCourses().size());
                 if (response.body().getEnglish() != null) {
                     moreClasses.clear();
                     mainiVideo.clear();
@@ -570,6 +562,9 @@ public class HomePageActivity extends AppCompatActivity {
                         recommendedLayout.setVisibility(View.VISIBLE);
                         myCourseList = response.body().getMyCourses();
                         footerMenuStatus = "paid";
+                        SharedPreferences.Editor editor = footerStatus.edit();
+                        editor.putString("footerStatus", "paid");
+                        editor.commit();
                         myCoursePagerAdapter = new MyCoursePagerAdapter(HomePageActivity.this,myCourseList);
                         listTopicsRecommended.setOffscreenPageLimit(myCourseList.size());
                         listTopicsRecommended.setAdapter(myCoursePagerAdapter);
@@ -580,6 +575,13 @@ public class HomePageActivity extends AppCompatActivity {
 
                     }
 
+                    if (footerMenuStatus.equalsIgnoreCase("unpaid")) {
+                        //footerNavigationPaid = FooterNavigationPaid.newInstance();
+                        mp4URL = response.body().getPromotional_video();
+                        youTubePlayerView.setVisibility(View.VISIBLE);
+                        getLifecycle().addObserver(youTubePlayerView);
+                        installYouTube(response.body().getPromotional_video());
+                    }
 
                     if (response.body().getMiniLessons().size() > 4) {
                         arraySize = 4;
@@ -647,12 +649,7 @@ public class HomePageActivity extends AppCompatActivity {
                     UserDataConstants.videoUrl = response.body().getHowToUseApp().get(0).getVideo();
                     UserDataConstants.howtouseDesc = response.body().getHowToUseApp().get(0).getDesc();
                     hocLoadingDialog.hideDialog();
-                    if (response.body().getMyCourses().size() == 0) {
-                        mp4URL = response.body().getPromotional_video();
-                        youTubePlayerView.setVisibility(View.VISIBLE);
-                        getLifecycle().addObserver(youTubePlayerView);
-                        installYouTube(response.body().getPromotional_video());
-                    }
+
                     /*if (getIntent().getBooleanExtra("isNewRegister",false) == true){
                         HowtoUseAppOpen();
                     }*/
@@ -809,8 +806,11 @@ public class HomePageActivity extends AppCompatActivity {
                 holder.txtStartLearning.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        CategoryName = datamodels.get(position).getCategoryname()+" "+datamodels.get(position).getLanguage();
-                        CourseLog = "";LessonLog = "";ActivityLog = "Click";PagenameLog = "Dashboard";
+                        CategoryName = "Most popular courses";
+                        CourseLog = datamodels.get(position).getCourseTitle();
+                        LessonLog = "";
+                        ActivityLog = "Start learning";
+                        PagenameLog = "Home page";
                         params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, datamodels.get(position).getCategoryname());
                         logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);
                         getLogEvent(HomePageActivity.this);

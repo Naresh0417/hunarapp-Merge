@@ -214,8 +214,8 @@ public class ContactActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 lessonLog = "";
-                PagenameLog = "chat with whatsapp";
-                ActivityLog = "Contact Us";
+                ActivityLog = "chat with whatsapp";
+                PagenameLog = "Contact Us";
                 logContactusEvent(ActivityLog);
                 getLogEvent(ContactActivity.this);
                 PackageManager packageManager = getPackageManager();
@@ -371,7 +371,7 @@ public class ContactActivity extends AppCompatActivity {
             data.put("mobile", mobile);
             data.put("fullname",fullname);
             data.put("email",email);
-            data.put("category","");
+            data.put("category","Contact Us");
             data.put("course","");
             data.put("lesson",lessonLog);
             data.put("activity",ActivityLog);

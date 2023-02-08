@@ -1131,14 +1131,27 @@ public class EnrolNowActivity extends AppCompatActivity implements
                             dialog.setContentView(R.layout.lock_popup);
                             dialog.setCancelable(true);
 
-                            Button btnNext = dialog.findViewById(R.id.btnNext);
+                            TextView btnNext = dialog.findViewById(R.id.btnNext);
+                            TextView txtInstallment = dialog.findViewById(R.id.txtInstallment);
                             TextView txtDialogTitle = dialog.findViewById(R.id.txtDialogTitle);
                             TextView txtContent = dialog.findViewById(R.id.txtContent);
+                            ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
+                            ImageView imgLock = dialog.findViewById(R.id.imgLock);
+                            txtInstallment.setVisibility(View.GONE);
                             txtContent.setVisibility(View.GONE);
                             txtDialogTitle.setText(getResources().getString(R.string.RemoveCourse));
                             btnNext.setText(getResources().getString(R.string.lblYes));
                             txtDialogTitle.setVisibility(View.VISIBLE);
                             dialog.show();
+
+                            imgLock.setVisibility(View.GONE);
+
+                            imgCancel.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    dialog.dismiss();
+                                }
+                            });
 
                             btnNext.setOnClickListener(new View.OnClickListener() {
                                 @Override

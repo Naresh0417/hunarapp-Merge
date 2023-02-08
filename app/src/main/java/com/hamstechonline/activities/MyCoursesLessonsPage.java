@@ -102,7 +102,9 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -144,7 +146,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
     ApiInterface apiService;
     HocLoadingDialog hocLoadingDialog;
     LogEventsActivity logEventsActivity;
-    String CategoryName, CourseLog, LessonLog, ActivityLog, PagenameLog, CourseId, CategoryLog;
+    String CategoryName, CourseLog="", LessonLog="", ActivityLog="", PagenameLog = "", CourseId, CategoryLog;
     ImageView imgLike, btnShare, imgLesson, videoThumbnail, imageLike, imageDisLike,assignmentDownArrow,
             studyDownArrow,feedbackDownArrow,imgVideoCompleted;
     TextView nextLessonTitle, previousLessonTitle,feedbackByFaculty,txtAssignment;
@@ -358,7 +360,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 LessonLog = "";
                 ActivityLog = "Sticky whatsapp";
-                PagenameLog = "MyCourses Lessons";
+                PagenameLog = "MyCourse Lesson";
                 getLogEvent(MyCoursesLessonsPage.this);
                 try {
                     String url = "https://api.whatsapp.com/send?phone=" + "919010100240" + "&text=" +
@@ -376,7 +378,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ActivityLog = "Video Call with Faculty";
-                LessonLog = "";
+                LessonLog = txtLessonName.getText().toString().trim();
+                PagenameLog = "MyCourse Lesson";
                 getLogEvent(MyCoursesLessonsPage.this);
                 getCallWithFaculty();
             }
@@ -393,7 +396,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ActivityLog = "Chat with Student Guide";
-                LessonLog = "";
+                LessonLog = txtLessonName.getText().toString().trim();
+                PagenameLog = "MyCourse Lesson";
                 getLogEvent(MyCoursesLessonsPage.this);
                 PackageManager packageManager = getPackageManager();
                 Intent i = new Intent(Intent.ACTION_VIEW);
@@ -630,34 +634,42 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
             if(resultCode == Activity.RESULT_OK) {
                 if(data.getClipData() != null) {
                     imageUrls.clear();
-                    int count = data.getClipData().getItemCount(); //evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
-                    for(int i = 0; i < count; i++) {
-                        Uri imageUri = data.getClipData().getItemAt(i).getUri();
-                        Log.e("imageUri","670    "+imageUri);
-                        Bitmap bitmap= null;
-                        try {
-                            bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+                    int count = data.getClipData().getItemCount();//evaluate the count before the for loop --- otherwise, the count is evaluated every loop.
+
+                    if (count > 2) {
+                        Toast.makeText(this, "Please select maximum 2 images", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        for(int i = 0; i < count; i++) {
+                            Uri imageUri = data.getClipData().getItemAt(i).getUri();
+                            Log.e("imageUri","670    "+imageUri);
+                            Bitmap bitmap= null;
+                            try {
+                                bitmap = MediaStore.Images.Media.getBitmap(getContentResolver(),imageUri);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            // initialize byte stream
+                            ByteArrayOutputStream stream=new ByteArrayOutputStream();
+                            // compress Bitmap
+                            bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+                            // Initialize byte array
+                            byte[] bytes=stream.toByteArray();
+                            // get base64 encoded string
+                            String sImage = Base64.encodeToString(bytes,Base64.DEFAULT);
+                            //imageToBase64(imageUri.toString());
+                            imageUrls.add(sImage);
+                            //do something with the image (save it to some directory or whatever you need to do with it here)
                         }
-                        // initialize byte stream
-                        ByteArrayOutputStream stream=new ByteArrayOutputStream();
-                        // compress Bitmap
-                        bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
-                        // Initialize byte array
-                        byte[] bytes=stream.toByteArray();
-                        // get base64 encoded string
-                        String sImage = Base64.encodeToString(bytes,Base64.DEFAULT);
-                        //imageToBase64(imageUri.toString());
-                        imageUrls.add(sImage);
-                        //do something with the image (save it to some directory or whatever you need to do with it here)
+                        if (count > 1) {
+                            textAssignFile.setText("You have selected multiple images.");
+                        } else if (count == 1){
+                            textAssignFile.setText(""+data.getClipData().getItemAt(0).getUri());
+                            Log.e("imageUri","676    "+imageUrls.size());
+                        }
                     }
-                    if (count > 1) {
-                        textAssignFile.setText("You have selected multiple images.");
-                    } else if (count == 1){
-                        textAssignFile.setText(""+data.getClipData().getItemAt(0).getUri());
-                    }
-                    Log.e("imageUri","676    "+imageUrls.size());
+
+
                 } else if(data.getData() != null) {
                     String imagePath = data.getData().getPath();
                     try {
@@ -752,6 +764,10 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
 
     public void downloadStudyMaterial(View view) {
         if (pdfURL != null && !pdfURL.isEmpty()) {
+            LessonLog = txtLessonName.getText().toString().trim();
+            ActivityLog = "Study material";
+            PagenameLog = "MyCourse Lesson";
+            getLogEvent(MyCoursesLessonsPage.this);
             startDownload(pdfURL, "_" + coursesList.get(intNext).getLessonTitle());
         }
     }
@@ -837,7 +853,9 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
     public void onSubmit(View view) {
         if (imageUrls.size() > 0) {
             hocLoadingDialog.showLoadingDialog();
-            uploadAssignment(this);
+            uploadAssignment(this,0);
+            //uploadAssignment();
+
         } else
             Toast.makeText(this, "Please select assignment file", Toast.LENGTH_SHORT).show();
     }
@@ -878,52 +896,35 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
     }
 
     public void OnlineSuccessfulPopUp(Context context) {
-        final Dialog dialog = new Dialog(context);
+        final Dialog dialog = new Dialog(MyCoursesLessonsPage.this);
         dialog.getWindow();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.setContentView(R.layout.payment_sucess);
+        dialog.setContentView(R.layout.post_upload_successfull);
         dialog.setCancelable(false);
 
         ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
         ImageView progressBar = dialog.findViewById(R.id.progressBar);
-        LinearLayout onlinePaymentLayout = dialog.findViewById(R.id.onlinePaymentLayout);
-        LinearLayout cod_layout = dialog.findViewById(R.id.cod_layout);
-        TextView paymentComment = dialog.findViewById(R.id.paymentComment);
+        TextView txtlabelBold = dialog.findViewById(R.id.txtlabelBold);
+        TextView txtlabelNormal = dialog.findViewById(R.id.txtlabelNormal);
 
-        onlinePaymentLayout.setVisibility(View.VISIBLE);
-        cod_layout.setVisibility(View.GONE);
+        txtlabelNormal.setVisibility(View.GONE);
 
-        Glide.with(context)
-                .load(R.drawable.ic_sucess_payment)
+        txtlabelBold.setText(getResources().getString(R.string.call_request_accepted));
+
+        Glide.with(MyCoursesLessonsPage.this)
+                .load(R.drawable.discussion_post_submit_thumsup)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.ic_sucess_payment)
+                .error(R.drawable.discussion_post_submit_thumsup)
                 .into(progressBar);
-        paymentComment.setText(getResources().getString(R.string.call_request_accepted));
 
         dialog.show();
 
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, HomePageActivity.class);
                 dialog.dismiss();
-                //startActivity(intent);
-            }
-        });
-
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK &&
-                        event.getAction() == KeyEvent.ACTION_UP &&
-                        !event.isCanceled()) {
-                    Intent intent = new Intent(context, HomePageActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                return false;
             }
         });
     }
@@ -1020,11 +1021,11 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
                                 assignmentText = jsonObject.getJSONObject("lesson_details").getString("assignment");
                             }
 
-                            if (!jsonObject.getJSONObject("lesson_details").getString("assignment").isEmpty()) {
+                            /*if (!jsonObject.getJSONObject("lesson_details").getString("assignment").isEmpty()) {
                                 layoutUpload.setVisibility(View.VISIBLE);
                             } else {
                                 layoutUpload.setVisibility(View.GONE);
-                            }
+                            }*/
 
                             facultyFeedBack = jsonObject.getString("faculty_feedback");
                             submitAssignment = jsonObject.getString("submit_assignment");
@@ -1320,7 +1321,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
         try {
             Bitmap bitmap = BitmapFactory.decodeFile(UriPath);
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 40, byteArrayOutputStream);
             byte[] bytes = byteArrayOutputStream.toByteArray();
             //imageUrls.add(Base64.encodeToString(bytes, Base64.DEFAULT));
             return Base64.encodeToString(bytes, Base64.DEFAULT);
@@ -1330,10 +1331,12 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
         return "";
     }
 
-    private void uploadAssignment(final Context context) {
+    private void uploadAssignment(final Context context,int intImage) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         JSONObject params = new JSONObject();
+        List<String> finalImage = new ArrayList<>();
+
         try {
             params.put("appname", "Hamstech");
             params.put("page", "lessons");
@@ -1342,7 +1345,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
             params.put("course_id", courseId);
             params.put("lesson_id", lessonId);
             //params.put("assignment", imageUrls);
-            params.put("assignment", imageUrls);
+            finalImage.add(imageUrls.get(intImage));
+            params.put("assignment", new JSONArray(finalImage));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -1352,18 +1356,29 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
         StringRequest sr = new StringRequest(Request.Method.POST, ApiConstants.uploadAssignment, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                hocLoadingDialog.hideDialog();
+
                 try {
                     JSONObject jsonObject = new JSONObject(response);
                     if (jsonObject != null && jsonObject.length() > 0) {
 
-                        strFilePath = "";
-                        assignmentFile = null;
-                        textAssignFile.setText(getString(R.string.select_files));
-                        layoutUpload.setVisibility(View.GONE);
-                        uploadSuccessPopUp();
+                        if (imageUrls.size()>1){
+                            if (intImage == 1) {
+                                strFilePath = "";
+                                assignmentFile = null;
+                                textAssignFile.setText(getString(R.string.select_files));
+                                layoutUpload.setVisibility(View.GONE);
+                                hocLoadingDialog.hideDialog();
+                                uploadSuccessPopUp();
+                                imageUrls.clear();
+                            } else uploadAssignment(MyCoursesLessonsPage.this,1);
+                        } else {
+                            hocLoadingDialog.hideDialog();
+                            uploadSuccessPopUp();
+                        }
+
                     }
                 } catch (Exception e) {
+                    hocLoadingDialog.hideDialog();
                     e.printStackTrace();
                 }
             }
@@ -1565,8 +1580,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
         postId = coursesList.get(listPosition).getLessonId();
         //pdfURL = coursesList.get(listPosition).getStudyMaterialUrl();
 
-        ActivityLog = "Click";
-        PagenameLog = "Lesson Page";
+        ActivityLog = "Next";
+        PagenameLog = "Mycourse Lesson";
         getLogEvent(MyCoursesLessonsPage.this);
         AppsFlyerEvent(listPosition);
         new AppsFlyerEventsHelper(MyCoursesLessonsPage.this).EventLessons(coursesList.get(listPosition).getCourseTitle(),
@@ -1644,8 +1659,8 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
         postId = coursesList.get(listPosition).getLessonId();
         //pdfURL = coursesList.get(listPosition).getStudyMaterialUrl();
 
-        ActivityLog = "Click";
-        PagenameLog = "Lesson Page";
+        ActivityLog = "Previous";
+        PagenameLog = "Mycourse Lesson";
         getLogEvent(MyCoursesLessonsPage.this);
         AppsFlyerEvent(listPosition);
         new AppsFlyerEventsHelper(MyCoursesLessonsPage.this).EventLessons(coursesList.get(listPosition).getCourseTitle(),
@@ -1841,6 +1856,11 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
 
         dialog.show();
 
+        LessonLog = txtLessonName.getText().toString().trim();
+        ActivityLog = "Assignment submitted";
+        PagenameLog = "MyCourse Lesson";
+        getLogEvent(MyCoursesLessonsPage.this);
+
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1870,7 +1890,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
             data.put("mobile", UserDataConstants.userMobile);
             data.put("fullname", UserDataConstants.userName);
             data.put("email", UserDataConstants.userMail);
-            data.put("category", CategoryLog);
+            data.put("category", "Mycourse page");
             data.put("course", CourseLog);
             data.put("lesson", LessonLog);
             data.put("activity", ActivityLog);

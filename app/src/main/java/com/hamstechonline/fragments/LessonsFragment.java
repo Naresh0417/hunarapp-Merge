@@ -151,7 +151,7 @@ public class LessonsFragment extends Fragment {
                             datamodel.setLesson_video_url(obj.getString("video_url"));
                             datamodel.setLessonImage(obj.getString("lesson_page_url"));
                             datamodel.setTextImage(obj.getString("lesson_page_text"));
-                            datamodel.setLock_status(obj.getInt("lock_value"));
+                            datamodel.setLock_status(Integer.parseInt(obj.getString("lock_value")));
                             datamodel.setLesson_liked(obj.getString("lesson_liked"));
                             datamodel.setCategory_name(CategoryName);
                             datamodel.setCourseId(searchName);
@@ -263,7 +263,10 @@ public class LessonsFragment extends Fragment {
                 holder.txtTitle.setText(coursesList.get(position).getLesson_title());
                 holder.txtDescription.setText(coursesList.get(position).getLesson_description());
                 holder.txtDuration.setText(coursesList.get(position).getVideo_duration());
-                holder.imgLock.setVisibility(View.GONE);
+                if (coursesList.get(position).getLock_status() == 1) {
+                    holder.imgLock.setVisibility(View.GONE);
+                } else holder.imgLock.setVisibility(View.VISIBLE);
+
                 Glide.with(context)
                         .load(coursesList.get(position).getLesson_image_url())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -292,7 +295,7 @@ public class LessonsFragment extends Fragment {
                             CategoryName = coursesList.get(position).getCategory_name();
                             CourseLog = coursesList.get(position).getCourse_title();
                             LessonLog = coursesList.get(position).getLesson_title();
-                            ActivityLog = "Click";
+                            ActivityLog = "Locked lesson Click";
                             PagenameLog = "Course Page";
                             getLogEvent(context);
                             new AppsFlyerEventsHelper(context).EventEnroll();

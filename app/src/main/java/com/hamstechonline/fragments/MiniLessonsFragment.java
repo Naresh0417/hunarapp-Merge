@@ -1,5 +1,6 @@
 package com.hamstechonline.fragments;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -254,7 +255,7 @@ public class MiniLessonsFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 holder.txtTitle.setText(coursesList.get(position).getLesson_title());
                 holder.txtDescription.setText(coursesList.get(position).getLesson_description());

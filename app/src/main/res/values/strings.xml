@@ -333,6 +333,7 @@ the last 4 digits of your mobile number to log in.</string>
     Step 3:\n
     Download the Hunar Learning App, login and start your course!</string>
     <string name="whatsAppmsg">Hi, I want to know more about courses and latest offers!</string>
+    <string name="know_more_whatsAppmsg">Hello! I want to know more about the Hunar Referral Programme.</string>
     <string name="onlinePaymentDiscount">Extra 5% Discount on Online Payment</string>
     <string name="sixMonths">6 - Month Online Courses</string>
     <string name="liner_certificate">To download your certificate, please complete 80% of your mini lesson and submit your assignment.</string>
@@ -353,9 +354,9 @@ the last 4 digits of your mobile number to log in.</string>
     <string name="start_learning_today">Click Below to Start Learning Today!</string>
     <string name="enrol_chat_msg">Hi, I want to enrol in my lesson and start learning!</string>
     <string name="minilessons_overview">With this Popular Lesson, You Can:</string>
-    <string name="upload_image">Upload image</string>
+    <string name="upload_image">Upload image <font color='#F32617'>(*)</font></string>
     <string name="write_title">Write title...</string>
-    <string name="write_Description">Write Description...</string>
+    <string name="write_Description">Write Description... <font color='#F32617'>(*)</font></string>
     <string name="submit_Your_Post">Submit Your Post</string>
     <string name="certificate_download_liner">Your certificate has been downloaded successfully. Please check your download folder to view your certificate</string>
     <string name="recieve_payments">Recieve Your Payment Scan\nCode and Link on WhatsApp</string>
@@ -482,4 +483,8 @@ the last 4 digits of your mobile number to log in.</string>
     <string name="watch_now">WATCH NOW</string>
     <string name="upcoming_classes">Upcoming Classes</string>
     <string name="enroll_now_for_full_course">Enroll Now For Full Course</string>
+    <string name="_55_ncontests">55+\nContests</string>
+    <string name="exciting_ncontests">Exciting\nContests</string>
+    <string name="hunar_nclub">Hunar\nClub</string>
+    <string name="have_a_doubt_ask_here">Have A Doubt? Ask Here ...</string>
 </resources>

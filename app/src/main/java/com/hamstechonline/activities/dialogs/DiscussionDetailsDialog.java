@@ -1,5 +1,6 @@
 package com.hamstechonline.activities.dialogs;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -64,6 +65,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -75,7 +77,8 @@ public class DiscussionDetailsDialog {
     ImageView imageView;
     int position;
     ImageView imgHamstech, imgZoom,imgPlayButton;
-    TextView txtTitle, txtDescription,txtExternalLink,likesCount,txtPost, txtUserName, imgLikeUnlike;
+    TextView txtTitle, txtDescription,txtExternalLink,likesCount,txtPost, txtUserName,
+            imgLikeUnlike,txtUserNameChar,txtUserNamePost;
     LinearLayout btnShare;
     RecyclerView listComments;
     RelativeLayout player_youtube;
@@ -100,6 +103,7 @@ public class DiscussionDetailsDialog {
     List<Discussions> dataMainList;
     LikesInterface likesInterface;
     CommentReportDialoge reportDialoge;
+    CircleImageView profile_image;
 
     public DiscussionDetailsDialog(Context context, int position, List<Discussions> dataMainList, String term_id,
                                    String course_id) {
@@ -139,6 +143,9 @@ public class DiscussionDetailsDialog {
         txtUserName = dialog.findViewById(R.id.txtUserName);
         youTubePlayerView = dialog.findViewById(R.id.youtube_player_view);
         player_youtube = dialog.findViewById(R.id.player_youtube);
+        profile_image = dialog.findViewById(R.id.profile_image);
+        txtUserNameChar = dialog.findViewById(R.id.txtUserNameChar);
+        txtUserNamePost = dialog.findViewById(R.id.txtUserNamePost);
 
         userDataBase = new UserDataBase(context);
         logEventsActivity = new LogEventsActivity();
@@ -264,6 +271,31 @@ public class DiscussionDetailsDialog {
                     if (!dataBuzz.get(position).getExternallink().isEmpty()) {
                         txtExternalLink.setText(dataBuzz.get(position).getExternallink());
                         txtExternalLink.setVisibility(View.VISIBLE);
+                    }
+
+                    if (!dataBuzz.get(position).getProfilePic().isEmpty()) {
+                        Glide.with(context)
+                                .load(dataBuzz.get(position).getImage())
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .error(R.mipmap.ic_launcher)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(profile_image);
+                        profile_image.setVisibility(View.VISIBLE);
+                        txtUserNamePost.setVisibility(View.VISIBLE);
+                    } else if (!dataBuzz.get(position).getName().isEmpty()) {
+                        txtUserNamePost.setText(dataBuzz.get(position).getName());
+                        profile_image.setVisibility(View.VISIBLE);
+                        txtUserNamePost.setVisibility(View.VISIBLE);
+                    } else if (!dataBuzz.get(position).getNameFirstCharacter().isEmpty()) {
+                        txtUserNameChar.setText(dataBuzz.get(position).getNameFirstCharacter());
+                        profile_image.setVisibility(View.GONE);
+                        txtUserNameChar.setVisibility(View.VISIBLE);
+                    }
+                    if (dataBuzz.get(position).getImage().isEmpty()) {
+                        imgHamstech.setVisibility(View.GONE);
+                    } else {
+                        imgHamstech.setVisibility(View.VISIBLE);
                     }
 
                     if (dataBuzz.get(position).getVideourl().equals("")) {
@@ -490,7 +522,7 @@ public class DiscussionDetailsDialog {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
                 holder.txtUserName.setText(dataBuzz.get(position).getName());
                 holder.txtComment.setText(dataBuzz.get(position).getComment());

@@ -232,6 +232,9 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
         btnEnrollNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ActivityLog = "Enroll now for full course";
+                PagenameLog = "Course page";
+                getLogEvent(CoursePageActivity.this);
                 EnrolNow(Integer.parseInt(CatId));
             }
         });

@@ -17,6 +17,7 @@
         android:src="@drawable/ic_closee" />
 
     <ImageView
+        android:id="@+id/imgLock"
         android:layout_width="35dp"
         android:layout_height="35dp"
         android:src="@drawable/ic_lock_pink"
@@ -24,13 +25,15 @@
         />
 
     <TextView
+        android:id="@+id/txtInstallment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pay Your Next Installment to\nContinue Watching Your Lessons!"
         android:gravity="center"
         android:layout_marginTop="10dp"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/black_two"/>
+        android:textColor="@color/black_two"
+        />
 
     <TextView
         android:id="@+id/txtDialogTitle"

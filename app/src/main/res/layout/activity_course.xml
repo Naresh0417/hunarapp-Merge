@@ -340,8 +340,10 @@
                         <ImageView
                             android:id="@+id/imgKnowHow"
                             android:layout_width="match_parent"
-                            android:layout_height="130dp"
+                            android:layout_height="150dp"
                             android:layout_marginTop="8dp"
+                            android:scaleType="fitXY"
+                            android:padding="5dp"
                             android:visibility="visible"/>
 
                         <TextView
@@ -431,7 +433,7 @@
                                 android:layout_toLeftOf="@+id/textSubmit"
                                 android:drawablePadding="10dp"
                                 android:fontFamily="@font/dinpro"
-                                android:hint="Have A Doubt? Ask Here ..."
+                                android:hint="@string/have_a_doubt_ask_here"
                                 android:textColor="@color/dark_pink"
                                 android:textColorHint="@color/dark_pink"
                                 android:background="@null"
@@ -516,7 +518,8 @@
                 android:layout_marginLeft="7dp"
                 android:layout_marginRight="7dp"
                 android:paddingRight="20dp"
-                android:paddingLeft="20dp">
+                android:paddingLeft="20dp"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="wrap_content"

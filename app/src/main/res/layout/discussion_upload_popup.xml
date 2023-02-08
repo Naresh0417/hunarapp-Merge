@@ -81,21 +81,37 @@
 
     </LinearLayout>
 
-    <TextView
+    <LinearLayout
         android:id="@+id/btnSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/blue_button_bg"
-        android:padding="8dp"
-        android:text="@string/file_submit"
-        android:textAllCaps="true"
-        android:textColor="@color/white"
-        android:textSize="17sp"
-        android:textStyle="bold"
-        android:gravity="center_vertical"
+        android:layout_width="120dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:background="@drawable/pink_stroke_white"
         android:layout_gravity="right"
-        android:drawablePadding="20dp"
-        android:layout_marginTop="15dp"
-        android:drawableRight="@drawable/submit_post"/>
+        android:layout_marginTop="7dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/file_submit"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/muted_blue"
+            android:layout_gravity="center_vertical"
+            android:paddingBottom="8dp"
+            android:paddingLeft="20dp"
+            />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/submit_post"
+            android:paddingBottom="7dp"
+            android:paddingLeft="10dp"
+            />
+
+    </LinearLayout>
 
 </LinearLayout>

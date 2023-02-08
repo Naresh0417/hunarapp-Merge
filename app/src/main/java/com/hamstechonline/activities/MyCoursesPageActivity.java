@@ -281,13 +281,13 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         imgKnowHow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityLog = "Know How";
-                PagenameLog = "MyCourse page";
+                ActivityLog = "Refer and earn";
+                PagenameLog = "Lesson page";
                 getLogEvent(MyCoursesPageActivity.this);
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 try {
                     String url = "https://api.whatsapp.com/send?phone="+ "917670903072" +"&text=" +
-                            URLEncoder.encode(getResources().getString(R.string.whatsAppmsg), "UTF-8");
+                            URLEncoder.encode(getResources().getString(R.string.know_more_whatsAppmsg), "UTF-8");
                     i.setPackage("com.whatsapp");
                     i.setData(Uri.parse(url));
                     startActivity(i);
@@ -317,14 +317,14 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                     txtSeeAll.setVisibility(View.GONE);
                     txtSeeAll.setChecked(true);
                     myCoursesLessonsListAdapter = new MyCoursesLessonsListAdapter(MyCoursesPageActivity.this,matchedListArray,
-                            matchedListArray.size(),courseId,matchedPosition,true,order_id,m_strEmail,originalListArray);
+                            matchedListArray.size(),courseId,CourseLog,matchedPosition,true,order_id,m_strEmail,originalListArray);
                     lessonsList.setLayoutManager(new LinearLayoutManager(MyCoursesPageActivity.this, RecyclerView.VERTICAL, false));
                     lessonsList.setAdapter(myCoursesLessonsListAdapter);
                 } else {
                     txtSeeAll.setVisibility(View.VISIBLE);
                     txtSeeAll.setChecked(false);
                     myCoursesLessonsListAdapter = new MyCoursesLessonsListAdapter(MyCoursesPageActivity.this,matchedListArray,
-                            nextListSize,courseId,matchedPosition,false,order_id,m_strEmail,originalListArray);
+                            nextListSize,courseId,CourseLog,matchedPosition,false,order_id,m_strEmail,originalListArray);
                     lessonsList.setLayoutManager(new LinearLayoutManager(MyCoursesPageActivity.this, RecyclerView.VERTICAL, false));
                     lessonsList.setAdapter(myCoursesLessonsListAdapter);
                 }
@@ -338,14 +338,14 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                     txtSeeAll.setVisibility(View.GONE);
                     expandLessonsList.setChecked(true);
                     myCoursesLessonsListAdapter = new MyCoursesLessonsListAdapter(MyCoursesPageActivity.this,matchedListArray,
-                            matchedListArray.size(),courseId,matchedPosition,true,order_id,m_strEmail,originalListArray);
+                            matchedListArray.size(),courseId,CourseLog,matchedPosition,true,order_id,m_strEmail,originalListArray);
                     lessonsList.setLayoutManager(new LinearLayoutManager(MyCoursesPageActivity.this, RecyclerView.VERTICAL, false));
                     lessonsList.setAdapter(myCoursesLessonsListAdapter);
                 } else {
                     txtSeeAll.setVisibility(View.VISIBLE);
                     expandLessonsList.setChecked(false);
                     myCoursesLessonsListAdapter = new MyCoursesLessonsListAdapter(MyCoursesPageActivity.this,matchedListArray,
-                            nextListSize,courseId,matchedPosition,false,order_id,m_strEmail,originalListArray);
+                            nextListSize,courseId,CourseLog,matchedPosition,false,order_id,m_strEmail,originalListArray);
                     lessonsList.setLayoutManager(new LinearLayoutManager(MyCoursesPageActivity.this, RecyclerView.VERTICAL, false));
                     lessonsList.setAdapter(myCoursesLessonsListAdapter);
                 }
@@ -368,13 +368,13 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             @Override
             public void onClick(View v) {
                 ActivityLog = "Chat with student guid";
-                PagenameLog = "MyCourse page";
+                PagenameLog = "Lesson page";
                 getLogEvent(MyCoursesPageActivity.this);
                 Intent i = new Intent(Intent.ACTION_VIEW);
 
                 try {
                     String url = "https://api.whatsapp.com/send?phone="+ "919666664757" +"&text=" +
-                            URLEncoder.encode("Hello, I want to talk to my student guide", "UTF-8");
+                            URLEncoder.encode(getResources().getString(R.string.chat_student_guide), "UTF-8");
                     i.setPackage("com.whatsapp");
                     i.setData(Uri.parse(url));
                     startActivity(i);
@@ -398,7 +398,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             @Override
             public void onClick(View v) {
                 ActivityLog = "Video Call with Faculty";
-                PagenameLog = "MyCourse page";
+                PagenameLog = "Lesson page";
                 getLogEvent(MyCoursesPageActivity.this);
                 getCallWithFaculty();
             }
@@ -407,15 +407,14 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         textSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ActivityLog = "Ask here";
-                PagenameLog = "MyCourse page";
-                getLogEvent(MyCoursesPageActivity.this);
                 uploadConentent = textFile.getText().toString().trim();
                 uploadTitle = "";
                 if (uploadConentent.equalsIgnoreCase("")){
                     Toast.makeText(MyCoursesPageActivity.this, "Fields should not be empty", Toast.LENGTH_SHORT).show();
                 } else {
-                    ActivityLog = "Upload Post";
+                    ActivityLog = "Have a doubt";
+                    PagenameLog = "Discussion";
+                    getLogEvent(MyCoursesPageActivity.this);
                     askDoubtApi(textFile.getText().toString().trim(),Integer.parseInt(courseId));
                     textFile.setText("");
                     textFile.setHint("Have A Doubt? Ask Here ...");
@@ -564,7 +563,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 listFaculty.setOffscreenPageLimit(response.body().getExpertFaculty().size());
                 listFaculty.setAdapter(facultySliderAdapter);
 
-                similarCoursesListAdapter = new SimilarCoursesListAdapter(MyCoursesPageActivity.this,response.body().getSimilarCourses());
+                similarCoursesListAdapter = new SimilarCoursesListAdapter(MyCoursesPageActivity.this,response.body().getSimilarCourses(),CourseLog);
                 listSimilarCourses.setLayoutManager(new LinearLayoutManager(MyCoursesPageActivity.this, RecyclerView.HORIZONTAL, false));
                 listSimilarCourses.setAdapter(similarCoursesListAdapter);
 
@@ -660,7 +659,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
 
                 //myCoursesLessonsListAdapter = new MyCoursesLessonsListAdapter(MyCoursesPageActivity.this,nextListArray,nextListArray.size(),courseId, matchedPosition,false);
                 myCoursesLessonsListAdapter = new MyCoursesLessonsListAdapter(MyCoursesPageActivity.this,matchedListArray,nextListSize,
-                        courseId, matchedPosition,false,order_id,m_strEmail,originalListArray);
+                        courseId,CourseLog, matchedPosition,false,order_id,m_strEmail,originalListArray);
                 lessonsList.setLayoutManager(new LinearLayoutManager(MyCoursesPageActivity.this, RecyclerView.VERTICAL, false));
                 lessonsList.setAdapter(myCoursesLessonsListAdapter);
 
@@ -747,7 +746,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         List<Discussions> dataBuzz;
         ImageView imgHamstech, imgZoom,imgPlayButton, btnChat,imgReport;
         TextView txtTitle, txtDescription,likesCount,imgLikeUnlike, txtComment,txtExternalLink,
-                txtUserName,txtUserNameChar;
+                txtUserName,txtUserNameChar,txtAskDoubt;
         LinearLayout btnShare;
         CircleImageView profile_image;
 
@@ -769,7 +768,8 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         @Override
         public void onBindViewHolder(@NonNull final DiscussionsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
             try {
-                txtDescription.setText(dataBuzz.get(position).getDescription());
+                if (!dataBuzz.get(position).getDescription().isEmpty()) txtDescription.setText(dataBuzz.get(position).getDescription());
+                else txtDescription.setVisibility(View.GONE);
                 //txtTitle.setVisibility(View.GONE);
                 txtTitle.setText(dataBuzz.get(position).getTitle());
                 txtUserName.setText(dataBuzz.get(position).getName());
@@ -796,8 +796,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                     profile_image.setVisibility(View.GONE);
                     txtUserNameChar.setVisibility(View.VISIBLE);
                 }
+
                 if (dataBuzz.get(position).getVideourl().equals("")){
-                    imgHamstech.setVisibility(View.VISIBLE);
+                    imgHamstech.setVisibility(View.GONE);
                     imgPlayButton.setVisibility(View.GONE);
                     Glide.with(context)
                             .load(dataBuzz.get(position).getImage())
@@ -811,6 +812,14 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                             .load(dataBuzz.get(position).getImage())
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .into(imgHamstech);
+                }
+                if (dataBuzz.get(position).getImage().isEmpty()) {
+                    imgHamstech.setVisibility(View.GONE);
+                    txtAskDoubt.setText(dataBuzz.get(position).getTitle());
+                    txtAskDoubt.setVisibility(View.VISIBLE);
+                } else {
+                    imgHamstech.setVisibility(View.VISIBLE);
+                    txtAskDoubt.setVisibility(View.GONE);
                 }
 
                 if (!intLike.equalsIgnoreCase("100")) {
@@ -972,6 +981,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 profile_image = view.findViewById(R.id.profile_image);
                 txtUserName = view.findViewById(R.id.txtUserName);
                 imgReport = view.findViewById(R.id.imgReport);
+                txtAskDoubt = view.findViewById(R.id.txtAskDoubt);
             }
 
         }
@@ -1065,9 +1075,13 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         LinearLayout selectGallery = dialog.findViewById(R.id.selectGallery);
         TextView uploadFileName = dialog.findViewById(R.id.uploadFileName);
         EditText userInputContent = dialog.findViewById(R.id.userInputContent);
-        TextView btnSubmit = dialog.findViewById(R.id.btnSubmit);
+        LinearLayout btnSubmit = dialog.findViewById(R.id.btnSubmit);
 
         dialog.show();
+
+        ActivityLog = "Post submitted";
+        PagenameLog = "Discussion";
+        getLogEvent(MyCoursesPageActivity.this);
 
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override

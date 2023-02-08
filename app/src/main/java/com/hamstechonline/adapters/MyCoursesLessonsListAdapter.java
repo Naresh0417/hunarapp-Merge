@@ -67,7 +67,7 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
     List<Lesson> originalListArray;
 
     //public MyCoursesLessonsListAdapter(Context context, List<MyCourse> datamodels){
-    public MyCoursesLessonsListAdapter(Context context, List<Lesson> lessonsArray,int listSize,String courseId,
+    public MyCoursesLessonsListAdapter(Context context, List<Lesson> lessonsArray,int listSize,String courseId, String CourseLog,
                                        int matchedPosition,boolean isExpand,String order_id,String m_strEmail,List<Lesson> originalListArray){
         this.context=context;
         this.lessonsArray = lessonsArray;
@@ -75,6 +75,7 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
         logEventsActivity = new LogEventsActivity();
         this.listSize = listSize;
         this.courseId = courseId;
+        this.CourseLog = CourseLog;
         this.order_id = order_id;
         this.m_strEmail = m_strEmail;
         this.matchedPosition = matchedPosition;
@@ -124,16 +125,26 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
                 @Override
                 public void onClick(View v) {
                     if (lessonsArray.get(position).getLockValue().equalsIgnoreCase("0")) {
+                        //CourseLog = MyCourses page;
+                        ActivityLog = "Pay your Instalment";
+                        PagenameLog = "Lesson page";
+                        LessonLog = lessonsArray.get(position).getLessonTitle();
+                        getLogEvent(context);
                         lockPopup();
                     } else if (lessonsArray.get(position).getType().equalsIgnoreCase("nsdc_exam") ||
                             lessonsArray.get(position).getType().equalsIgnoreCase("live")){
                         Intent intent = new Intent(context, LiveFashionWebview.class);
                         intent.putExtra("URL",lessonsArray.get(position).getVideoUrl());
-                        context.startActivity(intent);
+                        //context.startActivity(intent);
+                        lockPopup();
                     } else {
                         for (int i =0; i< originalListArray.size(); i++) {
                             if (originalListArray.get(i).getLessonId().equalsIgnoreCase(lessonsArray.get(position).getLessonId())) {
                                 lessonPositionId = i;
+                                ActivityLog = "Lesson click";
+                                PagenameLog = "Lesson page";
+                                LessonLog = originalListArray.get(lessonPositionId).getLessonTitle();
+                                getLogEvent(context);
                                 Intent intent = new Intent(context, MyCoursesLessonsPage.class);
                                 intent.putExtra("videoURL", originalListArray.get(lessonPositionId).getVideoUrl());
                                 intent.putExtra("CategoryName", originalListArray.get(lessonPositionId).getCourseTitle());

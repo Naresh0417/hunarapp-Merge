@@ -330,6 +330,7 @@
     स्टेप 3:\n
     हुनर ऑनलाइन ऐप डाउनलोड कीजिए और अपना कोर्स शुरू करने के लिए लॉगिन कीजिए।</string>
     <string name="whatsAppmsg">हेलो, मुझे कोर्स और नये ऑफर के बारे में बात करना है!</string>
+    <string name="know_more_whatsAppmsg">हेलो! मुझे हुनर के रेफरल प्रोग्राम के बारे और जानकारी चाहिए</string>
     <string name="onlinePaymentDiscount">पाइये एक्स्ट्रा 5% डिस्काउंट</string>
     <string name="sixMonths">6 - महीने के ऑनलाइन कोर्सेस</string>
     <string name="liner_certificate">सर्टिफ़िकेट डाउनलोड करने लिए अपने मिनी लेसन का 80% भाग पूरा कीजिए और अपना असाइनमेंट सबमिट कीजिए।</string>
@@ -350,9 +351,9 @@
     <string name="start_learning_today">नीचे क्लिक करके आज ही सीखना शुरू कीजिए!</string>
     <string name="enrol_chat_msg">हेलो, मैं अपने मनपसंद लेसन में एनरोल करके सीखना शुरू करना चाहती हूँ।</string>
     <string name="minilessons_overview">इस मनपसंद लेसन से आप:</string>
-    <string name="upload_image">फोटो अपलोड कीजिए</string>
+    <string name="upload_image">फोटो अपलोड कीजिए <font color='#F32617'>(*)</font></string>
     <string name="write_title">टाइटल लिखिए…</string>
-    <string name="write_Description">विवरण/ डिस्क्रिप्शन लिखिए…</string>
+    <string name="write_Description">विवरण/ डिस्क्रिप्शन लिखिए… <font color='#F32617'>(*)</font></string>
     <string name="submit_Your_Post">अपना पोस्ट सबमिट करें</string>
     <string name="certificate_download_liner">आपका प्रमाणपत्र सफलतापूर्वक डाउनलोड हो गया है। अपना प्रमाणपत्र देखने के लिए कृपया अपने डाउनलोड फोल्डर में जाये!</string>
     <string name="recieve_payments">भुगतान स्कैन कोड और लिंक\nव्हाट्सएप पर पाइए</string>
@@ -489,4 +490,8 @@
     <string name="watch_now">अभी देखिए</string>
     <string name="upcoming_classes">अपकमिंग क्लासेस</string>
     <string name="enroll_now_for_full_course">पूरे कोर्स के लिए अभी एनरोल करें</string>
+    <string name="_55_ncontests">55+\nकोर्सेस</string>
+    <string name="exciting_ncontests">आकर्षक\nकॉन्टेस्ट्स</string>
+    <string name="hunar_nclub">हुनर\nक्लब</string>
+    <string name="have_a_doubt_ask_here">कोई डाउट है? यहाँ पूछें!...</string>
 </resources>

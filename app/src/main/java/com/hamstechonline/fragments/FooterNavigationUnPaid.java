@@ -120,7 +120,7 @@ public class FooterNavigationUnPaid extends Fragment {
         layoutContact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityLog = "Home page";
+                ActivityLog = "Click";
                 PagenameLog = "Contact Page";
                 params.putString(AppEventsConstants.EVENT_PARAM_CONTENT_TYPE, PagenameLog);
                 logger.logEvent(AppEventsConstants.EVENT_PARAM_SEARCH_STRING,params);

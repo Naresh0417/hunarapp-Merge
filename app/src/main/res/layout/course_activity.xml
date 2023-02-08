@@ -202,7 +202,7 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="100dp"
+            android:layout_marginBottom="60dp"
             android:textColor="@color/muted_blue"
             android:fontFamily="sans-serif"
             android:gravity="center"
@@ -220,7 +220,7 @@
             android:src="@drawable/ic_whatsapp_circle"
             android:layout_alignParentRight="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="60dp"
+            android:layout_marginBottom="110dp"
             android:layout_marginLeft="7dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             />
