@@ -264,7 +264,7 @@ public class LiveClassesActivity extends AppCompatActivity {
     public class YourLiveClassListAdapter extends RecyclerView.Adapter<YourLiveClassListAdapter.ViewHolder> {
         Context context;
         List<LiveClass> datamodels;
-        String yourLiveClassType;
+        String yourLiveClassType,classType;
 
         public YourLiveClassListAdapter(Context context,String yourLiveClassType,List<LiveClass> datamodels){
             this.context=context;
@@ -299,30 +299,42 @@ public class LiveClassesActivity extends AppCompatActivity {
                     holder.txtDaysLeft.setVisibility(View.GONE);
                 } else holder.txtDaysLeft.setVisibility(View.VISIBLE);
 
-                if (yourLiveClassType.equalsIgnoreCase("Upcoming Classes")) {
+                if (datamodels.get(position).getType().equalsIgnoreCase("live")) {
                     holder.txtDaysLeft.setVisibility(View.GONE);
-                    holder.txtWatchNow.setText(R.string.watch_now);
-                } else if (yourLiveClassType.equalsIgnoreCase("Previous Classes")){
-                    holder.txtDaysLeft.setVisibility(View.VISIBLE);
-                    holder.txtWatchNow.setText(R.string.register_now);
+                    holder.txtWatchNow.setText("Live Class");
+                } else {
+                    if (yourLiveClassType.equalsIgnoreCase("Upcoming Classes")) {
+                        holder.txtDaysLeft.setVisibility(View.GONE);
+                        holder.txtWatchNow.setText(R.string.watch_now);
+                    } else if (yourLiveClassType.equalsIgnoreCase("Previous Classes")){
+                        holder.txtDaysLeft.setVisibility(View.VISIBLE);
+                        holder.txtWatchNow.setText(R.string.register_now);
+                    }
                 }
 
                 holder.txtWatchNow.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("REGISTER NOW")){
-                            CategoryName = "Your Live class";
-                            CourseLog = datamodels.get(position).getTitle();
-                            ActivityLog = "Register now";
-                            getLogEvent(LiveClassesActivity.this);
-                            getLiveClassRegistration(datamodels.get(position),1);
-                        } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("WATCH NOW")){
-                            CategoryName = "Your Live class";
-                            CourseLog = datamodels.get(position).getTitle();
-                            ActivityLog = "Watch now";
-                            getLogEvent(LiveClassesActivity.this);
-                            imageViewPop(datamodels.get(position));
+                        if (datamodels.get(position).getType().equalsIgnoreCase("live")) {
+                            Intent intent = new Intent(context, LiveFashionWebview.class);
+                            intent.putExtra("URL",datamodels.get(position).getVideoUrl());
+                            context.startActivity(intent);
+                        } else {
+                            if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("REGISTER NOW")){
+                                CategoryName = "Your Live class";
+                                CourseLog = datamodels.get(position).getTitle();
+                                ActivityLog = "Register now";
+                                getLogEvent(LiveClassesActivity.this);
+                                getLiveClassRegistration(datamodels.get(position),1);
+                            } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("WATCH NOW")){
+                                CategoryName = "Your Live class";
+                                CourseLog = datamodels.get(position).getTitle();
+                                ActivityLog = "Watch now";
+                                getLogEvent(LiveClassesActivity.this);
+                                imageViewPop(datamodels.get(position));
+                            }
                         }
+
                     }
                 });
                 holder.listLayout.setOnClickListener(new View.OnClickListener() {

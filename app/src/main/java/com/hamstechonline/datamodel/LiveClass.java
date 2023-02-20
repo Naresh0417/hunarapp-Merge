@@ -23,6 +23,9 @@ public class LiveClass {
     @SerializedName("live_class_id")
     @Expose
     private Integer liveClassId;
+    @SerializedName("type")
+    @Expose
+    private String type;
 
     public String getTitle() {
         return title;
@@ -70,5 +73,13 @@ public class LiveClass {
 
     public void setLiveClassId(Integer liveClassId) {
         this.liveClassId = liveClassId;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

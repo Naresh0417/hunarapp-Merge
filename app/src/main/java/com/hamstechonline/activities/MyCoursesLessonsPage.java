@@ -1822,6 +1822,11 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
         ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
         ImageView progressBar = dialog.findViewById(R.id.progressBar);
 
+        LessonLog = txtLessonName.getText().toString().trim();
+        ActivityLog = "Assignment submitted";
+        PagenameLog = "MyCourse Lesson";
+        getLogEvent(MyCoursesLessonsPage.this);
+
         Glide.with(MyCoursesLessonsPage.this)
                 .load(R.drawable.ic_sucess_assignment)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -1855,11 +1860,6 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
         txtAssignment.setText(assignment);
 
         dialog.show();
-
-        LessonLog = txtLessonName.getText().toString().trim();
-        ActivityLog = "Assignment submitted";
-        PagenameLog = "MyCourse Lesson";
-        getLogEvent(MyCoursesLessonsPage.this);
 
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override

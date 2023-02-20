@@ -78,7 +78,7 @@ public class DiscussionDetailsDialog {
     int position;
     ImageView imgHamstech, imgZoom,imgPlayButton;
     TextView txtTitle, txtDescription,txtExternalLink,likesCount,txtPost, txtUserName,
-            imgLikeUnlike,txtUserNameChar,txtUserNamePost;
+            imgLikeUnlike,txtUserNameChar,txtUserNamePost,txtAskDoubt;
     LinearLayout btnShare;
     RecyclerView listComments;
     RelativeLayout player_youtube;
@@ -146,6 +146,7 @@ public class DiscussionDetailsDialog {
         profile_image = dialog.findViewById(R.id.profile_image);
         txtUserNameChar = dialog.findViewById(R.id.txtUserNameChar);
         txtUserNamePost = dialog.findViewById(R.id.txtUserNamePost);
+        txtAskDoubt = dialog.findViewById(R.id.txtAskDoubt);
 
         userDataBase = new UserDataBase(context);
         logEventsActivity = new LogEventsActivity();
@@ -292,20 +293,36 @@ public class DiscussionDetailsDialog {
                         profile_image.setVisibility(View.GONE);
                         txtUserNameChar.setVisibility(View.VISIBLE);
                     }
-                    if (dataBuzz.get(position).getImage().isEmpty()) {
-                        imgHamstech.setVisibility(View.GONE);
-                    } else {
-                        imgHamstech.setVisibility(View.VISIBLE);
-                    }
 
-                    if (dataBuzz.get(position).getVideourl().equals("")) {
+
+                    if (!dataBuzz.get(position).getVideourl().equals("")) {
                         imgHamstech.setVisibility(View.VISIBLE);
+                        txtAskDoubt.setVisibility(View.GONE);
+                        imgPlayButton.setVisibility(View.GONE);
+                        player_youtube.setVisibility(View.VISIBLE);
+                        mp4URL = dataBuzz.get(position).getVideourl();
+                        /*imgHamstech.setVisibility(View.VISIBLE);
                         imgPlayButton.setVisibility(View.GONE);
                         player_youtube.setVisibility(View.GONE);
                         Glide.with(context)
                                 .load(dataBuzz.get(position).getImage())
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
+                                .into(imgHamstech);*/
+                    } if (!dataBuzz.get(position).getImage().isEmpty()) {
+                        imgHamstech.setVisibility(View.VISIBLE);
+                        imgPlayButton.setVisibility(View.GONE);
+                        player_youtube.setVisibility(View.GONE);
+                        txtAskDoubt.setVisibility(View.GONE);
+                        Glide.with(context)
+                                .load(dataBuzz.get(position).getImage())
+                                .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(imgHamstech);
+                    } else if (!dataBuzz.get(position).getTitle().isEmpty()){
+                        imgHamstech.setVisibility(View.GONE);
+                        imgPlayButton.setVisibility(View.GONE);
+                        player_youtube.setVisibility(View.GONE);
+                        txtAskDoubt.setVisibility(View.VISIBLE);
+                        txtAskDoubt.setText(dataBuzz.get(position).getTitle());
                     } else {
                         imgHamstech.setVisibility(View.VISIBLE);
                         imgPlayButton.setVisibility(View.GONE);

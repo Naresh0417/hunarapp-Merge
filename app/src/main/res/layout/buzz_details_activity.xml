@@ -89,6 +89,13 @@
                             android:layout_gravity="center_horizontal"
                             android:layout_marginTop="5dp"/>
 
+                        <TextView
+                            android:id="@+id/txtAskDoubt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:visibility="gone"
+                            android:padding="10dp"/>
+
                         <RelativeLayout
                             android:id="@+id/player_youtube"
                             android:layout_width="match_parent"

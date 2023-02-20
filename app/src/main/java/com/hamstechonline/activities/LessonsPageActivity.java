@@ -92,7 +92,7 @@ public class LessonsPageActivity extends AppCompatActivity {
     NavigationView navSideMenu;
     LinearLayout txtPdfTitle,linearLessonContent,playerLayout;
     TextView headerTitle,txtDescription,txtLessonName,txtImageText;
-    RelativeLayout layoutHeader,nextMainLayout;
+    RelativeLayout layoutHeader,nextMainLayout,navigation;
     UserDataBase userDataBase;
     HocLoadingDialog hocLoadingDialog;
     LogEventsActivity logEventsActivity;
@@ -149,6 +149,7 @@ public class LessonsPageActivity extends AppCompatActivity {
         youTubePlayerView = findViewById(R.id.youtube_player_view);
         playerLayout = findViewById(R.id.playerLayout);
         stickyWhatsApp = findViewById(R.id.stickyWhatsApp);
+        navigation = findViewById(R.id.navigation);
 
         nextMainLayout = findViewById(R.id.nextMainLayout);
 
@@ -350,6 +351,8 @@ public class LessonsPageActivity extends AppCompatActivity {
             txtLessonName.setVisibility(View.GONE);
             txtDescription.setVisibility(View.GONE);
             linearLessonContent.setVisibility(View.GONE);
+            stickyWhatsApp.setVisibility(View.GONE);
+            navigation.setVisibility(View.GONE);
             imgLesson.setVisibility(View.GONE);
             DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
@@ -361,6 +364,8 @@ public class LessonsPageActivity extends AppCompatActivity {
             txtDescription.setVisibility(View.VISIBLE);
             txtImageText.setVisibility(View.VISIBLE);
             linearLessonContent.setVisibility(View.VISIBLE);
+            imgLesson.setVisibility(View.VISIBLE);
+            navigation.setVisibility(View.VISIBLE);
             imgLesson.setVisibility(View.VISIBLE);
             playerLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,getResources().getDimensionPixelSize(R.dimen.dimen_entry_in_dp)));
         }

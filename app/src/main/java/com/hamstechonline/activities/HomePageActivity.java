@@ -137,7 +137,8 @@ public class HomePageActivity extends AppCompatActivity {
     NavigationView navSideMenu;
     ImageView imgMentorImage,imgChooseLang,imgWhatsApp,footer_ribbon,
             imgPrevious,imgNext,mycoursePrevious,mycourseNext,gifSuccessStory,imgExpand;
-    TextView txtTitle,subListTitle;
+    TextView txtTitle,subListTitle,txtlblMyCourse,txtlblMostPopularLesson,mostpopularLinear,txtlblAllCourses,
+            txtlblStudentSuccess,txtlblWantTobe,wantTobeLinear,txtlblYourCelebrity,txtCelebrityLignear;
     ArrayList<CategoryDatamodel> subCatList = new ArrayList<>();
     List<MainVideo> mainiVideo = new ArrayList<>();
     List<MoreTrialClass> moreClasses = new ArrayList<>();
@@ -228,6 +229,15 @@ public class HomePageActivity extends AppCompatActivity {
         layoutContact = findViewById(R.id.layoutContact);
         imgHunarClub = findViewById(R.id.imgHunarClub);
         imgMentorImage = findViewById(R.id.imgMentorImage);
+        txtlblMyCourse = findViewById(R.id.txtlblMyCourse);
+        txtlblMostPopularLesson = findViewById(R.id.txtlblMostPopularLesson);
+        mostpopularLinear = findViewById(R.id.mostpopularLinear);
+        txtlblAllCourses = findViewById(R.id.txtlblAllCourses);
+        txtlblStudentSuccess = findViewById(R.id.txtlblStudentSuccess);
+        txtlblWantTobe = findViewById(R.id.txtlblWantTobe);
+        wantTobeLinear = findViewById(R.id.wantTobeLinear);
+        txtlblYourCelebrity = findViewById(R.id.txtlblYourCelebrity);
+        txtCelebrityLignear = findViewById(R.id.txtCelebrityLignear);
 
         /*navigation.setOnNavigationItemSelectedListener(this);
         navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);*/
@@ -285,6 +295,16 @@ public class HomePageActivity extends AppCompatActivity {
         typeCat = typeCateSharedPreferences.getString("Category", "");
         mobile = userDataBase.getUserMobileNumber(1);
         changeLang(langPref);
+
+        txtlblMyCourse.setText(getResources().getString(R.string.my_courses));
+        txtlblMostPopularLesson.setText(getResources().getString(R.string.most_popular_courses));
+        mostpopularLinear.setText(getResources().getString(R.string._6_month_online_government_certified_courses_to_make_your_hobby_a_skill_and_a_business));
+        txtlblAllCourses.setText(getResources().getString(R.string.all_courses));
+        txtlblStudentSuccess.setText(getResources().getString(R.string.successStories));
+        txtlblWantTobe.setText(getResources().getString(R.string.want_to_be_a_part_of_the_hunar_club));
+        wantTobeLinear.setText(getResources().getString(R.string.get_daily_diy_videos_look_at_student_designs_amp_feature_nyour_own_creation_and_win_contest_prizes));
+        txtlblYourCelebrity.setText(getResources().getString(R.string.your_celebrity_mentor));
+        txtCelebrityLignear.setText(getResources().getString(R.string.learn_from_bollywood_s_top_fashion_designer_neeta_lulla_and_get_certified_by_her_too));
 
         getResponse();
 

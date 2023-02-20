@@ -40,7 +40,8 @@
                     android:fontFamily="@font/helveticabold"
                     android:text="@string/hi_let_s_help_you_choose_n_your_favourite_courses"
                     android:textColor="@color/muted_blue"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:gravity="center"/>
 
                 <TextView
                     android:layout_width="wrap_content"

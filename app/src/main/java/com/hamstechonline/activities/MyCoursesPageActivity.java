@@ -911,6 +911,25 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                     }
                 });
 
+                txtAskDoubt.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        //bundle.putParcelable("buzzdetails",dataArrayList.get(position));
+                        /*Intent intent =  new Intent(context,BuzzDetailsActivity.class);
+                        intent.putExtra("buzzData",dataArrayList.get(position));
+                        context.startActivity(intent);*/
+                        //bundle.putSerializable("buzzData",dataBuzz.get(position));
+                        //dataBuzz
+                        lessonEvent = dataBuzz.get(position).getTitle();
+                        ActivityLog = "Clicked on discussions post";
+                        PagenameLog = "MyCourse page";
+                        saveHunarClubPost(dataBuzz.get(position).getPostid());
+                        getLogEvent(context);
+                        buzzDetailsDialog = new DiscussionDetailsDialog(MyCoursesPageActivity.this, position,dataBuzz,term_id,courseId);
+                        buzzDetailsDialog.showLoadingDialog();
+                    }
+                });
+
                 btnShare.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

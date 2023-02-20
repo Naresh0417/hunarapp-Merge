@@ -131,9 +131,10 @@
                         android:paddingRight="7dp">
 
                         <TextView
+                            android:id="@+id/txtlblMyCourse"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/my_courses"
+                            android:text=""
                             android:textColor="@color/muted_blue"
                             android:fontFamily="@font/dinprobold"
                             android:textAllCaps="true"
@@ -184,9 +185,10 @@
                     android:paddingRight="0dp">
 
                     <TextView
+                        android:id="@+id/txtlblMostPopularLesson"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/most_popular_courses"
+                        android:text=""
                         android:textColor="@color/muted_blue"
                         android:fontFamily="@font/dinprobold"
                         android:textSize="17sp"
@@ -195,13 +197,14 @@
                         android:layout_marginTop="10dp"/>
 
                     <TextView
+                        android:id="@+id/mostpopularLinear"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="sans-serif"
                         android:textStyle="normal"
                         android:textSize="15sp"
                         android:textColor="@color/black"
-                        android:text="@string/_6_month_online_government_certified_courses_to_make_your_hobby_a_skill_and_a_business"
+                        android:text=""
                         android:layout_marginTop="7dp"
                         android:paddingLeft="7dp"
                         android:paddingRight="7dp"/>
@@ -214,9 +217,10 @@
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <TextView
+                        android:id="@+id/txtlblAllCourses"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/all_courses"
+                        android:text=""
                         android:textColor="@color/muted_blue"
                         android:fontFamily="@font/dinprobold"
                         android:textSize="17sp"
@@ -317,9 +321,10 @@
                         android:layout_marginRight="-8dp">
 
                         <TextView
+                            android:id="@+id/txtlblStudentSuccess"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/successStories"
+                            android:text=""
                             android:textColor="@color/muted_blue"
                             android:textSize="15sp"
                             android:fontFamily="sans-serif"
@@ -374,9 +379,10 @@
                         android:layout_marginTop="8dp">
 
                         <TextView
+                            android:id="@+id/txtlblWantTobe"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/want_to_be_a_part_of_the_hunar_club"
+                            android:text=""
                             android:textColor="@color/muted_blue"
                             android:textSize="15sp"
                             android:fontFamily="sans-serif"
@@ -385,9 +391,10 @@
                             android:layout_marginTop="8dp"/>
 
                         <TextView
+                            android:id="@+id/wantTobeLinear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/get_daily_diy_videos_look_at_student_designs_amp_feature_nyour_own_creation_and_win_contest_prizes"
+                            android:text=""
                             android:textColor="@color/black_two"
                             android:textSize="14sp"
                             android:fontFamily="sans-serif"
@@ -475,22 +482,24 @@
                         android:layout_marginTop="13dp">
 
                         <TextView
+                            android:id="@+id/txtlblYourCelebrity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
                             android:textStyle="bold"
                             android:textSize="16sp"
                             android:textColor="@color/muted_blue"
-                            android:text="@string/your_celebrity_mentor"/>
+                            android:text=""/>
 
                         <TextView
+                            android:id="@+id/txtCelebrityLignear"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="sans-serif"
                             android:textStyle="normal"
                             android:textSize="14sp"
                             android:textColor="@color/black"
-                            android:text="@string/learn_from_bollywood_s_top_fashion_designer_neeta_lulla_and_get_certified_by_her_too"/>
+                            android:text=""/>
 
                         <ImageView
                             android:id="@+id/imgMentorImage"
