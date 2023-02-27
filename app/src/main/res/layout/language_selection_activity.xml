@@ -63,7 +63,7 @@
                 android:layout_height="102dp"
                 android:button="@null"
                 android:text="English"
-                android:textColor="@color/dark_pink"
+                android:textColor="@color/white"
                 android:fontFamily="sans-serif"
                 android:textSize="25sp"
                 android:gravity="center"

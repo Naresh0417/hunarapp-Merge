@@ -392,6 +392,7 @@
 
     <string name="in">इंडिया</string>
     <string name="houseno">मकान संख्या, गली का नाम, लैंडमार्क, मोहल्ला</string>
+    <string name="special_limited_time">अब पाएं एक ख़ास लिमिटेड-टाइम ऑफर! ₹ <strike>%1$s </strike></string>
     <string name="labl_startcourse"><b>अपना कोर्स शुरू करने के लिए नीचे क्लिक कीजिए!</b></string>
     <string name="lblstartlearn">सीखना शूरु कीजिए!</string>
 
@@ -494,4 +495,6 @@
     <string name="exciting_ncontests">आकर्षक\nकॉन्टेस्ट्स</string>
     <string name="hunar_nclub">हुनर\nक्लब</string>
     <string name="have_a_doubt_ask_here">कोई डाउट है? यहाँ पूछें!...</string>
+    <string name="pay_your_first_instalment_now">अपनी पहली किश्त अभी भरें!</string>
+    <string name="pay_now_to_start_learning">Pay now to start learning</string>
 </resources>

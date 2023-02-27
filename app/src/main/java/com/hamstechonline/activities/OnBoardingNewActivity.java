@@ -107,7 +107,7 @@ public class OnBoardingNewActivity extends AppCompatActivity {
 
         getContent();
 
-        countDownTimer = new CountDownTimer(7000,1000) {
+        countDownTimer = new CountDownTimer(7000,20000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long sec = ((millisUntilFinished / 1000) % 60);

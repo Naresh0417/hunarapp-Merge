@@ -126,7 +126,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 chbEnglish.setBackground(getResources().getDrawable(R.drawable.english_check));
-                chbEnglish.setTextColor(getResources().getColor(R.color.dark_pink));
+                chbEnglish.setTextColor(getResources().getColor(R.color.white));
                 chbHindi.setTextColor(getResources().getColor(R.color.muted_blue));
                 chbHindi.setBackground(getResources().getDrawable(R.drawable.hindi_txt_check));
                 btnNext.setText("NEXT");
@@ -139,7 +139,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
             public void onClick(View view) {
                 chbEnglish.setBackground(getResources().getDrawable(R.drawable.english_uncheck));
                 chbEnglish.setTextColor(getResources().getColor(R.color.muted_blue));
-                chbHindi.setTextColor(getResources().getColor(R.color.dark_pink));
+                chbHindi.setTextColor(getResources().getColor(R.color.white));
                 chbHindi.setBackground(getResources().getDrawable(R.drawable.hindi_txt_uncheck));
                 btnNext.setText("आगे बढ़ें");
                 langPref = "hi";

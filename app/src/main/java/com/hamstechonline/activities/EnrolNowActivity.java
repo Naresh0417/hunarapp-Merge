@@ -1,5 +1,7 @@
 package com.hamstechonline.activities;
 
+import static java.text.NumberFormat.getInstance;
+
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -112,11 +114,12 @@ public class EnrolNowActivity extends AppCompatActivity implements
             amounttotal,txtInstalment,txtSecondInstalment,txtAddDiscount;
     LinearLayout linearBeforePayment, linearAfterPayment, linearBill, onlineDiscountLayout;
     LinearLayout linearPreferred, linearPremium;
-    LinearLayout linearonlinepay, linearcashdelevery;
+    LinearLayout linearonlinepay, linearcashdelevery,linearSpecialPrice;
     RelativeLayout listCourse, paymentOptions, courseLayout, relativeDiscount;
-    TextView txtTermsCond, txtDiscount;
+    TextView txtTermsCond, txtDiscount,txtOriginlPrice,txtSpecialPrice;
     TextView headerTitle;
     CheckBox checkboxNSDC, viewSummayDetails;
+    ImageView imgPaynowGif;
     EnrolItemAdapter enrolItemAdapter;
     selectedAdapter selectedAdapter;
     ListSelectedNames listSelectedNamesAdapter;
@@ -132,7 +135,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
     TextView txtChatUs;
     private FirebaseAnalytics mFirebaseAnalytics;
     float normal_amount, amount, premiumCost, discount_amount, full_amount, gst_amount, finalAmount, Actual_amount,
-            instalment_amount, second_instalment;
+            instalment_amount, second_instalment,specialDiscountPrice;
     long orderID;
     String course_type = "Preferred", selectLaguage = "", discount_percentage, skillIdString, orderType,
             mobile = "", fullname = "", email = "",amount_type = "fullAmount";
@@ -235,10 +238,12 @@ public class EnrolNowActivity extends AppCompatActivity implements
         txtInstalment = findViewById(R.id.txtInstalment);
         txtSecondInstalment = findViewById(R.id.txtSecondInstalment);
         txtAddDiscount = findViewById(R.id.txtAddDiscount);
-
+        imgPaynowGif = findViewById(R.id.imgPaynowGif);
+        txtOriginlPrice = findViewById(R.id.txtOriginlPrice);
+        txtSpecialPrice = findViewById(R.id.txtSpecialPrice);
         amounttotal = findViewById(R.id.amounttotal);
-
         btnNext = findViewById(R.id.btnNext);
+        linearSpecialPrice = findViewById(R.id.linearSpecialPrice);
 
         btnStartLearn = findViewById(R.id.btnstartlearn);
         btnStartLearn.setOnClickListener(new View.OnClickListener() {
@@ -327,6 +332,13 @@ public class EnrolNowActivity extends AppCompatActivity implements
                     .commit();
         }
 
+        ;
+        Glide.with(this)
+                .asGif()
+                .load(R.drawable.paynow_gif)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(imgPaynowGif);
+
         linearPreferred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -397,23 +409,24 @@ public class EnrolNowActivity extends AppCompatActivity implements
                 String payamount = getResources().getString(R.string.paynow);
                 String htmlFinalAmount = getResources().getString(R.string.txtOrderTotal);
                 if (selectedPlan == 1) {
-                    payamount = String.format(getResources().getString(R.string.pay_now), "₹" + NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)));
+                    payamount = String.format(getResources().getString(R.string.pay_now), "₹" + getInstance().format(finalAmount - (finalAmount * 0.05)));
                     //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)) + " ");
                     htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" +
-                            NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)) + "/-";
+                            getInstance().format(finalAmount - (finalAmount * 0.05)) + "/-";
                 } else {
                     //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(premiumCost - (premiumCost * 0.05)) + " ");
-                    payamount = String.format(getResources().getString(R.string.pay_now), "₹" + NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)));
+                    payamount = String.format(getResources().getString(R.string.pay_now), "₹" + getInstance().format(finalAmount - (finalAmount * 0.05)));
                     htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" +
-                            NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)) + "/-";
+                            getInstance().format(finalAmount - (finalAmount * 0.05)) + "/-";
                 }
 
                 btnNext.setText(payamount);
-
+                txtOriginlPrice.setText("₹" + getInstance().format(finalAmount - (finalAmount * 0.05))+ "/-");
+                txtSpecialPrice.setText("₹" + getInstance().format(Math.round(specialDiscountPrice))+ "/-");
+                linearSpecialPrice.setVisibility(View.VISIBLE);
 
                 txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
 
-                btnNext.setBackgroundResource(R.drawable.payment_blue_strok);
                 btnNext.setEnabled(true);
 
                 paymentmod = 0;
@@ -432,14 +445,13 @@ public class EnrolNowActivity extends AppCompatActivity implements
 
                 String payamount = getResources().getString(R.string.paynow);
                 //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(finalAmount) + " ");
-                payamount = String.format(getResources().getString(R.string.pay_now), "₹" + NumberFormat.getInstance().format(finalAmount));
+                payamount = String.format(getResources().getString(R.string.pay_now), "₹" + getInstance().format(finalAmount));
                 btnNext.setText(payamount);
 
                 String htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" +
-                        NumberFormat.getInstance().format(finalAmount) + "/-";
+                        getInstance().format(finalAmount) + "/-";
                 txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
 
-                btnNext.setBackgroundResource(R.drawable.payment_blue_strok);
                 btnNext.setEnabled(true);
                 paymentmod = 1;
                 LessonLog = "Payment option";
@@ -528,16 +540,16 @@ public class EnrolNowActivity extends AppCompatActivity implements
                     if (paymentOption < 4) {
                         onlineDiscountLayout.setVisibility(View.VISIBLE);
                         if (onlineDiscountLayout.getVisibility() == View.VISIBLE) {
-                            paymentTotal.setText("₹" + NumberFormat.getInstance().format(finalAmount));
-                            paymentDiscountAmount.setText("₹" + NumberFormat.getInstance().format((finalAmount * 0.05)));
+                            paymentTotal.setText("₹" + getInstance().format(finalAmount));
+                            paymentDiscountAmount.setText("₹" + getInstance().format((finalAmount * 0.05)));
                         }
                         String htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" +
-                                NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)) + "/-";
+                                getInstance().format(finalAmount - (finalAmount * 0.05)) + "/-";
                         txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
                     } else {
                         onlineDiscountLayout.setVisibility(View.GONE);
                         String htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" +
-                                NumberFormat.getInstance().format(finalAmount) + "/-";
+                                getInstance().format(finalAmount) + "/-";
                         txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
                     }
                 }
@@ -638,23 +650,24 @@ public class EnrolNowActivity extends AppCompatActivity implements
         String payamount = getResources().getString(R.string.paynow);
         String htmlFinalAmount = getResources().getString(R.string.txtOrderTotal);
         if (selectedPlan == 1) {
-            payamount = String.format(getResources().getString(R.string.pay_now), "₹" + NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)));
+            payamount = String.format(getResources().getString(R.string.pay_now), "₹" + getInstance().format(finalAmount - (finalAmount * 0.05)));
             //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)) + " ");
             htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" +
-                    NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)) + "/-";
+                    getInstance().format(finalAmount - (finalAmount * 0.05)) + "/-";
         } else {
             //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(premiumCost - (premiumCost * 0.05)) + " ");
-            payamount = String.format(getResources().getString(R.string.pay_now), "₹" + NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)));
+            payamount = String.format(getResources().getString(R.string.pay_now), "₹" + getInstance().format(finalAmount - (finalAmount * 0.05)));
             htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" +
-                    NumberFormat.getInstance().format(finalAmount - (finalAmount * 0.05)) + "/-";
+                    getInstance().format(finalAmount - (finalAmount * 0.05)) + "/-";
         }
 
         btnNext.setText(payamount);
-
+        txtOriginlPrice.setText("₹" + getInstance().format(finalAmount - (finalAmount * 0.05))+ "/-");
+        txtSpecialPrice.setText("₹" + getInstance().format(Math.round(specialDiscountPrice))+ "/-");
+        linearSpecialPrice.setVisibility(View.VISIBLE);
 
         txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
 
-        btnNext.setBackgroundResource(R.drawable.payment_blue_strok);
         btnNext.setEnabled(true);
 
         paymentmod = 0;
@@ -666,14 +679,13 @@ public class EnrolNowActivity extends AppCompatActivity implements
 
         String payamount = getResources().getString(R.string.paynow);
         //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(finalAmount) + " ");
-        payamount = String.format(getResources().getString(R.string.pay_now), "₹" + NumberFormat.getInstance().format(finalAmount));
+        payamount = String.format(getResources().getString(R.string.pay_now), "₹" + getInstance().format(finalAmount));
         btnNext.setText(payamount);
 
         String htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" +
-                NumberFormat.getInstance().format(finalAmount) + "/-";
+                getInstance().format(finalAmount) + "/-";
         txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
 
-        btnNext.setBackgroundResource(R.drawable.payment_blue_strok);
         btnNext.setEnabled(true);
         paymentmod = 1;
     }
@@ -744,10 +756,10 @@ public class EnrolNowActivity extends AppCompatActivity implements
                                 JSONArray jsonArray = jsonObject.getJSONArray("list");
                                 if (langPref.equalsIgnoreCase("en")) {
                                     txtPreferredTitle.setText(getResources().getString(R.string.lblPreferred)+dicount_value+"% discount");
-                                    txtAddDiscount.setText(getResources().getString(R.string.learnanother)+additional_course_discount+"% off!");
+                                    //txtAddDiscount.setText(getResources().getString(R.string.learnanother)+additional_course_discount+"% off!");
                                 } else {
                                     txtPreferredTitle.setText(getResources().getString(R.string.lblPreferred)+dicount_value+"% छूट पाइए");
-                                    txtAddDiscount.setText(additional_course_discount+getResources().getString(R.string.learnanother));
+                                    //txtAddDiscount.setText(additional_course_discount+getResources().getString(R.string.learnanother));
                                 }
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -878,31 +890,36 @@ public class EnrolNowActivity extends AppCompatActivity implements
             public void onResponse(Call<CalculateCoursePayment> call, retrofit2.Response<CalculateCoursePayment> response) {
                 if (response.body().getStatus().equalsIgnoreCase("ok")) {
                     if (selectedPlan == 1) {
-                        String htmlPreferred = "₹" + NumberFormat.getInstance().format(response.body().getFullPayment()); // + "\n" + htmlAllTaxesString;
-                        String htmlPremium = "₹" + NumberFormat.getInstance().format(response.body().getInstallmentAmount()); // + "\n" + htmlAllTaxesString;
+                        String htmlPreferred = "₹" + getInstance().format(response.body().getFullPayment()); // + "\n" + htmlAllTaxesString;
+                        String htmlPremium = "₹" + getInstance().format(response.body().getInstallmentAmount()); // + "\n" + htmlAllTaxesString;
                         amountPreferred.setText(Html.fromHtml(htmlPreferred));
                         amountPremium.setText(Html.fromHtml(htmlPremium));
-                        String htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" + NumberFormat.getInstance().format(response.body().getFullPayment()) + "/-";
+                        String htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" + getInstance().format(response.body().getFullPayment()) + "/-";
                         txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
                         finalAmount = response.body().getFullPayment();
+                        specialDiscountPrice = (float) (finalAmount - (finalAmount * 0.10));
                         String payamount = getResources().getString(R.string.paynow);
                         //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(finalAmount) + " ");
-                        payamount = String.format(getResources().getString(R.string.pay_now), "₹" + NumberFormat.getInstance().format(finalAmount));
+                        payamount = String.format(getResources().getString(R.string.pay_now), "₹" + getInstance().format(finalAmount));
                         btnNext.setText(payamount);
+                        txtOriginlPrice.setText("₹" + getInstance().format(finalAmount)+ "/-");
+                        txtSpecialPrice.setText("₹" + getInstance().format(Math.round(specialDiscountPrice))+ "/-");
+                        linearSpecialPrice.setVisibility(View.VISIBLE);
+
                     } else if (selectedPlan == 2) {
-                        String htmlPreferred = "₹" + NumberFormat.getInstance().format(response.body().getFullPayment()); // + "\n" + htmlAllTaxesString;
-                        String htmlPremium = "₹" + NumberFormat.getInstance().format(response.body().getInstallmentAmount()); // + "\n" + htmlAllTaxesString;
+                        String htmlPreferred = "₹" + getInstance().format(response.body().getFullPayment()); // + "\n" + htmlAllTaxesString;
+                        String htmlPremium = "₹" + getInstance().format(response.body().getInstallmentAmount()); // + "\n" + htmlAllTaxesString;
                         amountPreferred.setText(Html.fromHtml(htmlPreferred));
                         amountPremium.setText(Html.fromHtml(htmlPremium));
-                        String htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" + NumberFormat.getInstance().format(response.body().getInstallmentAmount()) + "/-";
+                        String htmlFinalAmount = getResources().getString(R.string.txtOrderTotal) + "\n" + "₹" + getInstance().format(response.body().getInstallmentAmount()) + "/-";
                         txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
                         String payamount = getResources().getString(R.string.paynow);
                         finalAmount = response.body().getInstallmentAmount();
                         //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(finalAmount) + " ");
-                        payamount = String.format(getResources().getString(R.string.pay_now), "₹" + NumberFormat.getInstance().format(finalAmount));
+                        payamount = String.format(getResources().getString(R.string.pay_now), "₹" + getInstance().format(finalAmount));
                         btnNext.setText(payamount);
                     }
-                    txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + NumberFormat.getInstance().format(second_instalment)+
+                    txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + getInstance().format(second_instalment)+
                             " 120 "+getResources().getString(R.string.days));
 
                     if (paymentOption == 10 || paymentmod == 0) {
@@ -1106,7 +1123,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
                 }
                 courseAmount = Float.parseFloat(coursesOriginalList.get(holder.getAdapterPosition()).getCourse_amount());
                 courseAmount = Float.parseFloat(String.format("%.0f", (courseAmount + ((courseAmount) / 100.0f) * 18)));
-                String htmlString = "₹" + NumberFormat.getInstance().format(courseAmount) + "/-";
+                String htmlString = "₹" + getInstance().format(courseAmount) + "/-";
                 holder.txtPrice.setText(Html.fromHtml(htmlString));
                 if (langPref.equalsIgnoreCase("hi")) {
                     holder.txtLanguage.setText("हिंदी");
@@ -1519,12 +1536,12 @@ public class EnrolNowActivity extends AppCompatActivity implements
             try {
                 holder.txtName.setText(coursesOriginalList.get(position).getCategory_Title());
                 if (selectedPlan == 1) {
-                    holder.txtAmount.setText("₹" + NumberFormat.getInstance().format(Float.parseFloat(coursesOriginalList.get(position).getCourse_amount())));
+                    holder.txtAmount.setText("₹" + getInstance().format(Float.parseFloat(coursesOriginalList.get(position).getCourse_amount())));
                 } else {
                     if (coursesOriginalList.get(position).getInstalment_amount().equals("0")) {
-                        holder.txtAmount.setText("₹" + NumberFormat.getInstance().format(Float.parseFloat(coursesOriginalList.get(position).getCourse_amount())));
+                        holder.txtAmount.setText("₹" + getInstance().format(Float.parseFloat(coursesOriginalList.get(position).getCourse_amount())));
                     } else {
-                        holder.txtAmount.setText("₹" + NumberFormat.getInstance().format(Float.parseFloat(coursesOriginalList.get(position).getInstalment_amount())));
+                        holder.txtAmount.setText("₹" + getInstance().format(Float.parseFloat(coursesOriginalList.get(position).getInstalment_amount())));
                     }
                 }
                 getTotal(coursesOriginalList);
@@ -1814,14 +1831,14 @@ public class EnrolNowActivity extends AppCompatActivity implements
                     premiumCost = Float.parseFloat(String.format("%.0f", (premiumCost - ((premiumCost) / 100.0f) * 5)));
                     gst_amount = Float.parseFloat(String.format("%.0f", (((amount) / 100.0f) * 18)));
                     premiumCost = Float.parseFloat(String.format("%.0f", (premiumCost + ((premiumCost) / 100.0f) * 18)));
-                    String htmlPreferred = "₹" + NumberFormat.getInstance().format(normal_amount); // + "\n" + htmlAllTaxesString;
-                    String htmlPremium = "₹" + NumberFormat.getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
+                    String htmlPreferred = "₹" + getInstance().format(normal_amount); // + "\n" + htmlAllTaxesString;
+                    String htmlPremium = "₹" + getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
                     /*amountPreferred.setText(Html.fromHtml(htmlPreferred));
                     amountPremium.setText(Html.fromHtml(htmlPremium));
                     //amountPremium.setText(R.string.instalment);
                     txtInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + NumberFormat.getInstance().format(second_instalment)+
                             " 60 "+getResources().getString(R.string.days));*/
-                    txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + NumberFormat.getInstance().format(second_instalment)+
+                    txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + getInstance().format(second_instalment)+
                             " 120 "+getResources().getString(R.string.days));
                     txtDiscountText.setText(getResources().getString(R.string.discount_25));
                     /*txtDiscountAmount.setText("-₹" + NumberFormat.getInstance().format(discount_amount) + "/-");
@@ -1847,8 +1864,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
                         normal_amount = Float.parseFloat(String.format("%.0f", (finalAmount + ((finalAmount) / 100.0f) * 18)));
                         full_amount = Float.parseFloat(String.format("%.0f", (finalAmount + ((finalAmount) / 100.0f) * 18)));
                         premiumCost = Float.parseFloat(String.format("%.0f", (premiumCost + ((premiumCost) / 100.0f) * 18)));
-                        String htmlPreferred = "₹" + NumberFormat.getInstance().format(normal_amount); // + "\n" + htmlAllTaxesString;
-                        String htmlPremium = "₹" + NumberFormat.getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
+                        String htmlPreferred = "₹" + getInstance().format(normal_amount); // + "\n" + htmlAllTaxesString;
+                        String htmlPremium = "₹" + getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
                         /*amountPreferred.setText(Html.fromHtml(htmlPreferred));
                         amountPremium.setText(Html.fromHtml(htmlPremium));*/
                     } else {
@@ -1858,8 +1875,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
                         finalAmount = (float) (amount - (amount * 0.15));
                         full_amount = Float.parseFloat(String.format("%.0f", (finalAmount + ((finalAmount) / 100.0f) * 18)));
                         premiumCost = Float.parseFloat(String.format("%.0f", (premiumCost + ((premiumCost) / 100.0f) * 18)));
-                        String htmlPreferred = "₹" + NumberFormat.getInstance().format(full_amount); // + "\n" + htmlAllTaxesString;
-                        String htmlPremium = "₹" + NumberFormat.getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
+                        String htmlPreferred = "₹" + getInstance().format(full_amount); // + "\n" + htmlAllTaxesString;
+                        String htmlPremium = "₹" + getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
                         /*amountPreferred.setText(Html.fromHtml(htmlPreferred));
                         amountPremium.setText(Html.fromHtml(htmlPremium));*/
                     }
@@ -1868,7 +1885,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
                     //full_amount = Float.parseFloat(String.format("%.0f",(full_amount+((full_amount) / 100.0f) * 18)));
                     /*txtInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + NumberFormat.getInstance().format(second_instalment)+
                             " 60 "+getResources().getString(R.string.days));*/
-                    txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + NumberFormat.getInstance().format(second_instalment)+
+                    txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + getInstance().format(second_instalment)+
                             " 120 "+getResources().getString(R.string.days));
 
 
@@ -1923,13 +1940,13 @@ public class EnrolNowActivity extends AppCompatActivity implements
                     normal_amount = Float.parseFloat(String.format("%.0f", (normal_amount + ((normal_amount) / 100.0f) * 18)));
                     premiumCost = Float.parseFloat(String.format("%.0f", (premiumCost - ((premiumCost) / 100.0f) * 15)));
                     premiumCost = Float.parseFloat(String.format("%.0f", (premiumCost + ((premiumCost) / 100.0f) * 18)));
-                    String htmlPreferred = "₹" + NumberFormat.getInstance().format(normal_amount); // + "\n" + htmlAllTaxesString;
-                    String htmlPremium = "₹" + NumberFormat.getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
+                    String htmlPreferred = "₹" + getInstance().format(normal_amount); // + "\n" + htmlAllTaxesString;
+                    String htmlPremium = "₹" + getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
                     /*amountPreferred.setText(Html.fromHtml(htmlPreferred));
                     amountPremium.setText(Html.fromHtml(htmlPremium));
                     txtInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + NumberFormat.getInstance().format(second_instalment)+
                             " 60 "+getResources().getString(R.string.days));*/
-                    txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + NumberFormat.getInstance().format(second_instalment)+
+                    txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + getInstance().format(second_instalment)+
                             " 120 "+getResources().getString(R.string.days));
                     txtDiscountText.setText(getResources().getString(R.string.discount));
                     gst_amount = Float.parseFloat(String.format("%.0f", ((amount) / 100.0f) * 18));
@@ -1952,8 +1969,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
                         amount = Float.parseFloat(listDetails.get(0).getCourse_amount());
                         normal_amount = Float.parseFloat(String.format("%.0f", (normal_amount + ((normal_amount) / 100.0f) * 18)));
                         premiumCost = Float.parseFloat(String.format("%.0f", (premiumCost + ((premiumCost) / 100.0f) * 18)));
-                        String htmlPreferred = "₹" + NumberFormat.getInstance().format(normal_amount); // + "\n" + htmlAllTaxesString;
-                        String htmlPremium = "₹" + NumberFormat.getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
+                        String htmlPreferred = "₹" + getInstance().format(normal_amount); // + "\n" + htmlAllTaxesString;
+                        String htmlPremium = "₹" + getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
                         /*amountPreferred.setText(Html.fromHtml(htmlPreferred));
                         amountPremium.setText(Html.fromHtml(htmlPremium));*/
                     } else {
@@ -1963,14 +1980,14 @@ public class EnrolNowActivity extends AppCompatActivity implements
                         normal_amount = (float) (normal_amount - (normal_amount * 0.15));
                         normal_amount = Float.parseFloat(String.format("%.0f", (normal_amount + ((normal_amount) / 100.0f) * 18)));
                         premiumCost = Float.parseFloat(String.format("%.0f", (premiumCost + ((premiumCost) / 100.0f) * 18)));
-                        String htmlPreferred = "₹" + NumberFormat.getInstance().format(normal_amount); // + "\n" + htmlAllTaxesString;
-                        String htmlPremium = "₹" + NumberFormat.getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
+                        String htmlPreferred = "₹" + getInstance().format(normal_amount); // + "\n" + htmlAllTaxesString;
+                        String htmlPremium = "₹" + getInstance().format(premiumCost); // + "\n" + htmlAllTaxesString;
                         //amountPreferred.setText(Html.fromHtml(htmlPreferred));
                         //amountPremium.setText(Html.fromHtml(htmlPremium));
                     }
                     /*txtInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + NumberFormat.getInstance().format(second_instalment)+
                             " 60 "+getResources().getString(R.string.days));*/
-                    txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + NumberFormat.getInstance().format(second_instalment)+
+                    txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + getInstance().format(second_instalment)+
                             " 120 "+getResources().getString(R.string.days));
                     gst_amount = Float.parseFloat(String.format("%.0f", ((amount) / 100.0f) * 18));
                     amount = Float.parseFloat(String.format("%.0f", (amount + ((amount) / 100.0f) * 18)));
@@ -1989,14 +2006,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
             }
         }
 
-        /*String payamount = getResources().getString(R.string.paynow);
-        //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(finalAmount) + " ");
-        payamount = String.format(getResources().getString(R.string.pay_now), "₹" + NumberFormat.getInstance().format(finalAmount));
-        btnNext.setText(payamount);*/
-        //btnNext.setEnabled(false);
-        //btnNext.setBackgroundResource(R.drawable.button_shape_gray);
-
-        amounttotal.setText("₹" + NumberFormat.getInstance().format(Actual_amount) + "/-");
+        amounttotal.setText("₹" + getInstance().format(Actual_amount) + "/-");
         amounttotal.setPaintFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
         //linearonlinepay.setBackgroundResource(R.drawable.border_gray_strok);

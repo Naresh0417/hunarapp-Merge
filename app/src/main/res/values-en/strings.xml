@@ -18,7 +18,7 @@
     <string name="lblTaxes">Taxes</string>
     <string name="lblEnrolNow">Enrol Now</string>
     <string name="choosePopupMsg">Sorry! You have already selected five categories</string>
-    <string name="AlreadyMember">Already a member?  </string>
+    <string name="AlreadyMember">Already a Student?  </string>
     <string name="enterOtp">Enter OTP</string>
     <string name="resendOtp">Resend OTP</string>
     <string name="lblPreferred"><big><b><font color='#34004E'>Pay Full Fees</font></b></big> <small><b><font color='#34004E'>Get </font></b></small></string>
@@ -378,7 +378,7 @@ the last 4 digits of your mobile number to log in.</string>
     <string name="enroll_make">Enroll, Make Your Payment &amp; Start Learning Now</string>
     <string name="offer_today">Offers Available Today!</string>
 
-    <string name="learnanother"><b><font color='#232323'>Learn Another Course &amp; Get </font></b></string>
+    <string name="learnanother">NOW GET A SPECIAL LIMITED TIME OFFER!</string>
     <string name="enrol_title">Enrol, Make Payment &amp; Learn On the Home Page!</string>
     <string name="choose_paytype">Choose Your Payment Method</string>
 
@@ -391,6 +391,7 @@ the last 4 digits of your mobile number to log in.</string>
     <string name="days"><small>days</small></string>
     <string name="paynow">Pay Now!</string>
     <string name="pay_now">Pay %1$s Now!</string>
+    <string name="special_limited_time">NOW GET A SPECIAL LIMITED TIME OFFER!</string>
     <string name="labeladdress">Fill your details to get the starter kit at your door step</string>
 
     <string name="in">INDIA</string>
@@ -483,8 +484,10 @@ the last 4 digits of your mobile number to log in.</string>
     <string name="watch_now">WATCH NOW</string>
     <string name="upcoming_classes">Upcoming Classes</string>
     <string name="enroll_now_for_full_course">Enroll Now For Full Course</string>
-    <string name="_55_ncontests">55+\nContests</string>
+    <string name="_55_ncontests">55+\nCourses</string>
     <string name="exciting_ncontests">Exciting\nContests</string>
     <string name="hunar_nclub">Hunar\nClub</string>
     <string name="have_a_doubt_ask_here">Have A Doubt? Ask Here ...</string>
+    <string name="pay_your_first_instalment_now">pay your first instalment now!</string>
+    <string name="pay_now_to_start_learning">Pay now to start learning</string>
 </resources>

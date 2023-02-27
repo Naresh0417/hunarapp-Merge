@@ -150,34 +150,94 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:id="@+id/linearadddiscount"
                         android:layout_width="match_parent"
-                        android:layout_height="55dp"
-                        android:background="@drawable/learn_anothercourse_shadow_bg"
+                        android:layout_height="80dp"
+                        android:background="@drawable/special_offer_bg"
                         android:onClick="ViewAllCources"
                         android:padding="10dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal">
 
                         <ImageView
                             android:id="@+id/iv_learndiscount"
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
+                            android:layout_gravity="center_vertical"
                             android:layout_centerVertical="true"
                             android:src="@drawable/learn_discount" />
 
-                        <TextView
-                            android:id="@+id/txtAddDiscount"
-                            android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_marginLeft="5dp"
-                            android:layout_toRightOf="@+id/iv_learndiscount"
-                            android:fontFamily="@font/dinprobold"
-                            android:text="@string/learnanother"
-                            android:textColor="@color/black_two"
-                            android:textSize="16sp"
-                            android:paddingBottom="6dp"/>
+                            android:orientation="vertical"
+                            android:layout_gravity="center_vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/txtAddDiscount"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_centerVertical="true"
+                                    android:layout_marginLeft="5dp"
+                                    android:fontFamily="@font/dinprobold"
+                                    android:text="@string/learnanother"
+                                    android:textColor="@color/black_two"
+                                    android:textSize="14sp"
+                                    android:paddingBottom="3dp"/>
+
+                            </RelativeLayout>
+
+                            <LinearLayout
+                                android:id="@+id/linearSpecialPrice"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:visibility="gone">
+
+                                <RelativeLayout
+                                    android:layout_width="67dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp">
+
+                                    <TextView
+                                        android:id="@+id/txtSpecialPrice"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text=""
+                                        android:gravity="center"
+                                        android:textColor="@color/pink"
+                                        android:textSize="16sp"
+                                        android:fontFamily="sans-serif"
+                                        android:background="@drawable/line_for_price"
+                                        android:textStyle="bold"/>
+
+                                </RelativeLayout>
+
+                                <TextView
+                                    android:id="@+id/txtOriginlPrice"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:background="@color/muted_blue"
+                                    android:fontFamily="@font/dinprobold"
+                                    android:paddingLeft="3dp"
+                                    android:paddingRight="3dp"
+                                    android:text=""
+                                    android:layout_marginLeft="8dp"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+
+                            </LinearLayout>
+
+
+
+                        </LinearLayout>
+
+
 
                         <TextView
                             android:id="@+id/txtAddCourse"
@@ -189,7 +249,7 @@
                             android:text="@string/txtAddCourse"
                             android:textColor="@color/black_two"
                             android:visibility="gone" />
-                    </RelativeLayout>
+                    </LinearLayout>
 
 
                     <CheckBox
@@ -240,13 +300,15 @@
                             android:fontFamily="@font/dinprobold"
                             android:text="@string/choosePaymentPlan"
                             android:textColor="@color/light_grey"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:visibility="gone"/>
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="170dp"
                             android:orientation="horizontal"
-                            android:weightSum="2">
+                            android:weightSum="2"
+                            android:visibility="gone">
 
                             <LinearLayout
                                 android:id="@+id/linearPremium"
@@ -490,13 +552,15 @@
                             android:fontFamily="@font/dinprobold"
                             android:text="@string/choose_paytype"
                             android:textColor="@color/light_grey"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:visibility="gone"/>
 
                         <LinearLayout
                             android:id="@+id/linearonlinepay"
                             android:layout_width="match_parent"
                             android:layout_height="90dp"
-                            android:background="@drawable/extra_discount_bg_shadow">
+                            android:background="@drawable/extra_discount_bg_shadow"
+                            android:visibility="gone">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -563,7 +627,8 @@
                             android:id="@+id/linearcashdelevery"
                             android:layout_width="match_parent"
                             android:layout_height="90dp"
-                            android:background="@drawable/extra_discount_bg_shadow">
+                            android:background="@drawable/extra_discount_bg_shadow"
+                            android:visibility="gone">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -598,7 +663,8 @@
                             android:layout_marginTop="30dp"
                             android:fontFamily="sans-serif"
                             android:gravity="center"
-                            android:text="@string/txt_one_step"
+                            android:textAllCaps="true"
+                            android:text="@string/pay_now_to_start_learning"
                             android:textColor="@color/muted_blue"
                             android:textStyle="bold"
                             android:textSize="16sp" />
@@ -610,16 +676,22 @@
                             android:layout_margin="5dp"
                             android:layout_marginTop="10dp">
 
-                            <Button
-                                android:id="@+id/btnNext"
+                            <ImageView
+                                android:id="@+id/imgPaynowGif"
                                 android:layout_width="match_parent"
                                 android:layout_height="52dp"
+                                android:layout_marginTop="5dp"/>
+
+                            <Button
+                                android:id="@+id/btnNext"
+                                android:layout_width="wrap_content"
+                                android:layout_height="52dp"
                                 android:layout_centerHorizontal="true"
-                                android:background="@drawable/payment_blue_strok"
                                 android:enabled="false"
                                 android:fontFamily="@font/dinprobold"
                                 android:onClick="PaymentDetails"
                                 android:text="Pay now"
+                                android:background="@android:color/transparent"
                                 android:textColor="@color/muted_blue"
                                 android:textSize="16sp"
                                 android:layout_marginTop="5dp"
