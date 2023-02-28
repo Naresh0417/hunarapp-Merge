@@ -112,32 +112,34 @@
                             android:textSize="14sp"
                             android:visibility="gone" />
 
-                        <LinearLayout
-                            android:id="@+id/linSelectedItem"
+
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linSelectedItem"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/txtDiscount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/textDiscount"
+                            android:textStyle="italic"
+                            android:visibility="gone" />
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/itemsSelected"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="7dp"
-                            android:orientation="vertical"
-                            android:visibility="gone">
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="7dp">
 
-                            <TextView
-                                android:id="@+id/txtDiscount"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/textDiscount"
-                                android:textStyle="italic"
-                                android:visibility="gone" />
-
-                            <androidx.recyclerview.widget.RecyclerView
-                                android:id="@+id/itemsSelected"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginTop="7dp">
-
-                            </androidx.recyclerview.widget.RecyclerView>
-
-                        </LinearLayout>
+                        </androidx.recyclerview.widget.RecyclerView>
 
                     </LinearLayout>
 
@@ -155,7 +157,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:background="@drawable/special_offer_bg"
-                        android:onClick="ViewAllCources"
                         android:padding="10dp"
                         android:layout_marginTop="10dp"
                         android:orientation="horizontal">

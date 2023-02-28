@@ -81,7 +81,7 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
     DrawerLayout drawer;
     NavigationView navSideMenu;
     NavigationFragment navigationFragment;
-    RelativeLayout layoutHeader;
+    RelativeLayout layoutHeader,navigation;
     CheckBox imgSearch;
     TextView headerTitle,txtCourseName, txtLessons, txtDetails,btnEnrollNow;
     View view;
@@ -125,6 +125,7 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
         txtLessons = findViewById(R.id.txtLessons);
         txtDetails = findViewById(R.id.txtDetails);
         btnEnrollNow = findViewById(R.id.btnEnrollNow);
+        navigation = findViewById(R.id.navigation);
 
         userDataBase = new UserDataBase(this);
         logger = AppEventsLogger.newLogger(this);
@@ -202,11 +203,17 @@ public class CoursePageActivity extends AppCompatActivity implements AdapterView
             @Override
             public void onYouTubePlayerEnterFullScreen() {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                navigation.setVisibility(View.GONE);
+                btnEnrollNow.setVisibility(View.GONE);
+                stickyWhatsApp.setVisibility(View.GONE);
             }
 
             @Override
             public void onYouTubePlayerExitFullScreen() {
                 setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                navigation.setVisibility(View.VISIBLE);
+                btnEnrollNow.setVisibility(View.VISIBLE);
+                stickyWhatsApp.setVisibility(View.VISIBLE);
             }
         });
 

@@ -421,8 +421,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
                 }
 
                 btnNext.setText(payamount);
-                txtOriginlPrice.setText("₹" + getInstance().format(finalAmount - (finalAmount * 0.05))+ "/-");
-                txtSpecialPrice.setText("₹" + getInstance().format(Math.round(specialDiscountPrice))+ "/-");
+                //txtOriginlPrice.setText("₹" + getInstance().format(finalAmount - (finalAmount * 0.05))+ "/-");
+                //txtSpecialPrice.setText("₹" + getInstance().format(Math.round(specialDiscountPrice))+ "/-");
                 linearSpecialPrice.setVisibility(View.VISIBLE);
 
                 txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
@@ -662,8 +662,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
         }
 
         btnNext.setText(payamount);
-        txtOriginlPrice.setText("₹" + getInstance().format(finalAmount - (finalAmount * 0.05))+ "/-");
-        txtSpecialPrice.setText("₹" + getInstance().format(Math.round(specialDiscountPrice))+ "/-");
+        //txtOriginlPrice.setText("₹" + getInstance().format(finalAmount - (finalAmount * 0.05))+ "/-");
+        //txtSpecialPrice.setText("₹" + getInstance().format(Math.round(specialDiscountPrice))+ "/-");
         linearSpecialPrice.setVisibility(View.VISIBLE);
 
         txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
@@ -825,7 +825,16 @@ public class EnrolNowActivity extends AppCompatActivity implements
                                     enrollment_type.add(hocLoadingDialog.getNsdc(coursesList.get(position).getStatusNSDC()));
                                     payment_mode.add(hocLoadingDialog.getPayment(coursesList.get(position).getInstalment_amount()));
                                     courseIds.add(Integer.parseInt(coursesList.get(position).getCategoryId()));
+                                    headerTitle.setVisibility(View.GONE);
+                                    //selectedItems.setVisibility(View.VISIBLE);
+                                    //itemsSelected.setVisibility(View.VISIBLE);
+                                    //linCourses.setVisibility(View.VISIBLE);
+                                    //txtOriginlPrice.setText("₹" + coursesList.get(position).getCourse_amount()+ "/-");
+                                    //txtSpecialPrice.setText("₹" + coursesList.get(position).getDiscount()+ "/-");
                                     coursesList.remove(position);
+                                    amount_type = "part";
+                                    selectedPlan = 2;
+                                    course_type = "Premium";
                                 }
                             }
                             try {
@@ -902,8 +911,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
                         //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(finalAmount) + " ");
                         payamount = String.format(getResources().getString(R.string.pay_now), "₹" + getInstance().format(finalAmount));
                         btnNext.setText(payamount);
-                        txtOriginlPrice.setText("₹" + getInstance().format(finalAmount)+ "/-");
-                        txtSpecialPrice.setText("₹" + getInstance().format(Math.round(specialDiscountPrice))+ "/-");
+                        //txtOriginlPrice.setText("₹" + getInstance().format(finalAmount)+ "/-");
+                        //txtSpecialPrice.setText("₹" + getInstance().format(Math.round(specialDiscountPrice))+ "/-");
                         linearSpecialPrice.setVisibility(View.VISIBLE);
 
                     } else if (selectedPlan == 2) {
@@ -915,9 +924,13 @@ public class EnrolNowActivity extends AppCompatActivity implements
                         txtFinalAmount.setText(Html.fromHtml(htmlFinalAmount));
                         String payamount = getResources().getString(R.string.paynow);
                         finalAmount = response.body().getInstallmentAmount();
+                        specialDiscountPrice = response.body().getFullPayment();
                         //payamount = payamount.replace(" ", " ₹" + NumberFormat.getInstance().format(finalAmount) + " ");
                         payamount = String.format(getResources().getString(R.string.pay_now), "₹" + getInstance().format(finalAmount));
                         btnNext.setText(payamount);
+
+
+                        linearSpecialPrice.setVisibility(View.VISIBLE);
                     }
                     txtSecondInstalment.setText(getResources().getString(R.string.instalment)+" 2- "+"₹" + getInstance().format(second_instalment)+
                             " 120 "+getResources().getString(R.string.days));
@@ -989,6 +1002,14 @@ public class EnrolNowActivity extends AppCompatActivity implements
                         courseIds.add(Integer.parseInt(coursesList.get(holder.getAdapterPosition()).getCategoryId()));
                         CategoryName = "";
                         CourseLog = coursesList.get(holder.getAdapterPosition()).getCategory_Title();
+                        headerTitle.setVisibility(View.GONE);
+                        linSelectedItem.setVisibility(View.VISIBLE);
+                        //itemsSelected.setVisibility(View.VISIBLE);
+                        linCourses.setVisibility(View.GONE);
+                        //txtSpecialPrice.setText("₹" + coursesList.get(position).getDiscount()+ "/-");
+                        amount_type = "part";
+                        selectedPlan = 2;
+                        course_type = "Premium";
                         LessonLog = "";
                         ActivityLog = "Course added";
                         PagenameLog = "Enrol Page";
@@ -1125,6 +1146,10 @@ public class EnrolNowActivity extends AppCompatActivity implements
                 courseAmount = Float.parseFloat(String.format("%.0f", (courseAmount + ((courseAmount) / 100.0f) * 18)));
                 String htmlString = "₹" + getInstance().format(courseAmount) + "/-";
                 holder.txtPrice.setText(Html.fromHtml(htmlString));
+                //
+                txtSpecialPrice.setText("₹" + getInstance().format(courseAmount)+ "/-");
+                txtOriginlPrice.setText("₹" + getInstance().format(Float.parseFloat(coursesOriginalList.get(holder.getAdapterPosition()).getDiscount()))+ "/-");
+                linearSpecialPrice.setVisibility(View.VISIBLE);
                 if (langPref.equalsIgnoreCase("hi")) {
                     holder.txtLanguage.setText("हिंदी");
                 } else {

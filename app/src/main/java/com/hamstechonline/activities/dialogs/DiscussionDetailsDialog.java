@@ -296,7 +296,7 @@ public class DiscussionDetailsDialog {
 
 
                     if (!dataBuzz.get(position).getVideourl().equals("")) {
-                        imgHamstech.setVisibility(View.VISIBLE);
+                        imgHamstech.setVisibility(View.GONE);
                         txtAskDoubt.setVisibility(View.GONE);
                         imgPlayButton.setVisibility(View.GONE);
                         player_youtube.setVisibility(View.VISIBLE);
@@ -308,7 +308,7 @@ public class DiscussionDetailsDialog {
                                 .load(dataBuzz.get(position).getImage())
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .into(imgHamstech);*/
-                    } if (!dataBuzz.get(position).getImage().isEmpty()) {
+                    } else if (!dataBuzz.get(position).getImage().isEmpty()) {
                         imgHamstech.setVisibility(View.VISIBLE);
                         imgPlayButton.setVisibility(View.GONE);
                         player_youtube.setVisibility(View.GONE);
