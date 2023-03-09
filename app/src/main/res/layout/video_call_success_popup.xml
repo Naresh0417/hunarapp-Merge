@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    android:background="@drawable/discussion_post_submit_success"
+    android:layout_centerInParent="true">
+
+    <LinearLayout
+        android:id="@+id/onlinePaymentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:background="@drawable/discussion_post_success_stroke"
+        android:padding="15dp"
+        android:layout_margin="10dp"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/imgCancel"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="0dp"
+            android:src="@drawable/disscussion_post_close"
+            android:layout_gravity="right" />
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/progressBar"
+            android:visibility="visible"/>
+
+        <TextView
+            android:id="@+id/txtlabelBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/thanks_for_your_submission"
+            android:textColor="@color/black_two"
+            android:textSize="20sp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/txtlabelNormal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/please_confirm_your_request_nfor_a_video_call_with_your_faculty"
+            android:textColor="@color/muted_dark_pink"
+            android:textSize="18sp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:layout_marginTop="5dp"/>
+
+        <TextView
+            android:id="@+id/txtConfirm"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="@string/i_confirm"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="7dp"
+            android:textColor="@color/muted_blue"
+            android:background="@drawable/pink_stroke_white"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

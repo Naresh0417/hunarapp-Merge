@@ -381,7 +381,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
                 LessonLog = txtLessonName.getText().toString().trim();
                 PagenameLog = "MyCourse Lesson";
                 getLogEvent(MyCoursesLessonsPage.this);
-                getCallWithFaculty();
+                VideoCallPopUp(MyCoursesLessonsPage.this);
             }
         });
 
@@ -1034,7 +1034,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
                             } else {
                                 layoutUpload.setVisibility(View.VISIBLE);
                             }
-                            if (!facultyFeedBack.isEmpty()) {
+                            if (!jsonObject.getString("faculty_feedback").isEmpty()) {
                                 layoutFeedback.setVisibility(View.VISIBLE);
                                 feedbackByFaculty.setText(facultyFeedBack);
                             }
@@ -1842,6 +1842,46 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
             }
         });
     }
+
+    public void VideoCallPopUp(Context context) {
+        final Dialog dialog = new Dialog(MyCoursesLessonsPage.this);
+        dialog.getWindow();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setContentView(R.layout.video_call_success_popup);
+        dialog.setCancelable(false);
+
+        ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
+        ImageView progressBar = dialog.findViewById(R.id.progressBar);
+        TextView txtConfirm = dialog.findViewById(R.id.txtConfirm);
+
+        Glide.with(MyCoursesLessonsPage.this)
+                .load(R.drawable.video_call_popimage)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.video_call_popimage)
+                .into(progressBar);
+
+        dialog.show();
+
+        //getCallWithFaculty();
+
+        txtConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getCallWithFaculty();
+                dialog.dismiss();
+            }
+        });
+
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
     public void AssignmentPopUp(String assignment) {
         final Dialog dialog = new Dialog(this);
         dialog.getWindow();

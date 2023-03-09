@@ -76,6 +76,7 @@ import com.hamstechonline.datamodel.HunarClubPostClick;
 import com.hamstechonline.datamodel.LastLessonDetails;
 import com.hamstechonline.datamodel.PayinstallmentRequest;
 import com.hamstechonline.datamodel.PaymentSuccessResponse;
+import com.hamstechonline.datamodel.ReferralCallbackRequest;
 import com.hamstechonline.datamodel.UploadPostDisscussions;
 import com.hamstechonline.datamodel.mycources.Lesson;
 import com.hamstechonline.datamodel.mycources.MyCoursesResponse;
@@ -119,6 +120,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
     DrawerLayout drawer;
     TextView txtLessons,txtDiscussion,txtChat,txtCallRequest,txtDescription,txtNextLessons,txtTitle,textSubmit;
     RecyclerView lessonsList,listSimilarCourses,listOverview,discussionList;
+    LinearLayout floatBtns;
     EditText textFile;
     //BottomNavigationView navigation;
     ImageView imgKnowHow,imgNextLesson,playButton,imgWhatsApp,lessonLock;
@@ -205,6 +207,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         lessonLock = findViewById(R.id.lessonLock);
         textSubmit = findViewById(R.id.textSubmit);
         textFile = findViewById(R.id.textFile);
+        floatBtns = findViewById(R.id.floatBtns);
 
         //navigation.setOnNavigationItemSelectedListener(this);
         //navigation.getMenu().findItem(R.id.navigation_home).setChecked(true);
@@ -256,6 +259,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 discussionLayout.setVisibility(View.GONE);
                 submitPost.setVisibility(View.GONE);
                 lessonsLayout.setVisibility(View.VISIBLE);
+                floatBtns.setVisibility(View.VISIBLE);
                 ActivityLog = "Lessons";
                 PagenameLog = "MyCourse page";
                 getLogEvent(MyCoursesPageActivity.this);
@@ -269,6 +273,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 txtLessons.setTextColor(getResources().getColor(R.color.muted_blue));
                 txtDiscussion.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
                 txtDiscussion.setTextColor(getResources().getColor(R.color.dark_pink));
+                floatBtns.setVisibility(View.GONE);
                 discussionLayout.setVisibility(View.VISIBLE);
                 lessonsLayout.setVisibility(View.GONE);
                 ActivityLog = "Discussions";
@@ -284,7 +289,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 ActivityLog = "Refer and earn";
                 PagenameLog = "Lesson page";
                 getLogEvent(MyCoursesPageActivity.this);
-                Intent i = new Intent(Intent.ACTION_VIEW);
+                ReferralCallBackAPi();
+
+                /*Intent i = new Intent(Intent.ACTION_VIEW);
                 try {
                     String url = "https://api.whatsapp.com/send?phone="+ "917670903072" +"&text=" +
                             URLEncoder.encode(getResources().getString(R.string.know_more_whatsAppmsg), "UTF-8");
@@ -293,7 +300,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                     startActivity(i);
                 } catch (Exception e){
                     e.printStackTrace();
-                }
+                }*/
             }
         });
 
@@ -400,7 +407,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 ActivityLog = "Video Call with Faculty";
                 PagenameLog = "Lesson page";
                 getLogEvent(MyCoursesPageActivity.this);
-                getCallWithFaculty();
+                VideoCallPopUp(MyCoursesPageActivity.this);
             }
         });
 
@@ -529,6 +536,27 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
 
             @Override
             public void onFailure(Call<PayinstallmentRequest> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void ReferralCallBackAPi() {
+        hocLoadingDialog.showLoadingDialog();
+        ReferralCallbackRequest referralCallbackRequest = new ReferralCallbackRequest("Hamstech",
+                "dsf99898398i3jofklese93",userDataBase.getUserMobileNumber(1),langPref);
+        Call<ReferralCallbackRequest> call = apiService.referralCallbackRequest(referralCallbackRequest);
+        call.enqueue(new Callback<ReferralCallbackRequest>() {
+            @Override
+            public void onResponse(Call<ReferralCallbackRequest> call, retrofit2.Response<ReferralCallbackRequest> response) {
+                if (response.body().getStatus().equalsIgnoreCase("success")) {
+                    hocLoadingDialog.hideDialog();
+                    ReferralfulPopUp(MyCoursesPageActivity.this,response.body().getMessage());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ReferralCallbackRequest> call, Throwable t) {
 
             }
         });
@@ -729,7 +757,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             public void onResponse(Call<CallWithFacultyResponse> call, Response<CallWithFacultyResponse> response) {
                 hocLoadingDialog.hideDialog();
                 if (response.body().getStatus().equalsIgnoreCase("ok")) {
-                    OnlineSuccessfulPopUp(MyCoursesPageActivity.this);
+                    //VideoCallPopUp(MyCoursesPageActivity.this);
                 }
             }
 
@@ -779,7 +807,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 }
                 if (!dataBuzz.get(position).getProfilePic().isEmpty()) {
                     Glide.with(MyCoursesPageActivity.this)
-                            .load(dataBuzz.get(position).getImage())
+                            .load(dataBuzz.get(position).getProfilePic())
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .error(R.mipmap.ic_launcher)
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -1433,6 +1461,82 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
             }
         });
     }
+
+    @SuppressLint("SetTextI18n")
+    public void ReferralfulPopUp(Context context,String description) {
+        final Dialog dialog = new Dialog(MyCoursesPageActivity.this);
+        dialog.getWindow();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setContentView(R.layout.post_upload_successfull);
+        dialog.setCancelable(false);
+
+        ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
+        ImageView progressBar = dialog.findViewById(R.id.progressBar);
+        TextView txtlabelBold = dialog.findViewById(R.id.txtlabelBold);
+        TextView txtlabelNormal = dialog.findViewById(R.id.txtlabelNormal);
+
+        txtlabelNormal.setVisibility(View.VISIBLE);
+
+        txtlabelBold.setText(R.string.thank_you);
+        txtlabelNormal.setText(description);
+
+        Glide.with(MyCoursesPageActivity.this)
+                .load(R.drawable.discussion_post_submit_thumsup)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.discussion_post_submit_thumsup)
+                .into(progressBar);
+
+        dialog.show();
+
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public void VideoCallPopUp(Context context) {
+        final Dialog dialog = new Dialog(MyCoursesPageActivity.this);
+        dialog.getWindow();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setContentView(R.layout.video_call_success_popup);
+        dialog.setCancelable(false);
+
+        ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
+        ImageView progressBar = dialog.findViewById(R.id.progressBar);
+        TextView txtConfirm = dialog.findViewById(R.id.txtConfirm);
+
+        Glide.with(MyCoursesPageActivity.this)
+                .load(R.drawable.video_call_popimage)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.video_call_popimage)
+                .into(progressBar);
+
+        dialog.show();
+
+        //getCallWithFaculty();
+
+        txtConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getCallWithFaculty();
+                dialog.dismiss();
+            }
+        });
+
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
     public void OnlineSuccessfulPopUp(Context context) {
         final Dialog dialog = new Dialog(MyCoursesPageActivity.this);
         dialog.getWindow();
@@ -1452,9 +1556,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         txtlabelBold.setText(getResources().getString(R.string.call_request_accepted));
 
         Glide.with(MyCoursesPageActivity.this)
-                .load(R.drawable.discussion_post_submit_thumsup)
+                .load(R.drawable.video_call_popimage)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.discussion_post_submit_thumsup)
+                .error(R.drawable.video_call_popimage)
                 .into(progressBar);
 
         dialog.show();

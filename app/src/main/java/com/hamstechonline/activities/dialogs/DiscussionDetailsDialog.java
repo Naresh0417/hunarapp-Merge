@@ -276,7 +276,7 @@ public class DiscussionDetailsDialog {
 
                     if (!dataBuzz.get(position).getProfilePic().isEmpty()) {
                         Glide.with(context)
-                                .load(dataBuzz.get(position).getImage())
+                                .load(dataBuzz.get(position).getProfilePic())
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                                 .error(R.mipmap.ic_launcher)
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -284,6 +284,7 @@ public class DiscussionDetailsDialog {
                                 .into(profile_image);
                         profile_image.setVisibility(View.VISIBLE);
                         txtUserNamePost.setVisibility(View.VISIBLE);
+                        txtUserNamePost.setText(dataBuzz.get(position).getName());
                     } else if (!dataBuzz.get(position).getName().isEmpty()) {
                         txtUserNamePost.setText(dataBuzz.get(position).getName());
                         profile_image.setVisibility(View.VISIBLE);

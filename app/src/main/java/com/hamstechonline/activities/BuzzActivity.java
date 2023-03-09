@@ -445,9 +445,9 @@ public class BuzzActivity extends AppCompatActivity implements LikesInterface {
                 } else if (!dataBuzz.get(position).getName().isEmpty()) {
                     holder.txtUserName.setText(dataBuzz.get(position).getName());
                     Glide.with(BuzzActivity.this)
-                            .load(R.drawable.profile_hunarclub)
+                            .load(R.drawable.ic_launcher)
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
-                            .error(R.drawable.profile_hunarclub)
+                            .error(R.drawable.ic_launcher)
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .skipMemoryCache(true)
                             .into(holder.profile_image);

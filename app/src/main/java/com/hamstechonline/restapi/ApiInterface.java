@@ -26,6 +26,7 @@ import com.hamstechonline.datamodel.MyCourseGetChatNumber;
 import com.hamstechonline.datamodel.OnBoardingRequest;
 import com.hamstechonline.datamodel.PayinstallmentRequest;
 import com.hamstechonline.datamodel.PaymentSuccessResponse;
+import com.hamstechonline.datamodel.ReferralCallbackRequest;
 import com.hamstechonline.datamodel.SaveCommentReply;
 import com.hamstechonline.datamodel.SaveCommentReport;
 import com.hamstechonline.datamodel.SaveCommentRequest;
@@ -182,4 +183,7 @@ public interface ApiInterface {
 
     @POST("http://android.hamstechonline.com/api/list/askDoubt")
     Call<AskDoubtResponse> askDoubtApi(@Body AskDoubtResponse hunarClubPostClick);
+
+    @POST("http://android.hamstechonline.com/api/list/referralCallbackRequest")
+    Call<ReferralCallbackRequest> referralCallbackRequest(@Body ReferralCallbackRequest referralCallbackRequest);
 }

@@ -217,7 +217,8 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     lengthMobile = 0;
                 }
-                btnResend.setBackgroundResource(R.drawable.button_shape_gray);
+                btnResend.setTextColor(getResources().getColor(R.color.muted_blue));
+                btnResend.setBackgroundResource(R.drawable.login_btn_blue);
                 GetOtp(LoginActivity.this);
                 btnResend.setEnabled(false);
             }
@@ -234,10 +235,12 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (txtOTP.getText().length() == 4){
                     btnVerify.setEnabled(true);
-                    btnVerify.setBackgroundResource(R.drawable.button_shape_orange);
+                    btnVerify.setTextColor(getResources().getColor(R.color.pink));
+                    btnVerify.setBackgroundResource(R.drawable.login_btn_pink);
                 } else {
                     btnVerify.setEnabled(false);
-                    btnVerify.setBackgroundResource(R.drawable.button_shape_gray);
+                    btnVerify.setTextColor(getResources().getColor(R.color.muted_blue));
+                    btnVerify.setBackgroundResource(R.drawable.login_btn_blue);
                 }
             }
 
@@ -299,6 +302,10 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                btnResend.setVisibility(View.VISIBLE);
+                btnResend.setEnabled(true);
+                btnResend.setTextColor(getResources().getColor(R.color.pink));
+                btnResend.setBackgroundResource(R.drawable.login_btn_pink);
                 getBlockApi();
             }
         };
@@ -315,7 +322,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.body().getStudent().equalsIgnoreCase("no")) {
                     btnResend.setVisibility(View.VISIBLE);
                     btnResend.setEnabled(true);
-                    btnResend.setBackgroundResource(R.drawable.button_shape_orange);
+                    btnResend.setTextColor(getResources().getColor(R.color.pink));
+                    btnResend.setBackgroundResource(R.drawable.login_btn_pink);
                     txtExpire.setVisibility(View.GONE);
                     isTimeOut = true;
                     lastNumber = resMobile.substring(resMobile.length() - 4);
@@ -535,7 +543,8 @@ public class LoginActivity extends AppCompatActivity {
                                 txtExpire.setVisibility(View.GONE);
                                 btnResend.setVisibility(View.VISIBLE);
                                 btnResend.setEnabled(true);
-                                btnResend.setBackgroundResource(R.drawable.button_shape_orange);
+                                btnResend.setTextColor(getResources().getColor(R.color.pink));
+                                btnResend.setBackgroundResource(R.drawable.login_btn_pink);
                             }
                         } catch(JSONException e) {
                             hocLoadingDialog.hideDialog();

@@ -496,5 +496,12 @@
     <string name="hunar_nclub">हुनर\nक्लब</string>
     <string name="have_a_doubt_ask_here">कोई डाउट है? यहाँ पूछें!...</string>
     <string name="pay_your_first_instalment_now">अपनी पहली किश्त अभी भरें!</string>
-    <string name="pay_now_to_start_learning">Pay now to start learning</string>
+    <string name="pay_now_to_start_learning">सीखना शुरू करने के लिए अभी पेमेंट करें</string>
+    <string name="thank_you">धन्यवाद!</string>
+    <string name="i_confirm">कन्फर्म</string>
+    <string name="please_confirm_your_request_nfor_a_video_call_with_your_faculty">कृपया अपने फैकल्टी के साथ वीडियो\n कॉल के लिए अपना अनुरोध कन्फर्म करें</string>
+    <string name="this_live_class_is_exclusively_for">यह लाइव क्लास विशेष रूप से केवल</string>
+    <string name="students_only_n_n_to_watch_this_class_n_just_give_a_missed_call_on">स्टूडेंट्स के लिए है! \n\n इस क्लास को देखने के लिए, \n बस इस पर मिस्ड कॉल दें:</string>
+    <string name="live_class_faculty_session">आपने लाइव फैकल्टी सेशन के लिए सफलतापूर्वक रजिस्टर कर लिया है!</string>
+    <string name="second_instalment_due_after_3_months">दूसरी किश्त 3 महीने बाद</string>
 </resources>

@@ -414,7 +414,7 @@ the last 4 digits of your mobile number to log in.</string>
     <string name="you_have_successfully_submitted_your_assignment">You have successfully submitted your Assignment!</string>
     <string name="your_faculty_will_review_it_and_post_the_feedback_on_this_page">Your faculty will review it and post the feedback on this page!</string>
     <string name="hunar_posts">Hunar Posts</string>
-    <string name="your_posts">My Post</string>
+    <string name="your_posts">My Posts</string>
     <string name="enrol_now_to_attend">Enrol Now to Attend!</string>
     <string name="like">Like</string>
     <string name="comment">Comment</string>
@@ -490,4 +490,11 @@ the last 4 digits of your mobile number to log in.</string>
     <string name="have_a_doubt_ask_here">Have A Doubt? Ask Here ...</string>
     <string name="pay_your_first_instalment_now">pay your first instalment now!</string>
     <string name="pay_now_to_start_learning">Pay now to start learning</string>
+    <string name="thank_you">Thank You!</string>
+    <string name="i_confirm">I Confirm</string>
+    <string name="please_confirm_your_request_nfor_a_video_call_with_your_faculty">Please confirm your request\nfor a video call with your faculty.</string>
+    <string name="this_live_class_is_exclusively_for">This Live Class is Exclusively for</string>
+    <string name="students_only_n_n_to_watch_this_class_n_just_give_a_missed_call_on">Students Only! \n\n To Watch this Class, \n Just Give a Missed Call on:</string>
+    <string name="live_class_faculty_session">You have successfully registered for the Live Faculty Session!</string>
+    <string name="second_instalment_due_after_3_months">Second Instalment Due After 3 Months</string>
 </resources>

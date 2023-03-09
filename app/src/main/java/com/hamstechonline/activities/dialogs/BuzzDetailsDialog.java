@@ -292,9 +292,9 @@ public class BuzzDetailsDialog {
                     } else if (!dataBuzz.get(position).getName().isEmpty()) {
                         txtUserNamePost.setText(dataBuzz.get(position).getName());
                         Glide.with(context)
-                                .load(R.drawable.profile_hunarclub)
+                                .load(R.drawable.ic_launcher)
                                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                                .error(R.drawable.profile_hunarclub)
+                                .error(R.drawable.ic_launcher)
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(profile_image);

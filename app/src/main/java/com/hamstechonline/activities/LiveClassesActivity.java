@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -301,7 +302,7 @@ public class LiveClassesActivity extends AppCompatActivity {
 
                 if (datamodels.get(position).getType().equalsIgnoreCase("live")) {
                     holder.txtDaysLeft.setVisibility(View.GONE);
-                    holder.txtWatchNow.setText("Live Class");
+                    holder.txtWatchNow.setText(R.string.live_class);
                 } else {
                     if (yourLiveClassType.equalsIgnoreCase("Upcoming Classes")) {
                         holder.txtDaysLeft.setVisibility(View.GONE);
@@ -325,7 +326,7 @@ public class LiveClassesActivity extends AppCompatActivity {
                                 CourseLog = datamodels.get(position).getTitle();
                                 ActivityLog = "Register now";
                                 getLogEvent(LiveClassesActivity.this);
-                                getLiveClassRegistration(datamodels.get(position),1);
+                                getLiveClassRegistration(datamodels.get(position),1,"Your","Register Now");
                             } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("WATCH NOW")){
                                 CategoryName = "Your Live class";
                                 CourseLog = datamodels.get(position).getTitle();
@@ -403,18 +404,21 @@ public class LiveClassesActivity extends AppCompatActivity {
 
                 holder.imgLock.setVisibility(View.VISIBLE);
                 holder.txtCourseName.setText(datamodels.get(position).getTitle());
-                holder.txtDaysLeft.setText(datamodels.get(position).getTimeLeft());
+                //holder.txtDaysLeft.setText(datamodels.get(position).getTimeLeft());
                 holder.txtClassDate.setText(datamodels.get(position).getDate());
-
-                if (datamodels.get(position).getTimeLeft().equalsIgnoreCase("")){
+                holder.txtDaysLeft.setVisibility(View.GONE);
+                /*if (datamodels.get(position).getTimeLeft().equalsIgnoreCase("")){
                     holder.txtDaysLeft.setVisibility(View.GONE);
-                } else holder.txtDaysLeft.setVisibility(View.VISIBLE);
+                } else holder.txtDaysLeft.setVisibility(View.VISIBLE);*/
 
                 if (allLiveClassType.equalsIgnoreCase("Upcoming Classes")) {
                     holder.txtDaysLeft.setVisibility(View.GONE);
                     holder.txtWatchNow.setText(R.string.watch_now);
                 } else if (allLiveClassType.equalsIgnoreCase("Previous Classes")){
-                    holder.txtDaysLeft.setVisibility(View.VISIBLE);
+                    if (datamodels.get(position).getTimeLeft() != null){
+                        holder.txtDaysLeft.setVisibility(View.VISIBLE);
+                        holder.txtDaysLeft.setText(datamodels.get(position).getTimeLeft());
+                    }
                     holder.txtWatchNow.setText(getResources().getString(R.string.register_now));
                 }
 
@@ -429,18 +433,19 @@ public class LiveClassesActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("REGISTERED")) {
+                        if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("Register Now")) {
                             CategoryName = "All Live class";
                             CourseLog = datamodels.get(position).getTitle();
                             ActivityLog = "Registered";
                             getLogEvent(LiveClassesActivity.this);
-                            getLiveClassRegistration(datamodels.get(position),2);
+                            getLiveClassRegistration(datamodels.get(position),2,"All","Register Now");
                         } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("WATCH NOW")){
                             CategoryName = "All Live class";
                             CourseLog = datamodels.get(position).getTitle();
                             ActivityLog = "Watch now";
                             getLogEvent(LiveClassesActivity.this);
-                            imageViewPop(datamodels.get(position));
+                            getLiveClassRegistration(datamodels.get(position),2,"All","Watch Now");
+                            //imageViewPop(datamodels.get(position));
                         }
 
                     }
@@ -473,7 +478,7 @@ public class LiveClassesActivity extends AppCompatActivity {
         }
     }
 
-    public void getLiveClassRegistration(LiveClass liveClass, int classType){
+    public void getLiveClassRegistration(LiveClass liveClass, int classType,String catType,String btnType){
 
         LiveClassRegistrationResponse liveClassRegistrationResponse = new LiveClassRegistrationResponse("Hamstech", getResources().getString(R.string.lblApiKey),
                 langPref,userDataBase.getUserMobileNumber(1), liveClass.getLiveClassId());
@@ -485,7 +490,7 @@ public class LiveClassesActivity extends AppCompatActivity {
                     if (classType == 1) {
                         OnlineSuccessfulPopUp(LiveClassesActivity.this);
                     } else {
-                        liveClassLockPopUp(LiveClassesActivity.this);
+                        liveClassLockPopUp(LiveClassesActivity.this,catType,btnType);
                     }
 
                 } else
@@ -503,58 +508,75 @@ public class LiveClassesActivity extends AppCompatActivity {
         listAllLiveClassesList.setAdapter(allLiveClassListAdapter);*/
     }
 
-    public void OnlineSuccessfulPopUp(Context context) {
-        final Dialog dialog = new Dialog(context);
+    public void AllLiveRegisterNowPopUp(Context context) {
+        final Dialog dialog = new Dialog(LiveClassesActivity.this);
         dialog.getWindow();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setGravity(Gravity.CENTER);
-        dialog.setContentView(R.layout.payment_sucess);
+        dialog.setContentView(R.layout.post_upload_successfull);
         dialog.setCancelable(false);
 
         ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
         ImageView progressBar = dialog.findViewById(R.id.progressBar);
-        LinearLayout onlinePaymentLayout = dialog.findViewById(R.id.onlinePaymentLayout);
-        LinearLayout cod_layout = dialog.findViewById(R.id.cod_layout);
-        TextView paymentComment = dialog.findViewById(R.id.paymentComment);
+        TextView txtlabelBold = dialog.findViewById(R.id.txtlabelBold);
+        TextView txtlabelNormal = dialog.findViewById(R.id.txtlabelNormal);
 
-        onlinePaymentLayout.setVisibility(View.VISIBLE);
-        cod_layout.setVisibility(View.GONE);
+        txtlabelNormal.setVisibility(View.GONE);
 
-        Glide.with(context)
-                .load(R.drawable.ic_sucess_assignment)
+        txtlabelBold.setText("You have successfully registered for the Live Faculty Session!");
+
+        Glide.with(LiveClassesActivity.this)
+                .load(R.drawable.discussion_post_submit_thumsup)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.ic_sucess_assignment)
+                .error(R.drawable.discussion_post_submit_thumsup)
                 .into(progressBar);
-        paymentComment.setText("You have successfully registered for the Live Faculty Session!");
 
         dialog.show();
 
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, HomePageActivity.class);
                 dialog.dismiss();
-                //startActivity(intent);
-            }
-        });
-
-        dialog.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            @Override
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                if (keyCode == KeyEvent.KEYCODE_BACK &&
-                        event.getAction() == KeyEvent.ACTION_UP &&
-                        !event.isCanceled()) {
-                    Intent intent = new Intent(context, HomePageActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                return false;
             }
         });
     }
 
-    public void liveClassLockPopUp(Context context) {
+    public void OnlineSuccessfulPopUp(Context context) {
+        final Dialog dialog = new Dialog(LiveClassesActivity.this);
+        dialog.getWindow();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setContentView(R.layout.post_upload_successfull);
+        dialog.setCancelable(false);
+
+        ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
+        ImageView progressBar = dialog.findViewById(R.id.progressBar);
+        TextView txtlabelBold = dialog.findViewById(R.id.txtlabelBold);
+        TextView txtlabelNormal = dialog.findViewById(R.id.txtlabelNormal);
+
+        txtlabelNormal.setVisibility(View.GONE);
+
+        txtlabelBold.setText(R.string.live_class_faculty_session);
+
+        Glide.with(LiveClassesActivity.this)
+                .load(R.drawable.discussion_post_submit_thumsup)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.discussion_post_submit_thumsup)
+                .into(progressBar);
+
+        dialog.show();
+
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public void liveClassLockPopUp(Context context,String catType,String buttonType) {
         final Dialog dialog = new Dialog(context);
         dialog.getWindow();
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -564,6 +586,16 @@ public class LiveClassesActivity extends AppCompatActivity {
         dialog.setCancelable(false);
 
         ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
+        TextView txtWatchNow = dialog.findViewById(R.id.txtWatchNow);
+
+        if (catType.equalsIgnoreCase("All")){
+            if (buttonType.equalsIgnoreCase("Watch Now")) {
+                txtWatchNow.setText("+91 76709 03072");
+            }
+            if (buttonType.equalsIgnoreCase("Register Now")) {
+                txtWatchNow.setText("+91 96666 64757");
+            }
+        }
 
         dialog.show();
 
@@ -573,6 +605,15 @@ public class LiveClassesActivity extends AppCompatActivity {
                 Intent intent = new Intent(context, HomePageActivity.class);
                 dialog.dismiss();
                 //startActivity(intent);
+            }
+        });
+
+        txtWatchNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:+919666664757"));
+                startActivity(intent);
             }
         });
 

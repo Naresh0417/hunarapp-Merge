@@ -22,6 +22,12 @@ public class CalculateCoursePayment {
     @SerializedName("full_payment")
     @Expose
     private Integer fullPayment;
+    @SerializedName("final_amount")
+    @Expose
+    private Integer finalAmount;
+    @SerializedName("show_next_installment")
+    @Expose
+    private String shownextinstallment;
     @SerializedName("installment_amount")
     @Expose
     private Integer installmentAmount;
@@ -48,5 +54,21 @@ public class CalculateCoursePayment {
 
     public void setInstallmentAmount(Integer installmentAmount) {
         this.installmentAmount = installmentAmount;
+    }
+
+    public Integer getFinalAmount() {
+        return finalAmount;
+    }
+
+    public void setFinalAmount(Integer finalAmount) {
+        this.finalAmount = finalAmount;
+    }
+
+    public String getShownextinstallment() {
+        return shownextinstallment;
+    }
+
+    public void setShownextinstallment(String shownextinstallment) {
+        this.shownextinstallment = shownextinstallment;
     }
 }
