@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -10,13 +19,15 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/navigation"
         android:background="@color/milkWhite"
+        android:layout_marginBottom="-7dp"
         android:scrollbars="none">
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/milkWhite"
-            android:padding="7dp">
+            android:paddingLeft="7dp"
+            android:paddingRight="7dp">
 
             <RelativeLayout
                 android:id="@+id/courseLayout"
@@ -32,7 +43,10 @@
                         android:id="@+id/layoutHeader"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="8dp">
+                        android:padding="8dp"
+                        android:layout_marginLeft="-7dp"
+                        android:layout_marginRight="-7dp"
+                        android:background="@drawable/bottom_line_bg">
 
                         <ImageView
                             android:id="@+id/imgSideMenu"
@@ -42,7 +56,7 @@
                             android:layout_centerVertical="true"
                             android:onClick="sideMenu"
                             android:src="@drawable/side_menu"
-                            android:visibility="gone" />
+                            android:visibility="visible" />
 
                         <TextView
                             android:id="@+id/headerTitle"
@@ -52,10 +66,22 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:layout_toRightOf="@+id/imgSideMenu"
-                            android:fontFamily="@font/dinpromedium"
+                            android:layout_toLeftOf="@+id/imgChooseLang"
+                            android:fontFamily="sans-serif"
                             android:text="@string/enrol_title"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:layout_centerVertical="true"
+                            android:gravity="center_vertical"
+                            android:textSize="15sp" />
+
+                        <ImageView
+                            android:id="@+id/imgChooseLang"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_choose_language"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="5dp"
+                            android:layout_centerVertical="true"/>
 
                     </RelativeLayout>
 
@@ -174,8 +200,7 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_gravity="center_vertical">
+                            android:orientation="vertical">
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -687,13 +712,13 @@
 
                             <Button
                                 android:id="@+id/btnNext"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="52dp"
                                 android:layout_centerHorizontal="true"
                                 android:enabled="false"
                                 android:fontFamily="@font/dinprobold"
                                 android:onClick="PaymentDetails"
-                                android:text="Pay now"
+                                android:text="@string/continuePayment"
                                 android:background="@android:color/transparent"
                                 android:textColor="@color/muted_blue"
                                 android:textSize="16sp"
@@ -767,6 +792,12 @@
                             android:textColor="@color/black_two"
                             android:textSize="14sp"
                             android:visibility="gone"/>
+
+                        <ImageView
+                            android:id="@+id/pageAsset"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            />
 
                     </LinearLayout>
 
@@ -1445,3 +1476,21 @@
     </RelativeLayout>
 
 </RelativeLayout>
+
+<RelativeLayout
+android:layout_width="260dp"
+android:layout_height="match_parent"
+android:layout_gravity="start"
+android:fitsSystemWindows="true"
+android:background="@color/white"
+android:visibility="visible">
+
+<com.google.android.material.navigation.NavigationView
+    android:id="@+id/navSideMenu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+
+</RelativeLayout>
+
+    </androidx.drawerlayout.widget.DrawerLayout>

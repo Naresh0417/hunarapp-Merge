@@ -680,77 +680,79 @@
                                     android:textStyle="bold" />
                             </RelativeLayout>
 
-                            <LinearLayout
-                                android:id="@+id/layoutFeedback"
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/layoutFeedback"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <RelativeLayout
+                                android:id="@+id/feedbackDown"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_margin="5dp"
-                                android:orientation="vertical"
-                                android:visibility="gone">
+                                android:orientation="horizontal">
 
-                                <RelativeLayout
-                                    android:id="@+id/feedbackDown"
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentLeft="true"
+                                    android:layout_centerVertical="true"
+                                    android:fontFamily="@font/helveticabold"
+                                    android:text="@string/faculty_feedback_on_your_assignment"
+                                    android:textColor="@color/muted_blue"
+                                    android:textSize="14dp"
+                                    android:textStyle="bold" />
+
+                                <ImageView
+                                    android:id="@+id/feedbackDownArrow"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_arrow_down"
+                                    android:layout_alignParentRight="true"
+                                    android:layout_centerVertical="true"
+                                    />
+
+                            </RelativeLayout>
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/cardFacultyFeedback"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:elevation="5dp"
+                                android:background="@drawable/stroke_gray"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="5dp"
+                                android:visibility="visible">
+
+                                <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_margin="5dp"
-                                    android:orientation="horizontal">
+                                    android:orientation="vertical">
 
                                     <TextView
+                                        android:id="@+id/feedbackByFaculty"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:layout_alignParentLeft="true"
-                                        android:layout_centerVertical="true"
-                                        android:fontFamily="@font/helveticabold"
-                                        android:text="@string/faculty_feedback_on_your_assignment"
-                                        android:textColor="@color/muted_blue"
-                                        android:textSize="14dp"
-                                        android:textStyle="bold" />
+                                        android:padding="5dp"
+                                        android:hint="@string/feedback"
+                                        android:textColorHint="@color/light_gray"
+                                        android:textColor="@color/black"
+                                        android:textStyle="normal"
+                                        android:textSize="15sp"
+                                        android:fontFamily="sans-serif"/>
 
-                                    <ImageView
-                                        android:id="@+id/feedbackDownArrow"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:src="@drawable/ic_arrow_down"
-                                        android:layout_alignParentRight="true"
-                                        android:layout_centerVertical="true"
-                                        />
-
-                                </RelativeLayout>
-
-                                <androidx.cardview.widget.CardView
-                                    android:id="@+id/cardFacultyFeedback"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_margin="5dp"
-                                    android:elevation="5dp"
-                                    android:background="@drawable/stroke_gray"
-                                    app:cardCornerRadius="8dp"
-                                    app:cardElevation="5dp"
-                                    android:visibility="gone">
-
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:orientation="vertical">
-
-                                        <TextView
-                                            android:id="@+id/feedbackByFaculty"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:padding="5dp"
-                                            android:hint="@string/feedback"
-                                            android:textColorHint="@color/light_gray"
-                                            android:textColor="@color/black"
-                                            android:textStyle="normal"
-                                            android:textSize="15sp"
-                                            android:fontFamily="sans-serif"/>
-
-                                    </LinearLayout>
-                                </androidx.cardview.widget.CardView>
-
-                            </LinearLayout>
+                                </LinearLayout>
+                            </androidx.cardview.widget.CardView>
 
                         </LinearLayout>
+
 
                         <LinearLayout
                             android:id="@+id/layoutStudentWorks"

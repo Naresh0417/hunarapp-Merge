@@ -229,7 +229,7 @@ So now is the time to dream, explore and learn and empower yourself!
     <string name="Pincode">Pincode</string>
     <string name="Email">Email</string>
     <string name="choosePaymentOption">Choose Your Payment Option</string>
-    <string name="continuePayment">Pay Now</string>
+    <string name="continuePayment">Pay</string>
     <string name="validPincode">Enter valid pincode</string>
     <string name="getCertified">Get certified by NSDC</string>
     <string name="certificationNotApplicable">NSDC certification not applicable</string>
@@ -390,7 +390,7 @@ the last 4 digits of your mobile number to log in.</string>
     <string name="instalment"><small>Installment</small></string>
     <string name="days"><small>days</small></string>
     <string name="paynow">Pay Now!</string>
-    <string name="pay_now">Pay %1$s Now!</string>
+    <string name="pay_now">Pay %1$s/-</string>
     <string name="special_limited_time">NOW GET A SPECIAL LIMITED TIME OFFER!</string>
     <string name="labeladdress">Fill your details to get the starter kit at your door step</string>
 

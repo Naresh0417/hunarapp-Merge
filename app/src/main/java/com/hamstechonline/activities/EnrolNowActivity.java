@@ -17,6 +17,7 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ImageSpan;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -57,14 +58,17 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.hamstechonline.R;
 import com.hamstechonline.database.UserDataBase;
 import com.hamstechonline.datamodel.CalculateCoursePayment;
 import com.hamstechonline.datamodel.CategoryDatamodel;
+import com.hamstechonline.datamodel.EnrollPageAssets;
 import com.hamstechonline.datamodel.PaymentSuccessResponse;
 import com.hamstechonline.fragments.FooterNavigationPaid;
 import com.hamstechonline.fragments.FooterNavigationUnPaid;
+import com.hamstechonline.fragments.NavigationFragment;
 import com.hamstechonline.restapi.ApiClient;
 import com.hamstechonline.restapi.ApiInterface;
 import com.hamstechonline.utils.ApiConstants;
@@ -99,6 +103,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -119,8 +125,9 @@ public class EnrolNowActivity extends AppCompatActivity implements
     TextView txtTermsCond, txtDiscount,txtOriginlPrice,txtSpecialPrice;
     TextView headerTitle;
     CheckBox checkboxNSDC, viewSummayDetails;
-    ImageView imgPaynowGif;
+    ImageView imgPaynowGif,pageAsset,imgChooseLang,imgSideMenu;
     EnrolItemAdapter enrolItemAdapter;
+    DrawerLayout drawer;
     selectedAdapter selectedAdapter;
     ListSelectedNames listSelectedNamesAdapter;
     allSelectedCourses allSelectedCourses;
@@ -162,6 +169,8 @@ public class EnrolNowActivity extends AppCompatActivity implements
     SharedPrefsUtils sharedPrefsUtils;
     ApiInterface apiService;
     ImageButton stickyWhatsApp;
+    NavigationFragment navigationFragment;
+    NavigationView navSideMenu;
 
     private String m_strEmail = "";
 
@@ -245,6 +254,11 @@ public class EnrolNowActivity extends AppCompatActivity implements
         btnNext = findViewById(R.id.btnNext);
         linearSpecialPrice = findViewById(R.id.linearSpecialPrice);
         txtInstallment = findViewById(R.id.txtInstallment);
+        pageAsset = findViewById(R.id.pageAsset);
+        imgChooseLang = findViewById(R.id.imgChooseLang);
+        imgSideMenu = findViewById(R.id.imgSideMenu);
+        drawer = findViewById(R.id.drawer_layout);
+        navSideMenu = findViewById(R.id.navSideMenu);
 
         btnStartLearn = findViewById(R.id.btnstartlearn);
         btnStartLearn.setOnClickListener(new View.OnClickListener() {
@@ -252,6 +266,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
             public void onClick(View view) {
 
                 if (ValidateInputs()) {
+                    ActivityLog = "Starter kit Form filled";
                     learnSuccess();
 
                     /*Toast.makeText(EnrolNowActivity.this, "service pending", Toast.LENGTH_SHORT).show();
@@ -263,6 +278,12 @@ public class EnrolNowActivity extends AppCompatActivity implements
         hocLoadingDialog = new HocLoadingDialog(this);
         logEventsActivity = new LogEventsActivity();
 
+        navigationFragment = NavigationFragment.newInstance();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .add(R.id.navSideMenu, navigationFragment, "")
+                .commit();
+
         MoEngage moEngage = new MoEngage.Builder(getApplication(), "UUN7GSHBBH1UT5GCHI2EQ1KY")
                 .setDataCenter(DataCenter.DATA_CENTER_3)
                 .configureNotificationMetaData(new NotificationConfig(R.drawable.generic_notification, R.drawable.generic_notification, R.color.dark_grey_blue, "sound", true, true, true))
@@ -271,6 +292,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
         MoEngage.initialise(moEngage);
 
         txtPhone.setEnabled(false);
+        drawer.closeDrawers();
 
         userDataBase = new UserDataBase(this);
         dialog = new Dialog(this);
@@ -317,6 +339,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
         validateHorizontalCourseList();
 
         getCategories(this);
+        EnrollPageAssetsAPI();
         htmlAllTaxesString = getResources().getString(R.string.txtInclusiveAllTaxes);
         Checkout.preload(getApplicationContext());
 
@@ -339,6 +362,20 @@ public class EnrolNowActivity extends AppCompatActivity implements
                 .load(R.drawable.paynow_gif)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(imgPaynowGif);
+
+        imgChooseLang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CategoryName = "";
+                CourseLog = "";
+                LessonLog = "";
+                PagenameLog = "Enrol page";
+                ActivityLog = "Language Selection";
+                getLogEvent(EnrolNowActivity.this);
+                Intent intent = new Intent(EnrolNowActivity.this, ChooseLanguage.class);
+                startActivity(intent);
+            }
+        });
 
         linearPreferred.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -586,6 +623,31 @@ public class EnrolNowActivity extends AppCompatActivity implements
                 }
             }
         });
+
+        drawer.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
+        });
+    }
+
+    public void sideMenu(View view){
+        drawer.openDrawer(Gravity.LEFT);
     }
 
     @Override
@@ -826,7 +888,6 @@ public class EnrolNowActivity extends AppCompatActivity implements
                                     enrollment_type.add(hocLoadingDialog.getNsdc(coursesList.get(position).getStatusNSDC()));
                                     payment_mode.add(hocLoadingDialog.getPayment(coursesList.get(position).getInstalment_amount()));
                                     courseIds.add(Integer.parseInt(coursesList.get(position).getCategoryId()));
-                                    headerTitle.setVisibility(View.GONE);
                                     //selectedItems.setVisibility(View.VISIBLE);
                                     //itemsSelected.setVisibility(View.VISIBLE);
                                     //linCourses.setVisibility(View.VISIBLE);
@@ -881,6 +942,29 @@ public class EnrolNowActivity extends AppCompatActivity implements
 
         };
         queue.add(stringRequest);
+    }
+
+    public void EnrollPageAssetsAPI() {
+        EnrollPageAssets enrollPageAssets = new EnrollPageAssets("Hamstech",
+                getResources().getString(R.string.lblApiKey),langPref);
+        Call<EnrollPageAssets> call = apiService.enrollpageAssets(enrollPageAssets);
+        call.enqueue(new Callback<EnrollPageAssets>() {
+            @Override
+            public void onResponse(Call<EnrollPageAssets> call, retrofit2.Response<EnrollPageAssets> response) {
+                if (response.body().getStatus().equalsIgnoreCase("success")) {
+                    Glide.with(EnrolNowActivity.this)
+                            .load(response.body().getImage())
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .error(R.mipmap.ic_launcher)
+                            .into(pageAsset);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<EnrollPageAssets> call, Throwable t) {
+
+            }
+        });
     }
 
     public void validateHorizontalCourseList() {
@@ -1008,7 +1092,6 @@ public class EnrolNowActivity extends AppCompatActivity implements
                         courseIds.add(Integer.parseInt(coursesList.get(holder.getAdapterPosition()).getCategoryId()));
                         CategoryName = "";
                         CourseLog = coursesList.get(holder.getAdapterPosition()).getCategory_Title();
-                        headerTitle.setVisibility(View.GONE);
                         linSelectedItem.setVisibility(View.VISIBLE);
                         //itemsSelected.setVisibility(View.VISIBLE);
                         linCourses.setVisibility(View.GONE);
@@ -1201,7 +1284,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
                                 }
                             });
 
-                            btnNext.setOnClickListener(new View.OnClickListener() {
+                            imgPaynowGif.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     coursesList.add(coursesOriginalList.get(holder.getAdapterPosition()));
@@ -1388,7 +1471,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
         CategoryName = "";
         CourseLog = selectedNames.toString().substring(1, (selectedNames.toString().length()) - 1);
         LessonLog = "";
-        ActivityLog = "Add cart";
+        ActivityLog = "Fill your form";
         PagenameLog = "Enrol Page";
         getLogEvent(EnrolNowActivity.this);
         linearBeforePayment.setVisibility(View.GONE);
@@ -2203,12 +2286,14 @@ public class EnrolNowActivity extends AppCompatActivity implements
 
         final Checkout co = new Checkout();
 
+
         try {
             String vAmount = "";
             //if (paymentOption < 4) {
             vAmount = String.format("%.0f", (payAmount));
             //}
             vAmount = vAmount + "00";
+            Log.e("payamount","2239    "+vAmount);
             JSONObject options = new JSONObject();
             options.put("name", "Hunar");
             options.put("description", "Online Courses");
@@ -2357,6 +2442,10 @@ public class EnrolNowActivity extends AppCompatActivity implements
         TextView textAddress = dialog.findViewById(R.id.textAddress);
         TextView fillNow = dialog.findViewById(R.id.fillNow);
 
+        ActivityLog = "Payment successful";
+
+        getLogEvent(EnrolNowActivity.this);
+
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -2380,7 +2469,6 @@ public class EnrolNowActivity extends AppCompatActivity implements
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-
                 AfterOrder();
             }
         });

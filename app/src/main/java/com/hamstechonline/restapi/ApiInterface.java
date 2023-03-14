@@ -12,6 +12,7 @@ import com.hamstechonline.datamodel.CourseDetailsResponse;
 import com.hamstechonline.datamodel.CourseType;
 import com.hamstechonline.datamodel.DiscussionsModel;
 import com.hamstechonline.datamodel.EnrolNotification;
+import com.hamstechonline.datamodel.EnrollPageAssets;
 import com.hamstechonline.datamodel.FlashOfferResponse;
 import com.hamstechonline.datamodel.GetChatNumber;
 import com.hamstechonline.datamodel.GetDynamicData;
@@ -186,4 +187,7 @@ public interface ApiInterface {
 
     @POST("http://android.hamstechonline.com/api/list/referralCallbackRequest")
     Call<ReferralCallbackRequest> referralCallbackRequest(@Body ReferralCallbackRequest referralCallbackRequest);
+
+    @POST("http://android.hamstechonline.com/api/list/getEnrolPageAssets")
+    Call<EnrollPageAssets> enrollpageAssets(@Body EnrollPageAssets enrollPageAssets);
 }

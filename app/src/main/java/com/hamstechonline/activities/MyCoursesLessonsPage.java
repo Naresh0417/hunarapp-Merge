@@ -1580,7 +1580,7 @@ public class MyCoursesLessonsPage extends AppCompatActivity {
         postId = coursesList.get(listPosition).getLessonId();
         //pdfURL = coursesList.get(listPosition).getStudyMaterialUrl();
 
-        ActivityLog = "Next";
+        ActivityLog = "Lesson Page";
         PagenameLog = "Mycourse Lesson";
         getLogEvent(MyCoursesLessonsPage.this);
         AppsFlyerEvent(listPosition);

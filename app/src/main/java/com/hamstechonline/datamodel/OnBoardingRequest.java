@@ -3,6 +3,8 @@ package com.hamstechonline.datamodel;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 public class OnBoardingRequest {
 
     String appname, apikey, lang;
@@ -19,6 +21,9 @@ public class OnBoardingRequest {
     @SerializedName("image")
     @Expose
     private String image;
+    @SerializedName("images")
+    @Expose
+    private List<String> images;
 
     public String getStatus() {
         return status;
@@ -34,5 +39,13 @@ public class OnBoardingRequest {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public List<String> getImages() {
+        return images;
+    }
+
+    public void setImages(List<String> images) {
+        this.images = images;
     }
 }

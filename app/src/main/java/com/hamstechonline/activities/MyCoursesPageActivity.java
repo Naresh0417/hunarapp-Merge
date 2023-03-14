@@ -758,6 +758,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 hocLoadingDialog.hideDialog();
                 if (response.body().getStatus().equalsIgnoreCase("ok")) {
                     //VideoCallPopUp(MyCoursesPageActivity.this);
+                    VideoCallSuccessfulPopUp(MyCoursesPageActivity.this);
                 }
             }
 
@@ -1126,7 +1127,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
 
         dialog.show();
 
-        ActivityLog = "Post submitted";
+        ActivityLog = "Submit your post";
         PagenameLog = "Discussion";
         getLogEvent(MyCoursesPageActivity.this);
 
@@ -1162,7 +1163,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 } else if (imagePathData.equalsIgnoreCase("")){
                     Toast.makeText(MyCoursesPageActivity.this, "Select an Image", Toast.LENGTH_SHORT).show();
                 } else {
-                    ActivityLog = "Upload Post";
+                    ActivityLog = "Post submitted";
                     userInputContent.setText("");
                     hocLoadingDialog.showLoadingDialog();
                     uploadFile();
@@ -1559,6 +1560,40 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 .load(R.drawable.video_call_popimage)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .error(R.drawable.video_call_popimage)
+                .into(progressBar);
+
+        dialog.show();
+
+        imgCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+    }
+
+    public void VideoCallSuccessfulPopUp(Context context) {
+        final Dialog dialog = new Dialog(MyCoursesPageActivity.this);
+        dialog.getWindow();
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setGravity(Gravity.CENTER);
+        dialog.setContentView(R.layout.post_upload_successfull);
+        dialog.setCancelable(false);
+
+        ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
+        ImageView progressBar = dialog.findViewById(R.id.progressBar);
+        TextView txtlabelBold = dialog.findViewById(R.id.txtlabelBold);
+        TextView txtlabelNormal = dialog.findViewById(R.id.txtlabelNormal);
+
+        txtlabelNormal.setVisibility(View.GONE);
+
+        txtlabelBold.setText(getResources().getString(R.string.call_request_accepted));
+
+        Glide.with(MyCoursesPageActivity.this)
+                .load(R.drawable.discussion_post_submit_thumsup)
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .error(R.drawable.discussion_post_submit_thumsup)
                 .into(progressBar);
 
         dialog.show();

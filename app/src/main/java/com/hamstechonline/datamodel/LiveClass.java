@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class LiveClass {
 
+    @SerializedName("category")
+    @Expose
+    private String category;
     @SerializedName("title")
     @Expose
     private String title;
@@ -26,6 +29,14 @@ public class LiveClass {
     @SerializedName("type")
     @Expose
     private String type;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
 
     public String getTitle() {
         return title;

@@ -69,7 +69,7 @@ public class LiveClassesActivity extends AppCompatActivity {
     UserDataBase userDataBase;
     ImageButton stickyWhatsApp;
     String CategoryName = "",CourseLog,LessonLog = "",ActivityLog,PagenameLog,footerMenuStatus,
-            langPref = "Language",mp4URL = "";
+            langPref = "Language",mp4URL = "",liveCatName = "";
     LogEventsActivity logEventsActivity;
     RecyclerView listYourLiveClassesList,listAllLiveClassesList;
     YourLiveClassListAdapter yourLiveClassListAdapter;
@@ -125,7 +125,7 @@ public class LiveClassesActivity extends AppCompatActivity {
         txtYourClassesType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (txtYourClassesType.getText().toString().equalsIgnoreCase("Upcoming Classes")) {
+                if (txtYourClassesType.getText().toString().equalsIgnoreCase(getResources().getString(R.string.upcoming_classes))) {
                     txtYourClassesType.setBackground(getResources().getDrawable(R.drawable.btn_blue_stroke_white));
                     txtYourClassesType.setTextColor(getResources().getColor(R.color.muted_blue));
                     txtYourClassesType.setText(getResources().getString(R.string.previous_classes));
@@ -151,10 +151,10 @@ public class LiveClassesActivity extends AppCompatActivity {
         txtAllClassesType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (txtAllClassesType.getText().toString().equalsIgnoreCase("Upcoming Classes")) {
+                if (txtAllClassesType.getText().toString().equalsIgnoreCase(getResources().getString(R.string.upcoming_classes))) {
                     txtAllClassesType.setBackground(getResources().getDrawable(R.drawable.btn_blue_stroke_white));
                     txtAllClassesType.setTextColor(getResources().getColor(R.color.muted_blue));
-                    txtAllClassesType.setText("Previous Classes");
+                    txtAllClassesType.setText(getResources().getString(R.string.previous_classes));
                     getAllLiveClassesList("upcoming");
 
                 } else {
@@ -321,13 +321,14 @@ public class LiveClassesActivity extends AppCompatActivity {
                             intent.putExtra("URL",datamodels.get(position).getVideoUrl());
                             context.startActivity(intent);
                         } else {
-                            if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("REGISTER NOW")){
+                            if (holder.txtWatchNow.getText().toString().equalsIgnoreCase(context.getResources().getString(R.string.register_now))){
                                 CategoryName = "Your Live class";
                                 CourseLog = datamodels.get(position).getTitle();
                                 ActivityLog = "Register now";
                                 getLogEvent(LiveClassesActivity.this);
-                                getLiveClassRegistration(datamodels.get(position),1,"Your","Register Now");
-                            } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("WATCH NOW")){
+                                liveCatName = datamodels.get(position).getCategory();
+                                getLiveClassRegistration(datamodels.get(position),1,"Your",context.getResources().getString(R.string.register_now));
+                            } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase(context.getResources().getString(R.string.watch_now))){
                                 CategoryName = "Your Live class";
                                 CourseLog = datamodels.get(position).getTitle();
                                 ActivityLog = "Watch now";
@@ -433,18 +434,20 @@ public class LiveClassesActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("Register Now")) {
+                        if (holder.txtWatchNow.getText().toString().equalsIgnoreCase(context.getResources().getString(R.string.register_now))) {
                             CategoryName = "All Live class";
                             CourseLog = datamodels.get(position).getTitle();
                             ActivityLog = "Registered";
                             getLogEvent(LiveClassesActivity.this);
-                            getLiveClassRegistration(datamodels.get(position),2,"All","Register Now");
-                        } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase("WATCH NOW")){
+                            liveCatName = datamodels.get(position).getCategory();
+                            getLiveClassRegistration(datamodels.get(position),2,"All",context.getResources().getString(R.string.register_now));
+                        } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase(context.getResources().getString(R.string.watch_now))){
                             CategoryName = "All Live class";
                             CourseLog = datamodels.get(position).getTitle();
                             ActivityLog = "Watch now";
                             getLogEvent(LiveClassesActivity.this);
-                            getLiveClassRegistration(datamodels.get(position),2,"All","Watch Now");
+                            liveCatName = datamodels.get(position).getCategory();
+                            getLiveClassRegistration(datamodels.get(position),2,"All",context.getResources().getString(R.string.watch_now));
                             //imageViewPop(datamodels.get(position));
                         }
 
@@ -587,12 +590,15 @@ public class LiveClassesActivity extends AppCompatActivity {
 
         ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
         TextView txtWatchNow = dialog.findViewById(R.id.txtWatchNow);
+        TextView txtCatName = dialog.findViewById(R.id.txtCatName);
+
+        txtCatName.setText(liveCatName);
 
         if (catType.equalsIgnoreCase("All")){
-            if (buttonType.equalsIgnoreCase("Watch Now")) {
+            if (buttonType.equalsIgnoreCase(context.getResources().getString(R.string.watch_now))) {
                 txtWatchNow.setText("+91 76709 03072");
             }
-            if (buttonType.equalsIgnoreCase("Register Now")) {
+            if (buttonType.equalsIgnoreCase(context.getResources().getString(R.string.register_now))) {
                 txtWatchNow.setText("+91 96666 64757");
             }
         }

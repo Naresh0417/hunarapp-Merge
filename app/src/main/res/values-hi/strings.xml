@@ -375,7 +375,7 @@
     <string name="enroll_make">एनरोल कीजिए, अपना पेमेंट कीजिए और अभी सीखना शुरू कीजिए।</string>
     <string name="offer_today">ऑफर आज के लिए लागू।</string>
 
-    <string name="learnanother"><b><font color='#232323'>% की छूट पाइए कोई भी अन्य कोर्स सीखने पर।</font></b></string>
+    <string name="learnanother">अब पाएंएक ख़ास लिलिटेड-टाइि ऑफर!</string>
     <string name="enrol_title">पेमेंट करके एनरोल कीजिए और अभी सीखना शुरू कीजिए!</string>
     <string name="choose_paytype">अपना पेमेंट प्लान चुनिए</string>
 
@@ -387,7 +387,7 @@
     <string name="instalment"><small>किश्त</small></string>
     <string name="days"><small>दिन पर।</small></string>
     <string name="paynow">अभी का भुगतान कीजिए।</string>
-    <string name="pay_now">अभी %1$s का भुगतान कीजिए।</string>
+    <string name="pay_now">पे करें %1$s/-</string>
     <string name="labeladdress">अपना स्टार्टर किट पाने के लिए डिटेल्स भरिए</string>
 
     <string name="in">इंडिया</string>

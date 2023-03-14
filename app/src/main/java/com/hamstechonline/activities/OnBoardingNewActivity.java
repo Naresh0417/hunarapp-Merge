@@ -49,6 +49,7 @@ import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,6 +65,8 @@ public class OnBoardingNewActivity extends AppCompatActivity {
     LogEventsActivity logEventsActivity;
     ApiInterface apiService;
     CountDownTimer countDownTimer;
+    int imagesPosition = 0,countTime = 2000;
+    private List<String> imagesList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,7 +110,7 @@ public class OnBoardingNewActivity extends AppCompatActivity {
 
         getContent();
 
-        countDownTimer = new CountDownTimer(7000,20000) {
+        countDownTimer = new CountDownTimer(countTime,7000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 long sec = ((millisUntilFinished / 1000) % 60);
@@ -117,8 +120,25 @@ public class OnBoardingNewActivity extends AppCompatActivity {
 
             @Override
             public void onFinish() {
-                Intent intent = new Intent(OnBoardingNewActivity.this, RegistrationActivity.class);
-                startActivity(intent);
+                Log.e("Timer","123   "+imagesPosition);
+                if(imagesPosition < imagesList.size()-1) {
+                    imagesPosition ++;
+                    Glide.with(OnBoardingNewActivity.this)
+                            .load(imagesList.get(imagesPosition))
+                            .diskCacheStrategy(DiskCacheStrategy.ALL)
+                            .error(R.mipmap.ic_launcher)
+                            .into(splashImg);
+                    if (imagesPosition == (imagesList.size() - 1)) {
+                        countTime = 4000;
+                    } else countTime = 2000;
+                    countDownTimer.start();
+                    Log.e("Timer","130   "+imagesPosition);
+                } else {
+                    Intent intent = new Intent(OnBoardingNewActivity.this, RegistrationActivity.class);
+                    startActivity(intent);
+                }
+                /*Intent intent = new Intent(OnBoardingNewActivity.this, RegistrationActivity.class);
+                startActivity(intent);*/
             }
         };
     }
@@ -131,11 +151,14 @@ public class OnBoardingNewActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<OnBoardingRequest> call, retrofit2.Response<OnBoardingRequest> response) {
                 if (response.body().getStatus().equalsIgnoreCase("success")){
+                    imagesList.clear();
+                    imagesList = response.body().getImages();
                     Glide.with(OnBoardingNewActivity.this)
-                            .load(response.body().getImage())
+                            .load(response.body().getImages().get(0))
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .error(R.mipmap.ic_launcher)
                             .into(splashImg);
+                    imagesPosition = 0;
                     countDownTimer.start();
                 } else {
                     Intent intent = new Intent(OnBoardingNewActivity.this, RegistrationActivity.class);

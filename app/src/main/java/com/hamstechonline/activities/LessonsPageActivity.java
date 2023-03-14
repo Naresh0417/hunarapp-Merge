@@ -741,7 +741,7 @@ public class LessonsPageActivity extends AppCompatActivity {
             data.put("email",UserDataConstants.userMail);
             data.put("category",CategoryName);
             data.put("course",CourseLog);
-            data.put("lesson",LessonLog);
+            data.put("lesson",txtLessonName.getText().toString());
             data.put("activity",ActivityLog);
             data.put("pagename",PagenameLog);
             logEventsActivity.LogEventsActivity(context,data);
