@@ -1176,6 +1176,7 @@ public class HomePageActivity extends AppCompatActivity {
                 if (!getIntent().getBooleanExtra("isNewRegister",false) == true){
                     player.pause();
                 }
+                player.play();
 
             }
             @Override

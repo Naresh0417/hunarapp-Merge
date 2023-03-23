@@ -644,6 +644,21 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
                 }
 
                 getLessons();
+                if (getIntent().getStringExtra("mycourse_discussion") != null) {
+                    if (getIntent().getStringExtra("mycourse_discussion").equalsIgnoreCase("yes")){
+                        txtLessons.setBackgroundResource(0);
+                        txtLessons.setTextColor(getResources().getColor(R.color.muted_blue));
+                        txtDiscussion.setBackground(getResources().getDrawable(R.drawable.shadow_pink_strok));
+                        txtDiscussion.setTextColor(getResources().getColor(R.color.dark_pink));
+                        floatBtns.setVisibility(View.GONE);
+                        discussionLayout.setVisibility(View.VISIBLE);
+                        lessonsLayout.setVisibility(View.GONE);
+                        ActivityLog = "Discussions";
+                        PagenameLog = "MyCourse page";
+                        getLogEvent(MyCoursesPageActivity.this);
+                        getDiscussions();
+                    }
+                }
             }
 
             @Override
@@ -1339,6 +1354,10 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         ImageView imgCancel = dialog.findViewById(R.id.imgCancel);
         ImageView progressBar = dialog.findViewById(R.id.progressBar);
 
+        ActivityLog = "Post submitted";
+        PagenameLog = "MyCourse page";
+        getLogEvent(MyCoursesPageActivity.this);
+
         Glide.with(MyCoursesPageActivity.this)
                 .load(R.drawable.discussion_post_submit_thumsup)
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -1478,6 +1497,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         TextView txtlabelBold = dialog.findViewById(R.id.txtlabelBold);
         TextView txtlabelNormal = dialog.findViewById(R.id.txtlabelNormal);
 
+        txtlabelBold.setVisibility(View.GONE);
         txtlabelNormal.setVisibility(View.VISIBLE);
 
         txtlabelBold.setText(R.string.thank_you);
@@ -1525,6 +1545,9 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         txtConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ActivityLog = "Video Call with Faculty";
+                PagenameLog = "Lesson page";
+                getLogEvent(MyCoursesPageActivity.this);
                 getCallWithFaculty();
                 dialog.dismiss();
             }

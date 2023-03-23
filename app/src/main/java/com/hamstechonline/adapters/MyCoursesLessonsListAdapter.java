@@ -135,8 +135,7 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
                             lessonsArray.get(position).getType().equalsIgnoreCase("live")){
                         Intent intent = new Intent(context, LiveFashionWebview.class);
                         intent.putExtra("URL",lessonsArray.get(position).getVideoUrl());
-                        //context.startActivity(intent);
-                        lockPopup();
+                        context.startActivity(intent);
                     } else {
                         for (int i =0; i< originalListArray.size(); i++) {
                             if (originalListArray.get(i).getLessonId().equalsIgnoreCase(lessonsArray.get(position).getLessonId())) {

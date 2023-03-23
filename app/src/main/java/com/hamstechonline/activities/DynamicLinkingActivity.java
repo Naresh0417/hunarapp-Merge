@@ -66,7 +66,7 @@ import retrofit2.Callback;
 
 public class DynamicLinkingActivity extends AppCompatActivity {
 
-    String courseId, language,lessonId = "";
+    String courseId, language,lessonId = "",myCourseDynamic="";
     String langPref = "Language",notiTitle="",splitLesson = "",deepLink;
     SharedPreferences prefs;
     private Locale myLocale;
@@ -140,6 +140,10 @@ public class DynamicLinkingActivity extends AppCompatActivity {
                 new DbCheck().execute();
             } else if (splitLesson.split("\\%")[1].substring(2).equals("my-courses")) {
                 lessonId = "my-courses";
+                UserDataConstants.courseId = ""+split.toString().split("\\%")[1].substring(2, split.toString().split("\\%")[1].length() - 0);
+                new DbCheck().execute();
+            } else if (splitLesson.split("\\%")[1].substring(2).equals("my-courses-discussion")) {
+                lessonId = "my-courses-discussion";
                 UserDataConstants.courseId = ""+split.toString().split("\\%")[1].substring(2, split.toString().split("\\%")[1].length() - 0);
                 new DbCheck().execute();
             } else if (splitLesson.split("\\%")[1].substring(2).equals("courses")) {
@@ -256,6 +260,16 @@ public class DynamicLinkingActivity extends AppCompatActivity {
                         if (langPref.equals("english"))
                             language = "en";
                         else language = "hi";
+                        getCourseDetails();
+                    }
+                }else if (lessonId.equalsIgnoreCase("my-courses-discussion")){
+                    if (splitLesson.split("\\%")[1].substring(2).equals("my-courses-discussion")) {
+                        userDataBase = new UserDataBase(DynamicLinkingActivity.this);
+                        courseId = UserDataConstants.courseId;
+                        if (langPref.equals("english"))
+                            language = "en";
+                        else language = "hi";
+                        myCourseDynamic = "yes";
                         getCourseDetails();
                     }
                 }else if (lessonId.equalsIgnoreCase("paid_course")){
@@ -538,6 +552,7 @@ public class DynamicLinkingActivity extends AppCompatActivity {
                 intent.putExtra("language",response.body().getCourseDetails().getCourseLanguage());
                 intent.putExtra("VideoUrl",response.body().getCourseDetails().getVideoUrl());
                 intent.putExtra("order_id",response.body().getCourseDetails().getOrder_id());
+                intent.putExtra("mycourse_discussion",myCourseDynamic);
                 intent.putExtra("email",response.body().getCourseDetails().getEmail());
                 intent.putExtra("statusNSDC","0");
                 startActivity(intent);

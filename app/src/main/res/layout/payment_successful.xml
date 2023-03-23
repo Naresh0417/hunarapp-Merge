@@ -61,7 +61,8 @@
             android:padding="10dp"
             android:text="@string/pay_address"
             android:textColor="@color/black"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone"/>
 
         <TextView
             android:id="@+id/fillNow"
@@ -72,7 +73,8 @@
             android:padding="10dp"
             android:text="Fill Details Now!"
             android:textColor="@color/white"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone"/>
 
     </LinearLayout>
 </RelativeLayout>

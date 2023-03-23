@@ -59,6 +59,7 @@ public class CategoryDatamodel {
     String preferred_amount;
     String langName;
     String langChar;
+    String short_course;
 
     public String getPreferredDuration() {
         return preferredDuration;
@@ -78,6 +79,14 @@ public class CategoryDatamodel {
 
     String preferredDuration;
     String premiumDuration;
+
+    public String getShort_course() {
+        return short_course;
+    }
+
+    public void setShort_course(String short_course) {
+        this.short_course = short_course;
+    }
 
     public String getInstalment_amount() {
         return instalment_amount;

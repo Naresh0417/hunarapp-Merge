@@ -834,6 +834,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
                                         datamodel.setCategory_Title(object.getString("course_title"));
                                         datamodel.setCategory_description(object.getString("course_description"));
                                         datamodel.setCat_image_url(object.getString("image_url"));
+                                        datamodel.setShort_course(object.getString("short_course"));
                                         datamodel.setStatus(object.getString("status"));
                                         datamodel.setPreferredDuration(object.getJSONArray("metadata").getJSONObject(0).getString("preferred_duration"));
                                         datamodel.setPremiumDuration(object.getJSONArray("metadata").getJSONObject(0).getString("premium_duration"));
@@ -876,6 +877,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
                                     }
                                     txtPremiumTitle.setText(getResources().getString(R.string.lblPremium));
                                     linSelectedItem.setVisibility(View.VISIBLE);
+                                    linCourses.setVisibility(View.GONE);
 
                                     selectedAdapter = new selectedAdapter(EnrolNowActivity.this, position);
                                     allSelectedCourses = new allSelectedCourses(EnrolNowActivity.this, position);
@@ -884,6 +886,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
                                     itemsSelected.setAdapter(selectedAdapter);
                                     selectedItems.setAdapter(allSelectedCourses);
                                     coursesOriginalList.add(coursesList.get(position));
+                                    UserDataConstants.short_course = coursesList.get(position).getShort_course();
                                     selectedNames.add(coursesList.get(position).getCategory_Title());
                                     enrollment_type.add(hocLoadingDialog.getNsdc(coursesList.get(position).getStatusNSDC()));
                                     payment_mode.add(hocLoadingDialog.getPayment(coursesList.get(position).getInstalment_amount()));
@@ -1081,6 +1084,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
                         itemsSelected.setAdapter(selectedAdapter);
                         selectedItems.setAdapter(allSelectedCourses);
                         coursesOriginalList.add(coursesList.get(holder.getAdapterPosition()));
+                        UserDataConstants.short_course = coursesList.get(holder.getAdapterPosition()).getShort_course();
                         listSelectedNamesAdapter = new ListSelectedNames(EnrolNowActivity.this);
                         listSelectedNames.setLayoutManager(new LinearLayoutManager(EnrolNowActivity.this, RecyclerView.VERTICAL, false));
                         listSelectedNames.setAdapter(listSelectedNamesAdapter);
@@ -2442,6 +2446,16 @@ public class EnrolNowActivity extends AppCompatActivity implements
         TextView textAddress = dialog.findViewById(R.id.textAddress);
         TextView fillNow = dialog.findViewById(R.id.fillNow);
 
+        Log.e("short_course","2449   "+UserDataConstants.short_course);
+
+        if (UserDataConstants.short_course.equalsIgnoreCase("no")) {
+            fillNow.setVisibility(View.VISIBLE);
+            textAddress.setVisibility(View.VISIBLE);
+        } else {
+            fillNow.setVisibility(View.GONE);
+            textAddress.setVisibility(View.GONE);
+        }
+
         ActivityLog = "Payment successful";
 
         getLogEvent(EnrolNowActivity.this);
@@ -2449,6 +2463,7 @@ public class EnrolNowActivity extends AppCompatActivity implements
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UserDataConstants.short_course = "";
                 Intent intent = new Intent(EnrolNowActivity.this, HomePageActivity.class);
                 dialog.dismiss();
                 startActivity(intent);

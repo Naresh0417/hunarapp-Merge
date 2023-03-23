@@ -129,12 +129,20 @@ public class LiveClassesActivity extends AppCompatActivity {
                     txtYourClassesType.setBackground(getResources().getDrawable(R.drawable.btn_blue_stroke_white));
                     txtYourClassesType.setTextColor(getResources().getColor(R.color.muted_blue));
                     txtYourClassesType.setText(getResources().getString(R.string.previous_classes));
+                    CategoryName = "Your Live class";
+                    CourseLog = "";
+                    ActivityLog = "Upcoming";
+                    getLogEvent(LiveClassesActivity.this);
                     getYourLiveClassesList("upcoming");
 
                 } else {
                     txtYourClassesType.setText(R.string.upcoming_classes);
                     txtYourClassesType.setBackground(getResources().getDrawable(R.drawable.pink_stroke_white));
                     txtYourClassesType.setTextColor(getResources().getColor(R.color.pink));
+                    CategoryName = "Your Live class";
+                    CourseLog = "";
+                    ActivityLog = "Previous";
+                    getLogEvent(LiveClassesActivity.this);
                     getYourLiveClassesList("previous");
                 }
             }
@@ -155,12 +163,20 @@ public class LiveClassesActivity extends AppCompatActivity {
                     txtAllClassesType.setBackground(getResources().getDrawable(R.drawable.btn_blue_stroke_white));
                     txtAllClassesType.setTextColor(getResources().getColor(R.color.muted_blue));
                     txtAllClassesType.setText(getResources().getString(R.string.previous_classes));
+                    CategoryName = "All Live class";
+                    CourseLog = "";
+                    ActivityLog = "Upcoming";
+                    getLogEvent(LiveClassesActivity.this);
                     getAllLiveClassesList("upcoming");
 
                 } else {
                     txtAllClassesType.setText(R.string.upcoming_classes);
                     txtAllClassesType.setBackground(getResources().getDrawable(R.drawable.pink_stroke_white));
                     txtAllClassesType.setTextColor(getResources().getColor(R.color.pink));
+                    CategoryName = "All Live class";
+                    CourseLog = "";
+                    ActivityLog = "Previous";
+                    getLogEvent(LiveClassesActivity.this);
                     getAllLiveClassesList("previous");
                 }
             }
@@ -323,14 +339,14 @@ public class LiveClassesActivity extends AppCompatActivity {
                         } else {
                             if (holder.txtWatchNow.getText().toString().equalsIgnoreCase(context.getResources().getString(R.string.register_now))){
                                 CategoryName = "Your Live class";
-                                CourseLog = datamodels.get(position).getTitle();
+                                CourseLog = datamodels.get(position).getCategory();
                                 ActivityLog = "Register now";
                                 getLogEvent(LiveClassesActivity.this);
                                 liveCatName = datamodels.get(position).getCategory();
                                 getLiveClassRegistration(datamodels.get(position),1,"Your",context.getResources().getString(R.string.register_now));
                             } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase(context.getResources().getString(R.string.watch_now))){
                                 CategoryName = "Your Live class";
-                                CourseLog = datamodels.get(position).getTitle();
+                                CourseLog = datamodels.get(position).getCategory();
                                 ActivityLog = "Watch now";
                                 getLogEvent(LiveClassesActivity.this);
                                 imageViewPop(datamodels.get(position));
@@ -436,14 +452,14 @@ public class LiveClassesActivity extends AppCompatActivity {
 
                         if (holder.txtWatchNow.getText().toString().equalsIgnoreCase(context.getResources().getString(R.string.register_now))) {
                             CategoryName = "All Live class";
-                            CourseLog = datamodels.get(position).getTitle();
+                            CourseLog = datamodels.get(position).getCategory();
                             ActivityLog = "Registered";
                             getLogEvent(LiveClassesActivity.this);
                             liveCatName = datamodels.get(position).getCategory();
                             getLiveClassRegistration(datamodels.get(position),2,"All",context.getResources().getString(R.string.register_now));
                         } else if (holder.txtWatchNow.getText().toString().equalsIgnoreCase(context.getResources().getString(R.string.watch_now))){
                             CategoryName = "All Live class";
-                            CourseLog = datamodels.get(position).getTitle();
+                            CourseLog = datamodels.get(position).getCategory();
                             ActivityLog = "Watch now";
                             getLogEvent(LiveClassesActivity.this);
                             liveCatName = datamodels.get(position).getCategory();
@@ -540,6 +556,7 @@ public class LiveClassesActivity extends AppCompatActivity {
         imgCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UserDataConstants.short_course = "";
                 dialog.dismiss();
             }
         });
@@ -618,6 +635,10 @@ public class LiveClassesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
+                CategoryName = "All Live class";
+                CourseLog = liveCatName;
+                ActivityLog = "Missed call";
+                getLogEvent(LiveClassesActivity.this);
                 Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:+919666664757"));
                 startActivity(intent);
             }

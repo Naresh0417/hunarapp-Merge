@@ -24,4 +24,5 @@ public class UserDataConstants {
 
     public static String lessonIdleft;
     public static String lessonIdRight;
+    public static String short_course="";
 }
