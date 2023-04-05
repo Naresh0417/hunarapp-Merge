@@ -124,6 +124,8 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
             holder.listLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+
                     if (lessonsArray.get(position).getLockValue().equalsIgnoreCase("0")) {
                         //CourseLog = MyCourses page;
                         ActivityLog = "Pay your Instalment";
@@ -133,8 +135,8 @@ public class MyCoursesLessonsListAdapter extends RecyclerView.Adapter<MyCoursesL
                         lockPopup();
                     } else if (lessonsArray.get(position).getType().equalsIgnoreCase("nsdc_exam") ||
                             lessonsArray.get(position).getType().equalsIgnoreCase("live")){
-                        Intent intent = new Intent(context, LiveFashionWebview.class);
-                        intent.putExtra("URL",lessonsArray.get(position).getVideoUrl());
+                        String url = lessonsArray.get(position).getVideoUrl();
+                        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
                         context.startActivity(intent);
                     } else {
                         for (int i =0; i< originalListArray.size(); i++) {

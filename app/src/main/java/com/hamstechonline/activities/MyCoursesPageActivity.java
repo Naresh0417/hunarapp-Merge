@@ -1545,7 +1545,7 @@ public class MyCoursesPageActivity extends AppCompatActivity implements LikesInt
         txtConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ActivityLog = "Video Call with Faculty";
+                ActivityLog = "I confirm click";
                 PagenameLog = "Lesson page";
                 getLogEvent(MyCoursesPageActivity.this);
                 getCallWithFaculty();

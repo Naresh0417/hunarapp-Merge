@@ -69,9 +69,17 @@ public class LiveFashionWebview extends AppCompatActivity {
 
         webview = findViewById(R.id.webview);
 
+        webview.getSettings().setAllowFileAccessFromFileURLs(true);
+        webview.getSettings().setAllowUniversalAccessFromFileURLs(true);
+        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webview.getSettings().setJavaScriptEnabled(true);
+        webview.getSettings().setDomStorageEnabled(true);
+        webview.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webview.getSettings().setBuiltInZoomControls(true);
         webview.getSettings().setAllowFileAccess(true);
         webview.getSettings().setSupportZoom(true);
+        webview.getSettings().setAllowFileAccessFromFileURLs(true);
+        webview.getSettings().setAllowUniversalAccessFromFileURLs(true);
         //webview.setOverScrollMode(WebView.OVER_SCROLL_NEVER);
         webview.addJavascriptInterface(new MyJavascriptInterface(this), "Android");
 

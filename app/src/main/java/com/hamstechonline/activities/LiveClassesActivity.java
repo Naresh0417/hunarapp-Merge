@@ -320,10 +320,12 @@ public class LiveClassesActivity extends AppCompatActivity {
                     holder.txtDaysLeft.setVisibility(View.GONE);
                     holder.txtWatchNow.setText(R.string.live_class);
                 } else {
-                    if (yourLiveClassType.equalsIgnoreCase("Upcoming Classes")) {
+                    if (txtYourClassesType.getText().toString().equalsIgnoreCase(getResources()
+                            .getString(R.string.upcoming_classes))) {
                         holder.txtDaysLeft.setVisibility(View.GONE);
                         holder.txtWatchNow.setText(R.string.watch_now);
-                    } else if (yourLiveClassType.equalsIgnoreCase("Previous Classes")){
+                    } else if (yourLiveClassType.equalsIgnoreCase(getResources()
+                            .getString(R.string.previous_classes))){
                         holder.txtDaysLeft.setVisibility(View.VISIBLE);
                         holder.txtWatchNow.setText(R.string.register_now);
                     }
@@ -333,8 +335,8 @@ public class LiveClassesActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (datamodels.get(position).getType().equalsIgnoreCase("live")) {
-                            Intent intent = new Intent(context, LiveFashionWebview.class);
-                            intent.putExtra("URL",datamodels.get(position).getVideoUrl());
+                            String url = datamodels.get(position).getVideoUrl();
+                            Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(url));
                             context.startActivity(intent);
                         } else {
                             if (holder.txtWatchNow.getText().toString().equalsIgnoreCase(context.getResources().getString(R.string.register_now))){
@@ -428,10 +430,12 @@ public class LiveClassesActivity extends AppCompatActivity {
                     holder.txtDaysLeft.setVisibility(View.GONE);
                 } else holder.txtDaysLeft.setVisibility(View.VISIBLE);*/
 
-                if (allLiveClassType.equalsIgnoreCase("Upcoming Classes")) {
+                if (txtAllClassesType.getText().toString().equalsIgnoreCase(getResources()
+                        .getString(R.string.upcoming_classes))) {
                     holder.txtDaysLeft.setVisibility(View.GONE);
                     holder.txtWatchNow.setText(R.string.watch_now);
-                } else if (allLiveClassType.equalsIgnoreCase("Previous Classes")){
+                } else if (txtAllClassesType.getText().toString().equalsIgnoreCase(getResources()
+                        .getString(R.string.previous_classes))){
                     if (datamodels.get(position).getTimeLeft() != null){
                         holder.txtDaysLeft.setVisibility(View.VISIBLE);
                         holder.txtDaysLeft.setText(datamodels.get(position).getTimeLeft());
@@ -613,10 +617,10 @@ public class LiveClassesActivity extends AppCompatActivity {
 
         if (catType.equalsIgnoreCase("All")){
             if (buttonType.equalsIgnoreCase(context.getResources().getString(R.string.watch_now))) {
-                txtWatchNow.setText("+91 76709 03072");
+                txtWatchNow.setText("+91 7670903072");
             }
             if (buttonType.equalsIgnoreCase(context.getResources().getString(R.string.register_now))) {
-                txtWatchNow.setText("+91 96666 64757");
+                txtWatchNow.setText("+91 9666664757");
             }
         }
 
@@ -639,7 +643,7 @@ public class LiveClassesActivity extends AppCompatActivity {
                 CourseLog = liveCatName;
                 ActivityLog = "Missed call";
                 getLogEvent(LiveClassesActivity.this);
-                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:+919666664757"));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:"+txtWatchNow.getText().toString().trim()));
                 startActivity(intent);
             }
         });
