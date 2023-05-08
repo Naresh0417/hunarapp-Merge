@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import com.adjust.sdk.Adjust;
+import com.adjust.sdk.AdjustEvent;
 import com.facebook.appevents.AppEventsConstants;
 import com.facebook.appevents.AppEventsLogger;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -57,6 +59,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("2x11zi");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventEnroll(){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -79,6 +84,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("d0tqol");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventContactus(){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -98,6 +106,10 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("qx1o0p");
+        Adjust.trackEvent(adjustEvent);
+
     }
     public void EventIsStudent(){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -118,6 +130,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("p9w748");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventMyCourse(){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -136,10 +151,13 @@ public class AppsFlyerEventsHelper {
         properties.addAttribute(AppsFlyerEventParameter.KEY_DEVICE_ID,sharedPrefsUtils.getDeviceId(ApiConstants.deviceId,""));
         properties.addAttribute(AppsFlyerEventParameter.KEY_GAID,sharedPrefsUtils.getGaidId(ApiConstants.gaid,""));
         properties.addAttribute(AppsFlyerEventParameter.KEY_LANGUAGE,langPref);
-        MoEHelper.getInstance(context).trackEvent(AppsFlyerEventParameter.KEY_ISSTUDENT,properties);
+        MoEHelper.getInstance(context).trackEvent(AppsFlyerEventParameter.KEY_MYCOURSE,properties);
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("s3kpsy");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventAccordion(String accordion,String course, String category){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -159,6 +177,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("2x11zi");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventCategory(String category){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -175,6 +196,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("axtrs9");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventCourse(String course){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -193,6 +217,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("c1dnzn");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventLessons(String category, String course, String lesson){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -213,6 +240,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("3zao4j");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventNotification(String notification){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -231,6 +261,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("729x4w");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventAdmission(String course,String payment_method){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -251,6 +284,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("ljjy51");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventLessonsDetails(String category, String course, String lesson, String eventName){
         eventData.put(AppsFlyerEventParameter.KEY_MOBILE_NUMBER,UserDataConstants.userMobile);
@@ -273,6 +309,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("s3kpsy");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventSuccessStories(){
         eventData.put(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
@@ -288,6 +327,9 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("n777vt");
+        Adjust.trackEvent(adjustEvent);
     }
     public void EventAboutUs(){
         eventData.put(AppsFlyerEventParameter.KEY_USER_NAME,UserDataConstants.userName);
@@ -303,5 +345,8 @@ public class AppsFlyerEventsHelper {
         MoEHelper.getInstance(context).setFirstName(UserDataConstants.userName);
         MoEHelper.getInstance(context).setNumber(UserDataConstants.userMobile);
         MoEHelper.getInstance(context).setUniqueId(UserDataConstants.userMobile);
+
+        AdjustEvent adjustEvent = new AdjustEvent("jdig1n");
+        Adjust.trackEvent(adjustEvent);
     }
 }

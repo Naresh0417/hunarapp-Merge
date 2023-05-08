@@ -156,7 +156,7 @@ public class HomePageActivity extends AppCompatActivity {
     FirebaseAnalytics mFirebaseAnalytics;
     ViewPager sliderView;
     WrapContentViewPager listTopicsRecommended;
-    int mMenuId, arraySize,currentPageBanner,mycoursePageBanner, selectedItem = 509;
+    int mMenuId, arraySize,currentPageBanner,mycoursePageBanner, selectedItem = 509,videoStatus = 0;
     Animation animation;
     UserDataBase userDataBase;
     LogEventsActivity logEventsActivity;
@@ -555,7 +555,6 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<HomepageResponse> call, retrofit2.Response<HomepageResponse> response) {
                 hocLoadingDialog.hideDialog();
-                Log.e("request","548    "+response.body().getMyCourses().size());
                 if (response.body().getEnglish() != null) {
                     moreClasses.clear();
                     mainiVideo.clear();
@@ -588,6 +587,10 @@ public class HomePageActivity extends AppCompatActivity {
                         myCoursePagerAdapter = new MyCoursePagerAdapter(HomePageActivity.this,myCourseList);
                         listTopicsRecommended.setOffscreenPageLimit(myCourseList.size());
                         listTopicsRecommended.setAdapter(myCoursePagerAdapter);
+                        /*mp4URL = response.body().getPromotional_video();
+                        youTubePlayerView.setVisibility(View.VISIBLE);
+                        getLifecycle().addObserver(youTubePlayerView);
+                        installYouTube(response.body().getPromotional_video());*/
                     } else {
                         SharedPreferences.Editor editor = footerStatus.edit();
                         editor.putString("footerStatus", "unpaid");
@@ -1188,9 +1191,28 @@ public class HomePageActivity extends AppCompatActivity {
                 CourseLog = "counseling video";
                 if (state.toString().equals("PLAYING")){
                     PagenameLog = "Video start";
+                    if (videoStatus == 0) videoStatus = 1;
                     getLogEvent(HomePageActivity.this);
                 } else if (state.toString().equals("PAUSED")){
-                    PagenameLog = "Video paused";
+                    if (videoStatus == 1) {
+                        Log.e("pause","1193   "+videoStatus);
+                        videoStatus = 2;
+                        player.play();
+                        player.mute();
+                        PagenameLog = "Video paused";
+                    } else if (videoStatus == 2){
+                        Log.e("pause","1193   "+videoStatus);
+                        videoStatus = 0;
+                        player.pause();
+                        player.unMute();
+                        PagenameLog = "Video paused";
+                    } else if (videoStatus == 0){
+                        Log.e("pause","1193   "+videoStatus);
+                        videoStatus = 1;
+                        player.play();
+                        player.unMute();
+                    }
+
                     getLogEvent(HomePageActivity.this);
                 } else if (state.toString().equals("STOPPED")){
                     PagenameLog = "Video stopped";

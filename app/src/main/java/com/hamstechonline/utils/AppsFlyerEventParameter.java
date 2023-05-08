@@ -33,5 +33,7 @@ public class AppsFlyerEventParameter {
     public static String KEY_LANGUAGE = "language";
     public static String KEY_SuccessStories = "Success_Stories";
     public static String KEY_ABOUTUS = "about_us";
+    public static String KEY_MYCOURSE = "mycourse";
+    public static String KEY_Lesson_DETAIL = "lesson_detail";
     public static String KEY_GCMID = "gcm_id";
 }

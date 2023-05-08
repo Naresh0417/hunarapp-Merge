@@ -61,11 +61,11 @@ public class OnBoardingNewActivity extends AppCompatActivity {
     SharedPreferences prefs;
     ImageView splashImg;
     HocLoadingDialog hocLoadingDialog;
-    String activityLog,gcm_id;
+    String activityLog,gcm_id,pagenameLog;
     LogEventsActivity logEventsActivity;
     ApiInterface apiService;
     CountDownTimer countDownTimer;
-    int imagesPosition = 0,countTime = 2000;
+    int imagesPosition = 0,countTime = 3000;
     private List<String> imagesList = new ArrayList<>();
 
     @Override
@@ -110,11 +110,12 @@ public class OnBoardingNewActivity extends AppCompatActivity {
 
         getContent();
 
-        countDownTimer = new CountDownTimer(countTime,7000) {
+        countDownTimer = new CountDownTimer(countTime,1000) {
             @Override
             public void onTick(long millisUntilFinished) {
+                Log.e("Timer","113   "+countTime);
                 long sec = ((millisUntilFinished / 1000) % 60);
-                Log.e("Timer","113   "+sec);
+                Log.e("Timer","118   "+sec);
 
             }
 
@@ -128,9 +129,16 @@ public class OnBoardingNewActivity extends AppCompatActivity {
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .error(R.mipmap.ic_launcher)
                             .into(splashImg);
+                    countTime = 5000;
                     if (imagesPosition == (imagesList.size() - 1)) {
-                        countTime = 4000;
-                    } else countTime = 2000;
+                        pagenameLog = "Slide2";
+
+                    } else{
+                        pagenameLog = "Slide1";
+                        //countTime = 3000;
+                    }
+                    activityLog = "Onboarding";
+                    getLogEvent(OnBoardingNewActivity.this);
                     countDownTimer.start();
                     Log.e("Timer","130   "+imagesPosition);
                 } else {
@@ -158,8 +166,12 @@ public class OnBoardingNewActivity extends AppCompatActivity {
                             .diskCacheStrategy(DiskCacheStrategy.ALL)
                             .error(R.mipmap.ic_launcher)
                             .into(splashImg);
+                    countTime = 3000;
                     imagesPosition = 0;
                     countDownTimer.start();
+                    pagenameLog = "Slide1";
+                    activityLog = "Onboarding";
+                    getLogEvent(OnBoardingNewActivity.this);
                 } else {
                     Intent intent = new Intent(OnBoardingNewActivity.this, RegistrationActivity.class);
                     startActivity(intent);
@@ -187,7 +199,7 @@ public class OnBoardingNewActivity extends AppCompatActivity {
             data.put("course","");
             data.put("lesson","");
             data.put("activity",activityLog);
-            data.put("pagename","");
+            data.put("pagename",pagenameLog);
             logEventsActivity.LogEventsActivity(context,data);
         } catch (JSONException e) {
             e.printStackTrace();
