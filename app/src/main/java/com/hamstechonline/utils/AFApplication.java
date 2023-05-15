@@ -51,7 +51,7 @@ public class AFApplication extends Application {
         //MoEHelper.getInstance(requireContext()).resetAppContext();
 
         String appToken = "fxa01vah756o";
-        String environment = AdjustConfig.ENVIRONMENT_SANDBOX;
+        String environment = AdjustConfig.ENVIRONMENT_PRODUCTION;
         config = new AdjustConfig(this, appToken, environment);
         config.setUrlStrategy(AdjustConfig.URL_STRATEGY_INDIA);
         //config.setLogLevel(LogLevel.WARN);
